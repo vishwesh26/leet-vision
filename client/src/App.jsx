@@ -54,6 +54,9 @@ function App() {
     return savedVideos.some(v => v.id === videoId);
   };
 
+  // Env Config: Force relative path in PROD (Vercel) to avoid localhost pollution
+  const API_BASE = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:5000');
+
   // Search Logic
   const performSearch = async (query) => {
     if (!query.trim()) return;
@@ -66,7 +69,7 @@ function App() {
     setQuestionId(query);
 
     try {
-      const response = await axios.get(`/api/search/${query}`);
+      const response = await axios.get(`${API_BASE}/api/search/${query}`);
       setVideos(response.data);
     } catch (err) {
       console.error(err);
@@ -96,7 +99,7 @@ function App() {
 
     try {
       // Add difficulty query param if exists
-      const url = `/api/list/${type}${difficulty ? `?difficulty=${difficulty}` : ''}`;
+      const url = `${API_BASE}/api/list/${type}${difficulty ? `?difficulty=${difficulty}` : ''}`;
       const response = await axios.get(url);
       setVideos(response.data);
     } catch (err) {

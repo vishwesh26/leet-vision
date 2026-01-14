@@ -121,6 +121,68 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=OWaZ6AosS30"
   },
+  "48": [
+    {
+      "id": "O3DuqVo7xCU",
+      "questionId": "48",
+      "title": "Rotate Image - Leetcode 48",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/O3DuqVo7xCU/hqdefault.jpg",
+      "viewCount": 738276,
+      "likeCount": 27138,
+      "publishedAt": "2024-08-27T15:00:18Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=O3DuqVo7xCU"
+    },
+    {
+      "id": "fMSJSS7eO1w",
+      "questionId": "48",
+      "title": "Rotate Image - Matrix - Leetcode 48",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/fMSJSS7eO1w/hqdefault.jpg",
+      "viewCount": 304635,
+      "likeCount": 6034,
+      "publishedAt": "2021-01-24T15:30:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=fMSJSS7eO1w"
+    },
+    {
+      "id": "-jhbxNJijyE",
+      "questionId": "48",
+      "title": "Rotate Image - Leetcode 48 - Arrays & Strings (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/-jhbxNJijyE/hqdefault.jpg",
+      "viewCount": 29058,
+      "likeCount": 630,
+      "publishedAt": "2024-06-13T19:02:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=-jhbxNJijyE"
+    },
+    {
+      "id": "Ux058jpRB9Y",
+      "questionId": "48",
+      "title": "Rotate Image (Leetcode 48) | Full solution with examples visuals and animation | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/Ux058jpRB9Y/hqdefault.jpg",
+      "viewCount": 25254,
+      "likeCount": 656,
+      "publishedAt": "2021-09-03T17:56:02Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Ux058jpRB9Y"
+    },
+    {
+      "id": "euulNY_rDfA",
+      "questionId": "48",
+      "title": "Leetcode | 48. Rotate Image | Medium | Java Solution",
+      "channelTitle": "Developer Docs",
+      "thumbnail": "https://i.ytimg.com/vi/euulNY_rDfA/hqdefault.jpg",
+      "viewCount": 4937,
+      "likeCount": 69,
+      "publishedAt": "2023-01-31T14:43:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=euulNY_rDfA"
+    }
+  ],
   "56": [
     {
       "id": "IexN60k62jo",
