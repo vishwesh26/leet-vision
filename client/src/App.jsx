@@ -135,7 +135,7 @@ function App() {
 
         <div className="nav-center">
           <ul className="nav-links">
-          {/*<li className="nav-item" onClick={() => fetchList('top-100', 'Top 100 Questions')}>Top 100</li>
+            {/*<li className="nav-item" onClick={() => fetchList('top-100', 'Top 100 Questions')}>Top 100</li>
             <li className="nav-item" onClick={() => fetchList('important', 'Most Important')}>Most Important</li>
             <li className="nav-item" onClick={() => fetchList('blind-75', 'Blind 75')}>Blind 75</li>
 
@@ -295,6 +295,20 @@ function App() {
         )}
 
       </div>
+
+      {/* Footer */}
+      <footer className="app-footer">
+        <p>Created by <span className="creator-name">Vishwesh Shinde</span></p>
+        <div className="footer-links">
+          <a href="https://www.instagram.com/vishwesh_shinde" target="_blank" rel="noreferrer" className="footer-link">
+            <span className="icon">📸</span> vishwesh_shinde
+          </a>
+          <span className="divider">|</span>
+          <a href="https://www.linkedin.com/in/vishweshshinde" target="_blank" rel="noreferrer" className="footer-link">
+            <span className="icon">💼</span> vishweshshinde
+          </a>
+        </div>
+      </footer>
     </>
   );
 }

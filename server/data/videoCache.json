@@ -59,6 +59,68 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=OWaZ6AosS30"
   },
+  "74": [
+    {
+      "id": "Ber2pi2C0j0",
+      "questionId": "74",
+      "title": "Search a 2D Matrix - Leetcode 74 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/Ber2pi2C0j0/hqdefault.jpg",
+      "viewCount": 251187,
+      "likeCount": 3369,
+      "publishedAt": "2021-06-25T15:00:11Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=Ber2pi2C0j0"
+    },
+    {
+      "id": "JXU4Akft7yk",
+      "questionId": "74",
+      "title": "BS-24. Search in a 2D Matrix - I | Binary Search of 2D",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/JXU4Akft7yk/hqdefault.jpg",
+      "viewCount": 241243,
+      "likeCount": 7473,
+      "publishedAt": "2023-08-13T08:31:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=JXU4Akft7yk"
+    },
+    {
+      "id": "RhPqIIOUiS8",
+      "questionId": "74",
+      "title": "Search a 2D matrix (LeetCode 74) | Full solution with visual examples and proof",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/RhPqIIOUiS8/hqdefault.jpg",
+      "viewCount": 15674,
+      "likeCount": 381,
+      "publishedAt": "2023-04-17T08:30:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=RhPqIIOUiS8"
+    },
+    {
+      "id": "NYk3IuJinuc",
+      "questionId": "74",
+      "title": "Search a 2D Matrix | Made Super Easy | Binary Search | AMAZON | Leetcode-74",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/NYk3IuJinuc/hqdefault.jpg",
+      "viewCount": 15367,
+      "likeCount": 554,
+      "publishedAt": "2022-07-25T23:30:02Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=NYk3IuJinuc"
+    },
+    {
+      "id": "8JI46p5Jv7Q",
+      "questionId": "74",
+      "title": "74. Search a 2D Matrix || Java || Leetcode || Hindi",
+      "channelTitle": "Coding Sphere",
+      "thumbnail": "https://i.ytimg.com/vi/8JI46p5Jv7Q/hqdefault.jpg",
+      "viewCount": 2486,
+      "likeCount": 51,
+      "publishedAt": "2024-06-30T17:36:50Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=8JI46p5Jv7Q"
+    }
+  ],
   "76": [
     {
       "id": "jSto0O4AJbM",
