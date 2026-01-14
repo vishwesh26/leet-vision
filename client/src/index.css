@@ -1,0 +1,726 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+  --bg-color: #0a0a0a; /* Deep black/grey */
+  --card-bg: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --accent-orange: #f57c00; /* LeetCode-ish orange */
+  --accent-glow: rgba(245, 124, 0, 0.3);
+  --border-color: #222222;
+  --font-family: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Background Subtle Grid/Glow */
+.background-glow {
+  position: fixed;
+  top: -50%;
+  left: -20%;
+  width: 80vw;
+  height: 80vw;
+  background: radial-gradient(circle, rgba(245, 124, 0, 0.08) 0%, rgba(0,0,0,0) 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Navbar (Enhanced) */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.logo span {
+  color: var(--accent-orange);
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  color: #ccc;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  color: white;
+}
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+.nav-search:focus-within {
+  border-color: var(--accent-orange);
+  width: 300px;
+}
+
+.nav-search input {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-size: 0.9rem;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+@media (max-width: 968px) {
+  .nav-links {
+    display: none; /* Hide links on mobile/tablet for simplicity for now */
+  }
+  .nav-center {
+    justify-content: flex-end;
+  }
+  
+  /* Mobile: Hide Navbar Search by default */
+  .nav-search {
+    display: none;
+  }
+
+  /* Mobile: Show Navbar Search ONLY when results are shown */
+  .navbar.has-results .nav-search {
+    display: flex;
+    width: 200px;
+    animation: fadeIn 0.5s ease;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center vertically */
+  justify-content: space-between;
+  min-height: 80vh;
+  padding: 0 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Left Content */
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+  z-index: 2;
+}
+
+.badge-new {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
+  color: #ccc;
+}
+
+h1.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h1.hero-title span {
+  color: var(--accent-orange);
+  background: none;
+  -webkit-text-fill-color: var(--accent-orange);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 90%;
+}
+
+/* Search Box in Hero */
+.hero-search-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-search-box:focus-within {
+  border-color: var(--accent-orange);
+  box-shadow: 0 10px 40px rgba(245, 124, 0, 0.15);
+}
+
+.hero-search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-size: 1.1rem;
+  outline: none;
+  font-family: var(--font-family);
+}
+
+.hero-search-box button {
+  background: var(--accent-orange);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.hero-search-box button:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+}
+
+/* Right Animation (Orbits) */
+.hero-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 600px;
+}
+
+.orbit-container {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Very faint border */
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.orbit-1 { width: 300px; height: 300px; animation: rotate 30s linear infinite; }
+.orbit-2 { width: 450px; height: 450px; animation: rotate 45s linear infinite reverse; }
+.orbit-3 { width: 600px; height: 600px; animation: rotate 60s linear infinite; }
+
+.planet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  margin-top: -25px; /* Center offset */
+  margin-left: -25px; /* Center offset */
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+.planet img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  filter: none;
+  transition: all 0.3s ease;
+}
+
+.planet:hover {
+  border-color: var(--accent-orange);
+  z-index: 10;
+}
+.planet:hover img {
+    filter: none;
+    transform: scale(1.1);
+}
+
+/* Results Content */
+.results-container {
+  padding: 4rem 5%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.results-header {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Video Card (Restoring missing styles) */
+.video-card {
+  background: #161616;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-result {
+  /* Only visual distinction, no layout distinction */
+  border: 1px solid var(--accent-orange);
+  background: linear-gradient(to bottom, rgba(245, 124, 0, 0.05), transparent);
+  box-shadow: 0 0 15px rgba(245, 124, 0, 0.1);
+}
+
+/* 
+Removed .top-result .thumbnail-container and .top-result .card-content 
+so they inherit default .video-card styles 
+*/
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  border-color: #333;
+}
+
+.thumbnail-container {
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  position: relative;
+  background-color: #000;
+}
+
+.thumbnail-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: white;
+}
+
+.channel-name {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  border-top: 1px solid #222;
+  padding-top: 1rem;
+}
+
+
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #222 25%, #2a2a2a 50%, #222 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Responsiveness */
+
+/* Tablet (Landscape & Portrait) */
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column-reverse;
+    justify-content: center;
+    text-align: center;
+    padding-top: 4rem;
+    min-height: auto;
+  }
+  
+  .hero-content {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .hero-visual {
+    height: 500px;
+    margin-bottom: 2rem;
+    width: 100%;
+    overflow: hidden; /* Prevent horizontal scroll if orbit is too big */
+  }
+
+  .orbit-container {
+      transform: scale(0.8);
+  }
+  
+  h1.hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-search-box {
+      width: 80%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  h1.hero-title {
+    font-size: 2.8rem;
+  }
+  
+  .hero-subtitle {
+     font-size: 1rem;
+  }
+
+  /* Hide orbit animation on mobile */
+  .hero-visual {
+      display: none;
+  }
+
+  .results-grid {
+      /* Smaller min-width for grid to fit mobile screens without scroll */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 1.5rem;
+  }
+  
+  .hero-search-box {
+      width: 100%;
+  }
+  
+  .navbar {
+     padding: 1rem;
+  }
+  
+  .results-header {
+      text-align: center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+   h1.hero-title {
+       font-size: 2.2rem;
+   }
+   
+   .orbit-container {
+       transform: scale(0.45);
+   }
+   
+   .hero-visual {
+       height: 300px;
+   }
+   
+   .results-grid {
+       grid-template-columns: 1fr; /* Stack vertically on very small screens */
+   }
+}
+
+/* Hero Features (Compact Pill Style) */
+.hero-features {
+  display: flex;
+  gap: 5rem; /* Large external spacing between items */
+  margin-top: 2.5rem;
+  width: 80%;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.8rem 1.5rem; /* Reverted to compact internal padding */
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 500;
+  font-size: 0.95rem; /* Reverted font size */
+  color: #ccc;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  flex: 0 1 auto;
+  margin: 0.5rem;
+}
+
+.feature-item:hover {
+  border-color: var(--accent-orange);
+  background: rgba(245, 124, 0, 0.1);
+  transform: translateY(-2px);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.feature-icon {
+  font-size: 1.2rem;
+  /* Remove box style from big card design */
+  background: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  color: inherit;
+  margin-bottom: 0;
+  filter: none;
+}
+
+/* Start Searching Button */
+.start-btn {
+  background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 5px 15px rgba(245, 124, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.start-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.start-btn:hover::before {
+  opacity: 1;
+}
+
+.start-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(245, 124, 0, 0.6), inset 0 1px 1px rgba(255,255,255,0.5);
+}
+
+.start-btn:active {
+  transform: translateY(-1px);
+}
+
+
+@media (max-width: 768px) {
+  .hero-features {
+      justify-content: center;
+      gap: 1rem;
+      flex-direction: row; 
+      align-items: center;
+  }
+  .feature-item {
+      width: auto;
+      border-left: 1px solid rgba(255, 255, 255, 0.1); /* Reset border override */
+      background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+/* Responsive Toggling */
+.mobile-hero-search {
+  display: none; /* Hidden by default (Desktop) */
+}
+
+.desktop-only {
+  display: block; /* Visible by default */
+}
+
+@media (max-width: 768px) {
+  .mobile-hero-search {
+    display: flex; /* Show on Mobile */
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+  /* Reuse the previous hero-search-box styles, ensuring they apply here */
+  .mobile-hero-search input {
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px;
+      margin-right: 0.5rem;
+      width: 70%;
+      background: rgba(0,0,0,0.3);
+      color: white;
+  }
+  .mobile-hero-search button {
+      width: 30%;
+      padding: 0.8rem;
+      border-radius: 30px;
+  }
+
+  .desktop-only {
+    display: none !important; /* Hide features/CTA on mobile */
+  }
+
+  /* Adjust Navbar Search to be hidden or smaller on mobile since we have Hero search? 
+     The user said "in that youtube video page on top he should have search question button".
+     So we keep navbar search, but maybe it's squished. 
+     The existing media query handles nav-search width.
+  */
+}
+/* Save Button */
+/* Badge */
+.badge-accurate {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, var(--accent-orange), #ff9800);
+  color: black;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  z-index: 20; /* Ensure on top */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Save Button */
+.save-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 20; /* Ensure on top */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.save-btn:hover {
+  background: white;
+  color: var(--accent-orange);
+  transform: scale(1.1) rotate(5deg);
+  border-color: white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.save-btn.saved {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: white;
+  box-shadow: 0 0 15px rgba(245, 124, 0, 0.5);
+}
+
+.save-btn.saved:hover {
+  transform: scale(0.95); /* Click effect */
+  background: #d66c00;
+}

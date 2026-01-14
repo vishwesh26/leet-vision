@@ -1,0 +1,136 @@
+{
+  "1": {
+    "id": "KLlXCFG5TnA",
+    "questionId": "1",
+    "title": "Two Sum - Leetcode 1 - HashMap - Python",
+    "channelTitle": "NeetCode",
+    "thumbnail": "https://i.ytimg.com/vi/KLlXCFG5TnA/hqdefault.jpg",
+    "viewCount": 1965035,
+    "likeCount": 22013,
+    "publishedAt": "2020-06-10T05:57:05Z",
+    "isMostAccurate": true,
+    "videoUrl": "https://www.youtube.com/watch?v=KLlXCFG5TnA"
+  },
+  "9": {
+    "id": "yubRKwixN-U",
+    "questionId": "9",
+    "title": "Palindrome Number - Leetcode 9 - Python",
+    "channelTitle": "NeetCode",
+    "thumbnail": "https://i.ytimg.com/vi/yubRKwixN-U/hqdefault.jpg",
+    "viewCount": 108515,
+    "likeCount": 2019,
+    "publishedAt": "2021-08-20T16:00:49Z",
+    "isMostAccurate": true,
+    "videoUrl": "https://www.youtube.com/watch?v=yubRKwixN-U"
+  },
+  "14": {
+    "id": "wtOQaovlvhY",
+    "questionId": "14",
+    "title": "Longest Common Prefix (LeetCode 14) | Full solution with animations and examples | Study Algorithms",
+    "channelTitle": "Nikhil Lohia",
+    "thumbnail": "https://i.ytimg.com/vi/wtOQaovlvhY/hqdefault.jpg",
+    "viewCount": 179389,
+    "likeCount": 4449,
+    "publishedAt": "2022-02-21T05:02:18Z",
+    "isMostAccurate": true,
+    "videoUrl": "https://www.youtube.com/watch?v=wtOQaovlvhY"
+  },
+  "21": {
+    "id": "XIdigk956u0",
+    "questionId": "21",
+    "title": "Merge Two Sorted Lists - Leetcode 21 - Python",
+    "channelTitle": "NeetCode",
+    "thumbnail": "https://i.ytimg.com/vi/XIdigk956u0/hqdefault.jpg",
+    "viewCount": 511670,
+    "likeCount": 6793,
+    "publishedAt": "2020-08-19T21:11:07Z",
+    "isMostAccurate": true,
+    "videoUrl": "https://www.youtube.com/watch?v=XIdigk956u0"
+  },
+  "28": {
+    "id": "OWaZ6AosS30",
+    "questionId": "28",
+    "title": "Find the index of the first occurrence in a string | Leetcode 28",
+    "channelTitle": "Technosage",
+    "thumbnail": "https://i.ytimg.com/vi/OWaZ6AosS30/hqdefault.jpg",
+    "viewCount": 80247,
+    "likeCount": 1214,
+    "publishedAt": "2022-09-20T17:06:44Z",
+    "isMostAccurate": true,
+    "videoUrl": "https://www.youtube.com/watch?v=OWaZ6AosS30"
+  },
+  "76": [
+    {
+      "id": "jSto0O4AJbM",
+      "questionId": "76",
+      "title": "Minimum Window Substring - Airbnb Interview Question - Leetcode 76",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/jSto0O4AJbM/hqdefault.jpg",
+      "viewCount": 472468,
+      "likeCount": 6963,
+      "publishedAt": "2021-01-21T15:30:11Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=jSto0O4AJbM"
+    },
+    {
+      "id": "WJaij9ffOIY",
+      "questionId": "76",
+      "title": "L12. Minimum Window Substring | 2 Pointers and Sliding Window Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/WJaij9ffOIY/hqdefault.jpg",
+      "viewCount": 252307,
+      "likeCount": 6268,
+      "publishedAt": "2024-03-27T04:25:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=WJaij9ffOIY"
+    },
+    {
+      "id": "3Bp3OVD1EGc",
+      "questionId": "76",
+      "title": "Minimum Window Substring | Google | Leetcode 76",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/3Bp3OVD1EGc/hqdefault.jpg",
+      "viewCount": 45901,
+      "likeCount": 1685,
+      "publishedAt": "2022-10-22T04:20:10Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3Bp3OVD1EGc"
+    },
+    {
+      "id": "2leVSSd8L_o",
+      "questionId": "76",
+      "title": "76. Minimum Window Substring | LeetCode | Java Solution",
+      "channelTitle": "Shrayansh Jain",
+      "thumbnail": "https://i.ytimg.com/vi/2leVSSd8L_o/hqdefault.jpg",
+      "viewCount": 5368,
+      "likeCount": 56,
+      "publishedAt": "2022-12-25T09:44:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=2leVSSd8L_o"
+    },
+    {
+      "id": "ydpA9w2NgZY",
+      "questionId": "76",
+      "title": "FIND Minimum Window Substring - Leetcode 76",
+      "channelTitle": "Lit Code",
+      "thumbnail": "https://i.ytimg.com/vi/ydpA9w2NgZY/hqdefault.jpg",
+      "viewCount": 281,
+      "likeCount": 3,
+      "publishedAt": "2024-02-04T11:38:56Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ydpA9w2NgZY"
+    }
+  ],
+  "86": {
+    "id": "KT1iUciJr4g",
+    "questionId": "86",
+    "title": "Partition List - Linked List - Leetcode 86",
+    "channelTitle": "NeetCode",
+    "thumbnail": "https://i.ytimg.com/vi/KT1iUciJr4g/hqdefault.jpg",
+    "viewCount": 44176,
+    "likeCount": 1071,
+    "publishedAt": "2021-02-03T15:30:03Z",
+    "isMostAccurate": true,
+    "videoUrl": "https://www.youtube.com/watch?v=KT1iUciJr4g"
+  }
+}
