@@ -34,9 +34,13 @@ try {
 // Helper: Save Cache
 const saveCache = () => {
     try {
+        // Vercel is Read-Only in production runtime. preventing crash.
+        // We only try to save if we think we can (local), but try-catch is safest.
+        if (process.env.NODE_ENV === 'production') return; 
+        
         fs.writeFileSync(CACHE_FILE, JSON.stringify(videoCache, null, 2));
     } catch (err) {
-        console.error('Error saving cache:', err);
+        console.warn('Cache save skipped (Read-Only FS or Error):', err.message);
     }
 };
 
@@ -176,6 +180,13 @@ app.get('/api/list/:type', async (req, res) => {
     res.json(results.filter(v => v !== null));
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+
+
+// Vercel requires exporting the app
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+module.exports = app;

@@ -66,7 +66,7 @@ function App() {
     setQuestionId(query);
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/search/${query}`);
+      const response = await axios.get(`/api/search/${query}`);
       setVideos(response.data);
     } catch (err) {
       console.error(err);
@@ -96,7 +96,7 @@ function App() {
 
     try {
       // Add difficulty query param if exists
-      const url = `http://localhost:5000/api/list/${type}${difficulty ? `?difficulty=${difficulty}` : ''}`;
+      const url = `/api/list/${type}${difficulty ? `?difficulty=${difficulty}` : ''}`;
       const response = await axios.get(url);
       setVideos(response.data);
     } catch (err) {
