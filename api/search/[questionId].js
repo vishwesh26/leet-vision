@@ -1,4 +1,4 @@
-const { getOrFetchVideo } = require('../../_lib/youtube');
+const { getOrFetchVideo } = require('../_lib/youtube');
 
 // Endpoint: /api/search/[questionId]
 export default async function handler(req, res) {

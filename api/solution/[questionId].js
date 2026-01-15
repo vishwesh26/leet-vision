@@ -1,4 +1,4 @@
-const { getSolution } = require('../../_lib/ai');
+const { getSolution } = require('../_lib/ai');
 
 // Endpoint: /api/solution/[questionId]
 export default async function handler(req, res) {

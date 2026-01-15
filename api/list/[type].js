@@ -1,5 +1,5 @@
-const { problemsDb } = require('../../_lib/db');
-const { getOrFetchVideo } = require('../../_lib/youtube');
+const { problemsDb } = require('../_lib/db');
+const { getOrFetchVideo } = require('../_lib/youtube');
 
 // Endpoint: /api/list/[type]
 export default async function handler(req, res) {
