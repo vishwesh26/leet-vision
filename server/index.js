@@ -150,7 +150,8 @@ app.get('/', (req, res) => {
 });
 
 // Search Endpoint (Manual - Always Fetch)
-app.get('/api/search/:questionId', async (req, res) => {
+// Support both /api/ and / incase Vercel rewrites strip the prefix
+app.get(['/api/search/:questionId', '/search/:questionId'], async (req, res) => {
     const { questionId } = req.params;
     if (!questionId) return res.status(400).json({ error: 'ID required' });
 
@@ -165,7 +166,7 @@ app.get('/api/search/:questionId', async (req, res) => {
 });
 
 // List Endpoint
-app.get('/api/list/:type', async (req, res) => {
+app.get(['/api/list/:type', '/list/:type'], async (req, res) => {
     try {
         const { type } = req.params;
         const { difficulty, param } = req.query; // param can be topic, company
@@ -219,7 +220,7 @@ app.get('/api/list/:type', async (req, res) => {
 });
 
 // Sync Endpoint
-app.post('/api/sync/:username', async (req, res) => {
+app.post(['/api/sync/:username', '/sync/:username'], async (req, res) => {
     const { username } = req.params;
     
     // LeetCode GraphQL Query
@@ -310,7 +311,7 @@ if (!fs.existsSync(SOLUTIONS_DIR)) {
 
 const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
 
-app.get('/api/solution/:questionId', async (req, res) => {
+app.get(['/api/solution/:questionId', '/solution/:questionId'], async (req, res) => {
     try {
         const { questionId } = req.params;
         const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
@@ -423,7 +424,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
 });
 
 // Company Endpoint
-app.get('/api/company/:companyName', async (req, res) => {
+app.get(['/api/company/:companyName', '/company/:companyName'], async (req, res) => {
     const { companyName } = req.params;
     const key = companyName.toLowerCase();
     
