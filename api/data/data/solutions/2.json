@@ -1,0 +1,24 @@
+{
+  "questionId": "2",
+  "title": "Add Two Numbers",
+  "solutions": {
+    "basic": {
+      "code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\nclass Solution:\n    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\n        dummy_head = ListNode(0)\n        current = dummy_head\n        carry = 0\n        \n        # 1. Main loop while both lists have nodes\n        while l1 and l2:\n            s = l1.val + l2.val + carry\n            carry = s // 10\n            current.next = ListNode(s % 10)\n            current = current.next\n            l1 = l1.next\n            l2 = l2.next\n            \n        # 2. Handle remainder of l1\n        while l1:\n            s = l1.val + carry\n            carry = s // 10\n            current.next = ListNode(s % 10)\n            current = current.next\n            l1 = l1.next\n            \n        # 3. Handle remainder of l2\n        while l2:\n            s = l2.val + carry\n            carry = s // 10\n            current.next = ListNode(s % 10)\n            current = current.next\n            l2 = l2.next\n            \n        # 4. Handle final carry\n        if carry > 0:\n            current.next = ListNode(carry)\n            \n        return dummy_head.next",
+      "time": "O(max(N, M))",
+      "space": "O(max(N, M))",
+      "explanation": "This basic approach iterates through the linked lists, calculating the sum and carry at each step. It handles the list traversal in separate stages: first, while both lists are present, then separate loops to handle any remaining nodes in L1 or L2, and finally, a check for the final carry. While functionally correct, the use of three separate `while` loops makes the code verbose."
+    },
+    "optimized": {
+      "code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\nclass Solution:\n    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\n        dummy_head = ListNode(0)\n        current = dummy_head\n        carry = 0\n        \n        # Condition includes the lists and the carry\n        while l1 or l2 or carry:\n            \n            # Safely get values, treat None as 0\n            val1 = l1.val if l1 else 0\n            val2 = l2.val if l2 else 0\n            \n            # Calculate sum and new carry\n            total = val1 + val2 + carry\n            carry = total // 10\n            digit = total % 10\n            \n            # Create and link new node\n            current.next = ListNode(digit)\n            current = current.next\n            \n            # Advance pointers safely\n            if l1: l1 = l1.next\n            if l2: l2 = l2.next\n                \n        return dummy_head.next",
+      "time": "O(max(N, M))",
+      "space": "O(max(N, M))",
+      "explanation": "This optimized approach consolidates the iteration into a single `while` loop that runs as long as there are nodes in either list or a pending carry. By checking for `l1 or l2 or carry`, we ensure every digit is processed efficiently. We use conditional expressions (`val1 = l1.val if l1 else 0`) to handle null nodes gracefully, resulting in cleaner and less repetitive code than the basic implementation."
+    },
+    "best": {
+      "code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\nclass Solution:\n    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\n        dummy = ListNode()\n        tail = dummy\n        carry = 0\n        \n        while l1 or l2 or carry:\n            \n            # Get current values (0 if list exhausted)\n            val1 = l1.val if l1 else 0\n            val2 = l2.val if l2 else 0\n            \n            # Calculate total and update carry\n            total = val1 + val2 + carry\n            carry = total // 10\n            \n            # Append the new digit\n            tail.next = ListNode(total % 10)\n            \n            # Advance pointers\n            tail = tail.next\n            if l1: l1 = l1.next\n            if l2: l2 = l2.next\n                \n        return dummy.next",
+      "time": "O(max(N, M))",
+      "space": "O(max(N, M))",
+      "explanation": "The time complexity is inherently limited by the length of the lists, so this implementation represents the 'best' structure. It uses a clean, single-pass iteration (`while l1 or l2 or carry`) which is the most efficient pattern for this specific problem. It minimizes pointer adjustments and maximizes clarity by using a dummy node and a tail pointer, which avoids special handling for the head of the resultant list."
+    }
+  }
+}

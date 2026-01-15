@@ -1,0 +1,24 @@
+{
+  "questionId": "1",
+  "title": "Two Sum",
+  "solutions": {
+    "basic": {
+      "code": "class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        n = len(nums)\n        for i in range(n):\n            for j in range(i + 1, n):\n                if nums[i] + nums[j] == target:\n                    return [i, j]",
+      "time": "O(n^2)",
+      "space": "O(1)",
+      "explanation": "This is the brute-force approach. It iterates through every possible pair of numbers in the array using nested loops. The outer loop picks the first number (at index `i`), and the inner loop picks the second number (at index `j`, starting from `i+1` to avoid using the same element twice and checking redundant pairs). If their sum equals the target, their indices are returned. This approach checks approximately `n * (n-1) / 2` pairs in the worst case."
+    },
+    "optimized": {
+      "code": "class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        # First pass: Store all numbers and their indices in a hash map\n        num_to_index = {}\n        for i, num in enumerate(nums):\n            num_to_index[num] = i\n\n        # Second pass: For each number, check if its complement exists in the hash map\n        for i, num in enumerate(nums):\n            complement = target - num\n            # Check if complement exists and is not the current number itself\n            if complement in num_to_index and num_to_index[complement] != i:\n                return [i, num_to_index[complement]]",
+      "time": "O(n)",
+      "space": "O(n)",
+      "explanation": "This approach uses a hash map (dictionary in Python) to optimize the lookup process by making it average O(1). It involves two passes. In the first pass, it iterates through the array and stores each number as a key and its index as a value in the `num_to_index` map. In the second pass, for each `num` at index `i`, it calculates the `complement` needed (`target - num`). It then checks if this `complement` exists in the hash map. If it does, and its stored index (`num_to_index[complement]`) is not `i` (to ensure two different elements are used), the indices `i` and `num_to_index[complement]` are returned. Each pass takes O(n) time, resulting in an overall O(n) time complexity. The space complexity is O(n) because, in the worst case, all `n` elements are stored in the hash map."
+    },
+    "best": {
+      "code": "class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        num_map = {}\n        for i, num in enumerate(nums):\n            complement = target - num\n            if complement in num_map:\n                # If complement is found, it means it was processed earlier\n                # and its index is already stored in the map.\n                return [num_map[complement], i]\n            # If complement not found, add the current number and its index to the map\n            num_map[num] = i",
+      "time": "O(n)",
+      "space": "O(n)",
+      "explanation": "This is generally considered the best solution due to its efficiency in a single pass. It utilizes a hash map `num_map` to store numbers encountered so far along with their indices. As it iterates through `nums` with an index `i` and value `num`:\n1. It calculates the `complement` needed (`target - num`).\n2. It checks if this `complement` already exists as a key in `num_map`. If it does, it means we've previously encountered the `complement` (at index `num_map[complement]`), and the current `num` at `i` completes the pair. We then immediately return `[num_map[complement], i]`.\n3. If the `complement` is not found, the current `num` and its index `i` are added to the `num_map`. This makes `num` available for future numbers to find it as their complement.\nThis approach achieves O(n) time complexity because each number is processed exactly once, and hash map operations (insertion, lookup) take O(1) on average. The space complexity is O(n) in the worst case, as we might store all `n` elements in the hash map if no pair is found until the last elements."
+    }
+  }
+}

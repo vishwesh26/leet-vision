@@ -1,0 +1,24 @@
+{
+  "questionId": "3",
+  "title": "Longest Substring Without Repeating Characters",
+  "solutions": {
+    "basic": {
+      "code": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        n = len(s)\n        max_len = 0\n        \n        # Iterate through all possible starting positions i\n        for i in range(n):\n            # Iterate through all possible ending positions j\n            for j in range(i, n):\n                substring = s[i:j+1]\n                \n                # Helper function to check uniqueness O(L)\n                if len(set(substring)) == len(substring):\n                    max_len = max(max_len, len(substring))\n                else:\n                    # Optimization: If s[i:j+1] fails, s[i:j+2] will also fail.\n                    # We can break the inner loop, but complexity remains cubic.\n                    break\n                    \n        return max_len",
+      "time": "O(N^3)",
+      "space": "O(N)",
+      "explanation": "This is the brute-force approach. It iterates through all possible substrings defined by start index 'i' and end index 'j'. For each substring, it checks for uniqueness by converting the substring to a set and comparing the set's length to the substring's length. Since there are O(N^2) substrings and checking uniqueness takes O(N) time, the overall complexity is O(N^3)."
+    },
+    "optimized": {
+      "code": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        left = 0\n        max_len = 0\n        # char_set stores characters currently in the sliding window [left, right]\n        char_set = set()\n        \n        for right in range(len(s)): \n            # Expand the window using the right pointer\n            current_char = s[right]\n            \n            # If the character is already in the set, the window is invalid.\n            while current_char in char_set:\n                # Shrink the window from the left until the repeating character is removed.\n                char_set.remove(s[left])\n                left += 1\n            \n            # Add the new character and update max length\n            char_set.add(current_char)\n            max_len = max(max_len, right - left + 1)\n            \n        return max_len",
+      "time": "O(N)",
+      "space": "O(min(N, \\Sigma))",
+      "explanation": "This solution uses the standard sliding window approach with two pointers (`left` and `right`) and a `set` to track characters within the current window. The right pointer iterates through the string, expanding the window. If a duplicate is found, the left pointer iteratively shrinks the window until the duplicate is removed. Since both pointers only move forward and traverse the string at most once, the time complexity is linear."
+    },
+    "best": {
+      "code": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        n = len(s)\n        # Map stores {character: last_seen_index}\n        char_map = {}\n        left = 0\n        max_len = 0\n        \n        for right in range(n):\n            char = s[right]\n            \n            # 1. Check if the character is repeating AND if its last occurrence \n            # is within the current window boundary (char_map[char] >= left)\n            if char in char_map and char_map[char] >= left:\n                # If repeat found, jump 'left' past the last occurrence. \n                # This avoids the iterative removal loop of the basic sliding window.\n                left = char_map[char] + 1\n            \n            # 2. Update the character's last seen index\n            char_map[char] = right\n            \n            # 3. Calculate current window length and update max_len\n            max_len = max(max_len, right - left + 1)\n            \n        return max_len",
+      "time": "O(N)",
+      "space": "O(min(N, \\Sigma))",
+      "explanation": "This solution uses the optimized sliding window with a hash map to store the last seen index of each character. When a duplicate character is encountered, instead of iteratively moving the 'left' pointer, we jump 'left' directly to one position past the character's previous location. This 'jump' optimization ensures every character is processed exactly once without internal loops, optimizing the constant factors of the $O(N)$ solution."
+    }
+  }
+}
