@@ -9,6 +9,9 @@
   --accent-glow: rgba(245, 124, 0, 0.3);
   --border-color: #222222;
   --font-family: 'Outfit', sans-serif;
+  --diff-easy: #00b8a3;
+  --diff-medium: #ffc01e;
+  --diff-hard: #ff375f;
 }
 
 body {
@@ -115,6 +118,70 @@ body {
   font-size: 0.9rem;
   width: 100%;
   font-family: var(--font-family);
+}
+
+/* Download Extension Button */
+.btn-download-ext {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--font-family);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 1rem;
+  min-width: 160px;
+}
+
+.btn-download-ext::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(45deg, var(--accent-orange), #ff4d4d);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.btn-download-ext:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(245, 124, 0, 0.3);
+}
+
+.btn-download-ext:hover::before {
+  opacity: 1;
+}
+
+.btn-download-ext .icon {
+  font-size: 1.2rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  opacity: 0.8;
+}
+
+.btn-download-ext .subtitle {
+  font-size: 0.65rem;
+  color: #aaa;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+@media (max-width: 968px) {
+  .btn-download-ext {
+    display: none; /* Hide full button on mobile headers to save space */
+  }
 }
 
 @media (max-width: 968px) {
@@ -327,12 +394,90 @@ h1.hero-title span {
   padding-bottom: 1rem;
 }
 
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  width: 100%;
+/* Problem List Table */
+.problem-list-container {
+    width: 100%;
+    overflow-x: auto;
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 12px;
 }
+
+.problem-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Ensure doesn't squash too much on mobile */
+}
+
+.problem-table th {
+    text-align: left;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #333;
+    color: #888;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.problem-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #222;
+    vertical-align: middle;
+    transition: background-color 0.2s;
+}
+
+.problem-table tr:last-child td {
+    border-bottom: none;
+}
+
+.problem-table tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.problem-title-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    display: block;
+    transition: color 0.2s;
+}
+.problem-title-link:hover {
+    color: var(--accent-orange);
+}
+
+/* Solution Button inside Table */
+.btn-solution {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+.btn-solution:hover {
+    background: rgba(245, 124, 0, 0.1);
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+}
+.btn-solution .icon {
+    font-size: 0.8rem;
+}
+
+/* Saved/Bookmark Icon Hover */
+td span[title] {
+    transition: transform 0.2s;
+    display: inline-block;
+}
+td span[title]:hover {
+    transform: scale(1.2);
+}
+
 
 /* Video Card (Restoring missing styles) */
 .video-card {
@@ -415,6 +560,46 @@ so they inherit default .video-card styles
   padding-top: 1rem;
 }
 
+/* Badges for Problem Cards */
+.problem-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+}
+.problem-link:hover {
+    color: var(--accent-orange);
+}
+
+.badge-difficulty {
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.1);
+}
+.badge-difficulty.easy { color: var(--diff-easy); background: rgba(0, 184, 163, 0.1); }
+.badge-difficulty.medium { color: var(--diff-medium); background: rgba(255, 192, 30, 0.1); }
+.badge-difficulty.hard { color: var(--diff-hard); background: rgba(255, 55, 95, 0.1); }
+
+.topic-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+.topic-tag {
+    background: #2a2a2a;
+    color: #ccc;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
 
 
 /* Skeleton */
@@ -734,64 +919,4 @@ so they inherit default .video-card styles
   background: rgba(0, 0, 0, 0.2);
   color: #888;
   font-size: 0.9rem;
-  position: relative;
-  z-index: 10;
-}
-
-.app-footer p {
-  margin-bottom: 0.5rem;
-}
-
-.creator-name {
-  color: var(--accent-orange);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.footer-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 0.8rem;
-}
-
-.footer-link {
-  text-decoration: none;
-  color: #aaa;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid transparent;
-}
-
-.footer-link:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-.footer-link .icon {
-  font-size: 1rem;
-}
-
-.divider {
-  color: #444;
-  font-size: 0.8rem;
-}
-
-@media (max-width: 480px) {
-  .footer-links {
-      flex-direction: column;
-      gap: 0.5rem;
-  }
-  .divider {
-      display: none;
-  }
 }

@@ -47,11 +47,22 @@ const saveCache = () => {
 app.use(cors());
 app.use(express.json());
 
+// Load problems database
+let problemsDb = [];
+try {
+    const problemsData = fs.readFileSync(path.join(__dirname, 'data', 'problems.json'), 'utf8');
+    problemsDb = JSON.parse(problemsData);
+    console.log(`Loaded ${problemsDb.length} problems from database.`);
+} catch (err) {
+    console.error('Error loading problems.json:', err);
+}
+
 // Helper: Get or Fetch Video (Quota Efficient)
-const getOrFetchVideo = async (questionId) => {
+// fetchIfMissing: true = perform API call if cache miss. false = return null/empty if cache miss.
+const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
     // 1. Check Cache
     if (videoCache[questionId]) {
-        console.log(`Cache HIT for ${questionId}`);
+        // console.log(`Cache HIT for ${questionId}`);
         // Handle legacy single-object cache (wrap in array)
         if (!Array.isArray(videoCache[questionId])) {
              return [videoCache[questionId]];
@@ -77,12 +88,14 @@ const getOrFetchVideo = async (questionId) => {
         return mockArray;
     }
 
-    // 3. Live Fetch (Only if missing and key exists)
+    if (!fetchIfMissing) return [];
+
+    // 3. Live Fetch (Only if missing and key exists AND fetchIfMissing is true)
     try {
         console.log(`Cache MISS for ${questionId} - Fetching API...`);
         const query = `LeetCode ${questionId} solution`;
         
-        // Search - Fetch 5 results (Same quota cost as 1)
+        // Search - Fetch 5 results
         const searchRes = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
             params: { part: 'snippet', q: query, type: 'video', maxResults: 5, key: YOUTUBE_API_KEY }
         });
@@ -134,13 +147,13 @@ app.get('/', (req, res) => {
     res.send('LeetCode Video Search API (Efficient Cached) is running');
 });
 
-// Search Endpoint (Manual)
+// Search Endpoint (Manual - Always Fetch)
 app.get('/api/search/:questionId', async (req, res) => {
     const { questionId } = req.params;
     if (!questionId) return res.status(400).json({ error: 'ID required' });
 
     // Returns Array of videos
-    const videos = await getOrFetchVideo(questionId);
+    const videos = await getOrFetchVideo(questionId, true); // Force fetch
     
     if (videos && videos.length > 0) {
         return res.json(videos); 
@@ -152,34 +165,175 @@ app.get('/api/search/:questionId', async (req, res) => {
 // List Endpoint
 app.get('/api/list/:type', async (req, res) => {
     const { type } = req.params;
-    const { difficulty } = req.query;
+    const { difficulty, param } = req.query; // param can be topic, company
 
-    const questions = {
-        'top-100': ['1', '2', '3', '5', '11', '15', '20', '21', '42', '53'],
-        'blind-75': ['1', '15', '33', '49', '53', '54', '55', '56', '57', '62'],
-        'important': ['4', '10', '23', '33', '42', '76', '98', '121', '146', '200']
-    };
+    let filtered = [];
 
-    let targetIds = questions[type] || [];
-    
-     if (type === 'difficulty' && difficulty) {
-        if (difficulty === 'Easy') targetIds = ['1', '9', '13', '14', '20', '21', '26', '27', '28', '35'];
-        if (difficulty === 'Medium') targetIds = ['2', '3', '5', '6', '7', '8', '11', '12', '15', '17'];
-        if (difficulty === 'Hard') targetIds = ['4', '10', '23', '25', '30', '32', '37', '41', '42', '44'];
+    if (type === 'top-100') {
+        // Just return first 100 of our DB for now
+        filtered = problemsDb.slice(0, 100);
+    } else if (type === 'blind-75') {
+        // Assume our DB IS the curated list for now, or filter by specific IDs if we had a separate list
+        filtered = problemsDb.slice(0, 75); 
+    } else if (type === 'difficulty') {
+        filtered = problemsDb.filter(p => p.difficulty === difficulty);
+    } else if (type === 'topic') {
+        // Fuzzy match topic
+        const topic = param || difficulty; // Sometimes passed as param
+        if (!topic) return res.json([]);
+        filtered = problemsDb.filter(p => p.topics.some(t => t.toLowerCase() === topic.toLowerCase()));
+    } else if (type === 'company') {
+        // Placeholder
+        filtered = problemsDb.slice(0, 20);
+    } else {
+        filtered = problemsDb;
     }
 
-    if (targetIds.length === 0) return res.json([]);
+    // Limit size to prevent massive payloads if something goes wrong
+    filtered = filtered.slice(0, 100);
 
-    // Fetch all, but map to only TOP result for the list
-    const results = await Promise.all(targetIds.map(async (id) => {
-        const videos = await getOrFetchVideo(id);
-        if (videos && videos.length > 0) return videos[0]; // Return only best one
-        return null;
+    // Attach Video Data (Only cached)
+    const results = await Promise.all(filtered.map(async (problem) => {
+        const videos = await getOrFetchVideo(problem.id, false); // FALSE = Do NOT live fetch
+        return {
+            ...problem,
+            video: (videos && videos.length > 0) ? videos[0] : null
+        };
     }));
     
-    res.json(results.filter(v => v !== null));
+    res.json(results);
 });
 
+// Sync Endpoint
+app.post('/api/sync/:username', async (req, res) => {
+    const { username } = req.params;
+    
+    // LeetCode GraphQL Query
+    const query = `
+      query userData($username: String!, $limit: Int!) {
+        matchedUser(username: $username) {
+          username
+          submissionCalendar
+          submitStats: submitStatsGlobal {
+            acSubmissionNum {
+              difficulty
+              count
+            }
+          }
+        }
+        recentAcSubmissionList(username: $username, limit: $limit) {
+          id
+          title
+          titleSlug
+          timestamp
+        }
+      }
+    `;
+
+    try {
+        const response = await axios.post('https://leetcode.com/graphql', {
+            query: query,
+            variables: { username, limit: 20 }
+        }, {
+            headers: { 
+                'Content-Type': 'application/json',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Referer': 'https://leetcode.com/'
+            }
+        });
+
+        if (!response.data.data.matchedUser) {
+             return res.status(404).json({ error: 'User not found or profile is private' });
+        }
+
+        const stats = response.data.data.matchedUser.submitStats.acSubmissionNum;
+        const recent = response.data.data.recentAcSubmissionList || [];
+        const calendar = response.data.data.matchedUser.submissionCalendar || "{}";
+
+        // Transform Stats
+        const solvedStats = {
+            total: stats.find(s => s.difficulty === 'All')?.count || 0,
+            easy: stats.find(s => s.difficulty === 'Easy')?.count || 0,
+            medium: stats.find(s => s.difficulty === 'Medium')?.count || 0,
+            hard: stats.find(s => s.difficulty === 'Hard')?.count || 0,
+            calendar: calendar
+        };
+
+        // Just return the raw list, let frontend handle deduplication
+        res.json({
+            solvedStats,
+            recentSolved: recent
+        });
+
+    } catch (err) {
+        console.error('LeetCode Sync Error:', err.message);
+        res.status(500).json({ error: 'Failed to sync with LeetCode', details: err.message });
+    }
+});
+
+
+
+// Helper to load companies data lazily or just read it here
+let companiesDb = {};
+try {
+    const companiesData = fs.readFileSync(path.join(__dirname, 'data', 'companies.json'), 'utf8');
+    companiesDb = JSON.parse(companiesData);
+    console.log(`Loaded ${Object.keys(companiesDb).length} companies from database.`);
+} catch (err) {
+    console.error('Error loading companies.json:', err);
+}
+
+// Company Endpoint
+app.get('/api/company/:companyName', async (req, res) => {
+    const { companyName } = req.params;
+    const key = companyName.toLowerCase();
+    
+    if (!companiesDb[key]) {
+        // Fallback: If company not found in our manual map, user might have just clicked "Companies" generally
+        // For now, return empty or a default set? 
+        // Or return 404? 
+        // Let's return 404 so frontend handles it or shows "No data for this company yet".
+        return res.status(404).json({ error: 'Company not found' });
+    }
+
+    const companyData = companiesDb[key];
+    const results = [];
+    const processedIds = new Set(); // Avoid dupes if same ID in both lists by mistake
+
+    // Helper to process list
+    const processList = async (idList, type, companyTitle) => {
+        for (const id of idList) {
+            if (processedIds.has(id)) continue;
+            
+            // Find problem in DB
+            // Problem DB uses string "1" or number 1? Our JSON has "1".
+            const problem = problemsDb.find(p => p.id === id.toString());
+            
+            if (problem) {
+                processedIds.add(id);
+                // Fetch video status (cached)
+                const videos = await getOrFetchVideo(problem.id, false);
+                
+                results.push({
+                    ...problem,
+                    video: (videos && videos.length > 0) ? videos[0] : null,
+                    companyStatus: {
+                        type: type, // 'asked' or 'similar'
+                        company: companyTitle
+                    }
+                });
+            }
+        }
+    };
+
+    // Process lists
+    // Note: We run sequentially or parallel. 
+    const title = companyName.charAt(0).toUpperCase() + companyName.slice(1);
+    await processList(companyData.asked || [], 'asked', title);
+    await processList(companyData.similar || [], 'similar', title);
+
+    res.json(results);
+});
 
 
 // Vercel requires exporting the app
