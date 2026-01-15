@@ -194,24 +194,7 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                                                         <span className="icon">▶</span> {hasVideo ? 'Video' : 'Watch'}
                                                     </a>
 
-                                                    <a
-                                                        href={`/solution/${problemId}`}
-                                                        className="btn-solution"
-                                                        style={{
-                                                            background: 'linear-gradient(135deg, #f57c00 0%, #ff9800 100%)',
-                                                            color: 'white',
-                                                            border: 'none',
-                                                            cursor: 'pointer',
-                                                            fontWeight: 'bold',
-                                                            textDecoration: 'none',
-                                                            display: 'inline-flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center'
-                                                        }}
-                                                        title="AI Optimized Solution"
-                                                    >
-                                                        ⚡ Code
-                                                    </a>
+
                                                 </div>
                                             </td>
 

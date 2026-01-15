@@ -15,7 +15,7 @@ import DailyPage from './components/DailyPage';
 import ProgressPage from './components/ProgressPage';
 import CompanyPage from './components/CompanyPage';
 import ErrorBoundary from './components/ErrorBoundary';
-import SolutionPage from './components/SolutionPage';
+
 
 function AppContent({ savedVideos, onToggleSave }) {
   // Helper to close mobile menu or handle extensive nav logic if needed
@@ -217,7 +217,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/" element={<HomePage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/search/:questionId" element={<SearchPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-          <Route path="/solution/:id" element={<SolutionPage />} />
+
 
           <Route path="/top-100-leetcode" element={<ListPage type="top-100" title="Top 100 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/blind-75" element={<ListPage type="blind-75" title="Blind 75 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
