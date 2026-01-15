@@ -47,14 +47,16 @@ const saveCache = () => {
 app.use(cors());
 app.use(express.json());
 
-// Load problems database
+// Load problems database (Using require for Vercel bundling compatibility)
 let problemsDb = [];
 try {
-    const problemsData = fs.readFileSync(path.join(__dirname, 'data', 'problems.json'), 'utf8');
-    problemsDb = JSON.parse(problemsData);
+    // Vercel handles require() better than fs.readFileSync for static assets
+    problemsDb = require('./data/problems.json');
     console.log(`Loaded ${problemsDb.length} problems from database.`);
 } catch (err) {
     console.error('Error loading problems.json:', err);
+    // Fallback or empty
+    problemsDb = [];
 }
 
 // Helper: Get or Fetch Video (Quota Efficient)
@@ -164,44 +166,56 @@ app.get('/api/search/:questionId', async (req, res) => {
 
 // List Endpoint
 app.get('/api/list/:type', async (req, res) => {
-    const { type } = req.params;
-    const { difficulty, param } = req.query; // param can be topic, company
+    try {
+        const { type } = req.params;
+        const { difficulty, param } = req.query; // param can be topic, company
 
-    let filtered = [];
+        let filtered = [];
 
-    if (type === 'top-100') {
-        // Just return first 100 of our DB for now
-        filtered = problemsDb.slice(0, 100);
-    } else if (type === 'blind-75') {
-        // Assume our DB IS the curated list for now, or filter by specific IDs if we had a separate list
-        filtered = problemsDb.slice(0, 75); 
-    } else if (type === 'difficulty') {
-        filtered = problemsDb.filter(p => p.difficulty === difficulty);
-    } else if (type === 'topic') {
-        // Fuzzy match topic
-        const topic = param || difficulty; // Sometimes passed as param
-        if (!topic) return res.json([]);
-        filtered = problemsDb.filter(p => p.topics.some(t => t.toLowerCase() === topic.toLowerCase()));
-    } else if (type === 'company') {
-        // Placeholder
-        filtered = problemsDb.slice(0, 20);
-    } else {
-        filtered = problemsDb;
+        if (type === 'top-100') {
+            // Just return first 100 of our DB for now
+            filtered = problemsDb.slice(0, 100);
+        } else if (type === 'blind-75') {
+            // Assume our DB IS the curated list for now, or filter by specific IDs if we had a separate list
+            filtered = problemsDb.slice(0, 75); 
+        } else if (type === 'difficulty') {
+            // Ensure problemsDb is an array before filtering
+            if (!Array.isArray(problemsDb)) problemsDb = [];
+            filtered = problemsDb.filter(p => p.difficulty === difficulty);
+        } else if (type === 'topic') {
+            const topic = param || difficulty; // Sometimes passed as param
+            if (!topic) return res.json([]);
+            if (!Array.isArray(problemsDb)) problemsDb = [];
+            filtered = problemsDb.filter(p => p.topics.some(t => t.toLowerCase() === topic.toLowerCase()));
+        } else if (type === 'company') {
+            // Placeholder
+            filtered = problemsDb.slice(0, 20);
+        } else {
+            filtered = problemsDb;
+        }
+
+        // Limit size to prevent massive payloads if something goes wrong
+        filtered = filtered.slice(0, 100);
+
+        // Attach Video Data (Only cached)
+        const results = await Promise.all(filtered.map(async (problem) => {
+            try {
+                const videos = await getOrFetchVideo(problem.id, false); // FALSE = Do NOT live fetch
+                return {
+                    ...problem,
+                    video: (videos && videos.length > 0) ? videos[0] : null
+                };
+            } catch (innerErr) {
+                console.warn(`Failed to attach video for ${problem.id}:`, innerErr);
+                return problem;
+            }
+        }));
+        
+        res.json(results);
+    } catch (err) {
+        console.error('API/List Error:', err);
+        res.status(500).json({ error: 'Internal Server Error', details: err.message });
     }
-
-    // Limit size to prevent massive payloads if something goes wrong
-    filtered = filtered.slice(0, 100);
-
-    // Attach Video Data (Only cached)
-    const results = await Promise.all(filtered.map(async (problem) => {
-        const videos = await getOrFetchVideo(problem.id, false); // FALSE = Do NOT live fetch
-        return {
-            ...problem,
-            video: (videos && videos.length > 0) ? videos[0] : null
-        };
-    }));
-    
-    res.json(results);
 });
 
 // Sync Endpoint
