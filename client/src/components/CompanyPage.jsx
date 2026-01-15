@@ -28,7 +28,7 @@ const CompanyPage = () => {
         setError('');
         setProblems([]);
         try {
-            const API_BASE = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:5000');
+            const API_BASE = import.meta.env.VITE_API_URL;
             const response = await axios.get(`${API_BASE}/api/company/${companyId}`);
             setProblems(response.data);
         } catch (err) {
@@ -112,39 +112,61 @@ const CompanyPage = () => {
                 </div>
 
                 {/* Actions */}
-                <div style={{ marginTop: 'auto', display: 'flex', gap: '0.8rem', paddingTop: '1rem', borderTop: '1px solid #2a2a2a' }}>
+                <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.8rem', paddingTop: '1rem', borderTop: '1px solid #2a2a2a' }}>
+                    <div style={{ display: 'flex', gap: '0.8rem' }}>
+                        <a
+                            href={`https://leetcode.com/problems/${problem.slug}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                                flex: 1,
+                                textAlign: 'center',
+                                background: '#333',
+                                color: 'white',
+                                padding: '0.6rem',
+                                borderRadius: '6px',
+                                textDecoration: 'none',
+                                fontSize: '0.9rem'
+                            }}
+                        >
+                            LeetCode ↗
+                        </a>
+                        <a
+                            href={`/search/${problem.id}`}
+                            style={{
+                                flex: 1,
+                                textAlign: 'center',
+                                background: '#333',
+                                color: 'white',
+                                padding: '0.6rem',
+                                borderRadius: '6px',
+                                textDecoration: 'none',
+                                fontSize: '0.9rem'
+                            }}
+                        >
+                            Video ▶
+                        </a>
+                    </div>
                     <a
-                        href={`https://leetcode.com/problems/${problem.slug}`}
-                        target="_blank"
-                        rel="noreferrer"
+                        href={`/solution/${problem.id}`}
                         style={{
-                            flex: 1,
+                            width: '100%',
                             textAlign: 'center',
-                            background: '#333',
+                            background: 'linear-gradient(135deg, #f57c00 0%, #ff9800 100%)',
                             color: 'white',
                             padding: '0.6rem',
                             borderRadius: '6px',
-                            textDecoration: 'none',
-                            fontSize: '0.9rem'
-                        }}
-                    >
-                        LeetCode ↗
-                    </a>
-                    <a
-                        href={`/search/${problem.id}`}
-                        style={{
-                            flex: 1,
-                            textAlign: 'center',
-                            background: 'var(--accent-orange)',
-                            color: 'white',
-                            padding: '0.6rem',
-                            borderRadius: '6px',
-                            textDecoration: 'none',
+                            border: 'none',
                             fontSize: '0.9rem',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            textDecoration: 'none',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
+                            boxSizing: 'border-box',
+                            display: 'block'
                         }}
                     >
-                        Solution ▶
+                        Optimized Solution ⚡
                     </a>
                 </div>
 

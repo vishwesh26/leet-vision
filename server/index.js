@@ -283,6 +283,131 @@ try {
     console.error('Error loading companies.json:', err);
 }
 
+// ---------------------------------------------
+// AI Solution Generator + Cache System
+// ---------------------------------------------
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
+
+// Ensure solutions dir exists
+if (!fs.existsSync(SOLUTIONS_DIR)) {
+    fs.mkdirSync(SOLUTIONS_DIR, { recursive: true });
+}
+
+const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
+
+app.get('/api/solution/:questionId', async (req, res) => {
+    try {
+        const { questionId } = req.params;
+        const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
+
+        // Ensure directory exists (Robustness)
+        if (!fs.existsSync(SOLUTIONS_DIR)) {
+            fs.mkdirSync(SOLUTIONS_DIR, { recursive: true });
+        }
+
+        const solutionPath = path.join(SOLUTIONS_DIR, `${questionId}.json`);
+
+        // 1. Check Cache (File System)
+        if (fs.existsSync(solutionPath)) {
+            console.log(`Solution Cache HIT for ${questionId}`);
+            try {
+                const cachedData = JSON.parse(fs.readFileSync(solutionPath, 'utf8'));
+                return res.json({ ...cachedData, source: 'cached' });
+            } catch (err) {
+                console.error('Error reading cached solution (Corrupt file):', err);
+                // Proceed to regenerate if cache is broken
+            }
+        }
+
+        // 2. Generate with AI (If no cache)
+        if (!genAI) {
+            console.error("AI Service Error: GEMINI_API_KEY is missing/invalid.");
+            return res.status(503).json({ error: "AI Service not configured", details: "Server missing API Key" });
+        }
+
+        console.log(`Solution Cache MISS for ${questionId} - Generating with AI...`);
+
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+        
+        const prompt = `
+        Generate for LeetCode question ${questionId}:
+
+        1) Basic solution
+        2) Optimized solution
+        3) Best solution
+
+        For each:
+        - Real code (Python default)
+        - Explanation
+        - Time complexity
+        - Space complexity
+
+        Return valid JSON only. Format:
+        {
+          "questionId": "${questionId}",
+          "title": "Question Title",
+          "solutions": {
+            "basic": { "code": "...", "time": "...", "space": "...", "explanation": "..." },
+            "optimized": { "code": "...", "time": "...", "space": "...", "explanation": "..." },
+            "best": { "code": "...", "time": "...", "space": "...", "explanation": "..." }
+          }
+        }
+        Do not include markdown formatting like \`\`\`json. Just raw JSON.
+        `;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let text = response.text();
+
+        console.log("Raw AI Response:", text.substring(0, 500) + "..."); // Log first 500 chars
+
+        // Clean up markdown if present (Robust)
+        text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+        let jsonResponse;
+        try {
+            // Try standard JSON first
+            jsonResponse = JSON.parse(text);
+        } catch (e1) {
+            try {
+                // Try JSON5 (allows trailing commas, newlines, etc.)
+                const JSON5 = require('json5'); 
+                jsonResponse = JSON5.parse(text);
+            } catch (e2) {
+                 console.error("AI JSON Parse Error. Raw text:", text);
+                 return res.status(500).json({ error: "AI generated invalid data", details: "JSON Parse Failed" });
+            }
+        }
+
+        // 3. Save to Cache
+        // Only save if looks valid
+        if (jsonResponse && jsonResponse.solutions) {
+            // Check for Vercel read-only env
+            // If strictly local requested, we can try write always, catching errors if Vercel blocks it
+             try {
+                if (process.env.NODE_ENV !== 'production') {
+                    fs.writeFileSync(solutionPath, JSON.stringify(jsonResponse, null, 2));
+                    console.log(`Saved solution to ${solutionPath}`);
+                }
+             } catch (writeErr) {
+                 console.error("Failed to write cache file:", writeErr);
+             }
+        } else {
+            return res.status(500).json({ error: "AI generated incomplete data" });
+        }
+
+        return res.json({ ...jsonResponse, source: 'ai-generated' });
+
+    } catch (err) {
+        console.error("Solution API Top-Level Error:", err);
+        return res.status(500).json({ 
+            error: "Internal Server Error during solution generation", 
+            details: err.message 
+        });
+    }
+});
+
 // Company Endpoint
 app.get('/api/company/:companyName', async (req, res) => {
     const { companyName } = req.params;

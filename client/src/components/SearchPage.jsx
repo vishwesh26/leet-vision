@@ -18,7 +18,7 @@ const SearchPage = ({ savedVideos, onToggleSave }) => {
             setVideos([]);
 
             try {
-                const API_BASE = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:5000');
+                const API_BASE = import.meta.env.VITE_API_URL || '';
                 const response = await axios.get(`${API_BASE}/api/search/${questionId}`);
                 setVideos(response.data);
             } catch (err) {

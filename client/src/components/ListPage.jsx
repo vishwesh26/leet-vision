@@ -5,6 +5,8 @@ import VideoCard from './VideoCard';
 import SEO from './SEO';
 import { useSolved } from '../context/SolvedContext';
 
+
+
 const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVideos, onToggleSave }) => {
     const { difficulty, topic, company } = useParams();
     const { isProblemSolved } = useSolved();
@@ -14,14 +16,13 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
+
+
     // Determine effective type and params
     let effectiveType = propType;
     let param = propParam || ''; // Default to propParam if exists
     let pageTitle = propTitle || 'LeetCode Solutions';
     let description = "Browse curated LeetCode questions.";
-
-    // Logic: If NO propType, try to infer from params. 
-    // If propType IS present (e.g. 'topic' for /topics/:topic), check if we have a param from URL.
 
     // Priority 1: URL Params (Dynamic Routes) override static props for param value
     if (difficulty) {
@@ -57,7 +58,7 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
             setVideos([]);
 
             try {
-                const API_BASE = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:5000');
+                const API_BASE = import.meta.env.VITE_API_URL;
 
                 const queryParams = new URLSearchParams();
                 if (effectiveType === 'difficulty') queryParams.append('difficulty', param);
@@ -67,7 +68,12 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
 
                 const url = `${API_BASE}/api/list/${effectiveType}?${queryParams.toString()}`;
                 const response = await axios.get(url);
-                setVideos(response.data);
+                if (Array.isArray(response.data)) {
+                    setVideos(response.data);
+                } else {
+                    console.error("Expected array but got:", response.data);
+                    setVideos([]);
+                }
             } catch (err) {
                 console.error(err);
                 setError('Failed to load list. Please try again.');
@@ -83,9 +89,13 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
         return savedVideos.some(v => v.id === videoId);
     };
 
+
+
     return (
         <>
             <SEO title={pageTitle} description={description} path={window.location.pathname} />
+
+
 
             <section className="results-container">
                 <h2 className="results-header">{pageTitle}</h2>
@@ -104,7 +114,7 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                     </div>
                 )}
 
-                {!loading && videos.length > 0 && (
+                {!loading && Array.isArray(videos) && videos.length > 0 && (
                     <div className="problem-list-container">
                         <table className="problem-table">
                             <thead>
@@ -136,6 +146,9 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                                     // Safe check: pass object that has slug.
                                     const problemObj = videoData.slug ? videoData : (video.slug ? video : null);
                                     const solved = problemObj ? isProblemSolved(problemObj) : false;
+
+                                    // Normalized Object for Modal
+                                    const modalObj = { id: problemId, title: title };
 
                                     return (
                                         <tr key={problemId} className={solved ? 'solved-row' : ''}>
@@ -173,10 +186,35 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href={`/search/${problemId}`} className="btn-solution" style={!hasVideo ? { opacity: 0.8, background: 'rgba(255,255,255,0.1)' } : {}}>
-                                                    <span className="icon">▶</span> {hasVideo ? 'Video Solution' : 'Watch Solution'}
-                                                </a>
+                                                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                                    <a href={`/search/${problemId}`} className="btn-solution"
+                                                        style={!hasVideo ? { opacity: 0.8, background: 'rgba(255,255,255,0.1)' } : {}}
+                                                        title="Watch Video Solution"
+                                                    >
+                                                        <span className="icon">▶</span> {hasVideo ? 'Video' : 'Watch'}
+                                                    </a>
+
+                                                    <a
+                                                        href={`/solution/${problemId}`}
+                                                        className="btn-solution"
+                                                        style={{
+                                                            background: 'linear-gradient(135deg, #f57c00 0%, #ff9800 100%)',
+                                                            color: 'white',
+                                                            border: 'none',
+                                                            cursor: 'pointer',
+                                                            fontWeight: 'bold',
+                                                            textDecoration: 'none',
+                                                            display: 'inline-flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center'
+                                                        }}
+                                                        title="AI Optimized Solution"
+                                                    >
+                                                        ⚡ Code
+                                                    </a>
+                                                </div>
                                             </td>
+
                                             <td>
                                                 {difficulty && (
                                                     <span className={`badge-difficulty ${difficulty.toLowerCase()}`}>

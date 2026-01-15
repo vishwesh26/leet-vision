@@ -6,10 +6,8 @@
             "destination": "/api/index.js"
         },
         {
-            "source": "/(.*)",
-            "destination": "/client/index.html"
-        },
-
-        { "source": "/(.*)", "destination": "/" }
+            "source": "/((?!api/.*).*)",
+            "destination": "/index.html"
+        }
     ]
 }

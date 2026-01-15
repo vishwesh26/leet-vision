@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://leet-vision.vercel.app/sitemap.xml

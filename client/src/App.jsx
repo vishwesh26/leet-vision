@@ -15,12 +15,14 @@ import DailyPage from './components/DailyPage';
 import ProgressPage from './components/ProgressPage';
 import CompanyPage from './components/CompanyPage';
 import ErrorBoundary from './components/ErrorBoundary';
+import SolutionPage from './components/SolutionPage';
 
 function AppContent({ savedVideos, onToggleSave }) {
   // Helper to close mobile menu or handle extensive nav logic if needed
 
   // Navbar Search Logic
   const [navbarSearch, setNavbarSearch] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile Menu State
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -144,18 +146,45 @@ function AppContent({ savedVideos, onToggleSave }) {
           </button>
         )}
 
-        {/* Download Extension Button */}
-        <button className="btn-download-ext" onClick={() => {
-          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-          if (isMobile) {
-            alert("Extension works only on desktop browsers.\n\nSupported: Chrome, Edge, Brave");
-          } else {
-            window.open("https://chrome.google.com/webstore/detail/your-extension-id", "_blank");
-          }
-        }} title="Works on Chrome, Edge, Brave">
-          <span className="icon">🧩</span> Download Extension
-          <span className="subtitle">Get solutions inside LeetCode</span>
+        {/* Mobile Hamburger Button */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
         </button>
+
+        {/* Mobile Menu Overlay */}
+        <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+          <div className="mobile-menu-content">
+            <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
+            <Link to="/blind-75" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Blind 75 List</Link>
+
+            <div className="mobile-divider">Difficulty</div>
+            <Link to="/leetcode-easy" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Easy</Link>
+            <Link to="/leetcode-medium" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Medium</Link>
+            <Link to="/leetcode-hard" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Hard</Link>
+
+            <div className="mobile-divider">Topics</div>
+            <Link to="/topics/array" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Arrays</Link>
+            <Link to="/topics/Dynamic Programming" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>DP</Link>
+            <Link to="/topics/string" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Strings</Link>
+            <Link to="/topics/tree" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Trees</Link>
+            <Link to="/topics/graph" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Graphs</Link>
+
+            <div className="mobile-divider">More</div>
+            <Link to="/interview-roadmap" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
+            <Link to="/company-questions" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
+            <Link to="/daily" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Daily Challenge</Link>
+            <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
+            {leetcodeUsername && (
+              <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
+            )}
+          </div>
+        </div>
       </nav>
 
       <div className="app-container" style={{ display: 'block', padding: 0 }}>
@@ -188,6 +217,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/" element={<HomePage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/search/:questionId" element={<SearchPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+          <Route path="/solution/:id" element={<SolutionPage />} />
 
           <Route path="/top-100-leetcode" element={<ListPage type="top-100" title="Top 100 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/blind-75" element={<ListPage type="blind-75" title="Blind 75 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />

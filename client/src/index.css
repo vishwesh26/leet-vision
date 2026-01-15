@@ -44,12 +44,19 @@ body {
   padding: 0.8rem 2rem; /* Reduced horizontal padding from 5% */
   width: 100%;
   box-sizing: border-box;
-  background: rgba(10, 10, 10, 0.8);
+  background: rgba(10, 10, 10, 0.95); /* More solid for readability */
   backdrop-filter: blur(10px);
-  position: sticky;
+  position: fixed; /* Fixed so it's always visible */
   top: 0;
-  z-index: 100;
+  left: 0;
+  z-index: 1000;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.app-container {
+    padding-top: 80px !important; /* Push content down */
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -392,6 +399,14 @@ h1.hero-title span {
   margin-bottom: 2rem;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 1rem;
+}
+
+/* Results Grid (Video Cards) */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
 }
 
 /* Problem List Table */
@@ -919,4 +934,114 @@ so they inherit default .video-card styles
   background: rgba(0, 0, 0, 0.2);
   color: #888;
   font-size: 0.9rem;
+}
+
+/* ========================================= */
+/* MOBILE MENU STYLES (New)                  */
+/* ========================================= */
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 200; /* Higher than menu overlay */
+    margin-left: 1rem;
+}
+
+.mobile-menu-btn .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+}
+
+/* Hamburger Animation */
+.mobile-menu-btn .bar.open:nth-child(1) {
+    transform: rotate(45deg);
+}
+.mobile-menu-btn .bar.open:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+}
+.mobile-menu-btn .bar.open:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0d0d0d; /* Pure black for contrast */
+    transform: translateX(100%); /* Hidden by default */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 150;
+    overflow-y: auto;
+    padding-top: 80px; /* Space for Navbar */
+    padding-bottom: 50px;
+    border-top: none;
+}
+
+.mobile-menu.open {
+    transform: translateX(0); /* Slide in */
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.mobile-link {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid #222;
+    transition: color 0.2s;
+    font-family: var(--font-family);
+    font-weight: 600;
+}
+
+.mobile-link:hover {
+    color: var(--accent-orange);
+    padding-left: 10px; /* Slide effect */
+}
+
+.mobile-link.sub {
+    font-size: 1.1rem;
+    color: #888;
+    padding: 0.8rem 0 0.8rem 1.5rem; /* Indent */
+    border-bottom: 1px solid #1a1a1a;
+    font-weight: 400;
+}
+
+.mobile-link.highlight {
+    color: var(--accent-orange);
+}
+
+.mobile-divider {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #555;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+}
+
+@media (max-width: 968px) {
+    .mobile-menu-btn {
+        display: flex; /* Show Hamburger */
+    }
 }
