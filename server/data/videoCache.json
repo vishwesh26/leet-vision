@@ -11,6 +11,68 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=KLlXCFG5TnA"
   },
+  "2": [
+    {
+      "id": "wgFPrzTjm7s",
+      "questionId": "2",
+      "title": "Add Two Numbers - Leetcode 2 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/wgFPrzTjm7s/hqdefault.jpg",
+      "viewCount": 344941,
+      "likeCount": 6613,
+      "publishedAt": "2020-08-18T20:23:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=wgFPrzTjm7s"
+    },
+    {
+      "id": "XmRrGzR6udg",
+      "questionId": "2",
+      "title": "L5. Add 2 numbers in LinkedList | Dummy Node Approach",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/XmRrGzR6udg/hqdefault.jpg",
+      "viewCount": 264259,
+      "likeCount": 9824,
+      "publishedAt": "2023-11-26T16:27:02Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=XmRrGzR6udg"
+    },
+    {
+      "id": "di_jUp3tWUI",
+      "questionId": "2",
+      "title": "Leetcode 2. Add Two Numbers | Add digits of two linked lists and return their sum | Linked List",
+      "channelTitle": "Code with Alisha",
+      "thumbnail": "https://i.ytimg.com/vi/di_jUp3tWUI/hqdefault.jpg",
+      "viewCount": 122529,
+      "likeCount": 2224,
+      "publishedAt": "2022-03-10T11:25:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=di_jUp3tWUI"
+    },
+    {
+      "id": "KMS0WFxrsT8",
+      "questionId": "2",
+      "title": "Add Two Numbers (LeetCode 2) | Full solution with diagrams | EASIEST EVER | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/KMS0WFxrsT8/hqdefault.jpg",
+      "viewCount": 102820,
+      "likeCount": 2269,
+      "publishedAt": "2023-01-30T03:38:51Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=KMS0WFxrsT8"
+    },
+    {
+      "id": "PiT_FE8oyfM",
+      "questionId": "2",
+      "title": "Add Two Numbers - Leetcode 2",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/PiT_FE8oyfM/hqdefault.jpg",
+      "viewCount": 44599,
+      "likeCount": 2063,
+      "publishedAt": "2024-07-09T14:00:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=PiT_FE8oyfM"
+    }
+  ],
   "9": {
     "id": "yubRKwixN-U",
     "questionId": "9",
