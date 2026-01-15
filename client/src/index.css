@@ -41,7 +41,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
+  padding: 0.8rem 2rem; /* Reduced horizontal padding from 5% */
   width: 100%;
   box-sizing: border-box;
   background: rgba(10, 10, 10, 0.8);
@@ -69,14 +69,14 @@ body {
 .nav-center {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem; /* Reduced from 2rem */
   flex: 1;
   justify-content: center;
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.2rem; /* Reduced from 2rem */
   list-style: none;
   margin: 0;
   padding: 0;
