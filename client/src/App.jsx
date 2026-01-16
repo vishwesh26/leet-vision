@@ -99,7 +99,7 @@ function AppContent({ savedVideos, onToggleSave }) {
                 <li className="nav-item"><Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link></li>
                 <li className="nav-item"><Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
                 <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
-                {leetcodeUsername && <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>}
+                <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>
                 <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
               </ul>
 
