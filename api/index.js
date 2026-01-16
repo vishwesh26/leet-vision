@@ -331,27 +331,54 @@ app.get('/api/solution/:questionId', async (req, res) => {
         const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         
         const prompt = `
-        Generate for LeetCode question ${questionId}:
-        1) Basic solution
-        2) Optimized solution
-        3) Best solution
-        For each:
-        - Real code (Python default)
-        - Explanation
-        - Time complexity
-        - Space complexity
+        You are an expert DSA coding tutor. Generate a comprehensive solution guide for LeetCode question "${questionId}".
         
-        Return valid JSON only. Format:
+        Structure the response efficiently as a JSON object.
+        
+        Required JSON Structure:
         {
           "questionId": "${questionId}",
-          "title": "Question Title",
-          "solutions": {
-            "basic": { "code": "...", "time": "...", "space": "...", "explanation": "..." },
-            "optimized": { "code": "...", "time": "...", "space": "...", "explanation": "..." },
-            "best": { "code": "...", "time": "...", "space": "...", "explanation": "..." }
-          }
+          "title": "Problem Title",
+          "problemStatement": "Concise problem description...",
+          "examples": [
+             { "input": "...", "output": "...", "explanation": "..." }
+          ],
+          "approaches": [
+             {
+               "name": "Brute Force Approach",
+               "algorithm": ["Step 1...", "Step 2..."],
+               "complexity": {
+                  "time": "O(...)",
+                  "space": "O(...)"
+               },
+               "codes": {
+                  "cpp": "...",
+                  "java": "...",
+                  "python": "...",
+                  "javascript": "..."
+               }
+             },
+             {
+               "name": "Optimal Approach",
+               "algorithm": ["Step 1...", "Step 2..."],
+               "complexity": {
+                  "time": "O(...)",
+                  "space": "O(...)"
+               },
+               "codes": {
+                  "cpp": "...",
+                  "java": "...",
+                  "python": "...",
+                  "javascript": "..."
+               }
+             }
+          ]
         }
-        Just raw JSON.
+
+        Rules:
+        1. Return ONLY valid JSON. No markdown formatting.
+        2. Provide at least "Brute Force" and "Optimal". If they are the same, just provide "Optimal".
+        3. "algorithm" should be an array of strings (bullet points).
         `;
 
         const result = await model.generateContent(prompt);
@@ -375,7 +402,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         // 3. Save to Cache
-        if (jsonResponse && jsonResponse.solutions) {
+        if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {
             try {
                 if (process.env.NODE_ENV !== 'production') {
                     fs.writeFileSync(solutionPath, JSON.stringify(jsonResponse, null, 2));
