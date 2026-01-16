@@ -456,6 +456,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         // 4. Save to MongoDB
+        let dbStatus = "skipped";
         if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {
             // Save to DB
             try {
@@ -464,9 +465,15 @@ app.get('/api/solution/:questionId', async (req, res) => {
                     ...jsonResponse
                 });
                 console.log(`Saved ${questionId} to MongoDB`);
+                dbStatus = "success";
             } catch (saveErr) {
                 // Ignore duplicate key error safely
-                if (saveErr.code !== 11000) console.error("DB Save Error:", saveErr);
+                if (saveErr.code === 11000) {
+                    dbStatus = "duplicate_skipped";
+                } else {
+                    console.error("DB Save Error:", saveErr);
+                    dbStatus = `error: ${saveErr.message}`;
+                }
             }
 
             // Save to File (Local Backup)
@@ -476,8 +483,14 @@ app.get('/api/solution/:questionId', async (req, res) => {
                 }
             } catch (e) {}
         } else {
-            return res.status(500).json({ error: "Incomplete AI Data" });
+             return res.status(500).json({ error: "Incomplete AI Data" });
         }
+
+        return res.json({ 
+            ...jsonResponse, 
+            source: 'ai-generated', 
+            dbStatus: dbStatus 
+        });
 
         return res.json({ ...jsonResponse, source: 'ai_generated' });
 
