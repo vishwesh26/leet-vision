@@ -288,6 +288,116 @@ app.post('/api/sync/:username', async (req, res) => {
 
 
 
+
+// ---------------------------------------------
+// AI Solution Generator + Cache System
+// ---------------------------------------------
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
+
+// Ensure solutions dir exists
+if (!fs.existsSync(SOLUTIONS_DIR)) {
+    try {
+        fs.mkdirSync(SOLUTIONS_DIR, { recursive: true });
+    } catch (e) { console.error("Could not create solutions dir:", e); }
+}
+
+const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
+
+app.get('/api/solution/:questionId', async (req, res) => {
+    try {
+        const { questionId } = req.params;
+        const solutionPath = path.join(SOLUTIONS_DIR, `${questionId}.json`);
+
+        // 1. Check Cache (File System)
+        if (fs.existsSync(solutionPath)) {
+            // console.log(`Solution Cache HIT for ${questionId}`);
+            try {
+                const cachedData = JSON.parse(fs.readFileSync(solutionPath, 'utf8'));
+                return res.json({ ...cachedData, source: 'cached' });
+            } catch (err) {
+                console.error('Error reading cached solution (Corrupt file):', err);
+            }
+        }
+
+        // 2. Generate with AI (If no cache)
+        if (!genAI) {
+            console.error("AI Service Error: GEMINI_API_KEY is missing/invalid.");
+            return res.status(503).json({ error: "AI Service not configured", details: "Server missing API Key" });
+        }
+
+        console.log(`Solution Cache MISS for ${questionId} - Generating with AI...`);
+
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+        
+        const prompt = `
+        Generate for LeetCode question ${questionId}:
+        1) Basic solution
+        2) Optimized solution
+        3) Best solution
+        For each:
+        - Real code (Python default)
+        - Explanation
+        - Time complexity
+        - Space complexity
+        
+        Return valid JSON only. Format:
+        {
+          "questionId": "${questionId}",
+          "title": "Question Title",
+          "solutions": {
+            "basic": { "code": "...", "time": "...", "space": "...", "explanation": "..." },
+            "optimized": { "code": "...", "time": "...", "space": "...", "explanation": "..." },
+            "best": { "code": "...", "time": "...", "space": "...", "explanation": "..." }
+          }
+        }
+        Just raw JSON.
+        `;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        let text = response.text();
+
+        // Clean up markdown
+        text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+        let jsonResponse;
+        try {
+            jsonResponse = JSON.parse(text);
+        } catch (e1) {
+            try {
+                const JSON5 = require('json5'); 
+                jsonResponse = JSON5.parse(text);
+            } catch (e2) {
+                 console.error("AI JSON Parse Error. Raw text:", text);
+                 return res.status(500).json({ error: "AI generated invalid data", details: "JSON Parse Failed" });
+            }
+        }
+
+        // 3. Save to Cache
+        if (jsonResponse && jsonResponse.solutions) {
+            try {
+                if (process.env.NODE_ENV !== 'production') {
+                    fs.writeFileSync(solutionPath, JSON.stringify(jsonResponse, null, 2));
+                }
+            } catch (writeErr) {
+                 console.warn("Failed to write check/save cache:", writeErr.message);
+            }
+        } else {
+            return res.status(500).json({ error: "AI generated incomplete data" });
+        }
+
+        return res.json({ ...jsonResponse, source: 'ai-generated' });
+
+    } catch (err) {
+        console.error("Solution API Top-Level Error:", err);
+        return res.status(500).json({ 
+            error: "Internal Server Error during solution generation", 
+            details: err.message 
+        });
+    }
+});
+
 // Helper to load companies data lazily or just read it here
 let companiesDb = {};
 try {

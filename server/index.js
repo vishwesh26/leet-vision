@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
 // Persistent Cache Path
+// Define path relative to where script is running, but handle Vercel structure
 const CACHE_FILE = path.join(__dirname, 'data', 'videoCache.json');
 
 // Memory Store for Cache (loaded from file)
@@ -287,15 +288,6 @@ app.post('/api/sync/:username', async (req, res) => {
 
 
 
-// Helper to load companies data lazily or just read it here
-let companiesDb = {};
-try {
-    const companiesData = fs.readFileSync(path.join(__dirname, 'data', 'companies.json'), 'utf8');
-    companiesDb = JSON.parse(companiesData);
-    console.log(`Loaded ${Object.keys(companiesDb).length} companies from database.`);
-} catch (err) {
-    console.error('Error loading companies.json:', err);
-}
 
 // ---------------------------------------------
 // AI Solution Generator + Cache System
@@ -305,7 +297,9 @@ const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
 
 // Ensure solutions dir exists
 if (!fs.existsSync(SOLUTIONS_DIR)) {
-    fs.mkdirSync(SOLUTIONS_DIR, { recursive: true });
+    try {
+        fs.mkdirSync(SOLUTIONS_DIR, { recursive: true });
+    } catch (e) { console.error("Could not create solutions dir:", e); }
 }
 
 const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
@@ -313,24 +307,16 @@ const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GE
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
         const { questionId } = req.params;
-        const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
-
-        // Ensure directory exists (Robustness)
-        if (!fs.existsSync(SOLUTIONS_DIR)) {
-            fs.mkdirSync(SOLUTIONS_DIR, { recursive: true });
-        }
-
         const solutionPath = path.join(SOLUTIONS_DIR, `${questionId}.json`);
 
         // 1. Check Cache (File System)
         if (fs.existsSync(solutionPath)) {
-            console.log(`Solution Cache HIT for ${questionId}`);
+            // console.log(`Solution Cache HIT for ${questionId}`);
             try {
                 const cachedData = JSON.parse(fs.readFileSync(solutionPath, 'utf8'));
                 return res.json({ ...cachedData, source: 'cached' });
             } catch (err) {
                 console.error('Error reading cached solution (Corrupt file):', err);
-                // Proceed to regenerate if cache is broken
             }
         }
 
@@ -346,17 +332,15 @@ app.get('/api/solution/:questionId', async (req, res) => {
         
         const prompt = `
         Generate for LeetCode question ${questionId}:
-
         1) Basic solution
         2) Optimized solution
         3) Best solution
-
         For each:
         - Real code (Python default)
         - Explanation
         - Time complexity
         - Space complexity
-
+        
         Return valid JSON only. Format:
         {
           "questionId": "${questionId}",
@@ -367,25 +351,21 @@ app.get('/api/solution/:questionId', async (req, res) => {
             "best": { "code": "...", "time": "...", "space": "...", "explanation": "..." }
           }
         }
-        Do not include markdown formatting like \`\`\`json. Just raw JSON.
+        Just raw JSON.
         `;
 
         const result = await model.generateContent(prompt);
         const response = await result.response;
         let text = response.text();
 
-        console.log("Raw AI Response:", text.substring(0, 500) + "..."); // Log first 500 chars
-
-        // Clean up markdown if present (Robust)
+        // Clean up markdown
         text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
 
         let jsonResponse;
         try {
-            // Try standard JSON first
             jsonResponse = JSON.parse(text);
         } catch (e1) {
             try {
-                // Try JSON5 (allows trailing commas, newlines, etc.)
                 const JSON5 = require('json5'); 
                 jsonResponse = JSON5.parse(text);
             } catch (e2) {
@@ -395,18 +375,14 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         // 3. Save to Cache
-        // Only save if looks valid
         if (jsonResponse && jsonResponse.solutions) {
-            // Check for Vercel read-only env
-            // If strictly local requested, we can try write always, catching errors if Vercel blocks it
-             try {
+            try {
                 if (process.env.NODE_ENV !== 'production') {
                     fs.writeFileSync(solutionPath, JSON.stringify(jsonResponse, null, 2));
-                    console.log(`Saved solution to ${solutionPath}`);
                 }
-             } catch (writeErr) {
-                 console.error("Failed to write cache file:", writeErr);
-             }
+            } catch (writeErr) {
+                 console.warn("Failed to write check/save cache:", writeErr.message);
+            }
         } else {
             return res.status(500).json({ error: "AI generated incomplete data" });
         }
@@ -422,20 +398,34 @@ app.get('/api/solution/:questionId', async (req, res) => {
     }
 });
 
+// Helper to load companies data lazily or just read it here
+let companiesDb = {};
+try {
+    const companiesData = fs.readFileSync(path.join(__dirname, 'data', 'companies.json'), 'utf8');
+    companiesDb = JSON.parse(companiesData);
+    console.log(`Loaded ${Object.keys(companiesDb).length} companies from database.`);
+} catch (err) {
+    console.error('Error loading companies.json:', err);
+}
+
 // Company Endpoint
 app.get('/api/company/:companyName', async (req, res) => {
     const { companyName } = req.params;
     const key = companyName.toLowerCase();
     
-    if (!companiesDb[key]) {
-        // Fallback: If company not found in our manual map, user might have just clicked "Companies" generally
-        // For now, return empty or a default set? 
-        // Or return 404? 
-        // Let's return 404 so frontend handles it or shows "No data for this company yet".
+    // Lazy load here in case we missed it at top, simplified
+    let localCompanies = companiesDb;
+    if (Object.keys(localCompanies).length === 0) {
+        try {
+            localCompanies = require('./data/companies.json');
+        } catch(e) {}
+    }
+
+    if (!localCompanies[key]) {
         return res.status(404).json({ error: 'Company not found' });
     }
 
-    const companyData = companiesDb[key];
+    const companyData = localCompanies[key];
     const results = [];
     const processedIds = new Set(); // Avoid dupes if same ID in both lists by mistake
 
