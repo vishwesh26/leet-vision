@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { SolvedProvider, useSolved } from './context/SolvedContext';
+import { FaInstagram, FaLinkedin, FaSearch, FaTimes } from 'react-icons/fa';
 import ConnectModal from './components/ConnectModal';
 import './index.css';
 
@@ -29,6 +30,7 @@ function AppContent({ savedVideos, onToggleSave }) {
   // Context
   const { leetcodeUsername, disconnect, syncWithLeetCode, isSyncing } = useSolved();
   const [showConnectModal, setShowConnectModal] = useState(false);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const handleNavbarSearch = (e) => {
     e.preventDefault();
@@ -51,111 +53,95 @@ function AppContent({ savedVideos, onToggleSave }) {
 
       {/* Navbar */}
       <nav className={`navbar ${navbarClass}`}>
-        <div className="logo" onClick={() => navigate('/')}>
-          Leet<span>Vision</span>
-        </div>
 
-        <div className="nav-center">
-          <ul className="nav-links">
-            <li className="nav-item">
-              <Link to="/top-100-leetcode" style={{ color: 'inherit', textDecoration: 'none' }}>Top 100</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/blind-75" style={{ color: 'inherit', textDecoration: 'none' }}>Blind 75</Link>
-            </li>
-            <li className="nav-item dropdown">
-              Difficulty ▾
-              <div className="dropdown-content">
-                <div><Link to="/leetcode-easy" style={{ color: 'inherit', textDecoration: 'none' }}>Easy</Link></div>
-                <div><Link to="/leetcode-medium" style={{ color: 'inherit', textDecoration: 'none' }}>Medium</Link></div>
-                <div><Link to="/leetcode-hard" style={{ color: 'inherit', textDecoration: 'none' }}>Hard</Link></div>
-              </div>
-            </li>
-            <li className="nav-item dropdown">
-              Topics ▾
-              <div className="dropdown-content">
-                <div><Link to="/topics/array" style={{ color: 'inherit', textDecoration: 'none' }}>Arrays</Link></div>
-                <div><Link to="/topics/Dynamic Programming" style={{ color: 'inherit', textDecoration: 'none' }}>DP</Link></div>
-                <div><Link to="/topics/string" style={{ color: 'inherit', textDecoration: 'none' }}>Strings</Link></div>
-                <div><Link to="/topics/tree" style={{ color: 'inherit', textDecoration: 'none' }}>Trees</Link></div>
-                <div><Link to="/topics/graph" style={{ color: 'inherit', textDecoration: 'none' }}>Graphs</Link></div>
-              </div>
-            </li>
-            <li className="nav-item">
-              <Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link>
-            </li>
-
-            {leetcodeUsername && (
-              <li className="nav-item">
-                <Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link>
-              </li>
-            )}
-
-            <li className="nav-item">
-              <Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link>
-            </li>
-          </ul>
-
-          <form onSubmit={handleNavbarSearch} className="nav-search">
+        {/* Mobile Search Overlay Mode */}
+        {showMobileSearch ? (
+          <form onSubmit={(e) => { handleNavbarSearch(e); setShowMobileSearch(false); }} className="nav-search-mobile-active">
             <input
+              autoFocus
               type="text"
-              placeholder="Search Q#"
+              placeholder="Search Question #..."
               value={navbarSearch}
               onChange={(e) => setNavbarSearch(e.target.value)}
             />
+            <button type="button" onClick={() => setShowMobileSearch(false)} className="close-search-btn">
+              <FaTimes />
+            </button>
           </form>
-        </div>
-
-        {/* Connect / User Button */}
-        {leetcodeUsername ? (
-          <div className="nav-item" style={{ marginLeft: '1rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }} title="Connected to LeetCode">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ color: '#4db6ac', fontSize: '1.2rem' }}>●</span>
-              <span style={{ fontWeight: 500, color: 'white' }}>{leetcodeUsername}</span>
+        ) : (
+          <>
+            <div className="logo" onClick={() => navigate('/')}>
+              Leet<span>Vision</span>
             </div>
 
-            <button
-              onClick={() => syncWithLeetCode(leetcodeUsername)}
-              disabled={isSyncing}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', opacity: isSyncing ? 0.5 : 1, padding: 0 }}
-              title="Sync now"
-            >
-              {isSyncing ? '⏳' : '↻'}
-            </button>
+            <div className="nav-center">
+              <ul className="nav-links">
+                <li className="nav-item"><Link to="/top-100-leetcode" style={{ color: 'inherit', textDecoration: 'none' }}>Top 100</Link></li>
+                <li className="nav-item"><Link to="/blind-75" style={{ color: 'inherit', textDecoration: 'none' }}>Blind 75</Link></li>
+                <li className="nav-item dropdown">
+                  Difficulty ▾
+                  <div className="dropdown-content">
+                    <div><Link to="/leetcode-easy" style={{ color: 'inherit', textDecoration: 'none' }}>Easy</Link></div>
+                    <div><Link to="/leetcode-medium" style={{ color: 'inherit', textDecoration: 'none' }}>Medium</Link></div>
+                    <div><Link to="/leetcode-hard" style={{ color: 'inherit', textDecoration: 'none' }}>Hard</Link></div>
+                  </div>
+                </li>
+                <li className="nav-item dropdown">
+                  Topics ▾
+                  <div className="dropdown-content">
+                    <div><Link to="/topics/array" style={{ color: 'inherit', textDecoration: 'none' }}>Arrays</Link></div>
+                    <div><Link to="/topics/Dynamic Programming" style={{ color: 'inherit', textDecoration: 'none' }}>DP</Link></div>
+                    <div><Link to="/topics/string" style={{ color: 'inherit', textDecoration: 'none' }}>Strings</Link></div>
+                    <div><Link to="/topics/tree" style={{ color: 'inherit', textDecoration: 'none' }}>Trees</Link></div>
+                    <div><Link to="/topics/graph" style={{ color: 'inherit', textDecoration: 'none' }}>Graphs</Link></div>
+                  </div>
+                </li>
+                <li className="nav-item"><Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link></li>
+                <li className="nav-item"><Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
+                <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
+                {leetcodeUsername && <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>}
+                <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
+              </ul>
 
-            <button
-              onClick={disconnect}
-              style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: '0.8rem', padding: 0 }}
-              title="Disconnect"
-            >
-              (x)
-            </button>
-          </div>
-        ) : (
-          <button onClick={() => setShowConnectModal(true)} style={{
-            background: 'transparent', border: '1px solid #444', color: '#ccc',
-            padding: '0.4rem 0.8rem', borderRadius: '20px', marginLeft: '1rem', cursor: 'pointer'
-          }}>
-            Connect LeetCode
-          </button>
+              {/* Desktop Search */}
+              <form onSubmit={handleNavbarSearch} className="nav-search desktop-only-search">
+                <input
+                  type="text"
+                  placeholder="Search Q#"
+                  value={navbarSearch}
+                  onChange={(e) => setNavbarSearch(e.target.value)}
+                />
+              </form>
+            </div>
+
+            {/* Mobile Actions: Search Icon + Menu */}
+            <div className="mobile-actions">
+              <button className="mobile-search-trigger" onClick={() => setShowMobileSearch(true)}>
+                <FaSearch />
+              </button>
+
+              {/* Connect / User Button */}
+              {leetcodeUsername ? (
+                <div className="nav-item desktop-only-user" title="Connected">
+                  <span style={{ color: '#4db6ac', fontSize: '1.2rem' }}>●</span>
+                  {/* Simplified user display for desktop, hidden on mobile in this simplified view if needed, 
+                         or we keep it but it might be crowded. Let's rely on CSS to hide 'desktop-only-user' on mobile if crowded. */}
+                </div>
+              ) : (null)}
+
+              {/* Mobile Hamburger Button */}
+              <button
+                className="mobile-menu-btn"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle Menu"
+              >
+                <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+                <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+              </button>
+            </div>
+          </>
         )}
-
-        {/* Mobile Hamburger Button */}
-        <button
-          className="mobile-menu-btn"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle Menu"
-        >
-          <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-          <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-          <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-        </button>
 
         {/* Mobile Menu Overlay */}
         <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
@@ -180,9 +166,8 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/company-questions" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
             <Link to="/daily" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Daily Challenge</Link>
             <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
-            {leetcodeUsername && (
-              <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
-            )}
+            {/* Always show in mobile menu, logic handled in page */}
+            <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
           </div>
         </div>
       </nav>
@@ -242,12 +227,11 @@ function AppContent({ savedVideos, onToggleSave }) {
       <footer className="app-footer">
         <p>Created by <span className="creator-name">Vishwesh Shinde</span></p>
         <div className="footer-links">
-          <a href="https://www.instagram.com/vishwesh_shinde" target="_blank" rel="noreferrer" className="footer-link">
-            <span className="icon">📸</span> vishwesh_shinde
+          <a href="https://www.instagram.com/vishwesh_shinde" target="_blank" rel="noreferrer" className="footer-icon-link">
+            <FaInstagram size={24} />
           </a>
-          <span className="divider">|</span>
-          <a href="https://www.linkedin.com/in/vishweshshinde" target="_blank" rel="noreferrer" className="footer-link">
-            <span className="icon">💼</span> vishweshshinde
+          <a href="https://www.linkedin.com/in/vishweshshinde" target="_blank" rel="noreferrer" className="footer-icon-link">
+            <FaLinkedin size={24} />
           </a>
         </div>
       </footer>

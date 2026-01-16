@@ -4,7 +4,7 @@ import ProgressGraph from './ProgressGraph';
 import SEO from './SEO';
 
 const ProgressPage = () => {
-    const { leetcodeUsername, userStats, recentSubmissions } = useSolved();
+    const { leetcodeUsername, userStats, recentSubmissions, syncWithLeetCode, isSyncing } = useSolved();
 
     const streak = useMemo(() => {
         if (!userStats?.calendar) return 0;
@@ -59,9 +59,38 @@ const ProgressPage = () => {
 
     if (!leetcodeUsername) {
         return (
-            <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-                <h2>Please Connect your LeetCode Account</h2>
-                <p>Use the "Connect LeetCode" button in the Navbar to track your progress.</p>
+            <div style={{ textAlign: 'center', marginTop: '4rem', padding: '0 1rem' }}>
+                <h2>Connect LeetCode to View Progress</h2>
+                <p style={{ color: '#888', marginBottom: '2rem' }}>Enter your username below to visualize your coding journey.</p>
+
+                <div style={{ maxWidth: '400px', margin: '0 auto', background: '#1a1a1a', padding: '2rem', borderRadius: '12px', border: '1px solid #333' }}>
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        const val = e.target.username.value;
+                        if (val) syncWithLeetCode(val);
+                    }}>
+                        <input
+                            name="username"
+                            type="text"
+                            placeholder="LeetCode Username"
+                            style={{
+                                width: '100%', padding: '1rem', marginBottom: '1rem',
+                                background: '#222', border: '1px solid #444', color: 'white', borderRadius: '8px'
+                            }}
+                        />
+                        <button
+                            type="submit"
+                            disabled={isSyncing}
+                            style={{
+                                width: '100%', padding: '1rem', background: 'var(--accent-orange)',
+                                border: 'none', color: 'white', fontWeight: 'bold', borderRadius: '8px', cursor: 'pointer',
+                                opacity: isSyncing ? 0.7 : 1
+                            }}
+                        >
+                            {isSyncing ? 'Syncing...' : 'View Progress'}
+                        </button>
+                    </form>
+                </div>
             </div>
         );
     }

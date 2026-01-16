@@ -936,6 +936,26 @@ so they inherit default .video-card styles
   font-size: 0.9rem;
 }
 
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.footer-icon-link {
+  color: #888;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-icon-link:hover {
+  color: var(--accent-orange);
+  transform: scale(1.2);
+}
+
 /* ========================================= */
 /* MOBILE MENU STYLES (New)                  */
 /* ========================================= */
@@ -988,7 +1008,7 @@ so they inherit default .video-card styles
     z-index: 150;
     overflow-y: auto;
     padding-top: 80px; /* Space for Navbar */
-    padding-bottom: 50px;
+    padding-bottom: 150px; /* Ensure last item is reachable */
     border-top: none;
 }
 
@@ -1025,7 +1045,100 @@ so they inherit default .video-card styles
     border-bottom: 1px solid #1a1a1a;
     font-weight: 400;
 }
+/* Navbar Z-Index Fix */
+.navbar {
+  z-index: 9999 !important;
+}
 
+/* Mobile Actions Container */
+.mobile-actions {
+    display: none; /* Hidden on Desktop */
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile-search-trigger {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.nav-search-mobile-active {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: fadeIn 0.2s ease;
+}
+
+.nav-search-mobile-active input {
+    flex: 1;
+    background: #222;
+    border: 1px solid #333;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.close-search-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Mobile Menu Button High Z-Index */
+.mobile-menu-btn {
+    z-index: 10001 !important;
+}
+
+/* ... */
+
+@media (max-width: 768px) {
+    .app-container {
+        padding-top: 70px !important; /* Slightly less on mobile */
+    }
+
+    .results-container {
+        padding: 2rem 1rem; /* Reduce side padding */
+    }
+    
+    .results-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .video-card {
+       /* Simpler card on mobile */
+       border-radius: 8px;
+    }
+    
+    .card-content {
+        padding: 1rem; /* Compact padding */
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+
+    /* Solution Page Tweaks via CSS if possible, or global overrides */
+    div[style*="padding: 2rem 1rem"] {
+        padding: 1rem 0.5rem !important; /* Force override inline styles for SolutionPage container */
+    }
+    
+    h1 {
+        font-size: 1.5rem !important;
+    }
+}
 .mobile-link.highlight {
     color: var(--accent-orange);
 }
@@ -1043,5 +1156,17 @@ so they inherit default .video-card styles
 @media (max-width: 968px) {
     .mobile-menu-btn {
         display: flex; /* Show Hamburger */
+    }
+    
+    .mobile-actions {
+        display: flex; /* Show Mobile Actions (Search + Menu) */
+    }
+
+    .desktop-only-search {
+        display: none !important; /* Hide Desktop Search Input */
+    }
+    
+    .desktop-only-user {
+        display: none !important; /* Hide user status text to save space */
     }
 }
