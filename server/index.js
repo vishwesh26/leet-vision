@@ -290,44 +290,85 @@ app.post('/api/sync/:username', async (req, res) => {
 
 
 // ---------------------------------------------
-// AI Solution Generator + Cache System
+// AI Solution Generator + MongoDB Persistence
 // ---------------------------------------------
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
+const mongoose = require('mongoose');
 
-// Ensure solutions dir exists
+// File Cache Fallback (Legacy/Dev)
+const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
 if (!fs.existsSync(SOLUTIONS_DIR)) {
-    try {
-        fs.mkdirSync(SOLUTIONS_DIR, { recursive: true });
-    } catch (e) { console.error("Could not create solutions dir:", e); }
+    try { fs.mkdirSync(SOLUTIONS_DIR, { recursive: true }); } catch (e) {}
 }
 
 const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
 
+// Connect to MongoDB
+const connectDB = async () => {
+    if (mongoose.connection.readyState >= 1) return;
+    if (!process.env.MONGODB_URI) {
+        console.warn("MONGODB_URI not set. Using File System cache only (Not persistent on Vercel).");
+        return;
+    }
+    try {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("MongoDB Connected");
+    } catch (err) {
+        console.error("MongoDB Connection Error:", err);
+    }
+};
+
+// Define Schema
+const solutionSchema = new mongoose.Schema({
+    questionId: { type: String, required: true, unique: true },
+    title: String,
+    problemStatement: String,
+    examples: Array,
+    approaches: Array, // Stores the complex array of objects
+    createdAt: { type: Date, default: Date.now }
+});
+
+// Get Model (prevent overwrite error during hot reload)
+const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
+
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
         const { questionId } = req.params;
-        const solutionPath = path.join(SOLUTIONS_DIR, `${questionId}.json`);
+        await connectDB();
 
-        // 1. Check Cache (File System)
-        if (fs.existsSync(solutionPath)) {
-            // console.log(`Solution Cache HIT for ${questionId}`);
+        // 1. Check MongoDB (Primary Persistent Storage)
+        if (mongoose.connection.readyState === 1) {
             try {
-                const cachedData = JSON.parse(fs.readFileSync(solutionPath, 'utf8'));
-                return res.json({ ...cachedData, source: 'cached' });
-            } catch (err) {
-                console.error('Error reading cached solution (Corrupt file):', err);
+                const dbSolution = await Solution.findOne({ questionId });
+                if (dbSolution) {
+                    console.log(`Solution DB HIT for ${questionId}`);
+                    return res.json({ ...dbSolution.toObject(), source: 'database' });
+                }
+            } catch (dbErr) {
+                console.error("DB Read Error:", dbErr);
             }
         }
 
-        // 2. Generate with AI (If no cache)
-        if (!genAI) {
-            console.error("AI Service Error: GEMINI_API_KEY is missing/invalid.");
-            return res.status(503).json({ error: "AI Service not configured", details: "Server missing API Key" });
+        // 2. Check File Cache (Fallback / Local Dev)
+        const solutionPath = path.join(SOLUTIONS_DIR, `${questionId}.json`);
+        if (fs.existsSync(solutionPath)) {
+            try {
+                const cachedData = JSON.parse(fs.readFileSync(solutionPath, 'utf8'));
+                // Optional: Migrate File to DB here? 
+                // Let's keep it simple: just return it.
+                return res.json({ ...cachedData, source: 'local_file_cache' });
+            } catch (err) { console.error('File Cache Read Error:', err); }
         }
 
-        console.log(`Solution Cache MISS for ${questionId} - Generating with AI...`);
+        // 3. Generate with AI
+        if (!genAI) {
+            return res.status(503).json({ error: "AI Service Unavailable (Key missing)" });
+        }
 
+        console.log(`Generating Solution for ${questionId}...`);
         const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         
         const prompt = `
@@ -384,8 +425,6 @@ app.get('/api/solution/:questionId', async (req, res) => {
         const result = await model.generateContent(prompt);
         const response = await result.response;
         let text = response.text();
-
-        // Clean up markdown
         text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
 
         let jsonResponse;
@@ -396,32 +435,41 @@ app.get('/api/solution/:questionId', async (req, res) => {
                 const JSON5 = require('json5'); 
                 jsonResponse = JSON5.parse(text);
             } catch (e2) {
-                 console.error("AI JSON Parse Error. Raw text:", text);
-                 return res.status(500).json({ error: "AI generated invalid data", details: "JSON Parse Failed" });
+                 return res.status(500).json({ error: "AI generated invalid JSON" });
             }
         }
 
-        // 3. Save to Cache
+        // 4. Save to MongoDB
         if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {
+            // Save to DB
+            if (mongoose.connection.readyState === 1) {
+                try {
+                    await Solution.create({
+                        questionId: questionId,
+                        ...jsonResponse
+                    });
+                    console.log(`Saved ${questionId} to MongoDB`);
+                } catch (saveErr) {
+                    // Ignore duplicate key error safely
+                    if (saveErr.code !== 11000) console.error("DB Save Error:", saveErr);
+                }
+            }
+
+            // Save to File (Local Backup)
             try {
                 if (process.env.NODE_ENV !== 'production') {
                     fs.writeFileSync(solutionPath, JSON.stringify(jsonResponse, null, 2));
                 }
-            } catch (writeErr) {
-                 console.warn("Failed to write check/save cache:", writeErr.message);
-            }
+            } catch (e) {}
         } else {
-            return res.status(500).json({ error: "AI generated incomplete data" });
+            return res.status(500).json({ error: "Incomplete AI Data" });
         }
 
-        return res.json({ ...jsonResponse, source: 'ai-generated' });
+        return res.json({ ...jsonResponse, source: 'ai_generated' });
 
     } catch (err) {
-        console.error("Solution API Top-Level Error:", err);
-        return res.status(500).json({ 
-            error: "Internal Server Error during solution generation", 
-            details: err.message 
-        });
+        console.error("Solution API Error:", err);
+        return res.status(500).json({ error: "Server Error", details: err.message });
     }
 });
 
