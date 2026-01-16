@@ -148,6 +148,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <div className="mobile-menu-content">
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
             <Link to="/blind-75" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Blind 75 List</Link>
+            <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
 
             <div className="mobile-divider">Difficulty</div>
             <Link to="/leetcode-easy" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Easy</Link>
@@ -166,8 +167,6 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/company-questions" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
             <Link to="/daily" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Daily Challenge</Link>
             <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
-            {/* Always show in mobile menu, logic handled in page */}
-            <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
           </div>
         </div>
       </nav>
