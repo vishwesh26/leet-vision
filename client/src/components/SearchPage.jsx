@@ -39,7 +39,28 @@ const SearchPage = ({ savedVideos, onToggleSave }) => {
 
     return (
         <>
-            <SEO title={`Solution for ${questionId}`} description={`Watch the best video solution for LeetCode ${questionId}.`} path={`/search/${questionId}`} />
+            <SEO title={`Solution for ${questionId} - LeetCode Video`} description={`Watch the best video solution for LeetCode ${questionId}. Explained step-by-step.`} path={`/search/${questionId}`} />
+
+            {!loading && videos.length > 0 && (
+                <SEO
+                    title={`Solution for ${questionId} - LeetCode Video`}
+                    description={`Watch the best video solution for LeetCode ${questionId}.`}
+                    path={`/search/${questionId}`}
+                >
+                    <script type="application/ld+json">
+                        {JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "VideoObject",
+                            "name": `${questionId}. ${videos[0].title || 'LeetCode Solution'}`,
+                            "description": `Video solution for LeetCode ${questionId}.`,
+                            "thumbnailUrl": `https://img.youtube.com/vi/${videos[0].id}/hqdefault.jpg`,
+                            "uploadDate": new Date().toISOString(), // Fallback as API might not return date
+                            "contentUrl": `https://www.youtube.com/watch?v=${videos[0].id}`,
+                            "embedUrl": `https://www.youtube.com/embed/${videos[0].id}`
+                        })}
+                    </script>
+                </SEO>
+            )}
 
             <section className="results-container">
                 <h2 className="results-header">Results for "{questionId}"</h2>

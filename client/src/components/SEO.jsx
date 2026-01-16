@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const SEO = ({ title, description, path }) => {
+const SEO = ({ title, description, path, children }) => {
     const fullTitle = `${title} | LeetVision`;
     const fullUrl = `https://leet-vision.vercel.app${path}`;
 
@@ -48,6 +48,7 @@ const SEO = ({ title, description, path }) => {
             <script type="application/ld+json">
                 {JSON.stringify(orgSchema)}
             </script>
+            {children}
         </Helmet>
     );
 };

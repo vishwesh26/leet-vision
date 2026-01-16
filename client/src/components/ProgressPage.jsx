@@ -74,7 +74,7 @@ const ProgressPage = () => {
                             type="text"
                             placeholder="LeetCode Username"
                             style={{
-                                width: '100%', padding: '1rem', marginBottom: '1rem',
+                                width: '90%', padding: '1rem', marginBottom: '1rem',
                                 background: '#222', border: '1px solid #444', color: 'white', borderRadius: '8px'
                             }}
                         />

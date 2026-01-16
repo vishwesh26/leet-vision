@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Home -->
   <url>
     <loc>https://leet-vision.vercel.app/</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>1.0</priority>
   </url>
-
-  <!-- Problem Lists -->
   <url>
     <loc>https://leet-vision.vercel.app/top-100-leetcode</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.9</priority>
   </url>
-
   <url>
     <loc>https://leet-vision.vercel.app/blind-75</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.9</priority>
   </url>
-
-  <!-- Difficulties -->
   <url>
     <loc>https://leet-vision.vercel.app/leetcode-easy</loc>
     <lastmod>2026-01-16</lastmod>
@@ -37,8 +30,6 @@
     <lastmod>2026-01-16</lastmod>
     <priority>0.8</priority>
   </url>
-
-  <!-- Topics -->
   <url>
     <loc>https://leet-vision.vercel.app/topics/array</loc>
     <lastmod>2026-01-16</lastmod>
@@ -64,36 +55,394 @@
     <lastmod>2026-01-16</lastmod>
     <priority>0.7</priority>
   </url>
-
-  <!-- Features -->
   <url>
     <loc>https://leet-vision.vercel.app/company-questions</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://leet-vision.vercel.app/progress</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.7</priority>
   </url>
-
   <url>
     <loc>https://leet-vision.vercel.app/interview-roadmap</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.7</priority>
   </url>
-
   <url>
     <loc>https://leet-vision.vercel.app/daily</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://leet-vision.vercel.app/saved</loc>
     <lastmod>2026-01-16</lastmod>
     <priority>0.6</priority>
   </url>
-
+  <url>
+    <loc>https://leet-vision.vercel.app/search/1</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/2</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/3</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/4</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/5</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/11</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/15</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/20</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/21</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/23</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/33</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/42</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/49</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/53</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/54</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/55</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/56</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/57</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/62</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/70</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/76</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/79</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/98</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/100</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/102</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/104</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/121</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/124</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/125</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/128</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/133</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/139</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/141</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/143</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/146</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/152</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/153</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/190</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/191</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/198</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/200</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/206</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/207</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/208</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/211</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/212</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/213</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/217</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/226</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/230</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/235</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/238</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/242</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/252</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/253</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/261</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/268</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/269</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/271</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/295</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/297</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/300</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/322</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/323</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/338</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/347</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/371</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/417</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/424</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/435</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/572</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/647</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/search/1143</loc>
+    <lastmod>2026-01-16</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>
