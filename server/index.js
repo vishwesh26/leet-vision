@@ -458,17 +458,15 @@ app.get('/api/solution/:questionId', async (req, res) => {
         // 4. Save to MongoDB
         if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {
             // Save to DB
-            if (mongoose.connection.readyState === 1) {
-                try {
-                    await Solution.create({
-                        questionId: questionId,
-                        ...jsonResponse
-                    });
-                    console.log(`Saved ${questionId} to MongoDB`);
-                } catch (saveErr) {
-                    // Ignore duplicate key error safely
-                    if (saveErr.code !== 11000) console.error("DB Save Error:", saveErr);
-                }
+            try {
+                await Solution.create({
+                    questionId: questionId,
+                    ...jsonResponse
+                });
+                console.log(`Saved ${questionId} to MongoDB`);
+            } catch (saveErr) {
+                // Ignore duplicate key error safely
+                if (saveErr.code !== 11000) console.error("DB Save Error:", saveErr);
             }
 
             // Save to File (Local Backup)
