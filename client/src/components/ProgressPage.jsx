@@ -4,9 +4,10 @@ import ProgressGraph from './ProgressGraph';
 import SEO from './SEO';
 
 const ProgressPage = () => {
-    const { leetcodeUsername, userStats, recentSubmissions, syncWithLeetCode, isSyncing } = useSolved();
+    const { leetcodeUsername, userStats, recentSubmissions, syncWithLeetCode, isSyncing, disconnect } = useSolved();
 
     const streak = useMemo(() => {
+
         if (!userStats?.calendar) return 0;
         try {
             const parsed = JSON.parse(userStats.calendar);
@@ -97,12 +98,32 @@ const ProgressPage = () => {
 
     return (
         <>
-            <SEO title={`${leetcodeUsername}'s Progress - LeetVision`} description="Track your LeetCode progress visually." path="/progress" />
+            <SEO title={`${leetcodeUsername}'s My Progress - LeetVision`} description="Track your LeetCode progress visually." path="/progress" />
+
 
             <div style={{ padding: '2rem 5%', maxWidth: '1200px', margin: '0 auto' }}>
-                <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>
-                    Your <span style={{ color: 'var(--accent-orange)' }}>Progress</span>
-                </h1>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                    <h1 style={{ fontSize: '2.5rem', margin: 0 }}>
+                        <span style={{ color: 'var(--accent-orange)' }}>My Progress</span>
+                    </h1>
+                    <button
+                        onClick={() => {
+                            if (window.confirm('Are you sure you want to disconnect?')) disconnect();
+                        }}
+                        className="btn-disconnect"
+                        style={{
+                            background: 'transparent',
+                            border: '1px solid #333',
+                            color: '#666',
+                            padding: '6px 12px',
+                            borderRadius: '6px',
+                            cursor: 'pointer',
+                            fontSize: '0.8rem'
+                        }}
+                    >
+                        Disconnect
+                    </button>
+                </div>
 
                 {/* Streak Banner */}
                 <div style={{

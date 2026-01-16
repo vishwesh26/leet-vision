@@ -45,7 +45,10 @@ const saveCache = () => {
     }
 };
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://leet-vision.vercel.app', 'http://localhost:5173', 'http://localhost:5000'],
+    credentials: true
+}));
 app.use(express.json());
 
 // Load problems database (Using require for Vercel bundling compatibility)
@@ -59,6 +62,17 @@ try {
     // Fallback or empty
     problemsDb = [];
 }
+
+// Load Company Plans
+let companyPlans = {};
+try {
+    companyPlans = require('./data/company_plans.json');
+    console.log(`Loaded plans for ${Object.keys(companyPlans).length} companies.`);
+} catch (err) {
+    console.error('Error loading company_plans.json:', err);
+    companyPlans = {};
+}
+
 
 // Helper: Get or Fetch Video (Quota Efficient)
 // fetchIfMissing: true = perform API call if cache miss. false = return null/empty if cache miss.
@@ -76,11 +90,11 @@ const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
     // 2. Mock Logic if NO Key
     if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === 'YOUR_YOUTUBE_API_KEY_HERE') {
         const mockVideo = {
-            id: `mock_${questionId}`,
+            id: 'Kl2u4R0OQVE', // Placeholder Valid Video (Two Sum)
             questionId: questionId,
-            title: `LeetCode ${questionId} Solution (Mock)`,
+            title: `[MOCK] Solution for ${questionId} (Add API Key for Real Data)`,
             channelTitle: 'Mock Channel',
-            thumbnail: 'https://i.ytimg.com/vi/mock/hqdefault.jpg',
+            thumbnail: 'https://i.ytimg.com/vi/Kl2u4R0OQVE/hqdefault.jpg',
             viewCount: 1000,
             likeCount: 50,
             isMostAccurate: true,
@@ -95,15 +109,35 @@ const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
 
     // 3. Live Fetch (Only if missing and key exists AND fetchIfMissing is true)
     try {
-        console.log(`Cache MISS for ${questionId} - Fetching API...`);
+        const maskedKey = YOUTUBE_API_KEY ? `${YOUTUBE_API_KEY.substring(0, 4)}...` : 'NONE';
+        console.log(`Cache MISS for ${questionId} - Fetching API... (Key: ${maskedKey})`);
+        
+        // Dynamic Query based on ID format
         const query = `LeetCode ${questionId} solution`;
         
+        console.log(`Querying YouTube: "${query}"`);
+
         // Search - Fetch 5 results
         const searchRes = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
             params: { part: 'snippet', q: query, type: 'video', maxResults: 5, key: YOUTUBE_API_KEY }
         });
 
-        if (!searchRes.data.items || searchRes.data.items.length === 0) return [];
+        if (!searchRes.data.items || searchRes.data.items.length === 0) {
+            console.warn(`YouTube returned 0 results for query: "${query}" - FAILED. Returning MOCK.`);
+            // FALLBACK TO PLAYABLE MOCK
+            const mockVideo = {
+                id: 'Kl2u4R0OQVE', 
+                questionId: questionId,
+                title: `[MOCK] Solution for ${questionId} (API Key Invalid or Quota Exceeded)`,
+                channelTitle: 'Mock Channel',
+                thumbnail: 'https://i.ytimg.com/vi/Kl2u4R0OQVE/hqdefault.jpg',
+                viewCount: 1000,
+                likeCount: 50,
+                isMostAccurate: true,
+                publishedAt: new Date().toISOString()
+            };
+            return [mockVideo];
+        }
 
         const videoIds = searchRes.data.items.map(item => item.id.videoId).join(',');
         
@@ -112,7 +146,7 @@ const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
             params: { part: 'statistics,snippet', id: videoIds, key: YOUTUBE_API_KEY }
         });
 
-        if (!statsRes.data.items || statsRes.data.items.length === 0) return [];
+        if (!statsRes.data.items || statsRes.data.items.length === 0) return []; // Should rarely happen if search succeeded
 
         let videos = statsRes.data.items.map(vid => ({
             id: vid.id,
@@ -140,7 +174,22 @@ const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
         return videos;
     } catch (e) {
         console.error(`Fetch failed for ${questionId}:`, e.message);
-        return [];
+        if (e.response) {
+            console.error('API Error Details:', e.response.data);
+        }
+        // FALLBACK TO PLAYABLE MOCK ON ERROR
+        const mockVideo = {
+            id: 'Kl2u4R0OQVE',
+            questionId: questionId,
+            title: `[MOCK] Solution for ${questionId} (API Key Invalid or Quota Exceeded)`,
+            channelTitle: 'Mock Channel',
+            thumbnail: 'https://i.ytimg.com/vi/Kl2u4R0OQVE/hqdefault.jpg',
+            viewCount: 1000,
+            likeCount: 50,
+            isMostAccurate: true,
+            publishedAt: new Date().toISOString()
+        };
+        return [mockVideo];
     }
 };
 
@@ -165,6 +214,16 @@ app.get('/api/search/:questionId', async (req, res) => {
     return res.status(404).json({ error: 'No video found' });
 });
 
+// Custom Lists
+let blind75Ids = [];
+let top100Ids = [];
+try {
+    blind75Ids = require('./data/blind75.json');
+    top100Ids = require('./data/top100.json');
+} catch (e) {
+    console.error("Failed to load custom lists:", e.message);
+}
+
 // List Endpoint
 app.get('/api/list/:type', async (req, res) => {
     try {
@@ -174,32 +233,43 @@ app.get('/api/list/:type', async (req, res) => {
         let filtered = [];
 
         if (type === 'top-100') {
-            // Just return first 100 of our DB for now
-            filtered = problemsDb.slice(0, 100);
+            // Filter DB by Top 100 IDs
+            // We want to preserve the order of top100Ids
+            filtered = top100Ids.map(id => problemsDb.find(p => p.id === id)).filter(Boolean);
+            
         } else if (type === 'blind-75') {
-            // Assume our DB IS the curated list for now, or filter by specific IDs if we had a separate list
-            filtered = problemsDb.slice(0, 75); 
+             // Filter DB by Blind 75 IDs
+            filtered = blind75Ids.map(id => problemsDb.find(p => p.id === id)).filter(Boolean);
+
         } else if (type === 'difficulty') {
             // Ensure problemsDb is an array before filtering
             if (!Array.isArray(problemsDb)) problemsDb = [];
             filtered = problemsDb.filter(p => p.difficulty === difficulty);
+
         } else if (type === 'topic') {
             const topic = param || difficulty; // Sometimes passed as param
             if (!topic) return res.json([]);
             if (!Array.isArray(problemsDb)) problemsDb = [];
             filtered = problemsDb.filter(p => p.topics.some(t => t.toLowerCase() === topic.toLowerCase()));
+
         } else if (type === 'company') {
-            // Placeholder
-            filtered = problemsDb.slice(0, 20);
+            // Placeholder fallback
+             filtered = problemsDb.slice(0, 20);
+             
         } else {
             filtered = problemsDb;
         }
 
-        // Limit size to prevent massive payloads if something goes wrong
-        filtered = filtered.slice(0, 100);
+        // Pagination
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 20;
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+        
+        const paginatedData = filtered.slice(startIndex, endIndex);
 
         // Attach Video Data (Only cached)
-        const results = await Promise.all(filtered.map(async (problem) => {
+        const results = await Promise.all(paginatedData.map(async (problem) => {
             try {
                 const videos = await getOrFetchVideo(problem.id, false); // FALSE = Do NOT live fetch
                 return {
@@ -212,7 +282,14 @@ app.get('/api/list/:type', async (req, res) => {
             }
         }));
         
-        res.json(results);
+        // Return structured response
+        res.json({
+            data: results,
+            total: filtered.length,
+            page,
+            totalPages: Math.ceil(filtered.length / limit),
+            hasMore: endIndex < filtered.length
+        });
     } catch (err) {
         console.error('API/List Error:', err);
         res.status(500).json({ error: 'Internal Server Error', details: err.message });
@@ -282,11 +359,82 @@ app.post('/api/sync/:username', async (req, res) => {
 
     } catch (err) {
         console.error('LeetCode Sync Error:', err.message);
-        res.status(500).json({ error: 'Failed to sync with LeetCode', details: err.message });
+            res.status(500).json({ error: 'Failed to sync with LeetCode', details: err.message });
     }
 });
 
 
+
+
+// Company Plan Endpoint
+app.get('/api/company/:name/plan', async (req, res) => {
+    try {
+        const companyName = req.params.name.toLowerCase();
+        const plan = companyPlans[companyName];
+
+        if (!plan) {
+            return res.status(404).json({ error: 'Company plan not found' });
+        }
+
+        // Deep copy to avoid mutating cache
+        const enrichedPlan = JSON.parse(JSON.stringify(plan));
+
+        // Enriched DSA IDs with full video/problem objects
+        const levels = Object.keys(enrichedPlan);
+        
+        for (const level of levels) {
+            const levelData = enrichedPlan[level];
+            if (levelData.dsa_ids && levelData.dsa_ids.length > 0) {
+                const problems = await Promise.all(levelData.dsa_ids.map(async (id) => {
+                    // Find problem details from problemsDb
+                    const problemDetails = problemsDb.find(p => p.id === id) || { id, title: `Problem ${id}`, difficulty: 'Unknown' };
+                    
+                    // Fetch video
+                    const videos = await getOrFetchVideo(id, false); 
+                    
+                    return {
+                        ...problemDetails,
+                        video: (videos && videos.length > 0) ? videos[0] : null
+                    };
+                }));
+                levelData.problems = problems; // Attach enriched array
+            } else {
+                levelData.problems = [];
+            }
+        }
+
+        res.json({ company: companyName, plan: enrichedPlan });
+
+    } catch (err) {
+        console.error("Company Plan API Error:", err);
+        res.status(500).json({ error: 'Failed to fetch company plan' });
+    }
+});
+
+
+// Daily Challenge Endpoint
+app.get('/api/daily-challenge', async (req, res) => {
+    try {
+        if (!problemsDb || problemsDb.length === 0) {
+            return res.status(503).json({ error: 'Problems database not loaded' });
+        }
+
+        const today = new Date();
+        const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+        const index = seed % problemsDb.length;
+        const problem = problemsDb[index];
+        const videos = await getOrFetchVideo(problem.id, false); 
+        
+        res.json({
+            ...problem,
+            video: (videos && videos.length > 0) ? videos[0] : null
+        });
+
+    } catch (err) {
+        console.error("Daily Challenge Error:", err);
+        res.status(500).json({ error: 'Failed to generate daily challenge' });
+    }
+});
 
 
 // ---------------------------------------------
@@ -567,6 +715,7 @@ app.get('/api/company/:companyName', async (req, res) => {
 });
 
 
+// Vercel requires exporting the app
 // Vercel requires exporting the app
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {

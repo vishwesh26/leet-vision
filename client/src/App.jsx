@@ -7,12 +7,15 @@ import ConnectModal from './components/ConnectModal';
 import './index.css';
 
 // Components
-import HomePage from './components/HomePage';
+// Components
+import LandingPage from './components/LandingPage';
+
 import ListPage from './components/ListPage';
 import SearchPage from './components/SearchPage';
 import SavedPage from './components/SavedPage';
 import RoadmapPage from './components/RoadmapPage';
 import DailyPage from './components/DailyPage';
+import CompanyPrepPage from './components/CompanyPrepPage';
 import ProgressPage from './components/ProgressPage';
 import CompanyPage from './components/CompanyPage';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -97,9 +100,19 @@ function AppContent({ savedVideos, onToggleSave }) {
                   </div>
                 </li>
                 <li className="nav-item"><Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link></li>
-                <li className="nav-item"><Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
+                <li className="nav-item dropdown">
+                  Companies ▾
+                  <div className="dropdown-content">
+                    <div><Link to="/company/google" style={{ color: 'inherit', textDecoration: 'none' }}>Google</Link></div>
+                    <div><Link to="/company/microsoft" style={{ color: 'inherit', textDecoration: 'none' }}>Microsoft</Link></div>
+                    <div><Link to="/company/amazon" style={{ color: 'inherit', textDecoration: 'none' }}>Amazon</Link></div>
+                    <div><Link to="/company/meta" style={{ color: 'inherit', textDecoration: 'none' }}>Meta</Link></div>
+                    <div><Link to="/company/apple" style={{ color: 'inherit', textDecoration: 'none' }}>Apple</Link></div>
+                    <div style={{ borderTop: '1px solid #333' }}><Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>All Companies</Link></div>
+                  </div>
+                </li>
                 <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
-                <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>
+                <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>My Progress</Link></li>
                 <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
               </ul>
 
@@ -162,9 +175,16 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/topics/tree" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Trees</Link>
             <Link to="/topics/graph" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Graphs</Link>
 
+            <div className="mobile-divider">Companies</div>
+            <Link to="/company/google" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Google</Link>
+            <Link to="/company/microsoft" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Microsoft</Link>
+            <Link to="/company/amazon" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Amazon</Link>
+            <Link to="/company/meta" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Meta</Link>
+            <Link to="/company/apple" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Apple</Link>
+            <Link to="/company-questions" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>All Companies</Link>
+
             <div className="mobile-divider">More</div>
             <Link to="/interview-roadmap" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
-            <Link to="/company-questions" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
             <Link to="/daily" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Daily Challenge</Link>
             <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
           </div>
@@ -198,14 +218,16 @@ function AppContent({ savedVideos, onToggleSave }) {
 
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/progress" element={<ProgressPage />} />
-          <Route path="/search/:questionId" element={<SearchPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+          {/* New Landing Page at Root */}
+          <Route path="/" element={<LandingPage />} />
 
+
+
+          <Route path="/progress" element={<ProgressPage />} />
           <Route path="/solution/:id" element={<SolutionPage />} />
 
 
-          <Route path="/top-100-leetcode" element={<ListPage type="top-100" title="Top 100 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+          <Route path="/top-100-leetcode" element={<ListPage type="top-100" title="Top 100 Liked Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/blind-75" element={<ListPage type="blind-75" title="Blind 75 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
 
           <Route path="/leetcode-easy" element={<ListPage type="difficulty" title="Easy Questions" param="Easy" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
@@ -213,7 +235,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/leetcode-hard" element={<ListPage type="difficulty" title="Hard Questions" param="Hard" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
 
           <Route path="/topics/:topic" element={<ListPage type="topic" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-          <Route path="/company/:company" element={<ListPage type="company" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+          <Route path="/company/:company" element={<CompanyPrepPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
 
           <Route path="/interview-roadmap" element={<RoadmapPage />} />
           <Route path="/company-questions" element={<CompanyPage />} />

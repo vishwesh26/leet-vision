@@ -15,8 +15,8 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-
-
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
     // Determine effective type and params
     let effectiveType = propType;
@@ -29,8 +29,8 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
         effectiveType = 'difficulty';
         param = difficulty;
         const capitalized = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
-        pageTitle = `${capitalized} LeetCode Questions`;
-        description = `Practice ${capitalized} LeetCode interview questions.`;
+        pageTitle = `${capitalized} Questions`;
+        description = `Practice ${capitalized} interview questions.`;
     } else if (topic) {
         effectiveType = 'topic';
         param = topic;
@@ -44,36 +44,70 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
     }
 
     // Priority 2: If still no param, and we have a propParam (Static Routes like /leetcode-easy), use it.
-    // effectiveType handles itself via propType.
-
     if (propType === 'difficulty' && !param && propParam) {
         param = propParam;
     }
+
+    // Reset State on Param Change
+    useEffect(() => {
+        setVideos([]);
+        setPage(1);
+        setHasMore(true);
+        // We don't trigger fetch here, purely state reset.
+        // The dependency on 'page' (which we just set to 1) or 'param' in the next effect will trigger fetch.
+    }, [difficulty, topic, company, propType, propParam]);
 
 
     useEffect(() => {
         const fetchList = async () => {
             setLoading(true);
             setError('');
-            setVideos([]);
+
+            // Should we clear videos if page is 1? Yes, to avoid stale data flicker if param changed
+            if (page === 1) {
+                // But we already did setVideos([]) in the other effect? 
+                // It's safer to not clear here to avoid double render flicker, but handling race conditions is key.
+                // We rely on the reset effect.
+            }
 
             try {
-                const API_BASE = import.meta.env.VITE_API_URL;
+                const API_BASE = import.meta.env.VITE_API_URL || '';
+                let url;
 
+                // LeetCode Endpoint
                 const queryParams = new URLSearchParams();
                 if (effectiveType === 'difficulty') queryParams.append('difficulty', param);
-
-                // For topic/company, we pass as 'param' query
                 if (effectiveType === 'topic' || effectiveType === 'company') queryParams.append('param', param);
 
-                const url = `${API_BASE}/api/list/${effectiveType}?${queryParams.toString()}`;
+                queryParams.append('page', page);
+                queryParams.append('limit', 20);
+
+                url = `${API_BASE}/api/list/${effectiveType}?${queryParams.toString()}`;
+
                 const response = await axios.get(url);
-                if (Array.isArray(response.data)) {
-                    setVideos(response.data);
-                } else {
-                    console.error("Expected array but got:", response.data);
-                    setVideos([]);
+                const resData = response.data;
+
+                // Handle both Object (new) and Array (old/fallback) formats
+                let newItems = [];
+                let hasMoreItems = false;
+
+                if (Array.isArray(resData)) {
+                    // Fallback for non-paginated endpoints
+                    newItems = resData;
+                    hasMoreItems = false;
+                } else if (resData.data && Array.isArray(resData.data)) {
+                    newItems = resData.data;
+                    hasMoreItems = resData.hasMore;
                 }
+
+                if (page === 1) {
+                    setVideos(newItems);
+                } else {
+                    setVideos(prev => [...prev, ...newItems]);
+                }
+
+                setHasMore(hasMoreItems);
+
             } catch (err) {
                 console.error(err);
                 setError('Failed to load list. Please try again.');
@@ -83,22 +117,22 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
         };
 
         fetchList();
-    }, [effectiveType, param]);
+    }, [effectiveType, param, page]);
 
     const isSaved = (videoId) => {
         return savedVideos.some(v => v.id === videoId);
     };
 
-
-
     return (
         <>
             <SEO title={pageTitle} description={description} path={window.location.pathname} />
 
-
-
             <section className="results-container">
-                <h2 className="results-header">{pageTitle}</h2>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+                    <h2 className="results-header" style={{ marginBottom: 0 }}>{pageTitle}</h2>
+
+                    {/* Source Toggle Removed */}
+                </div>
 
                 {loading && (
                     <div className="problem-list-container">
@@ -128,27 +162,16 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                             <tbody>
                                 {videos.map((video) => {
                                     const videoData = video.video || video;
-
-                                    // Correctly prioritize Problem ID/Title
-                                    // 'video' is primarily the Problem Object from the API
-                                    // 'videoData' might be the nested YouTube object
-
                                     const problemId = video.id || videoData.questionId || videoData.id;
                                     const title = video.title || videoData.title;
                                     const slug = video.slug || videoData.slug;
                                     const difficulty = video.difficulty || videoData.difficulty;
-
                                     const hasVideo = video.video || (videoData && videoData.viewCount !== undefined);
                                     const saved = isSaved(videoData.id || video.id);
 
-                                    // Check if solved (using the whole problem object which has slug)
-                                    // Sometimes video is the object, sometimes video.video.
-                                    // Safe check: pass object that has slug.
+                                    // Check solved status only for LeetCode
                                     const problemObj = videoData.slug ? videoData : (video.slug ? video : null);
                                     const solved = problemObj ? isProblemSolved(problemObj) : false;
-
-                                    // Normalized Object for Modal
-                                    const modalObj = { id: problemId, title: title };
 
                                     return (
                                         <tr key={problemId} className={solved ? 'solved-row' : ''}>
@@ -173,6 +196,18 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                                             </td>
                                             <td>
                                                 <div className="problem-cell">
+                                                    <span style={{
+                                                        fontSize: '0.8rem',
+                                                        background: '#ffffff11',
+                                                        color: '#aaa',
+                                                        padding: '2px 6px',
+                                                        borderRadius: '4px',
+                                                        marginRight: '8px',
+                                                        minWidth: '24px',
+                                                        textAlign: 'center'
+                                                    }}>
+                                                        LC
+                                                    </span>
                                                     <a
                                                         href={slug ? `https://leetcode.com/problems/${slug}` : '#'}
                                                         target="_blank"
@@ -216,8 +251,6 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                                                     >
                                                         ⚡ Code
                                                     </Link>
-
-
                                                 </div>
                                             </td>
 
@@ -234,6 +267,44 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                             </tbody>
                         </table>
                     </div>
+                )}
+
+                {hasMore && !loading && (
+                    <div style={{ textAlign: 'center', marginTop: '3rem', paddingBottom: '2rem' }}>
+                        <button
+                            onClick={() => setPage(prev => prev + 1)}
+                            style={{
+                                padding: '12px 30px',
+                                background: '#222',
+                                color: '#ccc',
+                                border: '1px solid #333',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                fontSize: '1rem',
+                                fontWeight: '500',
+                                transition: 'all 0.2s ease',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px'
+                            }}
+                            onMouseEnter={e => {
+                                e.currentTarget.style.background = '#333';
+                                e.currentTarget.style.color = '#fff';
+                                e.currentTarget.style.borderColor = '#555';
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.background = '#222';
+                                e.currentTarget.style.color = '#ccc';
+                                e.currentTarget.style.borderColor = '#333';
+                            }}
+                        >
+                            Load More
+                        </button>
+                    </div>
+                )}
+
+                {loading && videos.length > 0 && (
+                    <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>Loading more...</div>
                 )}
             </section>
         </>

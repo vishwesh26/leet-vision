@@ -1,21 +1,51 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import SEO from './SEO';
 
 const DailyPage = () => {
+    const [dailyProblem, setDailyProblem] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [revealed, setRevealed] = useState(false);
+    const navigate = useNavigate();
 
-    // Mock Daily Question (could be fetched from API)
-    const todayQuestion = {
-        id: "42",
-        title: "Trapping Rain Water",
-        difficulty: "Hard",
-        topic: "Array / Two Pointers"
-    };
+    // Fetch Daily Challenge
+    useEffect(() => {
+        const fetchDaily = async () => {
+            try {
+                const API_BASE = import.meta.env.VITE_API_URL || '';
+                const res = await fetch(`${API_BASE}/api/daily-challenge`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setDailyProblem(data);
+                }
+            } catch (err) {
+                console.error("Failed to fetch daily challenge", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchDaily();
+    }, []);
+
+    if (loading) {
+        return (
+            <div style={{ minHeight: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#888' }}>
+                Loading Daily Challenge...
+            </div>
+        );
+    }
+
+    if (!dailyProblem) {
+        return (
+            <div style={{ minHeight: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ff4444' }}>
+                Failed to load daily challenge. Please try again later.
+            </div>
+        );
+    }
 
     return (
         <>
-            <SEO title="Daily Challenge" description="Solve the daily LeetCode challenge and watch the video solution." path="/daily" />
+            <SEO title="Daily Challenge" description={`Solve today's challenge: ${dailyProblem.title}`} path="/daily" />
             <div className="daily-container" style={{
                 minHeight: '70vh',
                 display: 'flex',
@@ -43,11 +73,18 @@ const DailyPage = () => {
                     position: 'relative'
                 }}>
                     <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>
-                        <span style={{ color: 'var(--accent-orange)' }}>{todayQuestion.id}.</span> {todayQuestion.title}
+                        <span style={{ color: 'var(--accent-orange)' }}>{dailyProblem.id}.</span> {dailyProblem.title}
                     </h2>
                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '2rem' }}>
-                        <span className="badge" style={{ background: '#ff375f33', color: '#ff375f', padding: '0.4rem 1rem', borderRadius: '50px' }}>{todayQuestion.difficulty}</span>
-                        <span className="badge" style={{ background: '#333', color: '#ccc', padding: '0.4rem 1rem', borderRadius: '50px' }}>{todayQuestion.topic}</span>
+                        <span className={`badge-difficulty ${dailyProblem.difficulty?.toLowerCase()}`} style={{ padding: '0.4rem 1rem', borderRadius: '50px' }}>
+                            {dailyProblem.difficulty}
+                        </span>
+                        {/* If topics exist, show first one */}
+                        {dailyProblem.topics && dailyProblem.topics.length > 0 && (
+                            <span className="badge" style={{ background: '#333', color: '#ccc', padding: '0.4rem 1rem', borderRadius: '50px' }}>
+                                {dailyProblem.topics[0]}
+                            </span>
+                        )}
                     </div>
 
                     {!revealed ? (
@@ -66,14 +103,14 @@ const DailyPage = () => {
                                 I Tried, Show Solution
                             </button>
                             <div style={{ marginTop: '1.5rem' }}>
-                                <a href={`https://leetcode.com/problems/${todayQuestion.title.toLowerCase().replace(/ /g, '-')}`} target="_blank" rel="noreferrer" style={{ color: '#888', textDecoration: 'underline' }}>
+                                <a href={dailyProblem.slug ? `https://leetcode.com/problems/${dailyProblem.slug}` : '#'} target="_blank" rel="noreferrer" style={{ color: '#888', textDecoration: 'underline' }}>
                                     Go to LeetCode Problem
                                 </a>
                             </div>
                         </div>
                     ) : (
                         <div className="video-reveal" style={{ animation: 'fadeIn 0.5s ease' }}>
-                            <Link to={`/search/${todayQuestion.id}`} style={{
+                            <Link to={`/search/${dailyProblem.id}`} style={{
                                 textDecoration: 'none'
                             }}>
                                 <div style={{
