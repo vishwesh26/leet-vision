@@ -357,9 +357,25 @@ app.get('/api/solution/:questionId', async (req, res) => {
         if (fs.existsSync(solutionPath)) {
             try {
                 const cachedData = JSON.parse(fs.readFileSync(solutionPath, 'utf8'));
-                // Optional: Migrate File to DB here? 
-                // Let's keep it simple: just return it.
-                return res.json({ ...cachedData, source: 'local_file_cache' });
+                
+                // DATA MIGRATION: If found in File but not in DB, save to DB now!
+                if (mongoose.connection.readyState === 1) {
+                    try {
+                        // Check one more time or just upsert
+                        const exists = await Solution.exists({ questionId });
+                        if (!exists) {
+                            await Solution.create({
+                                questionId: questionId,
+                                ...cachedData
+                            });
+                            console.log(`Migrated ${questionId} from File to MongoDB`);
+                        }
+                    } catch (migErr) {
+                         console.warn("Migration error:", migErr.message);
+                    }
+                }
+                
+                return res.json({ ...cachedData, source: 'local_file_cache_migrated' });
             } catch (err) { console.error('File Cache Read Error:', err); }
         }
 
