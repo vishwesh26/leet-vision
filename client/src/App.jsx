@@ -222,6 +222,8 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/" element={<LandingPage />} />
 
 
+          {/* Video / Search Result Page */}
+          <Route path="/search/:questionId" element={<SearchPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
 
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/solution/:id" element={<SolutionPage />} />
