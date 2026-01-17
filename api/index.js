@@ -491,9 +491,12 @@ app.get('/api/solution/:questionId', async (req, res) => {
         if (mongoose.connection.readyState === 1) {
             try {
                 const dbSolution = await Solution.findOne({ questionId });
-                if (dbSolution) {
+                if (dbSolution && dbSolution.approaches && dbSolution.approaches.length > 0) {
                     console.log(`Solution DB HIT for ${questionId}`);
                     return res.json({ ...dbSolution.toObject(), source: 'database' });
+                } else if (dbSolution) {
+                    console.warn(`DB HIT for ${questionId} but data incomplete (empty approaches). Regenerating...`);
+                    // Optional: await Solution.deleteOne({ _id: dbSolution._id });
                 }
             } catch (dbErr) {
                 console.error("DB Read Error:", dbErr);
@@ -506,24 +509,29 @@ app.get('/api/solution/:questionId', async (req, res) => {
             try {
                 const cachedData = JSON.parse(fs.readFileSync(solutionPath, 'utf8'));
                 
-                // DATA MIGRATION: If found in File but not in DB, save to DB now!
-                if (mongoose.connection.readyState === 1) {
-                    try {
-                        // Check one more time or just upsert
-                        const exists = await Solution.exists({ questionId });
-                        if (!exists) {
-                            await Solution.create({
-                                questionId: questionId,
-                                ...cachedData
-                            });
-                            console.log(`Migrated ${questionId} from File to MongoDB`);
+                // VALIDATE CONTENT
+                if (!cachedData.approaches || cachedData.approaches.length === 0) {
+                     console.warn(`File Cache for ${questionId} is empty/invalid. Skipping.`);
+                     // Force fallthrough to AI generation
+                } else {
+                    // DATA MIGRATION: If found in File but not in DB, save to DB now!
+                    if (mongoose.connection.readyState === 1) {
+                        try {
+                            const exists = await Solution.exists({ questionId });
+                            if (!exists) {
+                                await Solution.create({
+                                    questionId: questionId,
+                                    ...cachedData
+                                });
+                                console.log(`Migrated ${questionId} from File to MongoDB`);
+                            }
+                        } catch (migErr) {
+                             console.warn("Migration error:", migErr.message);
                         }
-                    } catch (migErr) {
-                         console.warn("Migration error:", migErr.message);
                     }
+                    
+                    return res.json({ ...cachedData, source: 'local_file_cache_migrated' });
                 }
-                
-                return res.json({ ...cachedData, source: 'local_file_cache_migrated' });
             } catch (err) { console.error('File Cache Read Error:', err); }
         }
 
@@ -533,7 +541,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         console.log(`Generating Solution for ${questionId}...`);
-        const model = genAI.getGenerativeModel({ model: "gemini-3-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a comprehensive solution guide for LeetCode question "${questionId}".
