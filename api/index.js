@@ -541,7 +541,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         console.log(`Generating Solution for ${questionId}...`);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-native-audio-dialog" });
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a comprehensive solution guide for LeetCode question "${questionId}".
