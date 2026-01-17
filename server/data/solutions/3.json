@@ -1,24 +1,67 @@
 {
   "questionId": "3",
   "title": "Longest Substring Without Repeating Characters",
-  "solutions": {
-    "basic": {
-      "code": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        n = len(s)\n        max_len = 0\n        \n        # Iterate through all possible starting positions i\n        for i in range(n):\n            # Iterate through all possible ending positions j\n            for j in range(i, n):\n                substring = s[i:j+1]\n                \n                # Helper function to check uniqueness O(L)\n                if len(set(substring)) == len(substring):\n                    max_len = max(max_len, len(substring))\n                else:\n                    # Optimization: If s[i:j+1] fails, s[i:j+2] will also fail.\n                    # We can break the inner loop, but complexity remains cubic.\n                    break\n                    \n        return max_len",
-      "time": "O(N^3)",
-      "space": "O(N)",
-      "explanation": "This is the brute-force approach. It iterates through all possible substrings defined by start index 'i' and end index 'j'. For each substring, it checks for uniqueness by converting the substring to a set and comparing the set's length to the substring's length. Since there are O(N^2) substrings and checking uniqueness takes O(N) time, the overall complexity is O(N^3)."
+  "problemStatement": "Given a string s, find the length of the longest substring without repeating characters.",
+  "examples": [
+    {
+      "input": "abcabcbb",
+      "output": "3",
+      "explanation": "The longest substring without repeating characters is \"abc\", with a length of 3."
     },
-    "optimized": {
-      "code": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        left = 0\n        max_len = 0\n        # char_set stores characters currently in the sliding window [left, right]\n        char_set = set()\n        \n        for right in range(len(s)): \n            # Expand the window using the right pointer\n            current_char = s[right]\n            \n            # If the character is already in the set, the window is invalid.\n            while current_char in char_set:\n                # Shrink the window from the left until the repeating character is removed.\n                char_set.remove(s[left])\n                left += 1\n            \n            # Add the new character and update max length\n            char_set.add(current_char)\n            max_len = max(max_len, right - left + 1)\n            \n        return max_len",
-      "time": "O(N)",
-      "space": "O(min(N, \\Sigma))",
-      "explanation": "This solution uses the standard sliding window approach with two pointers (`left` and `right`) and a `set` to track characters within the current window. The right pointer iterates through the string, expanding the window. If a duplicate is found, the left pointer iteratively shrinks the window until the duplicate is removed. Since both pointers only move forward and traverse the string at most once, the time complexity is linear."
+    {
+      "input": "bbbbb",
+      "output": "1",
+      "explanation": "The longest substring without repeating characters is \"b\", with a length of 1."
     },
-    "best": {
-      "code": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        n = len(s)\n        # Map stores {character: last_seen_index}\n        char_map = {}\n        left = 0\n        max_len = 0\n        \n        for right in range(n):\n            char = s[right]\n            \n            # 1. Check if the character is repeating AND if its last occurrence \n            # is within the current window boundary (char_map[char] >= left)\n            if char in char_map and char_map[char] >= left:\n                # If repeat found, jump 'left' past the last occurrence. \n                # This avoids the iterative removal loop of the basic sliding window.\n                left = char_map[char] + 1\n            \n            # 2. Update the character's last seen index\n            char_map[char] = right\n            \n            # 3. Calculate current window length and update max_len\n            max_len = max(max_len, right - left + 1)\n            \n        return max_len",
-      "time": "O(N)",
-      "space": "O(min(N, \\Sigma))",
-      "explanation": "This solution uses the optimized sliding window with a hash map to store the last seen index of each character. When a duplicate character is encountered, instead of iteratively moving the 'left' pointer, we jump 'left' directly to one position past the character's previous location. This 'jump' optimization ensures every character is processed exactly once without internal loops, optimizing the constant factors of the $O(N)$ solution."
+    {
+      "input": "pwwkew",
+      "output": "3",
+      "explanation": "The longest substring without repeating characters is \"wke\", with a length of 3. Note that \"pwke\" is a subsequence, not a substring."
     }
-  }
+  ],
+  "approaches": [
+    {
+      "name": "Brute Force (O(N^2))",
+      "algorithm": [
+        "Initialize `maxLength = 0`.",
+        "Use a nested loop structure: Outer loop (i) iterates through all possible start positions, and the Inner loop (j) iterates through all possible end positions (j >= i).",
+        "For each substring s[i...j], use a Hash Set to track characters encountered.",
+        "As the inner loop advances (j++), check if s[j] is already in the set. If it is, a repetition is found, so break the inner loop and move to the next starting position (i+1).",
+        "If s[j] is unique, add it to the set and update `maxLength = max(maxLength, j - i + 1)`."
+      ],
+      "complexity": {
+        "time": "O(N^2)",
+        "space": "O(N)"
+      },
+      "codes": {
+        "cpp": "int lengthOfLongestSubstring_BruteForce(std::string s) {\n    int n = s.length();\n    int maxLength = 0;\n    for (int i = 0; i < n; i++) {\n        std::unordered_set<char> charSet;\n        for (int j = i; j < n; j++) {\n            if (charSet.count(s[j])) {\n                break; // Found repetition, move to next starting position\n            }\n            charSet.insert(s[j]);\n            maxLength = std::max(maxLength, j - i + 1);\n        }\n    }\n    return maxLength;\n}",
+        "java": "public int lengthOfLongestSubstring_BruteForce(String s) {\n    int n = s.length();\n    int maxLength = 0;\n    for (int i = 0; i < n; i++) {\n        java.util.HashSet<Character> charSet = new java.util.HashSet<>();\n        for (int j = i; j < n; j++) {\n            if (charSet.contains(s.charAt(j))) {\n                break;\n            }\n            charSet.add(s.charAt(j));\n            maxLength = Math.max(maxLength, j - i + 1);\n        }\n    }\n    return maxLength;\n}",
+        "python": "def lengthOfLongestSubstring_BruteForce(self, s: str) -> int:\n    n = len(s)\n    maxLength = 0\n    for i in range(n):\n        char_set = set()\n        for j in range(i, n):\n            if s[j] in char_set:\n                break\n            char_set.add(s[j])\n            maxLength = max(maxLength, j - i + 1)\n    return maxLength",
+        "javascript": "var lengthOfLongestSubstring_BruteForce = function(s) {\n    let n = s.length;\n    let maxLength = 0;\n    for (let i = 0; i < n; i++) {\n        let charSet = new Set();\n        for (let j = i; j < n; j++) {\n            if (charSet.has(s[j])) {\n                break;\n            }\n            charSet.add(s[j]);\n            maxLength = Math.max(maxLength, j - i + 1);\n        }\n    }\n    return maxLength;\n};"
+      }
+    },
+    {
+      "name": "Optimal Approach: Sliding Window with Hash Map",
+      "algorithm": [
+        "Initialize two pointers, `left = 0` and `right = 0`, and `maxLength = 0`.",
+        "Use a Hash Map (or Array) to store characters and their last seen index: `char -> index`.",
+        "Iterate the `right` pointer from 0 to N-1, expanding the window.",
+        "For each character `s[right]`, check if it exists in the Map.",
+        "If `s[right]` is already in the map, it means a repetition occurred. We must move the `left` pointer.",
+        "Update `left = max(left, map[s[right]] + 1)`. Using `max` ensures that `left` only moves forward, avoiding shrinking the window backward if the repeated character was already outside the current window.",
+        "Update the index of the current character in the map: `map[s[right]] = right`.",
+        "Update `maxLength = max(maxLength, right - left + 1)`."
+      ],
+      "complexity": {
+        "time": "O(N)",
+        "space": "O(min(N, |Alphabet|))"
+      },
+      "codes": {
+        "cpp": "class Solution {\npublic:\n    int lengthOfLongestSubstring(std::string s) {\n        if (s.empty()) return 0;\n        std::unordered_map<char, int> charIndexMap; // Stores char -> index\n        int maxLength = 0;\n        int left = 0;\n        \n        for (int right = 0; right < s.length(); ++right) {\n            char currentChar = s[right];\n            \n            if (charIndexMap.count(currentChar)) {\n                // Update left pointer to be 1 past the previous occurrence.\n                // std::max ensures left only moves forward.\n                left = std::max(left, charIndexMap[currentChar] + 1);\n            }\n            \n            // Update the index of the current character\n            charIndexMap[currentChar] = right;\n            \n            // Calculate current substring length\n            maxLength = std::max(maxLength, right - left + 1);\n        }\n        return maxLength;\n    }\n};",
+        "java": "class Solution {\n    public int lengthOfLongestSubstring(String s) {\n        if (s == null || s.length() == 0) return 0;\n        \n        java.util.HashMap<Character, Integer> charIndexMap = new java.util.HashMap<>();\n        int maxLength = 0;\n        int left = 0;\n        \n        for (int right = 0; right < s.length(); right++) {\n            char currentChar = s.charAt(right);\n            \n            if (charIndexMap.containsKey(currentChar)) {\n                // Move left pointer to 1 + (index of the previous occurrence)\n                left = Math.max(left, charIndexMap.get(currentChar) + 1);\n            }\n            \n            charIndexMap.put(currentChar, right);\n            maxLength = Math.max(maxLength, right - left + 1);\n        }\n        \n        return maxLength;\n    }\n}",
+        "python": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        if not s:\n            return 0\n        \n        char_index_map = {}\n        max_length = 0\n        left = 0\n        \n        for right in range(len(s)):\n            current_char = s[right]\n            \n            if current_char in char_index_map:\n                # Move the left boundary past the previous occurrence\n                left = max(left, char_index_map[current_char] + 1)\n            \n            # Update the index of the current character\n            char_index_map[current_char] = right\n            \n            # Update maximum length based on the current valid window size\n            max_length = max(max_length, right - left + 1)\n            \n        return max_length",
+        "javascript": "var lengthOfLongestSubstring = function(s) {\n    if (!s) return 0;\n    \n    let charIndexMap = new Map();\n    let maxLength = 0;\n    let left = 0;\n    \n    for (let right = 0; right < s.length; right++) {\n        const currentChar = s[right];\n        \n        if (charIndexMap.has(currentChar)) {\n            // Update left pointer to 1 + previous index, ensuring it only moves forward\n            left = Math.max(left, charIndexMap.get(currentChar) + 1);\n        }\n        \n        // Update the map with the current index\n        charIndexMap.set(currentChar, right);\n        \n        // Calculate the current valid window size\n        maxLength = Math.max(maxLength, right - left + 1);\n    }\n    \n    return maxLength;\n};"
+      }
+    }
+  ]
 }

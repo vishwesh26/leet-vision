@@ -1,0 +1,55 @@
+{
+  "questionId": "1",
+  "title": "Two Sum",
+  "problemStatement": "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice.",
+  "examples": [
+    {
+      "input": "nums = [2, 7, 11, 15], target = 9",
+      "output": "[0, 1]",
+      "explanation": "Because nums[0] (2) + nums[1] (7) == 9, we return indices [0, 1]."
+    }
+  ],
+  "approaches": [
+    {
+      "name": "Brute Force Approach",
+      "algorithm": [
+        "Iterate through the array using a nested loop structure.",
+        "The outer loop uses index `i` from 0 to N-2.",
+        "The inner loop uses index `j` from `i + 1` to N-1.",
+        "For every pair (nums[i], nums[j]), check if their sum equals the `target`.",
+        "If the sum matches, return the indices `[i, j]`."
+      ],
+      "complexity": {
+        "time": "O(N^2)",
+        "space": "O(1)"
+      },
+      "codes": {
+        "cpp": "class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        int n = nums.size();\n        for (int i = 0; i < n; ++i) {\n            for (int j = i + 1; j < n; ++j) {\n                if (nums[i] + nums[j] == target) {\n                    return {i, j};\n                }\n            }\n        }\n        return {};\n    }\n};",
+        "java": "class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        int n = nums.length;\n        for (int i = 0; i < n; i++) {\n            for (int j = i + 1; j < n; j++) {\n                if (nums[i] + nums[j] == target) {\n                    return new int[] { i, j };\n                }\n            }\n        }\n        throw new IllegalArgumentException(\"No two sum solution\");\n    }\n}",
+        "python": "class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        n = len(nums)\n        for i in range(n):\n            for j in range(i + 1, n):\n                if nums[i] + nums[j] == target:\n                    return [i, j]\n        return []",
+        "javascript": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nvar twoSum = function(nums, target) {\n    for (let i = 0; i < nums.length; i++) {\n        for (let j = i + 1; j < nums.length; j++) {\n            if (nums[i] + nums[j] === target) {\n                return [i, j];\n            }\n        }\n    }\n};"
+      }
+    },
+    {
+      "name": "Optimal Approach (One-Pass Hash Map)",
+      "algorithm": [
+        "Initialize a hash map (dictionary) to store numbers encountered so far, mapping the number value to its index.",
+        "Iterate through the array `nums` once using index `i`.",
+        "For the current number `nums[i]`, calculate the required `complement` needed: `complement = target - nums[i]`.",
+        "Check if the `complement` already exists as a key in the hash map.",
+        "If the complement is found, we have located the pair. Return the index stored for the complement and the current index `i`.",
+        "If the complement is not found, add the current number and its index to the hash map: `map[nums[i]] = i`."
+      ],
+      "complexity": {
+        "time": "O(N)",
+        "space": "O(N)"
+      },
+      "codes": {
+        "cpp": "#include <unordered_map>\nclass Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        unordered_map<int, int> num_to_index;\n        for (int i = 0; i < nums.size(); ++i) {\n            int complement = target - nums[i];\n            \n            // Check if the complement exists in the map\n            if (num_to_index.count(complement)) {\n                return {num_to_index[complement], i};\n            }\n            \n            // Store the current number and its index\n            num_to_index[nums[i]] = i;\n        }\n        return {};\n    }\n};",
+        "java": "import java.util.HashMap;\nimport java.util.Map;\n\nclass Solution {\n    public int[] twoSum(int[] nums, int target) {\n        Map<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int complement = target - nums[i];\n            if (map.containsKey(complement)) {\n                return new int[] { map.get(complement), i };\n            }\n            map.put(nums[i], i);\n        }\n        throw new IllegalArgumentException(\"No two sum solution\");\n    }\n}",
+        "python": "class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        num_map = {}\n        for i, num in enumerate(nums):\n            complement = target - num\n            if complement in num_map:\n                return [num_map[complement], i]\n            num_map[num] = i\n        return []",
+        "javascript": "/**\n * @param {number[]} nums\n * @param {number} target\n * @return {number[]}\n */\nvar twoSum = function(nums, target) {\n    const numMap = new Map();\n    for (let i = 0; i < nums.length; i++) {\n        const complement = target - nums[i];\n        \n        if (numMap.has(complement)) {\n            return [numMap.get(complement), i];\n        }\n        \n        numMap.set(nums[i], i);\n    }\n};"
+      }
+    }
+  ]
+}

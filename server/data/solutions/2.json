@@ -1,24 +1,38 @@
 {
   "questionId": "2",
   "title": "Add Two Numbers",
-  "solutions": {
-    "basic": {
-      "code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\nclass Solution:\n    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\n        dummy_head = ListNode(0)\n        current = dummy_head\n        carry = 0\n        \n        # 1. Main loop while both lists have nodes\n        while l1 and l2:\n            s = l1.val + l2.val + carry\n            carry = s // 10\n            current.next = ListNode(s % 10)\n            current = current.next\n            l1 = l1.next\n            l2 = l2.next\n            \n        # 2. Handle remainder of l1\n        while l1:\n            s = l1.val + carry\n            carry = s // 10\n            current.next = ListNode(s % 10)\n            current = current.next\n            l1 = l1.next\n            \n        # 3. Handle remainder of l2\n        while l2:\n            s = l2.val + carry\n            carry = s // 10\n            current.next = ListNode(s % 10)\n            current = current.next\n            l2 = l2.next\n            \n        # 4. Handle final carry\n        if carry > 0:\n            current.next = ListNode(carry)\n            \n        return dummy_head.next",
-      "time": "O(max(N, M))",
-      "space": "O(max(N, M))",
-      "explanation": "This basic approach iterates through the linked lists, calculating the sum and carry at each step. It handles the list traversal in separate stages: first, while both lists are present, then separate loops to handle any remaining nodes in L1 or L2, and finally, a check for the final carry. While functionally correct, the use of three separate `while` loops makes the code verbose."
-    },
-    "optimized": {
-      "code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\nclass Solution:\n    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\n        dummy_head = ListNode(0)\n        current = dummy_head\n        carry = 0\n        \n        # Condition includes the lists and the carry\n        while l1 or l2 or carry:\n            \n            # Safely get values, treat None as 0\n            val1 = l1.val if l1 else 0\n            val2 = l2.val if l2 else 0\n            \n            # Calculate sum and new carry\n            total = val1 + val2 + carry\n            carry = total // 10\n            digit = total % 10\n            \n            # Create and link new node\n            current.next = ListNode(digit)\n            current = current.next\n            \n            # Advance pointers safely\n            if l1: l1 = l1.next\n            if l2: l2 = l2.next\n                \n        return dummy_head.next",
-      "time": "O(max(N, M))",
-      "space": "O(max(N, M))",
-      "explanation": "This optimized approach consolidates the iteration into a single `while` loop that runs as long as there are nodes in either list or a pending carry. By checking for `l1 or l2 or carry`, we ensure every digit is processed efficiently. We use conditional expressions (`val1 = l1.val if l1 else 0`) to handle null nodes gracefully, resulting in cleaner and less repetitive code than the basic implementation."
-    },
-    "best": {
-      "code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\nclass Solution:\n    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\n        dummy = ListNode()\n        tail = dummy\n        carry = 0\n        \n        while l1 or l2 or carry:\n            \n            # Get current values (0 if list exhausted)\n            val1 = l1.val if l1 else 0\n            val2 = l2.val if l2 else 0\n            \n            # Calculate total and update carry\n            total = val1 + val2 + carry\n            carry = total // 10\n            \n            # Append the new digit\n            tail.next = ListNode(total % 10)\n            \n            # Advance pointers\n            tail = tail.next\n            if l1: l1 = l1.next\n            if l2: l2 = l2.next\n                \n        return dummy.next",
-      "time": "O(max(N, M))",
-      "space": "O(max(N, M))",
-      "explanation": "The time complexity is inherently limited by the length of the lists, so this implementation represents the 'best' structure. It uses a clean, single-pass iteration (`while l1 or l2 or carry`) which is the most efficient pattern for this specific problem. It minimizes pointer adjustments and maximizes clarity by using a dummy node and a tail pointer, which avoids special handling for the head of the resultant list."
+  "problemStatement": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.",
+  "examples": [
+    {
+      "input": "l1 = [2,4,3], l2 = [5,6,4]",
+      "output": "[7,0,8]",
+      "explanation": "342 + 465 = 807. The output list represents 807 in reverse order: 7 -> 0 -> 8."
     }
-  }
+  ],
+  "approaches": [
+    {
+      "name": "Optimal Iterative Summation",
+      "algorithm": [
+        "Initialize a dummy head node for the result list and a pointer (current) to build the list.",
+        "Initialize a 'carry' variable to 0.",
+        "Iterate through the lists (l1 and l2) simultaneously, continuing the loop as long as either list pointer is not null OR the carry is non-zero.",
+        "Inside the loop, retrieve the current digit from l1 (or 0 if l1 is null) and l2 (or 0 if l2 is null).",
+        "Calculate the sum: sum = l1_digit + l2_digit + carry.",
+        "Update the carry for the next iteration: carry = sum / 10.",
+        "Create a new node with the value sum % 10 and append it to the result list using the current pointer.",
+        "Advance the l1, l2, and current pointers.",
+        "Once the loop terminates, return the dummy head's next node."
+      ],
+      "complexity": {
+        "time": "O(max(N, M))",
+        "space": "O(max(N, M))"
+      },
+      "codes": {
+        "cpp": "/**\n * Definition for singly-linked list.\n * struct ListNode {\n *     int val;\n *     ListNode *next;\n *     ListNode() : val(0), next(nullptr) {}\n *     ListNode(int x) : val(x), next(nullptr) {}\n *     ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {\n        ListNode dummyHead(0);\n        ListNode* current = &dummyHead;\n        int carry = 0;\n        \n        while (l1 != nullptr || l2 != nullptr || carry != 0) {\n            int x = (l1 != nullptr) ? l1->val : 0;\n            int y = (l2 != nullptr) ? l2->val : 0;\n            \n            int sum = x + y + carry;\n            carry = sum / 10; \n            \n            current->next = new ListNode(sum % 10);\n            current = current->next;\n            \n            if (l1 != nullptr) l1 = l1->next;\n            if (l2 != nullptr) l2 = l2->next;\n        }\n        \n        return dummyHead.next;\n    }\n};",
+        "java": "/**\n * Definition for singly-linked list.\n * public class ListNode {\n *     int val;\n *     ListNode next;\n *     ListNode(int val) { this.val = val; }\n *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n * }\n */\nclass Solution {\n    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {\n        ListNode dummyHead = new ListNode(0);\n        ListNode current = dummyHead;\n        int carry = 0;\n        \n        while (l1 != null || l2 != null || carry != 0) {\n            int x = (l1 != null) ? l1.val : 0;\n            int y = (l2 != null) ? l2.val : 0;\n            \n            int sum = x + y + carry;\n            carry = sum / 10;\n            \n            current.next = new ListNode(sum % 10);\n            current = current.next;\n            \n            if (l1 != null) l1 = l1.next;\n            if (l2 != null) l2 = l2.next;\n        }\n        \n        return dummyHead.next;\n    }\n}",
+        "python": "# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\n        dummyHead = ListNode(0)\n        current = dummyHead\n        carry = 0\n        \n        while l1 or l2 or carry:\n            x = l1.val if l1 else 0\n            y = l2.val if l2 else 0\n            \n            sum_val = x + y + carry\n            carry = sum_val // 10\n            \n            current.next = ListNode(sum_val % 10)\n            current = current.next\n            \n            if l1: l1 = l1.next\n            if l2: l2 = l2.next\n            \n        return dummyHead.next",
+        "javascript": "/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nvar addTwoNumbers = function(l1, l2) {\n    let dummyHead = new ListNode(0);\n    let current = dummyHead;\n    let carry = 0;\n    \n    while (l1 !== null || l2 !== null || carry !== 0) {\n        let x = l1 ? l1.val : 0;\n        let y = l2 ? l2.val : 0;\n        \n        let sum = x + y + carry;\n        carry = Math.floor(sum / 10);\n        \n        current.next = new ListNode(sum % 10);\n        current = current.next;\n        \n        if (l1) l1 = l1.next;\n        if (l2) l2 = l2.next;\n    }\n    \n    return dummyHead.next;\n};"
+      }
+    }
+  ]
 }

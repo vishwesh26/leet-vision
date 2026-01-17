@@ -391,7 +391,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         console.log(`Generating Solution for ${questionId}...`);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-native-audio-dialog" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a comprehensive solution guide for LeetCode question "${questionId}".
@@ -410,37 +410,29 @@ app.get('/api/solution/:questionId', async (req, res) => {
              {
                "name": "Brute Force Approach",
                "algorithm": ["Step 1...", "Step 2..."],
-               "complexity": {
-                  "time": "O(...)",
-                  "space": "O(...)"
-               },
-               "codes": {
-                  "cpp": "...",
-                  "java": "...",
-                  "python": "...",
-                  "javascript": "..."
-               }
+               "complexity": { "time": "O(...)", "space": "O(...)" },
+               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
+             },
+             {
+               "name": "Better Approach",
+               "algorithm": ["Step 1...", "Step 2..."],
+               "complexity": { "time": "O(...)", "space": "O(...)" },
+               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
              },
              {
                "name": "Optimal Approach",
                "algorithm": ["Step 1...", "Step 2..."],
-               "complexity": {
-                  "time": "O(...)",
-                  "space": "O(...)"
-               },
-               "codes": {
-                  "cpp": "...",
-                  "java": "...",
-                  "python": "...",
-                  "javascript": "..."
-               }
+               "complexity": { "time": "O(...)", "space": "O(...)" },
+               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
              }
           ]
         }
 
         Rules:
         1. Return ONLY valid JSON. No markdown formatting.
-        2. Provide at least "Brute Force" and "Optimal". If they are the same, just provide "Optimal".
+        2. MUST Provide exactly 3 approaches if possible: "Brute Force", "Better", and "Optimal".
+           - If "Better" and "Optimal" are effectively the same, you can skip "Better".
+           - Always provide at least "Brute Force" and "Optimal".
         3. "algorithm" should be an array of strings (bullet points).
         `;
 
@@ -465,21 +457,21 @@ app.get('/api/solution/:questionId', async (req, res) => {
         let dbStatus = "skipped";
         if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {
             // Save to DB
+            // Save to DB (Upsert to overwrite potential bad/empty data)
             try {
-                await Solution.create({
-                    questionId: questionId,
-                    ...jsonResponse
-                });
-                console.log(`Saved ${questionId} to MongoDB`);
+                await Solution.findOneAndUpdate(
+                    { questionId: questionId },
+                    { 
+                        questionId: questionId,
+                        ...jsonResponse 
+                    },
+                    { upsert: true, new: true }
+                );
+                console.log(`Saved/Updated ${questionId} to MongoDB`);
                 dbStatus = "success";
             } catch (saveErr) {
-                // Ignore duplicate key error safely
-                if (saveErr.code === 11000) {
-                    dbStatus = "duplicate_skipped";
-                } else {
-                    console.error("DB Save Error:", saveErr);
-                    dbStatus = `error: ${saveErr.message}`;
-                }
+                console.error("DB Save Error:", saveErr);
+                dbStatus = `error: ${saveErr.message}`;
             }
 
             // Save to File (Local Backup)
