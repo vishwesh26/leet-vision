@@ -1,0 +1,593 @@
+{
+    "google": {
+        "0-1": {
+            "dsa_ids": [
+                "1",
+                "20",
+                "21",
+                "121",
+                "53",
+                "70",
+                "206",
+                "141",
+                "226",
+                "104",
+                "136",
+                "237",
+                "88",
+                "118",
+                "169",
+                "283",
+                "344",
+                "387",
+                "101",
+                "3",
+                "5",
+                "11",
+                "14",
+                "15",
+                "17",
+                "19",
+                "22",
+                "33",
+                "39",
+                "46",
+                "48",
+                "49",
+                "54",
+                "55",
+                "56",
+                "62",
+                "64",
+                "73",
+                "75"
+            ],
+            "topics": [
+                "Array",
+                "String",
+                "Stack",
+                "LinkedList",
+                "Tree",
+                "Recursion"
+            ],
+            "system_design": null,
+            "cs_fundamentals": [
+                "Sorting Algorithms",
+                "Complexity (Big O)"
+            ]
+        },
+        "1-3": {
+            "dsa_ids": [
+                "200",
+                "76",
+                "22",
+                "15",
+                "5",
+                "84",
+                "127",
+                "139",
+                "146",
+                "238",
+                "289",
+                "322",
+                "210",
+                "207",
+                "1143",
+                "300"
+            ],
+            "topics": [
+                "Graph",
+                "Sliding Window",
+                "Recursion",
+                "Two Pointers",
+                "DP"
+            ],
+            "system_design": [
+                {
+                    "title": "URL Shortener",
+                    "url": "/system-design/url-shortener"
+                },
+                {
+                    "title": "Design Pastebin",
+                    "url": "/system-design/pastebin"
+                }
+            ],
+            "cs_fundamentals": [
+                "Operating Systems (Processes vs Threads)",
+                "DBMS (ACID Properties)"
+            ]
+        },
+        "3-5": {
+            "dsa_ids": [
+                "124",
+                "23",
+                "4",
+                "42",
+                "297",
+                "315",
+                "329",
+                "188",
+                "10",
+                "72",
+                "85",
+                "115"
+            ],
+            "topics": [
+                "DP",
+                "Graph",
+                "Hard Arrays",
+                "Tree"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Chat System (WhatsApp)",
+                    "url": "/system-design/chat-app"
+                },
+                {
+                    "title": "Design Notification Service",
+                    "url": "/system-design/notification-service"
+                },
+                {
+                    "title": "Design Youtube Key-Value",
+                    "url": "/system-design/youtube"
+                }
+            ],
+            "cs_fundamentals": [
+                "Distributed Systems Basics",
+                "Database Sharding/Indexing"
+            ]
+        },
+        "5+": {
+            "dsa_ids": [],
+            "topics": [
+                "System Architecture",
+                "Scalability",
+                "Leadership"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Payment System",
+                    "url": "/system-design/payment-gateway"
+                },
+                {
+                    "title": "Design Google Drive",
+                    "url": "/system-design/google-drive"
+                },
+                {
+                    "title": "Design Web Crawler",
+                    "url": "/system-design/web-crawler"
+                }
+            ],
+            "cs_fundamentals": [
+                "Distributed Consensus (Paxos/Raft)",
+                "Microservices Patterns"
+            ]
+        }
+    },
+    "microsoft": {
+        "0-1": {
+            "dsa_ids": [
+                "1",
+                "20",
+                "21",
+                "121",
+                "206",
+                "88",
+                "125",
+                "160",
+                "234",
+                "104",
+                "108",
+                "141",
+                "169",
+                "202",
+                "217",
+                "242",
+                "268",
+                "283",
+                "344",
+                "387",
+                "412",
+                "2",
+                "3",
+                "5",
+                "8",
+                "6",
+                "13",
+                "14",
+                "26",
+                "28",
+                "38",
+                "53",
+                "54",
+                "58",
+                "66",
+                "67",
+                "69",
+                "70",
+                "73",
+                "74",
+                "83"
+            ],
+            "topics": [
+                "Array",
+                "Hashing",
+                "String",
+                "LinkedList",
+                "Math"
+            ],
+            "system_design": null,
+            "cs_fundamentals": [
+                "OOP Concepts",
+                "Basic Networking"
+            ]
+        },
+        "1-3": {
+            "dsa_ids": [
+                "2",
+                "48",
+                "73",
+                "200",
+                "75",
+                "138",
+                "56",
+                "31",
+                "17",
+                "22",
+                "46",
+                "79",
+                "98",
+                "102",
+                "199",
+                "146"
+            ],
+            "topics": [
+                "Matrix",
+                "LinkedList",
+                "Graph",
+                "Tree",
+                "Backtracking"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Parking Lot",
+                    "url": "/system-design/parking-lot"
+                }
+            ],
+            "cs_fundamentals": [
+                "DBMS (Normal Forms)",
+                "Networking (OSI Model)"
+            ]
+        },
+        "3-5": {
+            "dsa_ids": [
+                "91",
+                "139",
+                "295",
+                "460",
+                "124",
+                "4",
+                "23",
+                "32",
+                "42",
+                "76",
+                "239"
+            ],
+            "topics": [
+                "DP",
+                "Heap",
+                "Design",
+                "Hard"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Auto-Complete",
+                    "url": "/system-design/auto-complete"
+                },
+                {
+                    "title": "Design Typeahead",
+                    "url": "/system-design/typeahead"
+                }
+            ],
+            "cs_fundamentals": null
+        },
+        "5+": {
+            "dsa_ids": [],
+            "topics": [
+                "Architecture",
+                "Cloud Design"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Rate Limiter",
+                    "url": "/system-design/rate-limiter"
+                },
+                {
+                    "title": "Design Distributed Scheduler",
+                    "url": "/system-design/scheduler"
+                }
+            ],
+            "cs_fundamentals": null
+        }
+    },
+    "amazon": {
+        "0-1": {
+            "dsa_ids": [
+                "1",
+                "20",
+                "155",
+                "53",
+                "121",
+                "21",
+                "206",
+                "111",
+                "9",
+                "35",
+                "543",
+                "704",
+                "278",
+                "387",
+                "448",
+                "136",
+                "118",
+                "119",
+                "67",
+                "69",
+                "3",
+                "5",
+                "15",
+                "17",
+                "22",
+                "33",
+                "42",
+                "46",
+                "48",
+                "49",
+                "54",
+                "56"
+            ],
+            "topics": [
+                "Array",
+                "Stack",
+                "Dynamic Programming",
+                "Search"
+            ],
+            "system_design": null,
+            "cs_fundamentals": null
+        },
+        "1-3": {
+            "dsa_ids": [
+                "146",
+                "200",
+                "56",
+                "238",
+                "127",
+                "207",
+                "210",
+                "300",
+                "322",
+                "139",
+                "91",
+                "198",
+                "416",
+                "152",
+                "62",
+                "63"
+            ],
+            "topics": [
+                "LRU Cache",
+                "Graph",
+                "Intervals",
+                "DP"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Amazon Locker",
+                    "url": "/system-design/amazon-locker"
+                }
+            ],
+            "cs_fundamentals": [
+                "DBMS",
+                "OS"
+            ]
+        },
+        "3-5": {
+            "dsa_ids": [
+                "42",
+                "127",
+                "210",
+                "126",
+                "269",
+                "295",
+                "460",
+                "224",
+                "76"
+            ],
+            "topics": [
+                "Graph",
+                "Hard Arrays",
+                "String"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Shopping Cart",
+                    "url": "/system-design/shopping-cart"
+                }
+            ],
+            "cs_fundamentals": null
+        },
+        "5+": {
+            "dsa_ids": [],
+            "topics": [
+                "Scalability"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Amazon Search",
+                    "url": "/system-design/search-engine"
+                }
+            ],
+            "cs_fundamentals": null
+        }
+    },
+    "meta": {
+        "0-1": {
+            "dsa_ids": [
+                "1",
+                "15",
+                "1249",
+                "680",
+                "560",
+                "238",
+                "133",
+                "20",
+                "88",
+                "125"
+            ],
+            "topics": [
+                "Array",
+                "String",
+                "Graph"
+            ],
+            "system_design": null,
+            "cs_fundamentals": null
+        },
+        "1-3": {
+            "dsa_ids": [
+                "314",
+                "339",
+                "528",
+                "921",
+                "1762",
+                "1570"
+            ],
+            "topics": [
+                "Tree",
+                "Design",
+                "Heap"
+            ],
+            "system_design": [
+                {
+                    "title": "Design News Feed",
+                    "url": "/system-design/news-feed"
+                }
+            ],
+            "cs_fundamentals": [
+                "Database Consistency",
+                "Caching Strategies"
+            ]
+        },
+        "3-5": {
+            "dsa_ids": [
+                "426",
+                "227",
+                "827",
+                "1091"
+            ],
+            "topics": [
+                "Hard Graph",
+                "Recursion"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Instagram",
+                    "url": "/system-design/instagram"
+                }
+            ],
+            "cs_fundamentals": null
+        },
+        "5+": {
+            "dsa_ids": [],
+            "topics": [
+                "Scalability"
+            ],
+            "system_design": [
+                {
+                    "title": "Design Messenger",
+                    "url": "/system-design/messenger"
+                }
+            ],
+            "cs_fundamentals": null
+        }
+    },
+    "apple": {
+        "0-1": {
+            "dsa_ids": [
+                "1",
+                "15",
+                "20",
+                "70",
+                "53",
+                "121",
+                "200",
+                "206",
+                "242"
+            ],
+            "topics": [
+                "Array",
+                "HashTable",
+                "LinkedList"
+            ],
+            "system_design": null,
+            "cs_fundamentals": [
+                "OOP"
+            ]
+        },
+        "1-3": {
+            "dsa_ids": [
+                "146",
+                "42",
+                "3",
+                "49",
+                "139",
+                "56"
+            ],
+            "topics": [
+                "Design",
+                "DP",
+                "String"
+            ],
+            "system_design": [
+                {
+                    "title": "Design iTunes Store",
+                    "url": "/system-design/itunes"
+                }
+            ],
+            "cs_fundamentals": [
+                "OS Concepts"
+            ]
+        },
+        "3-5": {
+            "dsa_ids": [
+                "4",
+                "23",
+                "76",
+                "297"
+            ],
+            "topics": [
+                "Hard",
+                "Trees"
+            ],
+            "system_design": [
+                {
+                    "title": "Design iCloud",
+                    "url": "/system-design/icloud"
+                }
+            ],
+            "cs_fundamentals": null
+        },
+        "5+": {
+            "dsa_ids": [],
+            "topics": [
+                "Distributed Systems"
+            ],
+            "system_design": [
+                {
+                    "title": "Design App Store",
+                    "url": "/system-design/app-store"
+                }
+            ],
+            "cs_fundamentals": null
+        }
+    }
+}

@@ -391,7 +391,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         console.log(`Generating Solution for ${questionId}...`);
-        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a comprehensive solution guide for LeetCode question "${questionId}".
@@ -410,29 +410,37 @@ app.get('/api/solution/:questionId', async (req, res) => {
              {
                "name": "Brute Force Approach",
                "algorithm": ["Step 1...", "Step 2..."],
-               "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
-             },
-             {
-               "name": "Better Approach",
-               "algorithm": ["Step 1...", "Step 2..."],
-               "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
+               "complexity": {
+                  "time": "O(...)",
+                  "space": "O(...)"
+               },
+               "codes": {
+                  "cpp": "...",
+                  "java": "...",
+                  "python": "...",
+                  "javascript": "..."
+               }
              },
              {
                "name": "Optimal Approach",
                "algorithm": ["Step 1...", "Step 2..."],
-               "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
+               "complexity": {
+                  "time": "O(...)",
+                  "space": "O(...)"
+               },
+               "codes": {
+                  "cpp": "...",
+                  "java": "...",
+                  "python": "...",
+                  "javascript": "..."
+               }
              }
           ]
         }
 
         Rules:
         1. Return ONLY valid JSON. No markdown formatting.
-        2. MUST Provide exactly 3 approaches if possible: "Brute Force", "Better", and "Optimal".
-           - If "Better" and "Optimal" are effectively the same, you can skip "Better".
-           - Always provide at least "Brute Force" and "Optimal".
+        2. Provide at least "Brute Force" and "Optimal". If they are the same, just provide "Optimal".
         3. "algorithm" should be an array of strings (bullet points).
         `;
 
@@ -457,21 +465,21 @@ app.get('/api/solution/:questionId', async (req, res) => {
         let dbStatus = "skipped";
         if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {
             // Save to DB
-            // Save to DB (Upsert to overwrite potential bad/empty data)
             try {
-                await Solution.findOneAndUpdate(
-                    { questionId: questionId },
-                    { 
-                        questionId: questionId,
-                        ...jsonResponse 
-                    },
-                    { upsert: true, new: true }
-                );
-                console.log(`Saved/Updated ${questionId} to MongoDB`);
+                await Solution.create({
+                    questionId: questionId,
+                    ...jsonResponse
+                });
+                console.log(`Saved ${questionId} to MongoDB`);
                 dbStatus = "success";
             } catch (saveErr) {
-                console.error("DB Save Error:", saveErr);
-                dbStatus = `error: ${saveErr.message}`;
+                // Ignore duplicate key error safely
+                if (saveErr.code === 11000) {
+                    dbStatus = "duplicate_skipped";
+                } else {
+                    console.error("DB Save Error:", saveErr);
+                    dbStatus = `error: ${saveErr.message}`;
+                }
             }
 
             // Save to File (Local Backup)
@@ -507,6 +515,60 @@ try {
 } catch (err) {
     console.error('Error loading companies.json:', err);
 }
+
+// Load Company Plans
+let companyPlans = {};
+try {
+    companyPlans = require('./data/company_plans.json');
+    console.log(`Loaded plans for ${Object.keys(companyPlans).length} companies.`);
+} catch (err) {
+    console.error('Error loading company_plans.json:', err);
+    companyPlans = {};
+}
+
+app.get('/api/company/:name/plan', async (req, res) => {
+    try {
+        const companyName = req.params.name.toLowerCase();
+        const plan = companyPlans[companyName];
+
+        if (!plan) {
+            return res.status(404).json({ error: 'Company plan not found' });
+        }
+
+        // Deep copy to avoid mutating cache
+        const enrichedPlan = JSON.parse(JSON.stringify(plan));
+
+        // Enriched DSA IDs with full video/problem objects
+        const levels = Object.keys(enrichedPlan);
+        
+        for (const level of levels) {
+            const levelData = enrichedPlan[level];
+            if (levelData.dsa_ids && levelData.dsa_ids.length > 0) {
+                const problems = await Promise.all(levelData.dsa_ids.map(async (id) => {
+                    // Find problem details from problemsDb
+                    const problemDetails = problemsDb.find(p => p.id === id) || { id, title: `Problem ${id}`, difficulty: 'Unknown' };
+                    
+                    // Fetch video
+                    const videos = await getOrFetchVideo(id, false); 
+                    
+                    return {
+                        ...problemDetails,
+                        video: (videos && videos.length > 0) ? videos[0] : null
+                    };
+                }));
+                levelData.problems = problems; // Attach enriched array
+            } else {
+                levelData.problems = [];
+            }
+        }
+
+        res.json({ company: companyName, plan: enrichedPlan });
+
+    } catch (err) {
+        console.error("Company Plan API Error:", err);
+        res.status(500).json({ error: 'Failed to fetch company plan' });
+    }
+});
 
 // Company Endpoint
 app.get('/api/company/:companyName', async (req, res) => {

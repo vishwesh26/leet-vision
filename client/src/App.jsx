@@ -125,6 +125,16 @@ function AppContent({ savedVideos, onToggleSave }) {
                   onChange={(e) => setNavbarSearch(e.target.value)}
                 />
               </form>
+
+              {/* Download Extension Button (Desktop Only) */}
+              <a
+                href="https://microsoftedge.microsoft.com/addons/detail/dogbidjabcbbhojhlnbfjilppgpenikb"
+                target="_blank"
+                rel="noreferrer"
+                className="download-extension-btn"
+              >
+                Download Extension
+              </a>
             </div>
 
             {/* Mobile Actions: Search Icon + Menu */}

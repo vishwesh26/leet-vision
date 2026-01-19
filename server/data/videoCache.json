@@ -868,5 +868,67 @@
     "publishedAt": "2021-02-03T15:30:03Z",
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=KT1iUciJr4g"
-  }
+  },
+  "237": [
+    {
+      "id": "icnp4FJdZ_c",
+      "questionId": "237",
+      "title": "Delete Node in a Linked List | Can you solve it ?",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/icnp4FJdZ_c/hqdefault.jpg",
+      "viewCount": 128359,
+      "likeCount": 3603,
+      "publishedAt": "2020-10-11T08:32:56Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=icnp4FJdZ_c"
+    },
+    {
+      "id": "TvLWOECe8mQ",
+      "questionId": "237",
+      "title": "Delete Node in a Linked List | Super Easy | Apple | Microsoft | Leetcode 237",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/TvLWOECe8mQ/hqdefault.jpg",
+      "viewCount": 41276,
+      "likeCount": 781,
+      "publishedAt": "2022-10-13T04:31:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=TvLWOECe8mQ"
+    },
+    {
+      "id": "urzP1YbgUnU",
+      "questionId": "237",
+      "title": "LeetCode 237. Delete Node in a Linked List Solution Explained - Java",
+      "channelTitle": "Nick White",
+      "thumbnail": "https://i.ytimg.com/vi/urzP1YbgUnU/hqdefault.jpg",
+      "viewCount": 30540,
+      "likeCount": 487,
+      "publishedAt": "2019-09-14T22:47:51Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=urzP1YbgUnU"
+    },
+    {
+      "id": "bJPmNKMtjdk",
+      "questionId": "237",
+      "title": "Delete Node in a Linked List | Leetcode #237",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/bJPmNKMtjdk/hqdefault.jpg",
+      "viewCount": 29094,
+      "likeCount": 389,
+      "publishedAt": "2020-06-02T13:15:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=bJPmNKMtjdk"
+    },
+    {
+      "id": "ikBPtxW_v6U",
+      "questionId": "237",
+      "title": "237. Delete Node in a Linked List || Java || Leetcode || Hindi",
+      "channelTitle": "Coding Sphere",
+      "thumbnail": "https://i.ytimg.com/vi/ikBPtxW_v6U/hqdefault.jpg",
+      "viewCount": 6800,
+      "likeCount": 128,
+      "publishedAt": "2023-08-21T02:37:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ikBPtxW_v6U"
+    }
+  ]
 }

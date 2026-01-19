@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaPlayCircle, FaChartLine, FaBuilding, FaCode, FaArrowRight } from 'react-icons/fa';
+import { FaPlayCircle, FaChartLine, FaBuilding, FaCode, FaArrowRight, FaTimes } from 'react-icons/fa';
 import SEO from './SEO';
 
 const LandingPage = () => {
+    const [showNote, setShowNote] = useState(true);
+
     return (
         <>
             <SEO title="LeetVision - Visual Coding Preparation Platform" description="Master Data Structures and Algorithms with curated video solutions, company-specific plans, and progress tracking." path="/" />
@@ -56,6 +58,23 @@ const LandingPage = () => {
                     z-index: 0;
                     pointer-events: none;
                 }
+
+                @keyframes bounceIn {
+                    0% { opacity: 0; transform: translateY(-20px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+
+                .sticky-note-arrow {
+                    position: absolute;
+                    top: -15px;
+                    right: 40px;
+                    width: 0; 
+                    height: 0; 
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 15px solid rgba(30, 30, 30, 0.95);
+                }
+
             `}</style>
 
             <div className="landing-container" style={{ background: '#050505', minHeight: '100vh', color: 'white', overflowX: 'hidden', position: 'relative' }}>
@@ -65,6 +84,93 @@ const LandingPage = () => {
                     <div className="premium-grid-bg" style={{ position: 'absolute', inset: 0 }}></div>
                     <div className="glow-spotlight"></div>
                 </div>
+
+                {/* Sticky Note for Extension (Desktop Only) */}
+                {showNote && (
+                    <div className="desktop-only" style={{
+                        position: 'fixed',
+                        top: '80px', /* Moved down slightly */
+                        right: '15px', /* Moved right to align with button edge */
+                        width: '240px', /* Smaller width */
+                        background: '#111',
+                        border: '1px solid var(--accent-orange)',
+                        color: '#eee',
+                        padding: '1rem 1rem 1rem 1.5rem', /* Extra left padding for close btn? No, absolute positioning. */
+                        zIndex: 1000,
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                        animation: 'bounceIn 0.8s ease-out forwards 0.5s',
+                        opacity: 0,
+                        fontFamily: '"Caveat", cursive',
+                        transform: 'rotate(-2deg)',
+                        borderRadius: '2px 2px 20px 2px',
+                    }}>
+                        {/* Close Button (Left Side) */}
+                        <div
+                            onClick={() => setShowNote(false)}
+                            style={{
+                                position: 'absolute',
+                                top: '5px',
+                                left: '5px',
+                                cursor: 'pointer',
+                                color: '#666',
+                                transition: 'color 0.2s',
+                                zIndex: 10,
+                                padding: '2px'
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-orange)'}
+                            onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
+                            title="Close Note"
+                        >
+                            <FaTimes size={12} />
+                        </div>
+
+                        {/* Shadow for folded corner */}
+                        <div style={{
+                            content: '""',
+                            position: 'absolute',
+                            bottom: '15px',
+                            right: '5px',
+                            width: '20px', /* Smaller fold */
+                            height: '20px',
+                            background: 'linear-gradient(135deg, transparent 50%, rgba(255, 161, 22, 0.2) 50%)',
+                            zIndex: -1,
+                        }}></div>
+
+                        {/* Arrow pointing up (Dark) - Aligned to button center approx */}
+                        <div style={{
+                            position: 'absolute',
+                            top: '-15px',
+                            left: '20px', /* Moved to Left */
+                            width: '0',
+                            height: '0',
+                            borderLeft: '10px solid transparent', /* Smaller arrow */
+                            borderRight: '10px solid transparent',
+                            borderBottom: '15px solid var(--accent-orange)',
+                        }}></div>
+                        <div style={{
+                            position: 'absolute',
+                            top: '-13px',
+                            left: '20px', /* Moved to Left */
+                            width: '0',
+                            height: '0',
+                            borderLeft: '10px solid transparent',
+                            borderRight: '10px solid transparent',
+                            borderBottom: '15px solid #111',
+                        }}></div>
+
+                        <h4 style={{ margin: '0 0 0.25rem', fontWeight: '700', fontSize: '1.4rem', lineHeight: '1', color: 'var(--accent-orange)' }}>
+                            Hey There! 👋
+                        </h4>
+                        <p style={{ margin: 0, fontSize: '1.1rem', lineHeight: '1.2', fontWeight: '500' }}>
+                            Download the extension to watch video solutions directly on the <strong>LeetCode website itself</strong>!
+                            <br />
+                            <span style={{ fontSize: '0.9rem', color: '#ff6b6b', fontWeight: 'bold' }}>* Compatible with Edge Browser only</span>
+                            <span style={{ display: 'block', marginTop: '5px', fontSize: '1rem', color: '#888' }}>
+                                &uarr; Click the button to get started!
+                            </span>
+                        </p>
+                    </div>
+                )}
 
                 {/* Hero Section */}
                 <section style={{
