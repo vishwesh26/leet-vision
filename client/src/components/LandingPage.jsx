@@ -343,7 +343,7 @@ const LandingPage = () => {
 
                 {/* Footer */}
                 <footer style={{ padding: '3rem 2rem', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', color: '#555', position: 'relative', zIndex: 1 }}>
-                    <p style={{ marginBottom: '0.5rem' }}>&copy; 2026 LeetVision. Built for developers, by developers.</p>
+                    <p style={{ marginBottom: '0.5rem' }}>&copy; 2026 Vishwesh Shinde. All Rights Reserved.</p>
                     <p style={{ fontSize: '0.8rem' }}>Helping you clear the noise and focus on the code.</p>
                 </footer>
 
