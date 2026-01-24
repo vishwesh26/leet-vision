@@ -405,9 +405,15 @@ app.get('/api/solution/:questionId', async (req, res) => {
                 if (dbSolution && dbSolution.approaches && dbSolution.approaches.length > 0) {
                     console.log(`Solution DB HIT for ${questionId}`);
                     const problemEntry = problemsDb.find(p => p.id === questionId);
+                    
+                    // Fetch Video
+                    const videos = await getOrFetchVideo(questionId);
+                    const topVideo = videos.find(v => v.isMostAccurate) || videos[0];
+
                     return res.json({ 
                         ...dbSolution.toObject(), 
                         slug: problemEntry ? problemEntry.slug : null,
+                        video: topVideo,
                         source: 'database' 
                     });
                 } else if (dbSolution) {
@@ -445,9 +451,15 @@ app.get('/api/solution/:questionId', async (req, res) => {
                     }
                     
                     const problemEntry = problemsDb.find(p => p.id === questionId);
+                    
+                    // Fetch Video
+                    const videos = await getOrFetchVideo(questionId);
+                    const topVideo = videos.find(v => v.isMostAccurate) || videos[0];
+
                     return res.json({ 
                         ...cachedData, 
                         slug: problemEntry ? problemEntry.slug : null,
+                        video: topVideo,
                         source: 'local_file_cache_migrated' 
                     });
                 }
@@ -566,11 +578,17 @@ app.get('/api/solution/:questionId', async (req, res) => {
              return res.status(500).json({ error: "Incomplete AI Data" });
         }
 
-        // 5. Enrich with slug from problemsDb for the Practice link
+        // 5. Enrich with slug and video
         const problemEntry = problemsDb.find(p => p.id === questionId);
+        
+        // Fetch Video
+        const videos = await getOrFetchVideo(questionId);
+        const topVideo = videos.find(v => v.isMostAccurate) || videos[0];
+
         const enrichedResponse = { 
             ...jsonResponse, 
             slug: problemEntry ? problemEntry.slug : null,
+            video: topVideo,
             source: 'ai-generated', 
             dbStatus: dbStatus 
         };
