@@ -474,9 +474,13 @@ const connectDB = async () => {
 const solutionSchema = new mongoose.Schema({
     questionId: { type: String, required: true, unique: true },
     title: String,
+    difficulty: String,
+    topics: Array,
     problemStatement: String,
+    analyticalOverview: String,
     examples: Array,
-    approaches: Array, // Stores the complex array of objects
+    complexityTable: Array,
+    approaches: Array,
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -559,7 +563,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         
         const prompt = `
-        You are an expert DSA coding tutor. Generate a comprehensive solution guide for LeetCode question "${questionId}".
+        You are an expert DSA coding tutor. Generate a comprehensive article-style solution guide for LeetCode question "${questionId}".
         
         Structure the response efficiently as a JSON object.
         
@@ -567,38 +571,51 @@ app.get('/api/solution/:questionId', async (req, res) => {
         {
           "questionId": "${questionId}",
           "title": "Problem Title",
-          "problemStatement": "Concise problem description...",
+          "difficulty": "Easy, Medium, or Hard",
+          "topics": ["Topic1", "Topic2"],
+          "problemStatement": "Full problem description...",
+          "analyticalOverview": "A deep-dive explanation (2-3 paragraphs) of the problem logic, insights, and the core intuition behind the solutions.",
           "examples": [
              { "input": "...", "output": "...", "explanation": "..." }
           ],
+          "complexityTable": [
+             { "method": "Naive", "time": "O(...)", "space": "O(...)" },
+             { "method": "Better", "time": "O(...)", "space": "O(...)" },
+             { "method": "Best", "time": "O(...)", "space": "O(...)" }
+          ],
           "approaches": [
              {
-               "name": "Brute Force Approach",
-               "algorithm": ["Step 1...", "Step 2..."],
+               "name": "Naive Approach",
+               "concept": "Quick explanation of this specific approach...",
+               "steps": ["Step 1...", "Step 2..."],
                "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
-             },
-             {
-               "name": "Better Approach",
-               "algorithm": ["Step 1...", "Step 2..."],
-               "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
+               "codes": {
+                  "cpp": "...",
+                  "java": "...",
+                  "python": "...",
+                  "javascript": "..."
+               }
              },
              {
                "name": "Optimal Approach",
-               "algorithm": ["Step 1...", "Step 2..."],
+               "concept": "Quick explanation of this specific approach...",
+               "steps": ["Step 1...", "Step 2..."],
                "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "cpp": "...", "java": "...", "python": "...", "javascript": "..." }
+               "codes": {
+                  "cpp": "...",
+                  "java": "...",
+                  "python": "...",
+                  "javascript": "..."
+               }
              }
           ]
         }
 
         Rules:
         1. Return ONLY valid JSON. No markdown formatting.
-        2. MUST Provide exactly 3 approaches if possible: "Brute Force", "Better", and "Optimal".
-           - If "Better" and "Optimal" are effectively the same, you can skip "Better".
-           - Always provide at least "Brute Force" and "Optimal".
-        3. "algorithm" should be an array of strings (bullet points).
+        2. Provide at least "Naive" and "Optimal". If there is a middle ground, provide "Better".
+        3. "steps" should be an array of strings (bullet points).
+        4. In the complexityTable, use standard Big O notation.
         `;
 
         const result = await model.generateContent(prompt);
