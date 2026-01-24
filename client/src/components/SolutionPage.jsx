@@ -130,11 +130,11 @@ const SolutionPage = () => {
                             {data.examples?.map((ex, idx) => (
                                 <div key={idx} style={{ background: '#111', borderRadius: '12px', border: '1px solid #222', padding: '1.5rem' }}>
                                     <div style={{ color: '#f57c00', fontWeight: 700, marginBottom: '0.5rem', fontSize: '0.8rem', textTransform: 'uppercase' }}>Example {idx + 1}</div>
-                                    <pre style={{ margin: 0, color: '#ddd', fontSize: '0.95rem' }}>
+                                    <div style={{ margin: 0, color: '#ddd', fontSize: '0.95rem', whiteSpace: 'pre-wrap', wordBreak: 'break-word', lineHeight: 1.6 }}>
                                         <strong>Input:</strong> {ex.input}<br />
                                         <strong>Output:</strong> {ex.output}<br />
                                         {ex.explanation && <><strong>Explanation:</strong> {ex.explanation}</>}
-                                    </pre>
+                                    </div>
                                 </div>
                             ))}
                         </div>

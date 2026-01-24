@@ -1055,6 +1055,68 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=KT1iUciJr4g"
   },
+  "121": [
+    {
+      "id": "1pkOgXD63yU",
+      "questionId": "121",
+      "title": "Sliding Window: Best Time to Buy and Sell Stock - Leetcode 121 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/1pkOgXD63yU/hqdefault.jpg",
+      "viewCount": 1014550,
+      "likeCount": 18418,
+      "publishedAt": "2020-12-18T15:30:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=1pkOgXD63yU"
+    },
+    {
+      "id": "WBzZCm46mFo",
+      "questionId": "121",
+      "title": "Buy and Sell Stock Problem and Pow(X,N) Power exponential Problem - Leetcode | DSA Series",
+      "channelTitle": "Apna College",
+      "thumbnail": "https://i.ytimg.com/vi/WBzZCm46mFo/hqdefault.jpg",
+      "viewCount": 381088,
+      "likeCount": 6675,
+      "publishedAt": "2024-09-20T15:32:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=WBzZCm46mFo"
+    },
+    {
+      "id": "E2-heUEnZKU",
+      "questionId": "121",
+      "title": "Best Time To Buy & Sell Stock 1 (LeetCode 121) | Full solution with visuals and animation",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/E2-heUEnZKU/hqdefault.jpg",
+      "viewCount": 70952,
+      "likeCount": 2071,
+      "publishedAt": "2022-11-27T12:30:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=E2-heUEnZKU"
+    },
+    {
+      "id": "kJZrMGpyWpk",
+      "questionId": "121",
+      "title": "Best Time to Buy and Sell Stock - Leetcode 121 - Arrays & Strings (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/kJZrMGpyWpk/hqdefault.jpg",
+      "viewCount": 39958,
+      "likeCount": 855,
+      "publishedAt": "2024-06-19T21:10:37Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=kJZrMGpyWpk"
+    },
+    {
+      "id": "jQDIeuMIPGI",
+      "questionId": "121",
+      "title": "Best Time to Buy and Sell Stock | Leetcode 121 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/jQDIeuMIPGI/hqdefault.jpg",
+      "viewCount": 11656,
+      "likeCount": 227,
+      "publishedAt": "2025-02-07T17:21:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jQDIeuMIPGI"
+    }
+  ],
   "198": [
     {
       "id": "73r3KWiEvyk",
