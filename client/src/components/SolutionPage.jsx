@@ -12,6 +12,7 @@ const SolutionPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [activeLangs, setActiveLangs] = useState({});
+    const [expandedApproaches, setExpandedApproaches] = useState({});
     const [videoVisible, setVideoVisible] = useState(false);
 
     // Refs for smooth scroll
@@ -46,6 +47,10 @@ const SolutionPage = () => {
         if (ref.current) {
             ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+    };
+
+    const toggleApproach = (index) => {
+        setExpandedApproaches(prev => ({ ...prev, [index]: !prev[index] }));
     };
 
     const handleLangChange = (approachIndex, lang) => {
@@ -182,42 +187,63 @@ const SolutionPage = () => {
                         <h2 style={{ fontSize: '1.5rem', color: '#fff', borderLeft: '4px solid #f57c00', paddingLeft: '1rem', marginBottom: '2rem' }}>Approach Breakdown:</h2>
                         {approaches.map((appr, idx) => {
                             const currentLang = activeLangs[idx] || 'python';
+                            const isExpanded = expandedApproaches[idx];
                             return (
-                                <article key={idx} style={{ background: '#111', borderRadius: '24px', border: '1px solid #222', padding: '2.5rem', marginBottom: '3rem' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                        <div style={{ background: '#f57c00', color: '#000', padding: '0.4rem 1rem', borderRadius: '6px', fontWeight: 800, fontSize: '0.8rem' }}>{idx + 1}</div>
-                                        <h3 style={{ margin: 0, color: '#fff', fontSize: '1.4rem' }}>{appr.name}</h3>
-                                    </div>
-
-                                    <p style={{ color: '#aaa', lineHeight: 1.7, marginBottom: '2rem' }}>{appr.concept}</p>
-
-                                    <div style={{ marginBottom: '2rem' }}>
-                                        <h4 style={{ color: '#fff', fontSize: '1rem', marginBottom: '1rem' }}>Algorithm Steps:</h4>
-                                        <ol style={{ color: '#999', lineHeight: 1.8, paddingLeft: '1.2rem' }}>
-                                            {(appr.steps || appr.algorithm)?.map((step, sIdx) => <li key={sIdx} style={{ marginBottom: '0.5rem' }}>{step}</li>)}
-                                        </ol>
-                                    </div>
-
-                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2.5rem' }}>
-                                        <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '12px', border: '1px solid #222', textAlign: 'center' }}>
-                                            <div style={{ color: '#666', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Time Complexity</div>
-                                            <div style={{ color: '#f57c00', fontSize: '1.2rem', fontWeight: 700, fontFamily: 'monospace' }}>{appr.complexity?.time}</div>
+                                <article key={idx} style={{ background: '#111', borderRadius: '24px', border: '1px solid #222', marginBottom: '1.5rem', overflow: 'hidden' }}>
+                                    <button
+                                        onClick={() => toggleApproach(idx)}
+                                        style={{
+                                            width: '100%',
+                                            padding: '2rem 2.5rem',
+                                            background: '#161616',
+                                            border: 'none',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            cursor: 'pointer',
+                                            textAlign: 'left'
+                                        }}
+                                    >
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                            <div style={{ background: isExpanded ? '#f57c00' : '#333', color: isExpanded ? '#000' : '#fff', width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '0.9rem', transition: '0.3s' }}>{idx + 1}</div>
+                                            <h3 style={{ margin: 0, color: '#fff', fontSize: '1.4rem', fontWeight: 700 }}>{appr.name}</h3>
                                         </div>
-                                        <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '12px', border: '1px solid #222', textAlign: 'center' }}>
-                                            <div style={{ color: '#666', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Space Complexity</div>
-                                            <div style={{ color: '#f57c00', fontSize: '1.2rem', fontWeight: 700, fontFamily: 'monospace' }}>{appr.complexity?.space}</div>
-                                        </div>
-                                    </div>
+                                        {isExpanded ? <IoIosArrowUp color="#f57c00" size={24} /> : <IoIosArrowDown color="#888" size={24} />}
+                                    </button>
 
-                                    {/* Code Tabs */}
-                                    <div style={{ background: '#000', borderRadius: '16px', border: '1px solid #333', overflow: 'hidden' }}>
-                                        <div style={{ display: 'flex', background: '#0f0f0f', padding: '0 1rem', borderBottom: '1px solid #252525', overflowX: 'auto' }}>
-                                            {['cpp', 'java', 'python', 'javascript'].map(l => (
-                                                <button key={l} onClick={() => handleLangChange(idx, l)} style={{ background: 'transparent', border: 'none', padding: '1rem 1.5rem', color: currentLang === l ? '#fff' : '#555', cursor: 'pointer', borderBottom: currentLang === l ? '2px solid #f57c00' : '2px solid transparent', textTransform: 'capitalize', fontWeight: currentLang === l ? 700 : 400 }}>{l === 'cpp' ? 'C++' : l}</button>
-                                            ))}
+                                    {isExpanded && (
+                                        <div style={{ padding: '0 2.5rem 2.5rem 2.5rem', borderTop: '1px solid #222' }}>
+                                            <p style={{ color: '#aaa', lineHeight: 1.7, margin: '2rem 0' }}>{appr.concept}</p>
+
+                                            <div style={{ marginBottom: '2rem' }}>
+                                                <h4 style={{ color: '#fff', fontSize: '1rem', marginBottom: '1rem' }}>Algorithm Steps:</h4>
+                                                <ol style={{ color: '#999', lineHeight: 1.8, paddingLeft: '1.2rem' }}>
+                                                    {(appr.steps || appr.algorithm)?.map((step, sIdx) => <li key={sIdx} style={{ marginBottom: '0.5rem' }}>{step}</li>)}
+                                                </ol>
+                                            </div>
+
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2.5rem' }}>
+                                                <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '12px', border: '1px solid #222', textAlign: 'center' }}>
+                                                    <div style={{ color: '#666', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Time Complexity</div>
+                                                    <div style={{ color: '#f57c00', fontSize: '1.2rem', fontWeight: 700, fontFamily: 'monospace' }}>{appr.complexity?.time}</div>
+                                                </div>
+                                                <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '12px', border: '1px solid #222', textAlign: 'center' }}>
+                                                    <div style={{ color: '#666', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Space Complexity</div>
+                                                    <div style={{ color: '#f57c00', fontSize: '1.2rem', fontWeight: 700, fontFamily: 'monospace' }}>{appr.complexity?.space}</div>
+                                                </div>
+                                            </div>
+
+                                            {/* Code Tabs */}
+                                            <div style={{ background: '#000', borderRadius: '16px', border: '1px solid #333', overflow: 'hidden' }}>
+                                                <div style={{ display: 'flex', background: '#0f0f0f', padding: '0 1rem', borderBottom: '1px solid #252525', overflowX: 'auto' }}>
+                                                    {['cpp', 'java', 'python', 'javascript'].map(l => (
+                                                        <button key={l} onClick={(e) => { e.stopPropagation(); handleLangChange(idx, l); }} style={{ background: 'transparent', border: 'none', padding: '1rem 1.5rem', color: currentLang === l ? '#fff' : '#555', cursor: 'pointer', borderBottom: currentLang === l ? '2px solid #f57c00' : '2px solid transparent', textTransform: 'capitalize', fontWeight: currentLang === l ? 700 : 400 }}>{l === 'cpp' ? 'C++' : l}</button>
+                                                    ))}
+                                                </div>
+                                                <SyntaxHighlighter language={currentLang} style={vscDarkPlus} customStyle={{ margin: 0, padding: '2rem', fontSize: '0.9rem', lineHeight: 1.6, background: 'transparent' }} showLineNumbers>{appr.codes?.[currentLang] || '// Loading code...'}</SyntaxHighlighter>
+                                            </div>
                                         </div>
-                                        <SyntaxHighlighter language={currentLang} style={vscDarkPlus} customStyle={{ margin: 0, padding: '2rem', fontSize: '0.9rem', lineHeight: 1.6, background: 'transparent' }} showLineNumbers>{appr.codes?.[currentLang] || '// Loading code...'}</SyntaxHighlighter>
-                                    </div>
+                                    )}
                                 </article>
                             )
                         })}
