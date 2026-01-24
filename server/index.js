@@ -404,7 +404,12 @@ app.get('/api/solution/:questionId', async (req, res) => {
                 const dbSolution = await Solution.findOne({ questionId });
                 if (dbSolution && dbSolution.approaches && dbSolution.approaches.length > 0) {
                     console.log(`Solution DB HIT for ${questionId}`);
-                    return res.json({ ...dbSolution.toObject(), source: 'database' });
+                    const problemEntry = problemsDb.find(p => p.id === questionId);
+                    return res.json({ 
+                        ...dbSolution.toObject(), 
+                        slug: problemEntry ? problemEntry.slug : null,
+                        source: 'database' 
+                    });
                 } else if (dbSolution) {
                     console.warn(`DB HIT for ${questionId} but data incomplete (empty approaches). Regenerating...`);
                 }
@@ -439,7 +444,12 @@ app.get('/api/solution/:questionId', async (req, res) => {
                         }
                     }
                     
-                    return res.json({ ...cachedData, source: 'local_file_cache_migrated' });
+                    const problemEntry = problemsDb.find(p => p.id === questionId);
+                    return res.json({ 
+                        ...cachedData, 
+                        slug: problemEntry ? problemEntry.slug : null,
+                        source: 'local_file_cache_migrated' 
+                    });
                 }
             } catch (err) { console.error('File Cache Read Error:', err); }
         }
@@ -556,11 +566,16 @@ app.get('/api/solution/:questionId', async (req, res) => {
              return res.status(500).json({ error: "Incomplete AI Data" });
         }
 
-        return res.json({ 
+        // 5. Enrich with slug from problemsDb for the Practice link
+        const problemEntry = problemsDb.find(p => p.id === questionId);
+        const enrichedResponse = { 
             ...jsonResponse, 
+            slug: problemEntry ? problemEntry.slug : null,
             source: 'ai-generated', 
             dbStatus: dbStatus 
-        });
+        };
+
+        return res.json(enrichedResponse);
 
         return res.json({ ...jsonResponse, source: 'ai_generated' });
 
