@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync-topics": "node scripts/sync_topics.js",
+    "sync-news": "node scripts/sync_news.js",
+    "dev": "nodemon index.js",
+    "generate-sitemap": "node scripts/generate_sitemap.js"
   },
   "keywords": [],
   "author": "Vishwesh Shinde",
@@ -17,6 +21,10 @@
     "express": "^5.2.1",
     "json5": "^2.2.3",
     "mongoose": "^8.21.0",
-    "node-cache": "^5.1.2"
+    "node-cache": "^5.1.2",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }

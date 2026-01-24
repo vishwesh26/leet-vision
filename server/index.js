@@ -165,41 +165,75 @@ app.get('/api/search/:questionId', async (req, res) => {
     return res.status(404).json({ error: 'No video found' });
 });
 
+// Curated Top 100 Liked Questions List
+const TOP_100_IDS = [
+  1, 2, 3, 4, 5, 10, 11, 15, 17, 19, 20, 21, 22, 23, 31, 32, 33, 34, 35, 39,
+  41, 42, 46, 48, 49, 53, 55, 56, 62, 64, 70, 72, 75, 76, 78, 79, 84, 85, 94, 96, 98,
+  101, 102, 104, 105, 114, 121, 124, 128, 136, 139, 141, 142, 146, 148, 152, 155, 160, 169, 198,
+  200, 206, 207, 208, 215, 221, 226, 234, 236, 238, 239, 240, 253, 279, 283, 287, 295, 297, 300, 
+  301, 309, 322, 337, 338, 347, 394, 399, 406, 416, 437, 438, 448, 494, 543, 560, 581, 617, 647, 739
+];
+
+// Curated Blind 75 List
+const BLIND_75_IDS = [
+  1, 121, 217, 238, 15, 11, 153, 33, 3, 424, 76, 242, 49, 20, 125, 5, 647, 198, 213, 300, 322, 
+  139, 1143, 62, 190, 191, 338, 268, 371, 54, 48, 73, 206, 21, 143, 19, 141, 23, 104, 100, 226, 
+  102, 572, 98, 230, 235, 105, 211, 208, 252, 253, 435, 56, 57, 269, 200, 133, 417, 207, 210, 
+  261, 323, 212, 79, 347, 39, 128, 295
+];
+
 // List Endpoint
 app.get('/api/list/:type', async (req, res) => {
     try {
         const { type } = req.params;
-        const { difficulty, param } = req.query; // param can be topic, company
+        const { difficulty, param, page = 1, limit = 20 } = req.query;
 
         let filtered = [];
+        
+        // Ensure problemsDb is available
+        if (!Array.isArray(problemsDb)) problemsDb = [];
 
         if (type === 'top-100') {
-            // Just return first 100 of our DB for now
-            filtered = problemsDb.slice(0, 100);
+            // Strictly use the curated list
+            filtered = problemsDb.filter(p => TOP_100_IDS.includes(parseInt(p.id)));
+             // Ensure they are sorted by ID (Ascending)
+            filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
         } else if (type === 'blind-75') {
-            // Assume our DB IS the curated list for now, or filter by specific IDs if we had a separate list
-            filtered = problemsDb.slice(0, 75); 
+            // Use Curated Blind 75 List (Fixed Sequence)
+            filtered = problemsDb.filter(p => BLIND_75_IDS.includes(parseInt(p.id)));
+            // Sort by order in BLIND_75_IDS
+            filtered.sort((a, b) => {
+                return BLIND_75_IDS.indexOf(parseInt(a.id)) - BLIND_75_IDS.indexOf(parseInt(b.id));
+            });
         } else if (type === 'difficulty') {
-            // Ensure problemsDb is an array before filtering
-            if (!Array.isArray(problemsDb)) problemsDb = [];
             filtered = problemsDb.filter(p => p.difficulty === difficulty);
+            filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
         } else if (type === 'topic') {
             const topic = param || difficulty; // Sometimes passed as param
-            if (!topic) return res.json([]);
-            if (!Array.isArray(problemsDb)) problemsDb = [];
+            if (!topic) return res.json({ data: [], hasMore: false });
             filtered = problemsDb.filter(p => p.topics.some(t => t.toLowerCase() === topic.toLowerCase()));
+            filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
         } else if (type === 'company') {
-            // Placeholder
-            filtered = problemsDb.slice(0, 20);
+            // Placeholder - just take first 50 for now
+            filtered = problemsDb.slice(0, 50);
+            filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
         } else {
-            filtered = problemsDb;
+            // Default / All
+            filtered = [...problemsDb];
+            filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
         }
 
-        // Limit size to prevent massive payloads if something goes wrong
-        filtered = filtered.slice(0, 100);
+        // Pagination Logic
+        const pageNum = parseInt(page) || 1;
+        const limitNum = parseInt(limit) || 20;
+        const startIndex = (pageNum - 1) * limitNum;
+        const endIndex = startIndex + limitNum;
+
+        const total = filtered.length;
+        const paginatedItems = filtered.slice(startIndex, endIndex);
 
         // Attach Video Data (Only cached)
-        const results = await Promise.all(filtered.map(async (problem) => {
+        const results = await Promise.all(paginatedItems.map(async (problem) => {
             try {
                 const videos = await getOrFetchVideo(problem.id, false); // FALSE = Do NOT live fetch
                 return {
@@ -212,7 +246,14 @@ app.get('/api/list/:type', async (req, res) => {
             }
         }));
         
-        res.json(results);
+        // Return Object with Metadata for Frontend "Load More"
+        res.json({
+            data: results,
+            total: total,
+            page: pageNum,
+            limit: limitNum,
+            hasMore: endIndex < total
+        });
     } catch (err) {
         console.error('API/List Error:', err);
         res.status(500).json({ error: 'Internal Server Error', details: err.message });
@@ -321,7 +362,7 @@ const connectDB = async () => {
     }
 };
 
-// Define Schema
+// Define Solution Schema
 const solutionSchema = new mongoose.Schema({
     questionId: { type: String, required: true, unique: true },
     title: String,
@@ -331,8 +372,22 @@ const solutionSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// Get Model (prevent overwrite error during hot reload)
+// Define Article Schema for Tech News
+const articleSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    slug: { type: String, required: true, unique: true },
+    summary: String,
+    content: String,
+    category: String,
+    publishedDate: { type: Date, default: Date.now },
+    source: String,
+    originalLink: String,
+    createdAt: { type: Date, default: Date.now }
+});
+
+// Get Models
 const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
+const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
 
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
@@ -391,7 +446,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         }
 
         console.log(`Generating Solution for ${questionId}...`);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a comprehensive solution guide for LeetCode question "${questionId}".
@@ -626,12 +681,73 @@ app.get('/api/company/:companyName', async (req, res) => {
     res.json(results);
 });
 
+// Articles APIs
+app.get('/api/articles', async (req, res) => {
+    try {
+        await connectDB();
+        const { category, limit = 10, skip = 0 } = req.query;
+        
+        const query = category ? { category } : {};
+        const articles = await Article.find(query)
+            .sort({ publishedDate: -1 })
+            .limit(parseInt(limit))
+            .skip(parseInt(skip));
+            
+        res.json(articles);
+    } catch (err) {
+        console.error("Fetch Articles Error:", err);
+        res.status(500).json({ error: 'Failed to fetch articles' });
+    }
+});
 
-// Vercel requires exporting the app
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-}
+app.get('/api/articles/:slug', async (req, res) => {
+    try {
+        await connectDB();
+        const { slug } = req.params;
+        const article = await Article.findOne({ slug });
+        
+        if (!article) {
+            return res.status(404).json({ error: 'Article not found' });
+        }
+        
+        res.json(article);
+    } catch (err) {
+        console.error("Fetch Article Detail Error:", err);
+        res.status(500).json({ error: 'Failed to fetch article details' });
+    }
+});
+
+// Daily Challenge API
+app.get('/api/daily-challenge', (req, res) => {
+    try {
+        if (!problemsDb || problemsDb.length === 0) {
+            return res.status(500).json({ error: 'Problems database not loaded' });
+        }
+
+        // Use a deterministic index based on the current date
+        const today = new Date();
+        const startOfYear = new Date(today.getUTCFullYear(), 0, 0);
+        const diff = today - startOfYear;
+        const oneDay = 1000 * 60 * 60 * 24;
+        const dayOfYear = Math.floor(diff / oneDay);
+
+        // Pick problem based on day of year
+        const index = dayOfYear % problemsDb.length;
+        const dailyProblem = problemsDb[index];
+
+        res.json(dailyProblem);
+    } catch (err) {
+        console.error("Daily Challenge API Error:", err);
+        res.status(500).json({ error: 'Failed to fetch daily challenge' });
+    }
+});
+
+// Start Server
+const server = app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+// Keep process alive (deployment/environment fix)
+setInterval(() => {}, 60000);
 
 module.exports = app;

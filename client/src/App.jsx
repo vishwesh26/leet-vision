@@ -20,12 +20,18 @@ import ProgressPage from './components/ProgressPage';
 import CompanyPage from './components/CompanyPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import SolutionPage from './components/SolutionPage';
+import About from './components/About';
+import HowItWorks from './components/HowItWorks';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import Terms from './components/Terms';
+import Contact from './components/Contact';
+import BlogList from './components/BlogList';
+import BlogPost from './components/BlogPost';
+import DailyTechPage from './components/DailyTechPage';
 
 function AppContent({ savedVideos, onToggleSave }) {
   // Helper to close mobile menu or handle extensive nav logic if needed
 
-  // Navbar Search Logic
-  const [navbarSearch, setNavbarSearch] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile Menu State
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,14 +39,6 @@ function AppContent({ savedVideos, onToggleSave }) {
   // Context
   const { leetcodeUsername, disconnect, syncWithLeetCode, isSyncing } = useSolved();
   const [showConnectModal, setShowConnectModal] = useState(false);
-  const [showMobileSearch, setShowMobileSearch] = useState(false);
-
-  const handleNavbarSearch = (e) => {
-    e.preventDefault();
-    if (navbarSearch.trim()) {
-      navigate(`/search/${navbarSearch}`);
-    }
-  };
 
   // Determine if we should show 'has-results' style (solid background) on navbar
   // If not on Home OR if on Home but scrolled down (handled by CSS sticky? No, original had JS Logic)
@@ -54,117 +52,87 @@ function AppContent({ savedVideos, onToggleSave }) {
 
       {showConnectModal && <ConnectModal onClose={() => setShowConnectModal(false)} />}
 
-      {/* Navbar */}
       <nav className={`navbar ${navbarClass}`}>
+        <div className="logo" onClick={() => navigate('/')}>
+          Leet<span>Vision</span>
+        </div>
 
-        {/* Mobile Search Overlay Mode */}
-        {showMobileSearch ? (
-          <form onSubmit={(e) => { handleNavbarSearch(e); setShowMobileSearch(false); }} className="nav-search-mobile-active">
-            <input
-              autoFocus
-              type="text"
-              placeholder="Search Question #..."
-              value={navbarSearch}
-              onChange={(e) => setNavbarSearch(e.target.value)}
-            />
-            <button type="button" onClick={() => setShowMobileSearch(false)} className="close-search-btn">
-              <FaTimes />
-            </button>
-          </form>
-        ) : (
-          <>
-            <div className="logo" onClick={() => navigate('/')}>
-              Leet<span>Vision</span>
-            </div>
+        <div className="nav-center">
+          <ul className="nav-links">
+            <li className="nav-item"><Link to="/top-100-leetcode" style={{ color: 'inherit', textDecoration: 'none' }}>Top 100</Link></li>
+            <li className="nav-item"><Link to="/blind-75" style={{ color: 'inherit', textDecoration: 'none' }}>Blind 75</Link></li>
+            <li className="nav-item dropdown">
+              Difficulty ▾
+              <div className="dropdown-content">
+                <div><Link to="/leetcode-easy" style={{ color: 'inherit', textDecoration: 'none' }}>Easy</Link></div>
+                <div><Link to="/leetcode-medium" style={{ color: 'inherit', textDecoration: 'none' }}>Medium</Link></div>
+                <div><Link to="/leetcode-hard" style={{ color: 'inherit', textDecoration: 'none' }}>Hard</Link></div>
+              </div>
+            </li>
+            <li className="nav-item dropdown">
+              Topics ▾
+              <div className="dropdown-content">
+                <div><Link to="/topics/array" style={{ color: 'inherit', textDecoration: 'none' }}>Arrays</Link></div>
+                <div><Link to="/topics/Dynamic Programming" style={{ color: 'inherit', textDecoration: 'none' }}>DP</Link></div>
+                <div><Link to="/topics/string" style={{ color: 'inherit', textDecoration: 'none' }}>Strings</Link></div>
+                <div><Link to="/topics/tree" style={{ color: 'inherit', textDecoration: 'none' }}>Trees</Link></div>
+                <div><Link to="/topics/graph" style={{ color: 'inherit', textDecoration: 'none' }}>Graphs</Link></div>
+              </div>
+            </li>
+            <li className="nav-item"><Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link></li>
+            <li className="nav-item dropdown">
+              Companies ▾
+              <div className="dropdown-content">
+                <div><Link to="/company/google" style={{ color: 'inherit', textDecoration: 'none' }}>Google</Link></div>
+                <div><Link to="/company/microsoft" style={{ color: 'inherit', textDecoration: 'none' }}>Microsoft</Link></div>
+                <div><Link to="/company/amazon" style={{ color: 'inherit', textDecoration: 'none' }}>Amazon</Link></div>
+                <div><Link to="/company/meta" style={{ color: 'inherit', textDecoration: 'none' }}>Meta</Link></div>
+                <div><Link to="/company/apple" style={{ color: 'inherit', textDecoration: 'none' }}>Apple</Link></div>
+                <div style={{ borderTop: '1px solid #333' }}><Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>All Companies</Link></div>
+              </div>
+            </li>
+            <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
+            <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>My Progress</Link></li>
+            <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
+            <li className="nav-item"><Link to="/daily-tech" style={{ color: 'var(--accent-orange)', textDecoration: 'none', fontWeight: 600 }}>Daily Tech</Link></li>
+            <li className="nav-item"><Link to="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>Blog</Link></li>
+          </ul>
 
-            <div className="nav-center">
-              <ul className="nav-links">
-                <li className="nav-item"><Link to="/top-100-leetcode" style={{ color: 'inherit', textDecoration: 'none' }}>Top 100</Link></li>
-                <li className="nav-item"><Link to="/blind-75" style={{ color: 'inherit', textDecoration: 'none' }}>Blind 75</Link></li>
-                <li className="nav-item dropdown">
-                  Difficulty ▾
-                  <div className="dropdown-content">
-                    <div><Link to="/leetcode-easy" style={{ color: 'inherit', textDecoration: 'none' }}>Easy</Link></div>
-                    <div><Link to="/leetcode-medium" style={{ color: 'inherit', textDecoration: 'none' }}>Medium</Link></div>
-                    <div><Link to="/leetcode-hard" style={{ color: 'inherit', textDecoration: 'none' }}>Hard</Link></div>
-                  </div>
-                </li>
-                <li className="nav-item dropdown">
-                  Topics ▾
-                  <div className="dropdown-content">
-                    <div><Link to="/topics/array" style={{ color: 'inherit', textDecoration: 'none' }}>Arrays</Link></div>
-                    <div><Link to="/topics/Dynamic Programming" style={{ color: 'inherit', textDecoration: 'none' }}>DP</Link></div>
-                    <div><Link to="/topics/string" style={{ color: 'inherit', textDecoration: 'none' }}>Strings</Link></div>
-                    <div><Link to="/topics/tree" style={{ color: 'inherit', textDecoration: 'none' }}>Trees</Link></div>
-                    <div><Link to="/topics/graph" style={{ color: 'inherit', textDecoration: 'none' }}>Graphs</Link></div>
-                  </div>
-                </li>
-                <li className="nav-item"><Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link></li>
-                <li className="nav-item dropdown">
-                  Companies ▾
-                  <div className="dropdown-content">
-                    <div><Link to="/company/google" style={{ color: 'inherit', textDecoration: 'none' }}>Google</Link></div>
-                    <div><Link to="/company/microsoft" style={{ color: 'inherit', textDecoration: 'none' }}>Microsoft</Link></div>
-                    <div><Link to="/company/amazon" style={{ color: 'inherit', textDecoration: 'none' }}>Amazon</Link></div>
-                    <div><Link to="/company/meta" style={{ color: 'inherit', textDecoration: 'none' }}>Meta</Link></div>
-                    <div><Link to="/company/apple" style={{ color: 'inherit', textDecoration: 'none' }}>Apple</Link></div>
-                    <div style={{ borderTop: '1px solid #333' }}><Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>All Companies</Link></div>
-                  </div>
-                </li>
-                <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
-                <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>My Progress</Link></li>
-                <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
-              </ul>
+          {/* Download Extension Button (Desktop Only) */}
+          <a
+            href="https://microsoftedge.microsoft.com/addons/detail/dogbidjabcbbhojhlnbfjilppgpenikb"
+            target="_blank"
+            rel="noreferrer"
+            className="download-extension-btn"
+          >
+            Download Extension
+          </a>
+        </div>
 
-              {/* Desktop Search */}
-              <form onSubmit={handleNavbarSearch} className="nav-search desktop-only-search">
-                <input
-                  type="text"
-                  placeholder="Search Q#"
-                  value={navbarSearch}
-                  onChange={(e) => setNavbarSearch(e.target.value)}
-                />
-              </form>
+        {/* Mobile Actions: Menu */}
+        <div className="mobile-actions">
 
-              {/* Download Extension Button (Desktop Only) */}
-              <a
-                href="https://microsoftedge.microsoft.com/addons/detail/dogbidjabcbbhojhlnbfjilppgpenikb"
-                target="_blank"
-                rel="noreferrer"
-                className="download-extension-btn"
-              >
-                Download Extension
-              </a>
-            </div>
-
-            {/* Mobile Actions: Search Icon + Menu */}
-            <div className="mobile-actions">
-              <button className="mobile-search-trigger" onClick={() => setShowMobileSearch(true)}>
-                <FaSearch />
-              </button>
-
-              {/* Connect / User Button */}
-              {leetcodeUsername ? (
-                <div className="nav-item desktop-only-user" title="Connected">
-                  <span style={{ color: '#4db6ac', fontSize: '1.2rem' }}>●</span>
-                  {/* Simplified user display for desktop, hidden on mobile in this simplified view if needed, 
+          {/* Connect / User Button */}
+          {leetcodeUsername ? (
+            <div className="nav-item desktop-only-user" title="Connected">
+              <span style={{ color: '#4db6ac', fontSize: '1.2rem' }}>●</span>
+              {/* Simplified user display for desktop, hidden on mobile in this simplified view if needed, 
                          or we keep it but it might be crowded. Let's rely on CSS to hide 'desktop-only-user' on mobile if crowded. */}
-                </div>
-              ) : (null)}
-
-              {/* Mobile Hamburger Button */}
-              <button
-                className="mobile-menu-btn"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle Menu"
-              >
-                <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-                <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-                <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-              </button>
             </div>
-          </>
-        )}
+          ) : (null)}
+
+          {/* Mobile Hamburger Button */}
+          <button
+            className="mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Menu"
+          >
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+          </button>
+        </div>
+
 
         {/* Mobile Menu Overlay */}
         <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
@@ -199,7 +167,7 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
           </div>
         </div>
-      </nav>
+      </nav >
 
       <div className="app-container" style={{ display: 'block', padding: 0 }}>
         {/* Helper CSS for Dropdown */}
@@ -254,17 +222,37 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/daily" element={<DailyPage />} />
 
           <Route path="/saved" element={<SavedPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+
+          {/* AdSense Content Pages */}
+          <Route path="/about" element={<About />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/contact" element={<Contact />} />
+
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/daily-tech" element={<DailyTechPage />} />
         </Routes>
       </div>
 
       <footer className="app-footer">
         <p>Created by <span className="creator-name">Vishwesh Shinde</span></p>
         <div className="footer-links">
-          <a href="https://www.instagram.com/vishwesh_shinde" target="_blank" rel="noreferrer" className="footer-icon-link">
-            <FaInstagram size={24} />
+          <Link to="/about" className="footer-link">About</Link>
+          <Link to="/how-it-works" className="footer-link">How it Works</Link>
+          <Link to="/daily-tech" className="footer-link">Daily Tech</Link>
+          <Link to="/blog" className="footer-link">Blog & Guides</Link>
+          <Link to="/contact" className="footer-link">Contact</Link>
+          <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
+          <Link to="/terms" className="footer-link">Terms</Link>
+        </div>
+        <div className="footer-socials" style={{ marginTop: '1rem' }}>
+          <a href="https://www.instagram.com/vishwesh_shinde" target="_blank" rel="noreferrer" className="footer-icon-link" style={{ marginRight: '1rem' }}>
+            <FaInstagram size={20} />
           </a>
           <a href="https://www.linkedin.com/in/vishweshshinde" target="_blank" rel="noreferrer" className="footer-icon-link">
-            <FaLinkedin size={24} />
+            <FaLinkedin size={20} />
           </a>
         </div>
       </footer>

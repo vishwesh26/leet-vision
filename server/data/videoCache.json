@@ -283,6 +283,130 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=wtOQaovlvhY"
   },
+  "17": [
+    {
+      "id": "0snEunUacZY",
+      "questionId": "17",
+      "title": "Letter Combinations of a Phone Number - Backtracking - Leetcode 17",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/0snEunUacZY/hqdefault.jpg",
+      "viewCount": 221373,
+      "likeCount": 3862,
+      "publishedAt": "2021-02-09T16:00:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=0snEunUacZY"
+    },
+    {
+      "id": "IqHbaPeUQRE",
+      "questionId": "17",
+      "title": "Letter Combinations of a Phone Number - Leetcode 17",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/IqHbaPeUQRE/hqdefault.jpg",
+      "viewCount": 64394,
+      "likeCount": 3547,
+      "publishedAt": "2024-09-12T16:25:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=IqHbaPeUQRE"
+    },
+    {
+      "id": "imD5XeNaJXA",
+      "questionId": "17",
+      "title": "LeetCode  Letter Combinations of a Phone Number Solution Explained - Java",
+      "channelTitle": "Nick White",
+      "thumbnail": "https://i.ytimg.com/vi/imD5XeNaJXA/hqdefault.jpg",
+      "viewCount": 53502,
+      "likeCount": 763,
+      "publishedAt": "2019-09-07T21:05:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=imD5XeNaJXA"
+    },
+    {
+      "id": "vgnhZzw-kfU",
+      "questionId": "17",
+      "title": "Letter Combinations of a Phone Number | INTUITIVE | Backtracking Template | Leetcode-17",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/vgnhZzw-kfU/hqdefault.jpg",
+      "viewCount": 27696,
+      "likeCount": 1057,
+      "publishedAt": "2023-08-03T03:58:56Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=vgnhZzw-kfU"
+    },
+    {
+      "id": "EQgFsp2vcvU",
+      "questionId": "17",
+      "title": "LeetCode 17: Letter Combinations of a Phone Number | C++ Solution + Step-by-Step Explanation",
+      "channelTitle": "CodeWithBK",
+      "thumbnail": "https://i.ytimg.com/vi/EQgFsp2vcvU/hqdefault.jpg",
+      "viewCount": 106,
+      "likeCount": 3,
+      "publishedAt": "2025-10-27T14:53:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=EQgFsp2vcvU"
+    }
+  ],
+  "20": [
+    {
+      "id": "WTzjTskDFMg",
+      "questionId": "20",
+      "title": "Valid Parentheses - Stack - Leetcode 20 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/WTzjTskDFMg/hqdefault.jpg",
+      "viewCount": 566478,
+      "likeCount": 8187,
+      "publishedAt": "2021-04-19T16:00:11Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=WTzjTskDFMg"
+    },
+    {
+      "id": "wkDfsKijrZ8",
+      "questionId": "20",
+      "title": "Valid Parentheses | Leetcode",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/wkDfsKijrZ8/hqdefault.jpg",
+      "viewCount": 229821,
+      "likeCount": 5341,
+      "publishedAt": "2021-06-16T12:30:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=wkDfsKijrZ8"
+    },
+    {
+      "id": "d-EB49XnynY",
+      "questionId": "20",
+      "title": "Valid Parentheses - Leetcode 20",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/d-EB49XnynY/hqdefault.jpg",
+      "viewCount": 122143,
+      "likeCount": 5141,
+      "publishedAt": "2024-08-09T15:23:27Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=d-EB49XnynY"
+    },
+    {
+      "id": "TaWs8tIrnoA",
+      "questionId": "20",
+      "title": "Valid Parentheses (LeetCode 20) | Full solution with visuals and animations | Stack Data Structure",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/TaWs8tIrnoA/hqdefault.jpg",
+      "viewCount": 45402,
+      "likeCount": 1142,
+      "publishedAt": "2023-10-30T13:30:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=TaWs8tIrnoA"
+    },
+    {
+      "id": "3ssh_mk4LqY",
+      "questionId": "20",
+      "title": "Valid Parentheses | Leetcode - 20 | Google, Meta | Explanation ➕ Live Coding Trash",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/3ssh_mk4LqY/hqdefault.jpg",
+      "viewCount": 13006,
+      "likeCount": 0,
+      "publishedAt": "2023-04-10T04:39:54Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3ssh_mk4LqY"
+    }
+  ],
   "21": {
     "id": "XIdigk956u0",
     "questionId": "21",
@@ -307,6 +431,68 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=OWaZ6AosS30"
   },
+  "39": [
+    {
+      "id": "OyZFFqQtu98",
+      "questionId": "39",
+      "title": "L8. Combination Sum | Recursion | Leetcode | C++ | Java",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/OyZFFqQtu98/hqdefault.jpg",
+      "viewCount": 890505,
+      "likeCount": 17271,
+      "publishedAt": "2021-02-08T15:35:32Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=OyZFFqQtu98"
+    },
+    {
+      "id": "GBKI9VSKdGg",
+      "questionId": "39",
+      "title": "Combination Sum - Backtracking - Leetcode 39 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/GBKI9VSKdGg/hqdefault.jpg",
+      "viewCount": 446109,
+      "likeCount": 6004,
+      "publishedAt": "2021-06-01T16:00:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GBKI9VSKdGg"
+    },
+    {
+      "id": "jkgZw2WEaqA",
+      "questionId": "39",
+      "title": "Combination Sum Problem | Recursion & Backtracking",
+      "channelTitle": "Apna College",
+      "thumbnail": "https://i.ytimg.com/vi/jkgZw2WEaqA/hqdefault.jpg",
+      "viewCount": 83791,
+      "likeCount": 1940,
+      "publishedAt": "2024-12-12T15:24:26Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jkgZw2WEaqA"
+    },
+    {
+      "id": "qV20jACVNS4",
+      "questionId": "39",
+      "title": "Combination Sum - Recursive Backtracking - Leetcode 39",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/qV20jACVNS4/hqdefault.jpg",
+      "viewCount": 67997,
+      "likeCount": 2889,
+      "publishedAt": "2024-04-25T14:30:51Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qV20jACVNS4"
+    },
+    {
+      "id": "utBw5FbYswk",
+      "questionId": "39",
+      "title": "Combination Sum - Leetcode 39 - Recursive Backtracking (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/utBw5FbYswk/hqdefault.jpg",
+      "viewCount": 22453,
+      "likeCount": 411,
+      "publishedAt": "2024-04-29T18:53:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=utBw5FbYswk"
+    }
+  ],
   "42": [
     {
       "id": "ZI2z5pq0TqA",
@@ -869,6 +1055,68 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=KT1iUciJr4g"
   },
+  "198": [
+    {
+      "id": "73r3KWiEvyk",
+      "questionId": "198",
+      "title": "House Robber -  Leetcode 198 - Python Dynamic Programming",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/73r3KWiEvyk/hqdefault.jpg",
+      "viewCount": 442689,
+      "likeCount": 6871,
+      "publishedAt": "2020-06-21T07:09:53Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=73r3KWiEvyk"
+    },
+    {
+      "id": "VXqUQYGMnQg",
+      "questionId": "198",
+      "title": "House Robber (LeetCode 198) | Full solution with diagrams | Easy explanation | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/VXqUQYGMnQg/hqdefault.jpg",
+      "viewCount": 60232,
+      "likeCount": 2041,
+      "publishedAt": "2022-09-26T13:00:30Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=VXqUQYGMnQg"
+    },
+    {
+      "id": "hcAz7B96jAU",
+      "questionId": "198",
+      "title": "House Robber - Dynamic Programming - Leetcode 198",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/hcAz7B96jAU/hqdefault.jpg",
+      "viewCount": 37201,
+      "likeCount": 2093,
+      "publishedAt": "2024-10-26T12:01:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=hcAz7B96jAU"
+    },
+    {
+      "id": "SI6Pm8AKqnQ",
+      "questionId": "198",
+      "title": "House Robber | Recursion | Memo | Bottom Up | Leetcode 198",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/SI6Pm8AKqnQ/hqdefault.jpg",
+      "viewCount": 36950,
+      "likeCount": 1247,
+      "publishedAt": "2022-12-14T06:33:56Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=SI6Pm8AKqnQ"
+    },
+    {
+      "id": "Rm-f9v-Pumk",
+      "questionId": "198",
+      "title": "House Robber 198 leetcode solution hello world prince dynamic programming playlist Hindi",
+      "channelTitle": "Hello World",
+      "thumbnail": "https://i.ytimg.com/vi/Rm-f9v-Pumk/hqdefault.jpg",
+      "viewCount": 4912,
+      "likeCount": 162,
+      "publishedAt": "2023-05-02T11:30:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Rm-f9v-Pumk"
+    }
+  ],
   "237": [
     {
       "id": "icnp4FJdZ_c",

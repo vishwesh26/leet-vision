@@ -928,19 +928,30 @@ so they inherit default .video-card styles
 /* Footer Styles */
 .app-footer {
   text-align: center;
-  padding: 2rem;
+  padding: 4rem 2rem;
   margin-top: 4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(0, 0, 0, 0.2);
   color: #888;
-  font-size: 0.9rem;
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-top: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.footer-link {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--accent-orange);
 }
 
 .footer-icon-link {

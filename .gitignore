@@ -31,3 +31,9 @@ logs/
 
 # OS
 Thumbs.db
+
+# Temporary / Backups
+src_backup/
+*_backup/
+node_modules_old/
+.DS_Store

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SEO from './SEO';
+import AdSenseContainer from './AdSenseContainer';
 
 const DailyPage = () => {
     const [dailyProblem, setDailyProblem] = useState(null);
@@ -129,6 +130,10 @@ const DailyPage = () => {
                             <p style={{ marginTop: '1rem', color: '#4caf50' }}>Good job attempting it!</p>
                         </div>
                     )}
+                </div>
+
+                <div style={{ marginTop: '4rem', width: '100%', maxWidth: '600px' }}>
+                    <AdSenseContainer slot="8240394871" />
                 </div>
             </div>
         </>
