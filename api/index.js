@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const NodeCache = require('node-cache');
 const axios = require('axios');
+const slugify = require('slugify');
 
 dotenv.config();
 
@@ -479,8 +480,22 @@ const solutionSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// Get Model (prevent overwrite error during hot reload)
+// Define Article Schema for Tech News
+const articleSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    slug: { type: String, required: true, unique: true },
+    summary: String,
+    content: String,
+    category: String,
+    publishedDate: { type: Date, default: Date.now },
+    source: String,
+    originalLink: String,
+    createdAt: { type: Date, default: Date.now }
+});
+
+// Get Models
 const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
+const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
 
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
@@ -712,6 +727,42 @@ app.get('/api/company/:companyName', async (req, res) => {
     await processList(companyData.similar || [], 'similar', title);
 
     res.json(results);
+});
+
+// Articles APIs
+app.get('/api/articles', async (req, res) => {
+    try {
+        await connectDB();
+        const { category, limit = 10, skip = 0 } = req.query;
+        
+        const query = category ? { category } : {};
+        const articles = await Article.find(query)
+            .sort({ publishedDate: -1 })
+            .limit(parseInt(limit))
+            .skip(parseInt(skip));
+            
+        res.json(articles);
+    } catch (err) {
+        console.error("Fetch Articles Error:", err);
+        res.status(500).json({ error: 'Failed to fetch articles' });
+    }
+});
+
+app.get('/api/articles/:slug', async (req, res) => {
+    try {
+        await connectDB();
+        const { slug } = req.params;
+        const article = await Article.findOne({ slug });
+        
+        if (!article) {
+            return res.status(404).json({ error: 'Article not found' });
+        }
+        
+        res.json(article);
+    } catch (err) {
+        console.error("Fetch Article Detail Error:", err);
+        res.status(500).json({ error: 'Failed to fetch article details' });
+    }
 });
 
 
