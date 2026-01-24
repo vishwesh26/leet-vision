@@ -103,7 +103,7 @@ const SolutionPage = () => {
                         </div>
 
                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                            <a href={`https://leetcode.com/problems/${id}/`} target="_blank" rel="noreferrer" style={{ background: '#1a1a1a', color: '#fff', padding: '0.6rem 1.2rem', borderRadius: '50px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', border: '1px solid #333' }}>
+                            <a href={`https://leetcode.com/problems/${data.slug || id}/`} target="_blank" rel="noreferrer" style={{ background: '#1a1a1a', color: '#fff', padding: '0.6rem 1.2rem', borderRadius: '50px', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', border: '1px solid #333' }}>
                                 <IoMdLink /> Practice Here
                             </a>
                             {topics.map(t => (
@@ -166,21 +166,6 @@ const SolutionPage = () => {
                             </div>
                         </section>
                     )}
-
-                    {/* Method Tree Visualization (CSS Sim) */}
-                    <section ref={sections.method} style={{ marginBottom: '4rem', textAlign: 'center' }}>
-                        <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <div style={{ background: '#ff4b2b', color: '#fff', padding: '0.8rem 2rem', borderRadius: '50px', fontWeight: 700, border: '4px solid rgba(255,255,255,0.1)', marginBottom: '2rem' }}>Method</div>
-                            <div style={{ display: 'flex', gap: '3rem', position: 'relative' }}>
-                                {approaches.map((appr, idx) => (
-                                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <div style={{ width: '2px', height: '2rem', background: '#333', marginBottom: '0.5rem' }}></div>
-                                        <div style={{ background: '#1a1a1a', color: '#fff', padding: '0.6rem 1.5rem', borderRadius: '10px', fontSize: '0.85rem', border: '1px solid #333' }}>{appr.name.split(' ')[0]}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
 
                     {/* Approaches Section */}
                     <section ref={sections.approaches} id="approaches">
