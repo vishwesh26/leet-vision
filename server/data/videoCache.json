@@ -147,6 +147,68 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=yubRKwixN-U"
   },
+  "10": [
+    {
+      "id": "l3hda49XcDE",
+      "questionId": "10",
+      "title": "Regular Expression Dynamic Programming",
+      "channelTitle": "Tushar Roy - Coding Made Simple",
+      "thumbnail": "https://i.ytimg.com/vi/l3hda49XcDE/hqdefault.jpg",
+      "viewCount": 271042,
+      "likeCount": 3544,
+      "publishedAt": "2016-06-06T05:03:18Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=l3hda49XcDE"
+    },
+    {
+      "id": "HAA8mgxlov8",
+      "questionId": "10",
+      "title": "Regular Expression Matching - Dynamic Programming Top-Down Memoization - Leetcode 10",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/HAA8mgxlov8/hqdefault.jpg",
+      "viewCount": 227101,
+      "likeCount": 4284,
+      "publishedAt": "2021-02-02T15:45:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=HAA8mgxlov8"
+    },
+    {
+      "id": "KDPx7xuWxr0",
+      "questionId": "10",
+      "title": "Leetcode 10 Regular Expression Matching (Java) - Beats 100%",
+      "channelTitle": "TheAnalyticGuy",
+      "thumbnail": "https://i.ytimg.com/vi/KDPx7xuWxr0/hqdefault.jpg",
+      "viewCount": 5728,
+      "likeCount": 55,
+      "publishedAt": "2023-02-04T18:30:30Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=KDPx7xuWxr0"
+    },
+    {
+      "id": "ZNI_yXaGlxY",
+      "questionId": "10",
+      "title": "Regular Expression Matching Python Solution - LeetCode #10",
+      "channelTitle": "Professor Oakes",
+      "thumbnail": "https://i.ytimg.com/vi/ZNI_yXaGlxY/hqdefault.jpg",
+      "viewCount": 4327,
+      "likeCount": 48,
+      "publishedAt": "2023-09-15T14:00:32Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZNI_yXaGlxY"
+    },
+    {
+      "id": "VFQddcCP46c",
+      "questionId": "10",
+      "title": "Regular Expression Matching: 10 - Dynamic Programming interview - google,apple,amazon,meta,microsoft",
+      "channelTitle": "Destination FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/VFQddcCP46c/hqdefault.jpg",
+      "viewCount": 2333,
+      "likeCount": 44,
+      "publishedAt": "2022-11-26T01:48:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=VFQddcCP46c"
+    }
+  ],
   "11": [
     {
       "id": "UuiTKBwPgAo",
@@ -431,6 +493,130 @@
     "isMostAccurate": true,
     "videoUrl": "https://www.youtube.com/watch?v=OWaZ6AosS30"
   },
+  "30": [
+    {
+      "id": "oVi-fSX8cpg",
+      "questionId": "30",
+      "title": "Ranked #1 on LeetCode  #leetcode #codeprep #competitiveprogramming #codeforces",
+      "channelTitle": "Leetcode Profiles",
+      "thumbnail": "https://i.ytimg.com/vi/oVi-fSX8cpg/hqdefault.jpg",
+      "viewCount": 2906571,
+      "likeCount": 51891,
+      "publishedAt": "2025-07-29T13:49:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=oVi-fSX8cpg"
+    },
+    {
+      "id": "tMXGIIoQ4SQ",
+      "questionId": "30",
+      "title": "Watch till the end😨 #competitiveprogramming #codeprep  #leetcode #problemsolving",
+      "channelTitle": "Leetcode Profiles",
+      "thumbnail": "https://i.ytimg.com/vi/tMXGIIoQ4SQ/hqdefault.jpg",
+      "viewCount": 711462,
+      "likeCount": 15580,
+      "publishedAt": "2025-07-11T18:36:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=tMXGIIoQ4SQ"
+    },
+    {
+      "id": "taYRJf-M25I",
+      "questionId": "30",
+      "title": "Substring with Concatenation of All Words | Leetcode #30",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/taYRJf-M25I/hqdefault.jpg",
+      "viewCount": 37822,
+      "likeCount": 478,
+      "publishedAt": "2024-03-04T15:49:22Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=taYRJf-M25I"
+    },
+    {
+      "id": "EVHQ48RM5tw",
+      "questionId": "30",
+      "title": "Leetcode 30 Substring with Concatenation of All Words | Checkout SDE preparation Sheet link below",
+      "channelTitle": "Coding Decoded",
+      "thumbnail": "https://i.ytimg.com/vi/EVHQ48RM5tw/hqdefault.jpg",
+      "viewCount": 25370,
+      "likeCount": 377,
+      "publishedAt": "2022-08-13T12:04:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=EVHQ48RM5tw"
+    },
+    {
+      "id": "oYxdWdPIQLY",
+      "questionId": "30",
+      "title": "LeetCode Hard | 30. Substring with Concatenation of All Words | Animation",
+      "channelTitle": "CwkscAlgo",
+      "thumbnail": "https://i.ytimg.com/vi/oYxdWdPIQLY/hqdefault.jpg",
+      "viewCount": 1515,
+      "likeCount": 23,
+      "publishedAt": "2025-01-05T13:40:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=oYxdWdPIQLY"
+    }
+  ],
+  "37": [
+    {
+      "id": "FWAIf_EVUKE",
+      "questionId": "37",
+      "title": "L15. Sudoko Solver | Backtracking",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/FWAIf_EVUKE/hqdefault.jpg",
+      "viewCount": 404204,
+      "likeCount": 12845,
+      "publishedAt": "2021-05-12T19:05:26Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=FWAIf_EVUKE"
+    },
+    {
+      "id": "5g6fheUtjRs",
+      "questionId": "37",
+      "title": "Sudoku Solver | Simple Explanation | Leetcode 37 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/5g6fheUtjRs/hqdefault.jpg",
+      "viewCount": 8366,
+      "likeCount": 438,
+      "publishedAt": "2025-08-31T04:12:21Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=5g6fheUtjRs"
+    },
+    {
+      "id": "FIvhO6GmZRE",
+      "questionId": "37",
+      "title": "LeetCode 37 🔥 Sudoku Solver | Backtracking + Optimal Java Solution | Full Explanation + Dry Run",
+      "channelTitle": " Study Placement",
+      "thumbnail": "https://i.ytimg.com/vi/FIvhO6GmZRE/hqdefault.jpg",
+      "viewCount": 237,
+      "likeCount": 0,
+      "publishedAt": "2025-08-31T04:59:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=FIvhO6GmZRE"
+    },
+    {
+      "id": "Z829Z46ySiE",
+      "questionId": "37",
+      "title": "Sudoku Solver | 37 | Hard | Leetcode | C++ | DSA | Coding Solution | Recursive Solution",
+      "channelTitle": "DailyCodes",
+      "thumbnail": "https://i.ytimg.com/vi/Z829Z46ySiE/hqdefault.jpg",
+      "viewCount": 64,
+      "likeCount": 0,
+      "publishedAt": "2023-05-27T06:25:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Z829Z46ySiE"
+    },
+    {
+      "id": "4tTB32N3TDE",
+      "questionId": "37",
+      "title": "LeetCode 37 Sudoku Solver  | Best Solution Explained | C++ Java Python |Time & Space Complexity",
+      "channelTitle": "SnapLearn",
+      "thumbnail": "https://i.ytimg.com/vi/4tTB32N3TDE/hqdefault.jpg",
+      "viewCount": 17,
+      "likeCount": 1,
+      "publishedAt": "2025-08-31T07:03:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=4tTB32N3TDE"
+    }
+  ],
   "39": [
     {
       "id": "OyZFFqQtu98",
@@ -491,6 +677,68 @@
       "publishedAt": "2024-04-29T18:53:17Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=utBw5FbYswk"
+    }
+  ],
+  "41": [
+    {
+      "id": "8g78yfzMlao",
+      "questionId": "41",
+      "title": "First Missing Positive - Leetcode 41 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/8g78yfzMlao/hqdefault.jpg",
+      "viewCount": 154044,
+      "likeCount": 3234,
+      "publishedAt": "2021-05-07T16:00:07Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=8g78yfzMlao"
+    },
+    {
+      "id": "qLjmipfCceo",
+      "questionId": "41",
+      "title": "41. First Missing Positive | leetcode daily challenge | DSA | Shashwat Tiwari Hindi",
+      "channelTitle": "ShashCode",
+      "thumbnail": "https://i.ytimg.com/vi/qLjmipfCceo/hqdefault.jpg",
+      "viewCount": 7578,
+      "likeCount": 233,
+      "publishedAt": "2024-03-26T04:37:51Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qLjmipfCceo"
+    },
+    {
+      "id": "SEn4fyMZ22M",
+      "questionId": "41",
+      "title": "Leetcode | 41. First Missing Positive | Hard | Java Solution",
+      "channelTitle": "Developer Docs",
+      "thumbnail": "https://i.ytimg.com/vi/SEn4fyMZ22M/hqdefault.jpg",
+      "viewCount": 4972,
+      "likeCount": 84,
+      "publishedAt": "2024-03-26T01:15:21Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=SEn4fyMZ22M"
+    },
+    {
+      "id": "onHq4GE6Bls",
+      "questionId": "41",
+      "title": "FIRST MISSING POSITIVE | LEETCODE # 41 | PYTHON SOLUTION",
+      "channelTitle": "Cracking FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/onHq4GE6Bls/hqdefault.jpg",
+      "viewCount": 2011,
+      "likeCount": 58,
+      "publishedAt": "2022-08-06T15:10:51Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=onHq4GE6Bls"
+    },
+    {
+      "id": "_2j_3hHchXk",
+      "questionId": "41",
+      "title": "41. First Positive Missing Leetcode Problem | Solution with Explanation | DSA Problem Series",
+      "channelTitle": "Coding Blocks",
+      "thumbnail": "https://i.ytimg.com/vi/_2j_3hHchXk/hqdefault.jpg",
+      "viewCount": 863,
+      "likeCount": 19,
+      "publishedAt": "2022-04-05T12:30:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=_2j_3hHchXk"
     }
   ],
   "42": [

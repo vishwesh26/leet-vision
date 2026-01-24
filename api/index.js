@@ -585,59 +585,46 @@ app.get('/api/solution/:questionId', async (req, res) => {
         const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         
         const prompt = `
-        You are an expert DSA coding tutor. Generate a comprehensive article-style solution guide for LeetCode question "${questionId}".
-        
-        Structure the response efficiently as a JSON object.
-        
+        You are an expert DSA coding tutor. Generate a premium, concise solution guide for LeetCode question "${questionId}".
+        Focus on high-impact pedagogical value and professional formatting.
+
         Required JSON Structure:
         {
           "questionId": "${questionId}",
           "title": "Problem Title",
           "difficulty": "Easy, Medium, or Hard",
-          "topics": ["Topic1", "Topic2"],
-          "problemStatement": "Full problem description...",
-          "analyticalOverview": "A deep-dive explanation (2-3 paragraphs) of the problem logic, insights, and the core intuition behind the solutions.",
+          "topics": ["Topic", "Topic"],
+          "problemStatement": "Clear problem description.",
+          "analyticalOverview": "A concise (1-2 paragraph) overview of the core intuition and breakthrough logic. No fluff.",
           "examples": [
-             { "input": "...", "output": "...", "explanation": "..." }
+             { "input": "...", "output": "...", "explanation": "Brief, clear explanation." }
           ],
           "complexityTable": [
-             { "method": "Naive", "time": "O(...)", "space": "O(...)" },
-             { "method": "Better", "time": "O(...)", "space": "O(...)" },
-             { "method": "Best", "time": "O(...)", "space": "O(...)" }
+             { "method": "Naive Approach", "time": "O(...)", "space": "O(...)" },
+             { "method": "Optimal Approach", "time": "O(...)", "space": "O(...)" }
           ],
           "approaches": [
              {
                "name": "Naive Approach",
-               "concept": "Quick explanation of this specific approach...",
-               "steps": ["Step 1...", "Step 2..."],
+               "concept": "Core idea behind the brute force...",
+               "steps": ["Step 1", "Step 2"],
                "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": {
-                  "cpp": "...",
-                  "java": "...",
-                  "python": "...",
-                  "javascript": "..."
-               }
+               "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
              },
              {
                "name": "Optimal Approach",
-               "concept": "Quick explanation of this specific approach...",
-               "steps": ["Step 1...", "Step 2..."],
+               "concept": "The breakthrough insight and optimization phase...",
+               "steps": ["Step 1", "Step 2"],
                "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": {
-                  "cpp": "...",
-                  "java": "...",
-                  "python": "...",
-                  "javascript": "..."
-               }
+               "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
              }
           ]
         }
 
         Rules:
-        1. Return ONLY valid JSON. No markdown formatting.
-        2. Provide at least "Naive" and "Optimal". If there is a middle ground, provide "Better".
-        3. "steps" should be an array of strings (bullet points).
-        4. In the complexityTable, use standard Big O notation.
+        1. Return ONLY valid JSON.
+        2. Provide 2-3 distinct approaches.
+        3. Avoid excessive verbosity; focus on clear, high-impact learning.
         `;
 
         const result = await model.generateContent(prompt);
@@ -656,7 +643,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
                  return res.status(500).json({ error: "AI generated invalid JSON" });
             }
         }
-
+ 
         // 4. Save to MongoDB
         let dbStatus = "skipped";
         if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {

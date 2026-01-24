@@ -1,0 +1,89 @@
+{
+  "questionId": "41",
+  "title": "First Missing Positive",
+  "difficulty": "Hard",
+  "topics": [
+    "Array",
+    "Hashing",
+    "In-place Modification",
+    "Pigeonhole Principle"
+  ],
+  "problemStatement": "Given an unsorted integer array `nums`, find the smallest missing positive integer. You must implement an algorithm that runs in `O(n)` time and uses `O(1)` auxiliary space.",
+  "analyticalOverview": "The core challenge lies in meeting the O(N) time and O(1) space constraints. This immediately rules out typical solutions like sorting (O(N log N)) or using hash sets (O(N) space). The key insight is the 'Pigeonhole Principle': if the array has `N` elements, the first missing positive integer must lie within the range `[1, N+1]`. This means we can leverage the array itself as a hash map, attempting to place each number `x` at index `x-1`. Numbers outside the range `[1, N]` (negative, zero, or greater than `N`) are irrelevant to our search and can be ignored or treated as placeholders for missing positives.",
+  "examples": [
+    {
+      "input": "[1,2,0]",
+      "output": "3",
+      "explanation": "Numbers 1 and 2 are present. The smallest missing positive is 3."
+    },
+    {
+      "input": "[3,4,-1,1]",
+      "output": "2",
+      "explanation": "1, 3, and 4 are present. The smallest missing positive is 2."
+    },
+    {
+      "input": "[7,8,9,11,12]",
+      "output": "1",
+      "explanation": "None of the numbers 1 through 6 are present. The smallest missing positive is 1."
+    }
+  ],
+  "complexityTable": [
+    {
+      "method": "Hash Set Approach",
+      "time": "O(N)",
+      "space": "O(N)"
+    },
+    {
+      "method": "Optimal In-place Swapping (Cyclic Sort)",
+      "time": "O(N)",
+      "space": "O(1)"
+    }
+  ],
+  "approaches": [
+    {
+      "name": "Hash Set Approach",
+      "concept": "Collect all positive numbers into a hash set for quick lookup. Then, iterate through positive integers starting from 1, checking if each integer is present in the set. The first positive integer not found is the answer.",
+      "steps": [
+        "Initialize an empty hash set (or boolean array if numbers are bounded) to store positive numbers from `nums`.",
+        "Iterate through `nums`. For each positive number `x`, add it to the hash set.",
+        "Initialize `i = 1`. Loop indefinitely:",
+        "  If `i` is not in the hash set, return `i`.",
+        "  Increment `i`."
+      ],
+      "complexity": {
+        "time": "O(N)",
+        "space": "O(N)"
+      },
+      "codes": {
+        "python": "class Solution:\n    def firstMissingPositive(self, nums: list[int]) -> int:\n        seen = set()\n        for num in nums:\n            if num > 0:\n                seen.add(num)\n        \n        i = 1\n        while True:\n            if i not in seen:\n                return i\n            i += 1",
+        "javascript": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar firstMissingPositive = function(nums) {\n    const seen = new Set();\n    for (const num of nums) {\n        if (num > 0) {\n            seen.add(num);\n        }\n    }\n\n    let i = 1;\n    while (true) {\n        if (!seen.has(i)) {\n            return i;\n        }\n        i++;\n    }\n};",
+        "cpp": "class Solution {\npublic:\n    int firstMissingPositive(std::vector<int>& nums) {\n        std::unordered_set<int> seen;\n        for (int num : nums) {\n            if (num > 0) {\n                seen.insert(num);\n            }\n        }\n        \n        int i = 1;\n        while (true) {\n            if (seen.find(i) == seen.end()) {\n                return i;\n            }\n            i++;\n        }\n    }\n};",
+        "java": "import java.util.HashSet;\nimport java.util.Set;\n\nclass Solution {\n    public int firstMissingPositive(int[] nums) {\n        Set<Integer> seen = new HashSet<>();\n        for (int num : nums) {\n            if (num > 0) {\n                seen.add(num);\n            }\n        }\n        \n        int i = 1;\n        while (true) {\n            if (!seen.contains(i)) {\n                return i;\n            }\n            i++;\n        }\n    }\n}"
+      }
+    },
+    {
+      "name": "Optimal In-place Swapping (Cyclic Sort)",
+      "concept": "This approach uses the array itself as a hash map. For an array of size `N`, we only care about numbers in the range `[1, N]`. We attempt to place each number `x` at index `x-1`. After this 'cyclic sort' phase, we iterate through the array. The first index `i` where `nums[i] != i + 1` reveals `i + 1` as the first missing positive. If all numbers from 1 to `N` are present, then `N + 1` is the answer.",
+      "steps": [
+        "Initialize `n = len(nums)`.",
+        "Iterate `i` from 0 to `n-1`:",
+        "  While `nums[i]` is within the valid range `[1, n]` AND `nums[i]` is not already at its correct position (i.e., `nums[i] != nums[nums[i] - 1]`):",
+        "    Let `correct_pos = nums[i] - 1`.",
+        "    Swap `nums[i]` with `nums[correct_pos]`. This places `nums[i]` into its intended index.",
+        "After the first pass, iterate `i` from 0 to `n-1` again:",
+        "  If `nums[i]` is not equal to `i + 1`, then `i + 1` is the first missing positive. Return `i + 1`.",
+        "If the second loop completes (meaning all numbers from 1 to `n` are in their correct positions), then `n + 1` is the first missing positive. Return `n + 1`."
+      ],
+      "complexity": {
+        "time": "O(N)",
+        "space": "O(1)"
+      },
+      "codes": {
+        "python": "class Solution:\n    def firstMissingPositive(self, nums: list[int]) -> int:\n        n = len(nums)\n        \n        # Phase 1: Place numbers in their correct positions\n        # A number 'x' should ideally be at index 'x-1'\n        for i in range(n):\n            # Keep swapping while:\n            # 1. nums[i] is positive and within the range [1, n]\n            # 2. nums[i] is NOT already at its correct position (i.e., nums[i] != i + 1)\n            # 3. The number at the target position nums[nums[i]-1] is not already nums[i] \n            #    (prevents infinite loops for duplicates like [1,1])\n            while 1 <= nums[i] <= n and nums[i] != nums[nums[i] - 1]:\n                correct_pos = nums[i] - 1\n                nums[i], nums[correct_pos] = nums[correct_pos], nums[i]\n        \n        # Phase 2: Find the first missing positive\n        for i in range(n):\n            if nums[i] != i + 1:\n                return i + 1\n        \n        # If all numbers from 1 to n are present, then n + 1 is the answer\n        return n + 1",
+        "javascript": "/**\n * @param {number[]} nums\n * @return {number}\n */\nvar firstMissingPositive = function(nums) {\n    const n = nums.length;\n\n    // Phase 1: Place numbers in their correct positions\n    // A number 'x' should ideally be at index 'x-1'\n    for (let i = 0; i < n; i++) {\n        // Keep swapping while:\n        // 1. nums[i] is positive and within the range [1, n]\n        // 2. nums[i] is NOT already at its correct position (i.e., nums[i] != i + 1)\n        // 3. The number at the target position nums[nums[i]-1] is not already nums[i]\n        //    (prevents infinite loops for duplicates like [1,1])\n        while (nums[i] > 0 && nums[i] <= n && nums[i] !== nums[nums[i] - 1]) {\n            const correctPos = nums[i] - 1;\n            [nums[i], nums[correctPos]] = [nums[correctPos], nums[i]];\n        }\n    }\n\n    // Phase 2: Find the first missing positive\n    for (let i = 0; i < n; i++) {\n        if (nums[i] !== i + 1) {\n            return i + 1;\n        }\n    }\n\n    // If all numbers from 1 to n are present, then n + 1 is the answer\n    return n + 1;\n};",
+        "cpp": "class Solution {\npublic:\n    int firstMissingPositive(std::vector<int>& nums) {\n        int n = nums.size();\n        \n        // Phase 1: Place numbers in their correct positions\n        // A number 'x' should ideally be at index 'x-1'\n        for (int i = 0; i < n; ++i) {\n            // Keep swapping while:\n            // 1. nums[i] is positive and within the range [1, n]\n            // 2. nums[i] is NOT already at its correct position (i.e., nums[i] != i + 1)\n            // 3. The number at the target position nums[nums[i]-1] is not already nums[i]\n            //    (prevents infinite loops for duplicates like [1,1])\n            while (nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {\n                int correct_pos = nums[i] - 1;\n                std::swap(nums[i], nums[correct_pos]);\n            }\n        }\n        \n        // Phase 2: Find the first missing positive\n        for (int i = 0; i < n; ++i) {\n            if (nums[i] != i + 1) {\n                return i + 1;\n            }\n        }\n        \n        // If all numbers from 1 to n are present, then n + 1 is the answer\n        return n + 1;\n    }\n};",
+        "java": "class Solution {\n    public int firstMissingPositive(int[] nums) {\n        int n = nums.length;\n        \n        // Phase 1: Place numbers in their correct positions\n        // A number 'x' should ideally be at index 'x-1'\n        for (int i = 0; i < n; ++i) {\n            // Keep swapping while:\n            // 1. nums[i] is positive and within the range [1, n]\n            // 2. nums[i] is NOT already at its correct position (i.e., nums[i] != i + 1)\n            // 3. The number at the target position nums[nums[i]-1] is not already nums[i]\n            //    (prevents infinite loops for duplicates like [1,1])\n            while (nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]) {\n                int correctPos = nums[i] - 1;\n                // Swap nums[i] and nums[correctPos]\n                int temp = nums[i];\n                nums[i] = nums[correctPos];\n                nums[correctPos] = temp;\n            }\n        }\n        \n        // Phase 2: Find the first missing positive\n        for (int i = 0; i < n; ++i) {\n            if (nums[i] != i + 1) {\n                return i + 1;\n            }\n        }\n        \n        // If all numbers from 1 to n are present, then n + 1 is the answer\n        return n + 1;\n    }\n}"
+      }
+    }
+  ]
+}
