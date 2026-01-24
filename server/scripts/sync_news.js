@@ -95,10 +95,12 @@ async function fetchNews() {
     }
 }
 
-async function sync() {
+async function sync(closeConnection = true) {
     try {
-        await mongoose.connect(MONGODB_URI);
-        console.log('Connected to MongoDB');
+        if (mongoose.connection.readyState === 0) {
+            await mongoose.connect(MONGODB_URI);
+            console.log('Connected to MongoDB');
+        }
 
         const rawArticles = await fetchNews();
         if (!rawArticles || rawArticles.length === 0) {
@@ -125,7 +127,7 @@ async function sync() {
                     slug: slug,
                     originalLink: raw.url,
                     source: raw.source.name || raw.source,
-                    publishedDate: raw.publishedAt || new Date()
+                    publishedAt: raw.publishedAt || new Date()
                 });
                 console.log(`Successfully synced: ${rewritten.title}`);
             }
@@ -143,8 +145,16 @@ async function sync() {
     } catch (err) {
         console.error('Sync process failed:', err);
     } finally {
-        await mongoose.disconnect();
+        if (closeConnection) {
+            await mongoose.disconnect();
+            console.log('Disconnected from MongoDB');
+        }
     }
 }
 
-sync();
+module.exports = { sync };
+
+// Run standalone if executed directly
+if (require.main === module) {
+    sync(true);
+}

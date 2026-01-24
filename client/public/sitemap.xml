@@ -127,6 +127,36 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://leet-vision.vercel.app/blog/the-problem-first-revolution-taking-ai-from-notebooks-to-enterprise-production</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/engineering-equity-why-ethical-responsibility-is-now-a-core-technical-skill-for-software-developers</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/why-ai-still-cant-dance-a-deep-dive-into-generative-videos-biomechanical-blind-spots</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/beyond-the-hype-decoding-the-davos-ceo-split-on-ais-fundamental-impact-on-the-software-development-lifecycle</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/the-north-star-why-torontos-tech-market-is-setting-the-benchmark-for-dollar100k-engineering-roles</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://leet-vision.vercel.app/blog/the-great-reallocation-how-amazons-30000-job-cuts-signal-a-tech-strategy-shift-for-software-engineers</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>

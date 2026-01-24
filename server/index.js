@@ -742,6 +742,21 @@ app.get('/api/daily-challenge', (req, res) => {
     }
 });
 
+// Automated News Sync (Background Task)
+const cron = require('node-cron');
+const { sync: syncNews } = require('./scripts/sync_news');
+
+// Schedule news sync to run every day at 00:00 (Midnight)
+cron.schedule('0 0 * * *', async () => {
+    console.log('Automated News Sync started (Cron Task)...');
+    try {
+        await syncNews(false); // false = don't close the primary server connection
+        console.log('Automated News Sync completed.');
+    } catch (err) {
+        console.error('Automated News Sync failed:', err.message);
+    }
+});
+
 // Start Server
 const server = app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
