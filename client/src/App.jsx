@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { SolvedProvider, useSolved } from './context/SolvedContext';
 import { FaInstagram, FaLinkedin, FaSearch, FaTimes } from 'react-icons/fa';
 import ConnectModal from './components/ConnectModal';
+import { Analytics } from "@vercel/analytics/react"
 import './index.css';
 
 // Components
@@ -286,6 +287,7 @@ function App() {
         <ErrorBoundary>
           <BrowserRouter>
             <AppContent savedVideos={savedVideos} onToggleSave={handleToggleSave} />
+            <Analytics />
           </BrowserRouter>
         </ErrorBoundary>
       </SolvedProvider>
