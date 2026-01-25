@@ -117,13 +117,6 @@ const SolutionPage = () => {
                         <h2 className="section-title">Problem Statement :</h2>
                         <div className="problem-text">{data.problemStatement}</div>
 
-                        {data.analyticalOverview && (
-                            <div className="analytical-overview-card">
-                                <h3>Analytical Overview</h3>
-                                <p>{data.analyticalOverview}</p>
-                            </div>
-                        )}
-
 
                         <div className="examples-list">
                             {data.examples?.map((ex, idx) => (
@@ -138,36 +131,6 @@ const SolutionPage = () => {
                             ))}
                         </div>
                     </section>
-
-                    {/* Complexity Table */}
-                    {complexityTable.length > 0 && (
-                        <section ref={sections.complexity} className="section-container">
-                            <h2 className="section-title">Complexity Table</h2>
-                            <div className="complexity-table-wrapper">
-                                <table className="complexity-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Method</th>
-                                            <th>Time Complexity</th>
-                                            <th>Space Complexity</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {complexityTable.map((row, idx) => (
-                                            <tr key={idx}>
-                                                <td className="method-name">
-                                                    {row.method}
-                                                    <span className="info-icon">ⓘ</span>
-                                                </td>
-                                                <td className="complexity-val">{row.time}</td>
-                                                <td className="complexity-val">{row.space}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-                    )}
 
                     {/* Approaches Section */}
                     <section ref={sections.approaches} id="approaches">
@@ -311,9 +274,9 @@ const SolutionPage = () => {
                 .video-frame-wrapper { border-radius: 24px; overflow: hidden; border: 1px solid #222; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
                 .section-container { margin-bottom: 5rem; }
-                .section-title { font-size: 1.6rem; color: #fff; font-weight: 700; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 1rem; }
-                .section-title::before { content: ''; width: 4px; height: 1.2em; background: #f57c00; border-radius: 2px; }
-                .problem-text { font-size: 1.15rem; line-height: 1.9; color: #aaa; margin-bottom: 2.5rem; }
+                .section-title { font-size: 1.6rem; color: var(--accent-orange); font-weight: 700; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 1rem; }
+                .section-title::before { content: ''; width: 4px; height: 1.2em; background: rgba(245, 124, 0, 0.3); border-radius: 2px; }
+                .problem-text { font-size: 1.15rem; line-height: 1.9; color: #ccc; margin-bottom: 2.5rem; }
 
                 .analytical-overview-card { background: #111; padding: 2.5rem; border-radius: 20px; border: 1px solid #222; margin-bottom: 3rem; }
                 .analytical-overview-card h3 { color: #fff; margin-top: 0; font-size: 1.3rem; margin-bottom: 1.2rem; }
@@ -341,7 +304,7 @@ const SolutionPage = () => {
                 .approach-number { background: #333; color: #fff; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; }
                 .approach-card.expanded .approach-number { background: #f57c00; color: #000; }
                 .approach-card.expanded .approach-toggle { background: #181818; border-bottom: 1px solid #222; }
-                .approach-toggle h3 { margin: 0; color: #fff; font-size: 1.5rem; font-weight: 700; }
+                .approach-toggle h3 { margin: 0; color: #fff; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
                 .approach-details { padding: 0 2.8rem 2.8rem 2.8rem; }
                 .concept-text { color: #999; line-height: 1.8; font-size: 1.1rem; margin: 2rem 0; }
                 .algo-steps h4 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }

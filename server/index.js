@@ -476,7 +476,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a premium, concise solution guide for LeetCode question "${questionId}".
-        Focus on high-impact pedagogical value and professional formatting.
+        Follow the structure of a professional technical article similar to premium platforms like NeetCode or LeetCode Editorial.
 
         Required JSON Structure:
         {
@@ -484,26 +484,28 @@ app.get('/api/solution/:questionId', async (req, res) => {
           "title": "Problem Title",
           "difficulty": "Easy, Medium, or Hard",
           "topics": ["Topic", "Topic"],
-          "problemStatement": "Clear problem description.",
-          "analyticalOverview": "A concise (1-2 paragraph) overview of the core intuition and breakthrough logic. No fluff.",
+          "problemStatement": "Clear, concise problem description.",
           "examples": [
              { "input": "...", "output": "...", "explanation": "Brief, clear explanation." }
           ],
-          "complexityTable": [
-             { "method": "Naive Approach", "time": "O(...)", "space": "O(...)" },
-             { "method": "Optimal Approach", "time": "O(...)", "space": "O(...)" }
-          ],
           "approaches": [
              {
-               "name": "Naive Approach",
-               "concept": "Core idea behind the brute force...",
+               "name": "Brute Force",
+               "concept": "1-2 sentence high-level idea.",
                "steps": ["Step 1", "Step 2"],
                "complexity": { "time": "O(...)", "space": "O(...)" },
                "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
              },
              {
-               "name": "Optimal Approach",
-               "concept": "The breakthrough insight and optimization phase...",
+               "name": "Better Approach",
+               "concept": "1-2 sentence optimization insight.",
+               "steps": ["Step 1", "Step 2"],
+               "complexity": { "time": "O(...)", "space": "O(...)" },
+               "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
+             },
+             {
+               "name": "Optimal Solution",
+               "concept": "1-2 sentence breakthrough logic.",
                "steps": ["Step 1", "Step 2"],
                "complexity": { "time": "O(...)", "space": "O(...)" },
                "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
@@ -513,8 +515,11 @@ app.get('/api/solution/:questionId', async (req, res) => {
 
         Rules:
         1. Return ONLY valid JSON.
-        2. Provide 2-3 distinct approaches.
-        3. Avoid excessive verbosity; focus on clear, high-impact learning.
+        2. Provide exactly these 3 approaches: "Brute Force", "Better Approach", and "Optimal Solution".
+        3. No "analyticalOverview" or "complexityTable" fields.
+        4. "complexity" fields (time, space) must ONLY contain Big O notation (e.g., "O(N)") with NO DESCRIPTIVE TEXT.
+        5. "concept" and "steps" should be punchy and clear.
+        6. Tone: Professional, pedagogical, and concise. Avoid fluff.
         `;
 
         const result = await model.generateContent(prompt);
