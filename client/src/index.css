@@ -127,6 +127,84 @@ body {
   font-family: var(--font-family);
 }
 
+/* Navbar Search Integration Styles */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.nav-search-form {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  overflow: hidden;
+  width: 0;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.nav-search-container.active .nav-search-form {
+  width: 180px;
+  opacity: 1;
+  pointer-events: all;
+  padding: 0.2rem 0.2rem 0.2rem 1rem;
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 15px rgba(245, 124, 0, 0.2);
+}
+
+.nav-search-form input {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-size: 0.9rem;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.nav-search-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  padding: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+}
+
+.nav-search-btn:hover {
+  color: var(--accent-orange);
+}
+
+.nav-search-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.nav-search-toggle:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  background: rgba(245, 124, 0, 0.1);
+  transform: scale(1.1);
+}
+
 /* Download Extension Button */
 .btn-download-ext {
   background: rgba(255, 255, 255, 0.05);
@@ -155,6 +233,7 @@ body {
   background: linear-gradient(45deg, var(--accent-orange), #ff4d4d);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   opacity: 0.5;
   transition: opacity 0.3s ease;

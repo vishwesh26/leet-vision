@@ -37,15 +37,27 @@ function AppContent({ savedVideos, onToggleSave }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Context
   const { leetcodeUsername, disconnect, syncWithLeetCode, isSyncing } = useSolved();
   const [showConnectModal, setShowConnectModal] = useState(false);
+
+  // Search State
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Determine if we should show 'has-results' style (solid background) on navbar
   // If not on Home OR if on Home but scrolled down (handled by CSS sticky? No, original had JS Logic)
   // Original logic: view !== 'home' 
   const isHome = location.pathname === '/';
   const navbarClass = !isHome ? 'has-results' : '';
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/solution/${searchQuery.trim()}`);
+      setSearchQuery('');
+      setIsSearchOpen(false);
+    }
+  };
 
   return (
     <>
@@ -108,6 +120,29 @@ function AppContent({ savedVideos, onToggleSave }) {
           >
             Download Extension
           </a>
+
+          {/* Navbar Search Integration */}
+          <div className={`nav-search-container ${isSearchOpen ? 'active' : ''}`}>
+            <form onSubmit={handleSearchSubmit} className="nav-search-form">
+              <input
+                type="text"
+                placeholder="question no. eg. 12"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus={isSearchOpen}
+              />
+              <button type="submit" className="nav-search-btn">
+                <FaSearch />
+              </button>
+            </form>
+            <button
+              className="nav-search-toggle"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              aria-label="Toggle Search"
+            >
+              {isSearchOpen ? <FaTimes /> : <FaSearch />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Actions: Menu */}

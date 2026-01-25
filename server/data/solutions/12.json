@@ -1,0 +1,86 @@
+{
+  "questionId": "12",
+  "title": "Integer to Roman",
+  "difficulty": "Medium",
+  "topics": [
+    "Math",
+    "String",
+    "Greedy"
+  ],
+  "problemStatement": "Given an integer, convert it to a Roman numeral. The input is guaranteed to be within the range from 1 to 3999.",
+  "analyticalOverview": "The core of converting an integer to a Roman numeral lies in recognizing that Roman numerals are formed by combining symbols representing specific values (e.g., I=1, V=5, X=10) and special subtractive combinations (e.g., IV=4, IX=9). The most efficient strategy is a greedy approach: iterate through a predefined list of Roman numeral values (including the subtractive cases) from largest to smallest. For each value, repeatedly subtract it from the input number and append its corresponding symbol to the result until the input number is smaller than that value. This ensures we always use the largest possible Roman numeral at each step, building the representation correctly.",
+  "examples": [
+    {
+      "input": "3",
+      "output": "III",
+      "explanation": "3 is represented as three ones."
+    },
+    {
+      "input": "58",
+      "output": "LVIII",
+      "explanation": "50 (L) + 5 (V) + 3 (III) = 58."
+    },
+    {
+      "input": "1994",
+      "output": "MCMXCIV",
+      "explanation": "1000 (M) + 900 (CM) + 90 (XC) + 4 (IV) = 1994."
+    }
+  ],
+  "complexityTable": [
+    {
+      "method": "Greedy Mapping Approach",
+      "time": "O(1)",
+      "space": "O(1)"
+    },
+    {
+      "method": "Digit-by-Digit Approach",
+      "time": "O(1)",
+      "space": "O(1)"
+    }
+  ],
+  "approaches": [
+    {
+      "name": "Greedy Mapping Approach",
+      "concept": "This approach predefines all standard and subtractive Roman numeral values and their symbols in descending order. It then iteratively subtracts the largest possible value from the input number, appending its symbol to the result, until the number becomes zero. This greedy strategy naturally constructs the shortest and correct Roman numeral.",
+      "steps": [
+        "Create two arrays: one for integer values (e.g., 1000, 900, 500, ...) and another for their corresponding Roman symbols (e.g., 'M', 'CM', 'D', ...). Ensure values are in descending order and include subtractive cases (900, 400, 90, 40, 9, 4).",
+        "Initialize an empty string builder (or string) for the result.",
+        "Iterate through the values array from the beginning (largest value) to the end.",
+        "For each value `v` and its symbol `s`: while the input number `num` is greater than or equal to `v`, append `s` to the result and subtract `v` from `num`.",
+        "Return the accumulated result string."
+      ],
+      "complexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      },
+      "codes": {
+        "python": "class Solution:\n    def intToRoman(self, num: int) -> str:\n        values = [\n            1000, 900, 500, 400, \n            100, 90, 50, 40, \n            10, 9, 5, 4, 1\n        ]\n        symbols = [\n            \"M\", \"CM\", \"D\", \"CD\", \n            \"C\", \"XC\", \"L\", \"XL\", \n            \"X\", \"IX\", \"V\", \"IV\", \"I\"\n        ]\n        \n        roman_numeral = []\n        for i in range(len(values)):\n            while num >= values[i]:\n                roman_numeral.append(symbols[i])\n                num -= values[i]\n        \n        return \"\".join(roman_numeral)",
+        "javascript": "/**\n * @param {number} num\n * @return {string}\n */\nvar intToRoman = function(num) {\n    const values = [\n        1000, 900, 500, 400, \n        100, 90, 50, 40, \n        10, 9, 5, 4, 1\n    ];\n    const symbols = [\n        \"M\", \"CM\", \"D\", \"CD\", \n        \"C\", \"XC\", \"L\", \"XL\", \n        \"X\", \"IX\", \"V\", \"IV\", \"I\"\n    ];\n    \n    let romanNumeral = [];\n    for (let i = 0; i < values.length; i++) {\n        while (num >= values[i]) {\n            romanNumeral.push(symbols[i]);\n            num -= values[i];\n        }\n    }\n    \n    return romanNumeral.join('');\n};",
+        "cpp": "class Solution {\npublic:\n    string intToRoman(int num) {\n        vector<int> values = {\n            1000, 900, 500, 400, \n            100, 90, 50, 40, \n            10, 9, 5, 4, 1\n        };\n        vector<string> symbols = {\n            \"M\", \"CM\", \"D\", \"CD\", \n            \"C\", \"XC\", \"L\", \"XL\", \n            \"X\", \"IX\", \"V\", \"IV\", \"I\"\n        };\n        \n        string romanNumeral = \"\";\n        for (int i = 0; i < values.size(); ++i) {\n            while (num >= values[i]) {\n                romanNumeral += symbols[i];\n                num -= values[i];\n            }\n        }\n        \n        return romanNumeral;\n    }\n};",
+        "java": "class Solution {\n    public String intToRoman(int num) {\n        int[] values = {\n            1000, 900, 500, 400,\n            100, 90, 50, 40,\n            10, 9, 5, 4, 1\n        };\n        String[] symbols = {\n            \"M\", \"CM\", \"D\", \"CD\",\n            \"C\", \"XC\", \"L\", \"XL\",\n            \"X\", \"IX\", \"V\", \"IV\", \"I\"\n        };\n        \n        StringBuilder romanNumeral = new StringBuilder();\n        for (int i = 0; i < values.length; i++) {\n            while (num >= values[i]) {\n                romanNumeral.append(symbols[i]);\n                num -= values[i];\n            }\n        }\n        \n        return romanNumeral.toString();\n    }\n}"
+      }
+    },
+    {
+      "name": "Digit-by-Digit Approach",
+      "concept": "This method processes the integer digit by digit, from thousands down to ones. For each place value, it converts the corresponding digit into its Roman numeral representation based on a predefined set of rules or mappings for numbers 1-3, 4, 5-8, and 9. This approach explicitly breaks down the problem by magnitude.",
+      "steps": [
+        "Define four arrays or functions for Roman symbols corresponding to ones (I, V, X), tens (X, L, C), hundreds (C, D, M), and thousands (M). These arrays handle the patterns for digits 0-9 in their respective place values.",
+        "Extract the thousands digit (`num / 1000`). Append the corresponding 'M's.",
+        "Extract the hundreds digit (`(num % 1000) / 100`). Use the hundreds mapping to convert this digit (e.g., 400 -> 'CD', 600 -> 'DC').",
+        "Extract the tens digit (`(num % 100) / 10`). Use the tens mapping.",
+        "Extract the ones digit (`num % 10`). Use the ones mapping.",
+        "Concatenate the Roman numerals generated for thousands, hundreds, tens, and ones."
+      ],
+      "complexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      },
+      "codes": {
+        "python": "class Solution:\n    def intToRoman(self, num: int) -> str:\n        M = [\"\", \"M\", \"MM\", \"MMM\"]\n        C = [\"\", \"C\", \"CC\", \"CCC\", \"CD\", \"D\", \"DC\", \"DCC\", \"DCCC\", \"CM\"]\n        X = [\"\", \"X\", \"XX\", \"XXX\", \"XL\", \"L\", \"LX\", \"LXX\", \"LXXX\", \"XC\"]\n        I = [\"\", \"I\", \"II\", \"III\", \"IV\", \"V\", \"VI\", \"VII\", \"VIII\", \"IX\"]\n        \n        thousands = M[num // 1000]\n        hundreds = C[(num % 1000) // 100]\n        tens = X[(num % 100) // 10]\n        ones = I[num % 10]\n        \n        return thousands + hundreds + tens + ones",
+        "javascript": "/**\n * @param {number} num\n * @return {string}\n */\nvar intToRoman = function(num) {\n    const M = [\"\", \"M\", \"MM\", \"MMM\"];\n    const C = [\"\", \"C\", \"CC\", \"CCC\", \"CD\", \"D\", \"DC\", \"DCC\", \"DCCC\", \"CM\"];\n    const X = [\"\", \"X\", \"XX\", \"XXX\", \"XL\", \"L\", \"LX\", \"LXX\", \"LXXX\", \"XC\"];\n    const I = [\"\", \"I\", \"II\", \"III\", \"IV\", \"V\", \"VI\", \"VII\", \"VIII\", \"IX\"];\n    \n    let thousands = M[Math.floor(num / 1000)];\n    let hundreds = C[Math.floor((num % 1000) / 100)];\n    let tens = X[Math.floor((num % 100) / 10)];\n    let ones = I[num % 10];\n    \n    return thousands + hundreds + tens + ones;\n};",
+        "cpp": "class Solution {\npublic:\n    string intToRoman(int num) {\n        string M[] = {\"\", \"M\", \"MM\", \"MMM\"};\n        string C[] = {\"\", \"C\", \"CC\", \"CCC\", \"CD\", \"D\", \"DC\", \"DCC\", \"DCCC\", \"CM\"};\n        string X[] = {\"\", \"X\", \"XX\", \"XXX\", \"XL\", \"L\", \"LX\", \"LXX\", \"LXXX\", \"XC\"};\n        string I[] = {\"\", \"I\", \"II\", \"III\", \"IV\", \"V\", \"VI\", \"VII\", \"VIII\", \"IX\"};\n        \n        return M[num / 1000] +\n               C[(num % 1000) / 100] +\n               X[(num % 100) / 10] +\n               I[num % 10];\n    }\n};",
+        "java": "class Solution {\n    public String intToRoman(int num) {\n        String[] M = {\"\", \"M\", \"MM\", \"MMM\"};\n        String[] C = {\"\", \"C\", \"CC\", \"CCC\", \"CD\", \"D\", \"DC\", \"DCC\", \"DCCC\", \"CM\"};\n        String[] X = {\"\", \"X\", \"XX\", \"XXX\", \"XL\", \"L\", \"LX\", \"LXX\", \"LXXX\", \"XC\"};\n        String[] I = {\"\", \"I\", \"II\", \"III\", \"IV\", \"V\", \"VI\", \"VII\", \"VIII\", \"IX\"};\n        \n        return M[num / 1000] +\n               C[(num % 1000) / 100] +\n               X[(num % 100) / 10] +\n               I[num % 10];\n    }\n}"
+      }
+    }
+  ]
+}
