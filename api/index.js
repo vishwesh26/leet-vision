@@ -484,7 +484,6 @@ const solutionSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
-// Define Article Schema for Tech News
 const articleSchema = new mongoose.Schema({
     title: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
@@ -497,9 +496,25 @@ const articleSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }
 });
 
+const companyQuestionSchema = new mongoose.Schema({
+    company: { type: String, required: true, index: true },
+    title: { type: String, required: true },
+    difficulty: { type: String, required: true },
+    frequency: { type: Number, default: 0 },
+    acceptanceRate: { type: Number, default: 0 },
+    topics: [String],
+    leetcodeUrl: { type: String, required: true },
+    questionId: { type: String, index: true }, 
+    updatedAt: { type: Date, default: Date.now }
+});
+
+// Compound index for uniqueness (per company)
+companyQuestionSchema.index({ company: 1, leetcodeUrl: 1 }, { unique: true });
+
 // Get Models
 const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
 const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
+const CompanyQuestion = mongoose.models.CompanyQuestion || mongoose.model('CompanyQuestion', companyQuestionSchema);
 
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
@@ -714,6 +729,55 @@ try {
 } catch (err) {
     console.error('Error loading companies.json:', err);
 }
+
+// Company-Wise Questions API (Paginated & Searchable)
+app.get('/api/companies', async (req, res) => {
+    try {
+        await connectDB();
+        // Get unique companies and their counts
+        const companies = await CompanyQuestion.aggregate([
+            { $group: { _id: "$company", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
+        ]);
+        res.json(companies.map(c => ({ name: c._id, count: c.count })));
+    } catch (err) {
+        console.error("Fetch Companies Error:", err);
+        res.status(500).json({ error: 'Failed to fetch companies' });
+    }
+});
+
+app.get('/api/company/:name/questions', async (req, res) => {
+    try {
+        await connectDB();
+        const { name } = req.params;
+        const { difficulty, topic, search, sort = 'frequency', order = 'desc', page = 1, limit = 50 } = req.query;
+
+        const query = { company: new RegExp(`^${name}$`, 'i') };
+        if (difficulty) query.difficulty = difficulty;
+        if (topic) query.topics = topic;
+        if (search) query.title = new RegExp(search, 'i');
+
+        const sortObj = {};
+        sortObj[sort] = order === 'asc' ? 1 : -1;
+
+        const questions = await CompanyQuestion.find(query)
+            .sort(sortObj)
+            .skip((page - 1) * limit)
+            .limit(parseInt(limit));
+
+        const total = await CompanyQuestion.countDocuments(query);
+
+        res.json({
+            questions,
+            total,
+            page: parseInt(page),
+            pages: Math.ceil(total / limit)
+        });
+    } catch (err) {
+        console.error("Fetch Company Questions Error:", err);
+        res.status(500).json({ error: 'Failed to fetch company questions' });
+    }
+});
 
 // Company Endpoint
 app.get('/api/company/:companyName', async (req, res) => {
