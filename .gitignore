@@ -37,3 +37,8 @@ src_backup/
 *_backup/
 node_modules_old/
 .DS_Store
+
+# External Data & Caches
+leetcode-company-wise-problems-main/
+server/data/solutions/
+server/data/videoCache.json

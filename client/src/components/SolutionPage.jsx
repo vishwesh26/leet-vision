@@ -95,7 +95,7 @@ const SolutionPage = () => {
 
                     <header className="article-header">
                         <div className="header-top">
-                            <h1 className="problem-title">{data.title}</h1>
+                            <h1 className="problem-title">#{id}. {data.title}</h1>
                             <div className="difficulty-tag">
                                 <IoMdFlash color="#f57c00" />
                                 <span style={{ color: difficulty === 'Hard' ? '#ff4b2b' : difficulty === 'Easy' ? '#00c853' : '#f57c00' }}>{difficulty}</span>

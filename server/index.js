@@ -8,6 +8,7 @@ dotenv.config();
 
 const fs = require('fs');
 const path = require('path');
+const CompanyQuestion = require('./models/CompanyQuestion');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -614,6 +615,55 @@ try {
     console.error('Error loading company_plans.json:', err);
     companyPlans = {};
 }
+
+// Company-Wise Questions API (Paginated & Searchable)
+app.get('/api/companies', async (req, res) => {
+    try {
+        await connectDB();
+        // Get unique companies and their counts
+        const companies = await CompanyQuestion.aggregate([
+            { $group: { _id: "$company", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
+        ]);
+        res.json(companies.map(c => ({ name: c._id, count: c.count })));
+    } catch (err) {
+        console.error("Fetch Companies Error:", err);
+        res.status(500).json({ error: 'Failed to fetch companies' });
+    }
+});
+
+app.get('/api/company/:name/questions', async (req, res) => {
+    try {
+        await connectDB();
+        const { name } = req.params;
+        const { difficulty, topic, search, sort = 'frequency', order = 'desc', page = 1, limit = 50 } = req.query;
+
+        const query = { company: new RegExp(`^${name}$`, 'i') };
+        if (difficulty) query.difficulty = difficulty;
+        if (topic) query.topics = topic;
+        if (search) query.title = new RegExp(search, 'i');
+
+        const sortObj = {};
+        sortObj[sort] = order === 'asc' ? 1 : -1;
+
+        const questions = await CompanyQuestion.find(query)
+            .sort(sortObj)
+            .skip((page - 1) * limit)
+            .limit(parseInt(limit));
+
+        const total = await CompanyQuestion.countDocuments(query);
+
+        res.json({
+            questions,
+            total,
+            page: parseInt(page),
+            pages: Math.ceil(total / limit)
+        });
+    } catch (err) {
+        console.error("Fetch Company Questions Error:", err);
+        res.status(500).json({ error: 'Failed to fetch company questions' });
+    }
+});
 
 app.get('/api/company/:name/plan', async (req, res) => {
     try {

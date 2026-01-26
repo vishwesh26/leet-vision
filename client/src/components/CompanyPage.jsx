@@ -88,7 +88,7 @@ const CompanyPage = () => {
                 {/* Title */}
                 <div>
                     <h3 style={{ fontSize: '1.2rem', margin: 0, lineHeight: 1.4 }}>
-                        <span style={{ color: '#888', marginRight: '0.5rem' }}>{problem.id}.</span>
+                        <span style={{ color: '#888', marginRight: '0.5rem' }}>#{problem.id}.</span>
                         {problem.title}
                     </h3>
                 </div>

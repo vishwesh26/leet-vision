@@ -29,6 +29,8 @@ import Contact from './components/Contact';
 import BlogList from './components/BlogList';
 import BlogPost from './components/BlogPost';
 import DailyTechPage from './components/DailyTechPage';
+import CompanyListingPage from './components/CompanyListingPage';
+import CompanyDetailPage from './components/CompanyDetailPage';
 
 function AppContent({ savedVideos, onToggleSave }) {
   // Helper to close mobile menu or handle extensive nav logic if needed
@@ -93,17 +95,7 @@ function AppContent({ savedVideos, onToggleSave }) {
               </div>
             </li>
             <li className="nav-item"><Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link></li>
-            <li className="nav-item dropdown">
-              Companies ▾
-              <div className="dropdown-content">
-                <div><Link to="/company/google" style={{ color: 'inherit', textDecoration: 'none' }}>Google</Link></div>
-                <div><Link to="/company/microsoft" style={{ color: 'inherit', textDecoration: 'none' }}>Microsoft</Link></div>
-                <div><Link to="/company/amazon" style={{ color: 'inherit', textDecoration: 'none' }}>Amazon</Link></div>
-                <div><Link to="/company/meta" style={{ color: 'inherit', textDecoration: 'none' }}>Meta</Link></div>
-                <div><Link to="/company/apple" style={{ color: 'inherit', textDecoration: 'none' }}>Apple</Link></div>
-                <div style={{ borderTop: '1px solid #333' }}><Link to="/company-questions" style={{ color: 'inherit', textDecoration: 'none' }}>All Companies</Link></div>
-              </div>
-            </li>
+            <li className="nav-item"><Link to="/companies" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
             <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
             <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>My Progress</Link></li>
             <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
@@ -190,12 +182,7 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/topics/graph" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Graphs</Link>
 
             <div className="mobile-divider">Companies</div>
-            <Link to="/company/google" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Google</Link>
-            <Link to="/company/microsoft" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Microsoft</Link>
-            <Link to="/company/amazon" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Amazon</Link>
-            <Link to="/company/meta" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Meta</Link>
-            <Link to="/company/apple" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Apple</Link>
-            <Link to="/company-questions" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>All Companies</Link>
+            <Link to="/companies" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Browse All Companies</Link>
 
             <div className="mobile-divider">More</div>
             <Link to="/interview-roadmap" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
@@ -254,6 +241,8 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/company/:company" element={<CompanyPrepPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
 
           <Route path="/interview-roadmap" element={<RoadmapPage />} />
+          <Route path="/companies" element={<CompanyListingPage />} />
+          <Route path="/company-questions/:companyName" element={<CompanyDetailPage />} />
           <Route path="/company-questions" element={<CompanyPage />} />
           <Route path="/daily" element={<DailyPage />} />
 
