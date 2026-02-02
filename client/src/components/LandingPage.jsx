@@ -256,7 +256,7 @@ const LandingPage = () => {
                                 Start Solving <FaArrowRight />
                             </Link>
 
-                            <Link to="/company-questions" style={{
+                            <Link to="/companies" style={{
                                 padding: '1rem 3rem',
                                 background: 'rgba(5,5,5,0.6)', /* Semi-transparent back for readability */
                                 backdropFilter: 'blur(10px)',
