@@ -25,16 +25,29 @@ const SolutionPage = () => {
     };
 
     useEffect(() => {
-        const fetchSolution = async () => {
+        const fetchSolution = async (retryCount = 0) => {
             setLoading(true);
             setError('');
             try {
                 const API_BASE = import.meta.env.VITE_API_URL || '';
-                const response = await axios.get(`${API_BASE}/api/solution/${id}`);
+                // Increased timeout to 60s for AI generation
+                const response = await axios.get(`${API_BASE}/api/solution/${id}`, {
+                    timeout: 60000
+                });
                 setData(response.data);
             } catch (err) {
-                console.error(err);
-                setError('Failed to load solution. Please ensure your API key is configured.');
+                console.error("Fetch Error:", err);
+
+                // If it's a network error or timeout, and we haven't retried yet, try once more
+                // This handles cases where the first request triggers generation but times out,
+                // and the second one (retry) will likely hit the database.
+                if (retryCount < 1 && (err.code === 'ERR_NETWORK' || err.code === 'ECONNABORTED')) {
+                    console.log("Retrying fetch...");
+                    setTimeout(() => fetchSolution(retryCount + 1), 2000);
+                    return;
+                }
+
+                setError('Failed to load solution. The AI generation might be taking longer than expected. Please try refreshing the page.');
             } finally {
                 setLoading(false);
             }

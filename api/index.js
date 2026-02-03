@@ -74,6 +74,38 @@ try {
     companyPlans = {};
 }
 
+// Logo Proxy to avoid frontend 404s
+app.get('/api/logo/:domain', async (req, res) => {
+    const { domain } = req.params;
+    try {
+        const services = [
+            `https://logo.clearbit.com/${domain}`,
+            `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
+            `https://icon.horse/icon/${domain}`
+        ];
+        
+        for (const url of services) {
+            try {
+                const response = await axios.get(url, { 
+                    responseType: 'arraybuffer',
+                    timeout: 2000,
+                    headers: { 'User-Agent': 'Mozilla/5.0' }
+                });
+                if (response.status === 200) {
+                    res.set('Content-Type', response.headers['content-type']);
+                    res.set('Cache-Control', 'public, max-age=86400'); // 24h cache
+                    return res.send(response.data);
+                }
+            } catch (e) {
+                continue; 
+            }
+        }
+        res.status(404).json({ error: 'Logo not found' });
+    } catch (err) {
+        res.status(404).json({ error: 'Logo not found' });
+    }
+});
+
 
 // Helper: Get or Fetch Video (Quota Efficient)
 // fetchIfMissing: true = perform API call if cache miss. false = return null/empty if cache miss.
