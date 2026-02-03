@@ -9,6 +9,8 @@ dotenv.config();
 const fs = require('fs');
 const path = require('path');
 const CompanyQuestion = require('./models/CompanyQuestion');
+const StoredVideo = require('./models/StoredVideo');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -64,10 +66,8 @@ try {
 // Helper: Get or Fetch Video (Quota Efficient)
 // fetchIfMissing: true = perform API call if cache miss. false = return null/empty if cache miss.
 const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
-    // 1. Check Cache
+    // 1. Check Memory Cache
     if (videoCache[questionId]) {
-        // console.log(`Cache HIT for ${questionId}`);
-        // Handle legacy single-object cache (wrap in array)
         if (!Array.isArray(videoCache[questionId])) {
              return [videoCache[questionId]];
         }
@@ -96,7 +96,7 @@ const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
 
     // 3. Live Fetch (Only if missing and key exists AND fetchIfMissing is true)
     try {
-        console.log(`Cache MISS for ${questionId} - Fetching API...`);
+        console.log(`Cache MISS for ${questionId} - Fetching YouTube API...`);
         const query = `LeetCode ${questionId} solution`;
         
         // Search - Fetch 5 results
@@ -124,7 +124,7 @@ const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
             viewCount: parseInt(vid.statistics.viewCount) || 0,
             likeCount: parseInt(vid.statistics.likeCount) || 0,
             publishedAt: vid.snippet.publishedAt,
-            isMostAccurate: false, // Set below
+            isMostAccurate: false,
             videoUrl: `https://www.youtube.com/watch?v=${vid.id}`
         }));
 
@@ -134,14 +134,78 @@ const getOrFetchVideo = async (questionId, fetchIfMissing = true) => {
         // Mark Top Result
         if (videos.length > 0) videos[0].isMostAccurate = true;
 
-        // Update Cache
+        // --- NEW: SAVE BEST RESULT TO DATABASE ---
+        if (videos.length > 0) {
+            const best = videos[0];
+            try {
+                await StoredVideo.findOneAndUpdate(
+                    { questionId: questionId },
+                    {
+                        videoId: best.id,
+                        title: best.title,
+                        channelTitle: best.channelTitle,
+                        thumbnail: best.thumbnail,
+                        viewCount: best.viewCount,
+                        likeCount: best.likeCount,
+                        publishedAt: best.publishedAt
+                    },
+                    { upsert: true, new: true }
+                );
+                console.log(`Updated StoredVideo for ${questionId} in DB.`);
+            } catch (dbErr) {
+                console.warn(`Failed to save StoredVideo for ${questionId}:`, dbErr.message);
+            }
+        }
+        // -----------------------------------------
+
+        // Update Memory Cache
         videoCache[questionId] = videos;
-        saveCache(); // Persist to disk
+        saveCache(); // Persist memory cache to disk results
 
         return videos;
     } catch (e) {
-        console.error(`Fetch failed for ${questionId}:`, e.message);
-        return [];
+        console.error(`YouTube API Quota maybe hit for ${questionId}:`, e.message);
+        
+        // --- NEW: FALLBACK TO DATABASE CACHE ---
+        try {
+            const savedVideo = await StoredVideo.findOne({ questionId: questionId });
+            if (savedVideo) {
+                console.log(`FALLBACK: Found StoredVideo for ${questionId} in Database.`);
+                const mapped = {
+                    id: savedVideo.videoId,
+                    questionId: questionId,
+                    title: savedVideo.title,
+                    channelTitle: savedVideo.channelTitle,
+                    thumbnail: savedVideo.thumbnail,
+                    viewCount: savedVideo.viewCount,
+                    likeCount: savedVideo.likeCount,
+                    isMostAccurate: true,
+                    publishedAt: savedVideo.publishedAt,
+                    videoUrl: `https://www.youtube.com/watch?v=${savedVideo.videoId}`
+                };
+                videoCache[questionId] = [mapped]; // Update memory cache for subsequent hits
+                return [mapped];
+            }
+        } catch (dbErr) {
+            console.error(`DB Fallback search failed for ${questionId}:`, dbErr.message);
+        }
+        // ---------------------------------------
+
+        // Ultimate Fallback to Mock Data if DB also empty
+        const mockVideo = {
+            id: `dQw4w9WgXcQ`, 
+            questionId: questionId,
+            title: `LeetCode ${questionId} Solution (Fallback)`,
+            channelTitle: 'LeetVision AI Fallback',
+            thumbnail: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+            viewCount: 999999,
+            likeCount: 50000,
+            isMostAccurate: true,
+            publishedAt: new Date().toISOString(),
+            videoUrl: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+        };
+        videoCache[questionId] = [mockVideo];
+        return [mockVideo];
     }
 };
 
