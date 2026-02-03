@@ -9,8 +9,20 @@ dotenv.config();
 const fs = require('fs');
 const path = require('path');
 const CompanyQuestion = require('./models/CompanyQuestion');
-const StoredVideo = require('./models/StoredVideo');
 const mongoose = require('mongoose');
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('MongoDB connection error:', err));
+const cookieParser = require('cookie-parser');
+const authRoutes = require('./routes/auth');
+const paymentRoutes = require('./routes/payment');
+const User = require('./models/User'); 
+const Purchase = require('./models/Purchase');
+const StoredVideo = require('./models/StoredVideo');
+const SurveyResponse = require('./models/SurveyResponse');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -48,8 +60,56 @@ const saveCache = () => {
     }
 };
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        'http://localhost:5173', 
+        'http://localhost:5174', 
+        'http://localhost:3000',
+        'https://leet-vision.vercel.app'
+    ],
+    credentials: true
+}));
 app.use(express.json());
+app.use(cookieParser());
+
+// Auth Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/payment', paymentRoutes);
+
+// Logo Proxy to avoid frontend 404s
+app.get('/api/logo/:domain', async (req, res) => {
+    const { domain } = req.params;
+    try {
+        const services = [
+            `https://logo.clearbit.com/${domain}`,
+            `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
+            `https://icon.horse/icon/${domain}`
+        ];
+        
+        // Try Clearbit first as it's high quality, fallback to Google
+        for (const url of services) {
+            try {
+                const response = await axios.get(url, { 
+                    responseType: 'arraybuffer',
+                    timeout: 2000,
+                    headers: { 'User-Agent': 'Mozilla/5.0' }
+                });
+                if (response.status === 200) {
+                    res.set('Content-Type', response.headers['content-type']);
+                    res.set('Cache-Control', 'public, max-age=86400'); // 24h cache
+                    return res.send(response.data);
+                }
+            } catch (e) {
+                continue;
+            }
+        }
+        throw new Error('All services failed');
+    } catch (err) {
+        // Return a generic transparent 1x1 pixel or a simple SVG to avoid 404
+        res.set('Content-Type', 'image/svg+xml');
+        res.send('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>');
+    }
+});
 
 // Load problems database (Using require for Vercel bundling compatibility)
 let problemsDb = [];
@@ -399,8 +459,6 @@ app.post('/api/sync/:username', async (req, res) => {
 // AI Solution Generator + MongoDB Persistence
 // ---------------------------------------------
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const mongoose = require('mongoose');
-
 // File Cache Fallback (Legacy/Dev)
 const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
 if (!fs.existsSync(SOLUTIONS_DIR)) {
@@ -696,35 +754,76 @@ app.get('/api/companies', async (req, res) => {
     }
 });
 
+// Company Questions
 app.get('/api/company/:name/questions', async (req, res) => {
     try {
-        await connectDB();
         const { name } = req.params;
-        const { difficulty, topic, search, sort = 'frequency', order = 'desc', page = 1, limit = 50 } = req.query;
+        const { page = 1, limit = 50, sort = 'frequency', order = 'desc', search = '', difficulty = '' } = req.query;
+        
+        // Access Control Logic
+        let hasAccess = false;
+        const token = req.cookies.jwt; // Corrected from 'token' to 'jwt'
+        if (token) {
+            try {
+                const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_keep_it_safe';
+                const decoded = jwt.verify(token, JWT_SECRET);
+                const purchase = await Purchase.findOne({
+                    userId: decoded.id, // Corrected from 'userId' to 'id'
+                    companies: name
+                });
+                if (purchase) hasAccess = true;
+            } catch (err) {
+                // Token invalid or expired, proceed as guest
+            }
+        }
 
-        const query = { company: new RegExp(`^${name}$`, 'i') };
+        const query = { company: name };
+        if (search) query.title = { $regex: search, $options: 'i' };
         if (difficulty) query.difficulty = difficulty;
-        if (topic) query.topics = topic;
-        if (search) query.title = new RegExp(search, 'i');
 
+        const skip = (page - 1) * limit;
         const sortObj = {};
-        sortObj[sort] = order === 'asc' ? 1 : -1;
-
-        const questions = await CompanyQuestion.find(query)
-            .sort(sortObj)
-            .skip((page - 1) * limit)
-            .limit(parseInt(limit));
+        sortObj[sort] = order === 'desc' ? -1 : 1;
 
         const total = await CompanyQuestion.countDocuments(query);
+        let questions = await CompanyQuestion.find(query)
+            .sort(sortObj)
+            .skip(skip)
+            .limit(parseInt(limit));
+
+        // If no access, only show top 40% of the total questions
+        if (!hasAccess) {
+            const limitCount = Math.ceil(total * 0.4);
+            const allQuestions = await CompanyQuestion.find(query).sort(sortObj);
+            const accessibleQuestions = allQuestions.slice(0, limitCount);
+            
+            // Mark non-accessible ones as locked
+            questions = questions.map(q => {
+                const isAccessible = accessibleQuestions.some(aq => aq._id.toString() === q._id.toString());
+                if (!isAccessible) {
+                    return {
+                        ...q._doc,
+                        isLocked: true,
+                        // Strip sensitive info if needed
+                        leetcodeUrl: '#',
+                        frequency: 0
+                    };
+                }
+                return { ...q._doc, isLocked: false };
+            });
+        } else {
+            questions = questions.map(q => ({ ...q._doc, isLocked: false }));
+        }
 
         res.json({
             questions,
             total,
-            page: parseInt(page),
-            pages: Math.ceil(total / limit)
+            pages: Math.ceil(total / limit),
+            currentPage: parseInt(page),
+            hasAccess
         });
     } catch (err) {
-        console.error("Fetch Company Questions Error:", err);
+        console.error('Company Questions Error:', err);
         res.status(500).json({ error: 'Failed to fetch company questions' });
     }
 });
@@ -827,6 +926,80 @@ app.get('/api/company/:companyName', async (req, res) => {
     await processList(companyData.similar || [], 'similar', title);
 
     res.json(results);
+});
+
+// Survey API
+app.post('/api/survey', async (req, res) => {
+    try {
+        await connectDB();
+        const { response, pricePoint, userId } = req.body;
+        
+        if (!response) {
+            return res.status(400).json({ error: 'Response is required' });
+        }
+
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        
+        // Basic deduplication check (relaxed for testing - 5 minutes)
+        const recentResponse = await SurveyResponse.findOne({
+            ip: ip,
+            createdAt: { $gt: new Date(Date.now() - 5 * 60 * 1000) } // Within last 5 minutes
+        });
+
+        if (recentResponse) {
+            return res.status(429).json({ error: 'Survey already submitted recently' });
+        }
+
+        const surveyData = {
+            response,
+            pricePoint: pricePoint || "N/A",
+            userId: userId || "guest",
+            ip: ip,
+            userAgent: req.headers['user-agent']
+        };
+
+        const newResponse = await SurveyResponse.create(surveyData);
+        res.status(201).json({ message: 'Survey response saved', id: newResponse._id });
+    } catch (err) {
+        console.error("Survey Submission Error:", err);
+        res.status(500).json({ error: 'Failed to submit survey' });
+    }
+});
+
+// Survey Stats (Internal/Admin)
+app.get('/api/survey/stats', async (req, res) => {
+    try {
+        await connectDB();
+        
+        // Count distribution of responses
+        const distribution = await SurveyResponse.aggregate([
+            { $group: { _id: "$response", count: { $sum: 1 } } }
+        ]);
+
+        // Count distribution of price points for "Yes"
+        const pricing = await SurveyResponse.aggregate([
+            { $match: { response: "Yes" } },
+            { $group: { _id: "$pricePoint", count: { $sum: 1 } } },
+            { $sort: { count: -1 } }
+        ]);
+
+        const total = await SurveyResponse.countDocuments();
+        
+        // Get recent responses
+        const recent = await SurveyResponse.find()
+            .sort({ createdAt: -1 })
+            .limit(10);
+
+        res.json({
+            total,
+            distribution,
+            pricing,
+            recent
+        });
+    } catch (err) {
+        console.error("Survey Stats Error:", err);
+        res.status(500).json({ error: 'Failed to fetch survey stats' });
+    }
 });
 
 // Articles APIs

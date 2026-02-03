@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { SolvedProvider, useSolved } from './context/SolvedContext';
-import { FaInstagram, FaLinkedin, FaSearch, FaTimes } from 'react-icons/fa';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { FaInstagram, FaLinkedin, FaSearch, FaTimes, FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 import ConnectModal from './components/ConnectModal';
 import { Analytics } from "@vercel/analytics/react"
 import './index.css';
@@ -31,8 +32,14 @@ import BlogPost from './components/BlogPost';
 import DailyTechPage from './components/DailyTechPage';
 import CompanyListingPage from './components/CompanyListingPage';
 import CompanyDetailPage from './components/CompanyDetailPage';
+import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
+import ProtectedRoute from './components/ProtectedRoute';
+import CheckoutPage from './components/CheckoutPage';
+import SurveyAnalytics from './components/SurveyAnalytics';
 
 function AppContent({ savedVideos, onToggleSave }) {
+  const { user, logout } = useAuth();
   // Helper to close mobile menu or handle extensive nav logic if needed
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile Menu State
@@ -103,6 +110,21 @@ function AppContent({ savedVideos, onToggleSave }) {
             <li className="nav-item"><Link to="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>Blog</Link></li>
           </ul>
 
+          <div className="nav-auth-links">
+            {user ? (
+              <div className="nav-user-menu">
+                <span className="user-greeting">Hi, {user.name.split(' ')[0]}</span>
+                <button onClick={logout} className="logout-btn" title="Logout">
+                  <FaSignOutAlt />
+                </button>
+              </div>
+            ) : (
+              <div className="nav-auth-group">
+                <Link to="/login" className="nav-link auth-link">Sign In</Link>
+              </div>
+            )}
+          </div>
+
           {/* Download Extension Button (Desktop Only) */}
           <a
             href="https://microsoftedge.microsoft.com/addons/detail/dogbidjabcbbhojhlnbfjilppgpenikb"
@@ -165,6 +187,18 @@ function AppContent({ savedVideos, onToggleSave }) {
         {/* Mobile Menu Overlay */}
         <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="mobile-menu-content">
+            {user ? (
+              <div className="mobile-user-info">
+                <span className="mobile-greeting">Hi, {user.name}</span>
+                <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="mobile-logout-btn">
+                  Logout <FaSignOutAlt />
+                </button>
+              </div>
+            ) : (
+              <div className="mobile-auth-group">
+                <Link to="/login" className="mobile-link auth-highlight primary" onClick={() => setIsMobileMenuOpen(false)}>Sign In</Link>
+              </div>
+            )}
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
             <Link to="/blind-75" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Blind 75 List</Link>
             <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
@@ -221,6 +255,8 @@ function AppContent({ savedVideos, onToggleSave }) {
         <Routes>
           {/* New Landing Page at Root */}
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
 
 
           {/* Video / Search Result Page */}
@@ -245,14 +281,23 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/company-questions/:companyName" element={<CompanyDetailPage />} />
           <Route path="/company-questions" element={<CompanyPage />} />
           <Route path="/daily" element={<DailyPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
-          <Route path="/saved" element={<SavedPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+          <Route
+            path="/saved"
+            element={
+              <ProtectedRoute>
+                <SavedPage savedVideos={savedVideos} onToggleSave={onToggleSave} />
+              </ProtectedRoute>
+            }
+          />
 
           {/* AdSense Content Pages */}
           <Route path="/about" element={<About />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/admin/survey" element={<SurveyAnalytics />} />
           <Route path="/contact" element={<Contact />} />
 
           <Route path="/blog" element={<BlogList />} />
@@ -307,14 +352,14 @@ function App() {
 
   return (
     <HelmetProvider>
-      <SolvedProvider>
-        <ErrorBoundary>
+      <AuthProvider>
+        <SolvedProvider>
           <BrowserRouter>
             <AppContent savedVideos={savedVideos} onToggleSave={handleToggleSave} />
             <Analytics />
           </BrowserRouter>
-        </ErrorBoundary>
-      </SolvedProvider>
+        </SolvedProvider>
+      </AuthProvider>
     </HelmetProvider>
   );
 }
