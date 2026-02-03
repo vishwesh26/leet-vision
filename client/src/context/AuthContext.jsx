@@ -1,9 +1,25 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
-const AuthContext = createContext();
+const AuthContext = createContext({
+    user: null,
+    loading: false,
+    error: null,
+    login: async () => ({ success: false }),
+    signup: async () => ({ success: false }),
+    logout: async () => { },
+    refreshUser: async () => { }
+});
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext) || {
+    user: null,
+    loading: false,
+    error: null,
+    login: async () => ({ success: false }),
+    signup: async () => ({ success: false }),
+    logout: async () => { },
+    refreshUser: async () => { }
+};
 
 // Use VITE_API_URL or fallback to localhost
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
