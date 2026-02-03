@@ -540,6 +540,33 @@ const companyQuestionSchema = new mongoose.Schema({
     updatedAt: { type: Date, default: Date.now }
 });
 
+const surveyResponseSchema = new mongoose.Schema({
+    question: {
+        type: String,
+        required: true,
+        default: "Would you pay for Top 100 companies interview question bundles?"
+    },
+    response: {
+        type: String,
+        required: true,
+        enum: ['Yes', 'No', 'Maybe']
+    },
+    pricePoint: {
+        type: String,
+        default: "N/A"
+    },
+    userId: {
+        type: String,
+        default: "guest"
+    },
+    ip: String,
+    userAgent: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
 // Compound index for uniqueness (per company)
 companyQuestionSchema.index({ company: 1, leetcodeUrl: 1 }, { unique: true });
 
@@ -547,6 +574,7 @@ companyQuestionSchema.index({ company: 1, leetcodeUrl: 1 }, { unique: true });
 const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
 const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
 const CompanyQuestion = mongoose.models.CompanyQuestion || mongoose.model('CompanyQuestion', companyQuestionSchema);
+const SurveyResponse = mongoose.models.SurveyResponse || mongoose.model('SurveyResponse', surveyResponseSchema);
 
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
@@ -749,6 +777,56 @@ app.get('/api/solution/:questionId', async (req, res) => {
     } catch (err) {
         console.error("Solution API Error:", err);
         return res.status(500).json({ error: "Server Error", details: err.message });
+    }
+});
+
+// Survey API
+app.post('/api/survey', async (req, res) => {
+    try {
+        await connectDB();
+        const { response, pricePoint, userId } = req.body;
+        
+        if (!response) {
+            return res.status(400).json({ error: 'Response is required' });
+        }
+
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        
+        // Basic deduplication check (relaxed for testing - 5 minutes)
+        const recentResponse = await SurveyResponse.findOne({
+            ip: ip,
+            createdAt: { $gt: new Date(Date.now() - 5 * 60 * 1000) } // Within last 5 minutes
+        });
+
+        if (recentResponse) {
+            return res.status(429).json({ error: 'Survey already submitted recently' });
+        }
+
+        const surveyData = {
+            response,
+            pricePoint: pricePoint || "N/A",
+            userId: userId || "guest",
+            ip: ip,
+            userAgent: req.headers['user-agent']
+        };
+
+        const newResponse = await SurveyResponse.create(surveyData);
+        res.status(201).json({ message: 'Survey response saved', id: newResponse._id });
+    } catch (err) {
+        console.error("Survey Submission Error:", err);
+        res.status(500).json({ error: 'Failed to submit survey' });
+    }
+});
+
+app.get('/api/survey/stats', async (req, res) => {
+    try {
+        await connectDB();
+        const stats = await SurveyResponse.aggregate([
+            { $group: { _id: "$response", count: { $sum: 1 } } }
+        ]);
+        res.json(stats);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch stats' });
     }
 });
 
