@@ -70,7 +70,7 @@ function AppContent({ savedVideos, onToggleSave }) {
 
       {showConnectModal && <ConnectModal onClose={() => setShowConnectModal(false)} />}
 
-      <nav className={`navbar ${navbarClass}`}>
+      <nav className={`navbar ${navbarClass} `}>
         <div className="logo" onClick={() => navigate('/')}>
           Leet<span>Vision</span>
         </div>
@@ -106,20 +106,6 @@ function AppContent({ savedVideos, onToggleSave }) {
             <li className="nav-item"><Link to="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>Blog</Link></li>
           </ul>
 
-          <div className="nav-auth-links">
-            {user ? (
-              <div className="nav-user-menu">
-                <span className="user-greeting">Hi, {user.name.split(' ')[0]}</span>
-                <button onClick={logout} className="logout-btn" title="Logout">
-                  <FaSignOutAlt />
-                </button>
-              </div>
-            ) : (
-              <div className="nav-auth-group">
-                <Link to="/login" className="nav-link auth-link">Sign In</Link>
-              </div>
-            )}
-          </div>
 
           {/* Download Extension Button (Desktop Only) */}
           <a
@@ -132,7 +118,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           </a>
 
           {/* Navbar Search Integration */}
-          <div className={`nav-search-container ${isSearchOpen ? 'active' : ''}`}>
+          <div className={`nav - search - container ${isSearchOpen ? 'active' : ''} `}>
             <form onSubmit={handleSearchSubmit} className="nav-search-form">
               <input
                 type="text"
@@ -158,43 +144,22 @@ function AppContent({ savedVideos, onToggleSave }) {
         {/* Mobile Actions: Menu */}
         <div className="mobile-actions">
 
-          {/* Connect / User Button */}
-          {leetcodeUsername ? (
-            <div className="nav-item desktop-only-user" title="Connected">
-              <span style={{ color: '#4db6ac', fontSize: '1.2rem' }}>●</span>
-              {/* Simplified user display for desktop, hidden on mobile in this simplified view if needed, 
-                         or we keep it but it might be crowded. Let's rely on CSS to hide 'desktop-only-user' on mobile if crowded. */}
-            </div>
-          ) : (null)}
-
           {/* Mobile Hamburger Button */}
           <button
             className="mobile-menu-btn"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
           >
-            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
-            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''} `}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''} `}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''} `}></span>
           </button>
         </div>
 
 
         {/* Mobile Menu Overlay */}
-        <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+        <div className={`mobile - menu ${isMobileMenuOpen ? 'open' : ''} `}>
           <div className="mobile-menu-content">
-            {user ? (
-              <div className="mobile-user-info">
-                <span className="mobile-greeting">Hi, {user.name}</span>
-                <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="mobile-logout-btn">
-                  Logout <FaSignOutAlt />
-                </button>
-              </div>
-            ) : (
-              <div className="mobile-auth-group">
-                <Link to="/login" className="mobile-link auth-highlight primary" onClick={() => setIsMobileMenuOpen(false)}>Sign In</Link>
-              </div>
-            )}
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
             <Link to="/blind-75" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Blind 75 List</Link>
             <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
@@ -225,27 +190,27 @@ function AppContent({ savedVideos, onToggleSave }) {
       <div className="app-container" style={{ display: 'block', padding: 0 }}>
         {/* Helper CSS for Dropdown */}
         <style>{`
-                    .dropdown { position: relative; display: inline-block; }
-                    .dropdown-content {
-                        display: none;
-                        position: absolute;
-                        background-color: #1a1a1a;
-                        min-width: 120px;
-                        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-                        z-index: 100;
-                        border-radius: 8px;
-                        border: 1px solid #333;
-                        top: 100%;
-                        left: 0;
-                    }
-                    .dropdown:hover .dropdown-content { display: block; }
-                    .dropdown-content div {
-                        padding: 12px 16px;
-                        display: block;
-                        cursor: pointer;
-                    }
-                    .dropdown-content div:hover { background-color: #333; }
-                `}</style>
+  .dropdown { position: relative; display: inline - block; }
+                    .dropdown - content {
+  display: none;
+  position: absolute;
+  background - color: #1a1a1a;
+  min - width: 120px;
+  box - shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z - index: 100;
+  border - radius: 8px;
+  border: 1px solid #333;
+  top: 100 %;
+  left: 0;
+}
+                    .dropdown: hover.dropdown - content { display: block; }
+                    .dropdown - content div {
+  padding: 12px 16px;
+  display: block;
+  cursor: pointer;
+}
+                    .dropdown - content div:hover { background - color: #333; }
+`}</style>
 
 
         <Routes>
