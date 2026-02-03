@@ -262,10 +262,7 @@ const LandingPage = () => {
     useEffect(() => {
         const isSurveyDone = localStorage.getItem('leetvision_survey_completed');
         if (!isSurveyDone) {
-            const timer = setTimeout(() => {
-                setShowSurvey(true);
-            }, 3000); // Show after 3 seconds
-            return () => clearTimeout(timer);
+            setShowSurvey(true);
         }
     }, []);
 
