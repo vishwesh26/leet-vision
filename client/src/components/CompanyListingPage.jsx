@@ -67,17 +67,7 @@ const CompanyListingPage = () => {
                 <h1>Company <span>Interview</span> Questions</h1>
                 <p>Curated list of questions reported by the community for 470+ companies.</p>
 
-                {!isBundleOwned && (
-                    <div className="bundle-promo">
-                        <div className="promo-text">
-                            <h3><FaBolt /> Limited Time Offer</h3>
-                            <p>Unlock <b>Top 100 Companies</b> (Google, Amazon, Meta, Microsoft, etc.) for a one-time lifetime fee.</p>
-                        </div>
-                        <button className="promo-btn" onClick={() => handleBundleUnlock()} disabled={isPaying}>
-                            {isPaying ? 'Processing...' : 'Unlock Bundle - ₹300'}
-                        </button>
-                    </div>
-                )}
+                {/* Purchase/Bundle UI removed for production */}
 
                 <div className="search-box-container">
                     <FaSearch className="search-icon" />

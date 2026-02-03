@@ -155,16 +155,7 @@ const CompanyDetailPage = () => {
                 </form>
 
                 <div className="filters-group">
-                    {!hasAccess && (
-                        <button
-                            className="unlock-banner-btn"
-                            onClick={() => handleUnlock('single')}
-                            disabled={isPaying}
-                        >
-                            <FaBolt /> {isPaying ? 'Processing...' : `Unlock Lifetime Access (₹50)`}
-                        </button>
-                    )}
-
+                    {/* Purchase UI removed for production */}
                     <div className="filter-select">
                         <FaFilter />
                         <select value={difficulty} onChange={(e) => { setDifficulty(e.target.value); setPage(1); }}>
@@ -185,22 +176,7 @@ const CompanyDetailPage = () => {
                 </div>
             </div>
 
-            {!hasAccess && (
-                <div className="premium-upsell-card">
-                    <div className="upsell-content">
-                        <h3>Unlock <span>{companyName}</span> Interview Questions</h3>
-                        <p>Get lifetime access to the full list of {total} questions, priority sorting, and AI optimized solutions.</p>
-                        <div className="upsell-actions">
-                            <button className="primary-btn" onClick={() => handleUnlock('single')}>
-                                Unlock <b>{companyName}</b> only - ₹50
-                            </button>
-                            <button className="secondary-btn" onClick={() => handleUnlock('bundle')}>
-                                Unlock <b>Top 100 Companies</b> Bundle - ₹300
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* Premium upsell removed for production */}
 
             {loading ? (
                 <div className="loader-container">
@@ -223,55 +199,47 @@ const CompanyDetailPage = () => {
                         <tbody>
                             {questions.map((q) => {
                                 const solved = isProblemSolved({ id: q.questionId });
-                                const locked = q.isLocked;
+                                const locked = false; // Always unlocked for production
                                 return (
-                                    <tr key={q._id} className={`${solved ? 'solved-row' : ''} ${locked ? 'locked-row' : ''}`}>
+                                    <tr key={q._id} className={`${solved ? 'solved-row' : ''}`}>
                                         <td className="status-cell">
-                                            {locked ? (
-                                                <span className="lock-icon" title="Unlock for full access">🔒</span>
-                                            ) : (
-                                                solved ? <span className="solved-badge">Done</span> : <span className="todo-dot"></span>
-                                            )}
+                                            {solved ? <span className="solved-badge">Done</span> : <span className="todo-dot"></span>}
                                         </td>
                                         <td className="title-cell">
                                             <div className="q-title-wrap">
                                                 <span className="q-title">
-                                                    {q.questionId}. {locked ? '••••••••••••••••' : q.title}
+                                                    {q.questionId}. {q.title}
                                                 </span>
                                                 <div className="q-topics">
-                                                    {(locked ? ['Binary Search', 'Dynamic Programming', 'Graph'] : q.topics).slice(0, 3).map(t => (
+                                                    {q.topics.slice(0, 3).map(t => (
                                                         <span key={t} className="topic-tag">{t}</span>
                                                     ))}
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="diff-cell">
-                                            <span style={{ color: locked ? '#333' : getDifficultyColor(q.difficulty) }}>{q.difficulty}</span>
+                                            <span style={{ color: getDifficultyColor(q.difficulty) }}>{q.difficulty}</span>
                                         </td>
                                         <td className="freq-cell">
                                             <div className="freq-bar-container">
-                                                <div className="freq-bar" style={{ width: `${locked ? (Math.random() * 40 + 20) : q.frequency}%`, opacity: locked ? 0.2 : 1 }}></div>
+                                                <div className="freq-bar" style={{ width: `${q.frequency}%` }}></div>
                                             </div>
                                         </td>
                                         <td className="acc-cell">
-                                            {locked ? '--' : `${q.acceptanceRate.toFixed(1)}%`}
+                                            {`${q.acceptanceRate.toFixed(1)}%`}
                                         </td>
                                         <td className="actions-cell">
-                                            {locked ? (
-                                                <button className="unlock-inline-btn" onClick={() => handleUnlock('single')}>Unlock Now</button>
-                                            ) : (
-                                                <div className="action-btns">
-                                                    <a href={q.leetcodeUrl} target="_blank" rel="noreferrer" title="LeetCode" className="btn-icon">
-                                                        <FaExternalLinkAlt />
-                                                    </a>
-                                                    <Link to={`/search/${q.questionId}`} title="Video Solution" className="btn-icon">
-                                                        <FaPlay />
-                                                    </Link>
-                                                    <Link to={`/solution/${q.questionId}`} title="AI Solution" className="btn-pill">
-                                                        <FaBolt /> Solution
-                                                    </Link>
-                                                </div>
-                                            )}
+                                            <div className="action-btns">
+                                                <a href={q.leetcodeUrl} target="_blank" rel="noreferrer" title="LeetCode" className="btn-icon">
+                                                    <FaExternalLinkAlt />
+                                                </a>
+                                                <Link to={`/search/${q.questionId}`} title="Video Solution" className="btn-icon">
+                                                    <FaPlay />
+                                                </Link>
+                                                <Link to={`/solution/${q.questionId}`} title="AI Solution" className="btn-pill">
+                                                    <FaBolt /> Solution
+                                                </Link>
+                                            </div>
                                         </td>
                                     </tr>
                                 );
