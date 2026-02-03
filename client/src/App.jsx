@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { SolvedProvider, useSolved } from './context/SolvedContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
 import { FaInstagram, FaLinkedin, FaSearch, FaTimes, FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 import ConnectModal from './components/ConnectModal';
 import { Analytics } from "@vercel/analytics/react"
@@ -32,14 +31,11 @@ import BlogPost from './components/BlogPost';
 import DailyTechPage from './components/DailyTechPage';
 import CompanyListingPage from './components/CompanyListingPage';
 import CompanyDetailPage from './components/CompanyDetailPage';
-import LoginPage from './components/LoginPage';
-import SignupPage from './components/SignupPage';
-import ProtectedRoute from './components/ProtectedRoute';
-import CheckoutPage from './components/CheckoutPage';
 import SurveyAnalytics from './components/SurveyAnalytics';
 
 function AppContent({ savedVideos, onToggleSave }) {
-  const { user, logout } = useAuth();
+  const user = null; // Auth disabled for survey-only build
+  const logout = () => { };
   // Helper to close mobile menu or handle extensive nav logic if needed
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile Menu State
@@ -255,8 +251,6 @@ function AppContent({ savedVideos, onToggleSave }) {
         <Routes>
           {/* New Landing Page at Root */}
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
 
 
           {/* Video / Search Result Page */}
@@ -281,14 +275,11 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/company-questions/:companyName" element={<CompanyDetailPage />} />
           <Route path="/company-questions" element={<CompanyPage />} />
           <Route path="/daily" element={<DailyPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
 
           <Route
             path="/saved"
             element={
-              <ProtectedRoute>
-                <SavedPage savedVideos={savedVideos} onToggleSave={onToggleSave} />
-              </ProtectedRoute>
+              <SavedPage savedVideos={savedVideos} onToggleSave={onToggleSave} />
             }
           />
 
@@ -352,14 +343,12 @@ function App() {
 
   return (
     <HelmetProvider>
-      <AuthProvider>
-        <SolvedProvider>
-          <BrowserRouter>
-            <AppContent savedVideos={savedVideos} onToggleSave={handleToggleSave} />
-            <Analytics />
-          </BrowserRouter>
-        </SolvedProvider>
-      </AuthProvider>
+      <SolvedProvider>
+        <BrowserRouter>
+          <AppContent savedVideos={savedVideos} onToggleSave={handleToggleSave} />
+          <Analytics />
+        </BrowserRouter>
+      </SolvedProvider>
     </HelmetProvider>
   );
 }
