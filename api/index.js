@@ -821,11 +821,27 @@ app.post('/api/survey', async (req, res) => {
 app.get('/api/survey/stats', async (req, res) => {
     try {
         await connectDB();
-        const stats = await SurveyResponse.aggregate([
-            { $group: { _id: "$response", count: { $sum: 1 } } }
+        
+        const [total, distribution, pricing, recent] = await Promise.all([
+            SurveyResponse.countDocuments(),
+            SurveyResponse.aggregate([
+                { $group: { _id: "$response", count: { $sum: 1 } } }
+            ]),
+            SurveyResponse.aggregate([
+                { $group: { _id: "$pricePoint", count: { $sum: 1 } } },
+                { $sort: { count: -1 } }
+            ]),
+            SurveyResponse.find().sort({ createdAt: -1 }).limit(10)
         ]);
-        res.json(stats);
+
+        res.json({
+            total,
+            distribution,
+            pricing,
+            recent
+        });
     } catch (err) {
+        console.error("Stats Error:", err);
         res.status(500).json({ error: 'Failed to fetch stats' });
     }
 });
