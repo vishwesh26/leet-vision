@@ -2,22 +2,37 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SEO from './SEO';
-import { FaSearch, FaBuilding, FaCode } from 'react-icons/fa';
+import { FaSearch, FaBuilding, FaCode, FaBolt, FaCrown, FaCheckCircle } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
 
 const CompanyListingPage = () => {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isPaying, setIsPaying] = useState(false);
     const navigate = useNavigate();
+    const { user, refreshUser } = useAuth();
+
+    const isBundleOwned = user?.ownedCompanies?.length > 10; // Simple heuristic for bundle
+    const ownedSet = new Set(user?.ownedCompanies || []);
 
     // Helper to get logo URL (Using Google Favicon Service as it's less likely to be blocked)
     const getLogoUrl = (companyName) => {
         const domain = companyDomains[companyName];
         if (domain) {
-            return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+            const API_BASE = import.meta.env.VITE_API_URL || '';
+            return `${API_BASE}/api/logo/${domain}`;
         }
         return null;
+    };
+
+    const handleBundleUnlock = async () => {
+        if (!user) {
+            navigate('/login?redirect=/companies');
+            return;
+        }
+        navigate('/checkout?type=bundle');
     };
 
     useEffect(() => {
@@ -48,8 +63,21 @@ const CompanyListingPage = () => {
             />
 
             <div className="listing-header">
+                <div className="premium-badge"><FaCrown /> Official Interview Partner</div>
                 <h1>Company <span>Interview</span> Questions</h1>
                 <p>Curated list of questions reported by the community for 470+ companies.</p>
+
+                {!isBundleOwned && (
+                    <div className="bundle-promo">
+                        <div className="promo-text">
+                            <h3><FaBolt /> Limited Time Offer</h3>
+                            <p>Unlock <b>Top 100 Companies</b> (Google, Amazon, Meta, Microsoft, etc.) for a one-time lifetime fee.</p>
+                        </div>
+                        <button className="promo-btn" onClick={() => handleBundleUnlock()} disabled={isPaying}>
+                            {isPaying ? 'Processing...' : 'Unlock Bundle - ₹300'}
+                        </button>
+                    </div>
+                )}
 
                 <div className="search-box-container">
                     <FaSearch className="search-icon" />
@@ -71,12 +99,14 @@ const CompanyListingPage = () => {
                 <div className="companies-grid">
                     {filteredCompanies.map((company) => {
                         const logo = getLogoUrl(company.name);
+                        const isOwned = ownedSet.has(company.name);
                         return (
                             <div
                                 key={company.name}
-                                className="company-card"
+                                className={`company-card ${isOwned ? 'owned-card' : ''}`}
                                 onClick={() => navigate(`/company-questions/${encodeURIComponent(company.name)}`)}
                             >
+                                {isOwned && <div className="owned-indicator"><FaCheckCircle /> Unlocked</div>}
                                 <div className="company-info">
                                     <div className="company-logo-type">
                                         {logo ? (
@@ -112,7 +142,7 @@ const CompanyListingPage = () => {
                 </div>
             )}
 
-            <style jsx>{`
+            <style>{`
                 .company-listing-container {
                     padding: 8rem 5% 4rem;
                     max-width: 1400px;
@@ -141,7 +171,80 @@ const CompanyListingPage = () => {
                     color: #888;
                     font-size: 1.2rem;
                     max-width: 600px;
-                    margin: 0 auto 2.5rem;
+                    margin: 0 auto 1.5rem;
+                }
+
+                .premium-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    background: rgba(245, 124, 0, 0.1);
+                    color: var(--accent-orange);
+                    padding: 0.5rem 1rem;
+                    border-radius: 50px;
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                    margin-bottom: 2rem;
+                    border: 1px solid rgba(245, 124, 0, 0.2);
+                }
+
+                .bundle-promo {
+                    background: linear-gradient(90deg, rgba(245, 124, 0, 0.15) 0%, rgba(20, 20, 20, 0.8) 100%);
+                    border: 1px solid var(--accent-orange);
+                    border-radius: 20px;
+                    padding: 2rem;
+                    max-width: 800px;
+                    margin: 0 auto 3rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    text-align: left;
+                    backdrop-filter: blur(10px);
+                }
+
+                .promo-text h3 {
+                    margin: 0 0 0.5rem 0;
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                .promo-text p {
+                    margin: 0;
+                    font-size: 1rem;
+                    color: #aaa;
+                }
+
+                .promo-btn {
+                    background: var(--accent-orange);
+                    color: white;
+                    border: none;
+                    padding: 0.8rem 2rem;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    flex-shrink: 0;
+                }
+
+                .promo-btn:hover { background: #ff9800; transform: scale(1.05); }
+
+                .owned-card { border-color: rgba(0, 184, 163, 0.3); }
+
+                .owned-indicator {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-size: 0.7rem;
+                    background: rgba(0, 184, 163, 0.1);
+                    color: #00b8a3;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 4px;
+                    font-weight: 700;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.3rem;
                 }
 
                 .search-box-container {

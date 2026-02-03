@@ -15,8 +15,14 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
+const cookieParser = require('cookie-parser');
+const authRoutes = require('./routes/auth');
+const paymentRoutes = require('./routes/payment');
+const User = require('./models/User'); 
+const Purchase = require('./models/Purchase');
 const StoredVideo = require('./models/StoredVideo');
 const SurveyResponse = require('./models/SurveyResponse');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -64,7 +70,11 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json());
+app.use(cookieParser());
 
+// Auth Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/payment', paymentRoutes);
 
 // Logo Proxy to avoid frontend 404s
 app.get('/api/logo/:domain', async (req, res) => {
@@ -750,8 +760,22 @@ app.get('/api/company/:name/questions', async (req, res) => {
         const { name } = req.params;
         const { page = 1, limit = 50, sort = 'frequency', order = 'desc', search = '', difficulty = '' } = req.query;
         
-        // Access Control Logic (Disabled for survey-only build)
-        const hasAccess = true; 
+        // Access Control Logic
+        let hasAccess = false;
+        const token = req.cookies.jwt; // Corrected from 'token' to 'jwt'
+        if (token) {
+            try {
+                const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_keep_it_safe';
+                const decoded = jwt.verify(token, JWT_SECRET);
+                const purchase = await Purchase.findOne({
+                    userId: decoded.id, // Corrected from 'userId' to 'id'
+                    companies: name
+                });
+                if (purchase) hasAccess = true;
+            } catch (err) {
+                // Token invalid or expired, proceed as guest
+            }
+        }
 
         const query = { company: name };
         if (search) query.title = { $regex: search, $options: 'i' };

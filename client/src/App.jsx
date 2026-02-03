@@ -8,9 +8,7 @@ import { Analytics } from "@vercel/analytics/react"
 import './index.css';
 
 // Components
-// Components
 import LandingPage from './components/LandingPage';
-
 import ListPage from './components/ListPage';
 import SearchPage from './components/SearchPage';
 import SavedPage from './components/SavedPage';
@@ -34,11 +32,10 @@ import CompanyDetailPage from './components/CompanyDetailPage';
 import SurveyAnalytics from './components/SurveyAnalytics';
 
 function AppContent({ savedVideos, onToggleSave }) {
-  const user = null; // Auth disabled for survey-only build
+  const user = null;
   const logout = () => { };
-  // Helper to close mobile menu or handle extensive nav logic if needed
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile Menu State
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,9 +46,6 @@ function AppContent({ savedVideos, onToggleSave }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Determine if we should show 'has-results' style (solid background) on navbar
-  // If not on Home OR if on Home but scrolled down (handled by CSS sticky? No, original had JS Logic)
-  // Original logic: view !== 'home' 
   const isHome = location.pathname === '/';
   const navbarClass = !isHome ? 'has-results' : '';
 
@@ -70,7 +64,7 @@ function AppContent({ savedVideos, onToggleSave }) {
 
       {showConnectModal && <ConnectModal onClose={() => setShowConnectModal(false)} />}
 
-      <nav className={`navbar ${navbarClass} `}>
+      <nav className={`navbar ${navbarClass}`}>
         <div className="logo" onClick={() => navigate('/')}>
           Leet<span>Vision</span>
         </div>
@@ -106,7 +100,6 @@ function AppContent({ savedVideos, onToggleSave }) {
             <li className="nav-item"><Link to="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>Blog</Link></li>
           </ul>
 
-
           {/* Download Extension Button (Desktop Only) */}
           <a
             href="https://microsoftedge.microsoft.com/addons/detail/dogbidjabcbbhojhlnbfjilppgpenikb"
@@ -118,7 +111,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           </a>
 
           {/* Navbar Search Integration */}
-          <div className={`nav - search - container ${isSearchOpen ? 'active' : ''} `}>
+          <div className={`nav-search-container ${isSearchOpen ? 'active' : ''}`}>
             <form onSubmit={handleSearchSubmit} className="nav-search-form">
               <input
                 type="text"
@@ -143,22 +136,25 @@ function AppContent({ savedVideos, onToggleSave }) {
 
         {/* Mobile Actions: Menu */}
         <div className="mobile-actions">
+          {leetcodeUsername && (
+            <div className="nav-item desktop-only-user" title="Connected">
+              <span style={{ color: '#4db6ac', fontSize: '1.2rem' }}>●</span>
+            </div>
+          )}
 
-          {/* Mobile Hamburger Button */}
           <button
             className="mobile-menu-btn"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
           >
-            <span className={`bar ${isMobileMenuOpen ? 'open' : ''} `}></span>
-            <span className={`bar ${isMobileMenuOpen ? 'open' : ''} `}></span>
-            <span className={`bar ${isMobileMenuOpen ? 'open' : ''} `}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
+            <span className={`bar ${isMobileMenuOpen ? 'open' : ''}`}></span>
           </button>
         </div>
 
-
         {/* Mobile Menu Overlay */}
-        <div className={`mobile - menu ${isMobileMenuOpen ? 'open' : ''} `}>
+        <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="mobile-menu-content">
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
             <Link to="/blind-75" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Blind 75 List</Link>
@@ -185,77 +181,56 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
           </div>
         </div>
-      </nav >
+      </nav>
 
       <div className="app-container" style={{ display: 'block', padding: 0 }}>
-        {/* Helper CSS for Dropdown */}
         <style>{`
-  .dropdown { position: relative; display: inline - block; }
-                    .dropdown - content {
-  display: none;
-  position: absolute;
-  background - color: #1a1a1a;
-  min - width: 120px;
-  box - shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z - index: 100;
-  border - radius: 8px;
-  border: 1px solid #333;
-  top: 100 %;
-  left: 0;
-}
-                    .dropdown: hover.dropdown - content { display: block; }
-                    .dropdown - content div {
-  padding: 12px 16px;
-  display: block;
-  cursor: pointer;
-}
-                    .dropdown - content div:hover { background - color: #333; }
-`}</style>
-
+          .dropdown { position: relative; display: inline-block; }
+          .dropdown-content {
+              display: none;
+              position: absolute;
+              background-color: #1a1a1a;
+              min-width: 120px;
+              box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+              z-index: 100;
+              border-radius: 8px;
+              border: 1px solid #333;
+              top: 100%;
+              left: 0;
+          }
+          .dropdown:hover .dropdown-content { display: block; }
+          .dropdown-content div {
+              padding: 12px 16px;
+              display: block;
+              cursor: pointer;
+          }
+          .dropdown-content div:hover { background-color: #333; }
+        `}</style>
 
         <Routes>
-          {/* New Landing Page at Root */}
           <Route path="/" element={<LandingPage />} />
-
-
-          {/* Video / Search Result Page */}
           <Route path="/search/:questionId" element={<SearchPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/solution/:id" element={<SolutionPage />} />
-
-
           <Route path="/top-100-leetcode" element={<ListPage type="top-100" title="Top 100 Liked Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/blind-75" element={<ListPage type="blind-75" title="Blind 75 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-
           <Route path="/leetcode-easy" element={<ListPage type="difficulty" title="Easy Questions" param="Easy" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/leetcode-medium" element={<ListPage type="difficulty" title="Medium Questions" param="Medium" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/leetcode-hard" element={<ListPage type="difficulty" title="Hard Questions" param="Hard" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-
           <Route path="/topics/:topic" element={<ListPage type="topic" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/company/:company" element={<CompanyPrepPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-
           <Route path="/interview-roadmap" element={<RoadmapPage />} />
           <Route path="/companies" element={<CompanyListingPage />} />
           <Route path="/company-questions/:companyName" element={<CompanyDetailPage />} />
           <Route path="/company-questions" element={<CompanyPage />} />
           <Route path="/daily" element={<DailyPage />} />
-
-          <Route
-            path="/saved"
-            element={
-              <SavedPage savedVideos={savedVideos} onToggleSave={onToggleSave} />
-            }
-          />
-
-          {/* AdSense Content Pages */}
+          <Route path="/saved" element={<SavedPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/about" element={<About />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/admin/survey" element={<SurveyAnalytics />} />
           <Route path="/contact" element={<Contact />} />
-
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/daily-tech" element={<DailyTechPage />} />

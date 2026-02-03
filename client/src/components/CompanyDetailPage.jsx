@@ -4,18 +4,22 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import SEO from './SEO';
 import { FaExternalLinkAlt, FaPlay, FaBolt, FaSearch, FaFilter, FaBuilding } from 'react-icons/fa';
 import { useSolved } from '../context/SolvedContext';
+import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
 
 const CompanyDetailPage = () => {
     const { companyName } = useParams();
     const navigate = useNavigate();
     const { isProblemSolved } = useSolved();
+    const { user, refreshUser } = useAuth();
 
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [pages, setPages] = useState(1);
+    const [hasAccess, setHasAccess] = useState(false);
+    const [isPaying, setIsPaying] = useState(false);
 
     // Filters
     const [difficulty, setDifficulty] = useState('');
@@ -26,7 +30,8 @@ const CompanyDetailPage = () => {
     const getLogoUrl = (name) => {
         const domain = companyDomains[name];
         if (domain) {
-            return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+            const API_BASE = import.meta.env.VITE_API_URL || '';
+            return `${API_BASE}/api/logo/${domain}`;
         }
         return null;
     };
@@ -46,10 +51,16 @@ const CompanyDetailPage = () => {
             if (difficulty) params.difficulty = difficulty;
             if (searchTerm) params.search = searchTerm;
 
-            const response = await axios.get(`${API_BASE}/api/company/${encodeURIComponent(companyName)}/questions`, { params });
+            const response = await axios.get(`${API_BASE}/api/company/${encodeURIComponent(companyName)}/questions`, { params, withCredentials: true });
+
+            // Client-side override for access if backend check fails 
+            // but user object says we own it
+            const isOwnedLocally = user?.ownedCompanies?.includes(companyName) || user?.ownedCompanies?.length > 10;
+
             setQuestions(response.data.questions);
             setTotal(response.data.total);
             setPages(response.data.pages);
+            setHasAccess(response.data.hasAccess || isOwnedLocally);
         } catch (err) {
             console.error("Error fetching questions:", err);
         } finally {
@@ -59,7 +70,7 @@ const CompanyDetailPage = () => {
 
     useEffect(() => {
         fetchQuestions();
-    }, [companyName, page, difficulty, sortBy]);
+    }, [companyName, page, difficulty, sortBy, user]);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -74,6 +85,10 @@ const CompanyDetailPage = () => {
             case 'hard': return '#ff375f';
             default: return '#888';
         }
+    };
+
+    const handleUnlock = async (planType = 'single') => {
+        navigate(`/checkout?type=${planType}&company=${encodeURIComponent(companyName)}`);
     };
 
     return (
@@ -140,6 +155,16 @@ const CompanyDetailPage = () => {
                 </form>
 
                 <div className="filters-group">
+                    {!hasAccess && (
+                        <button
+                            className="unlock-banner-btn"
+                            onClick={() => handleUnlock('single')}
+                            disabled={isPaying}
+                        >
+                            <FaBolt /> {isPaying ? 'Processing...' : `Unlock Lifetime Access (₹50)`}
+                        </button>
+                    )}
+
                     <div className="filter-select">
                         <FaFilter />
                         <select value={difficulty} onChange={(e) => { setDifficulty(e.target.value); setPage(1); }}>
@@ -159,6 +184,23 @@ const CompanyDetailPage = () => {
                     </div>
                 </div>
             </div>
+
+            {!hasAccess && (
+                <div className="premium-upsell-card">
+                    <div className="upsell-content">
+                        <h3>Unlock <span>{companyName}</span> Interview Questions</h3>
+                        <p>Get lifetime access to the full list of {total} questions, priority sorting, and AI optimized solutions.</p>
+                        <div className="upsell-actions">
+                            <button className="primary-btn" onClick={() => handleUnlock('single')}>
+                                Unlock <b>{companyName}</b> only - ₹50
+                            </button>
+                            <button className="secondary-btn" onClick={() => handleUnlock('bundle')}>
+                                Unlock <b>Top 100 Companies</b> Bundle - ₹300
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {loading ? (
                 <div className="loader-container">
@@ -181,42 +223,55 @@ const CompanyDetailPage = () => {
                         <tbody>
                             {questions.map((q) => {
                                 const solved = isProblemSolved({ id: q.questionId });
+                                const locked = q.isLocked;
                                 return (
-                                    <tr key={q._id} className={solved ? 'solved-row' : ''}>
+                                    <tr key={q._id} className={`${solved ? 'solved-row' : ''} ${locked ? 'locked-row' : ''}`}>
                                         <td className="status-cell">
-                                            {solved ? <span className="solved-badge">Done</span> : <span className="todo-dot"></span>}
+                                            {locked ? (
+                                                <span className="lock-icon" title="Unlock for full access">🔒</span>
+                                            ) : (
+                                                solved ? <span className="solved-badge">Done</span> : <span className="todo-dot"></span>
+                                            )}
                                         </td>
                                         <td className="title-cell">
                                             <div className="q-title-wrap">
-                                                <span className="q-title">{q.questionId}. {q.title}</span>
+                                                <span className="q-title">
+                                                    {q.questionId}. {locked ? '••••••••••••••••' : q.title}
+                                                </span>
                                                 <div className="q-topics">
-                                                    {q.topics.slice(0, 3).map(t => <span key={t} className="topic-tag">{t}</span>)}
+                                                    {(locked ? ['Binary Search', 'Dynamic Programming', 'Graph'] : q.topics).slice(0, 3).map(t => (
+                                                        <span key={t} className="topic-tag">{t}</span>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="diff-cell">
-                                            <span style={{ color: getDifficultyColor(q.difficulty) }}>{q.difficulty}</span>
+                                            <span style={{ color: locked ? '#333' : getDifficultyColor(q.difficulty) }}>{q.difficulty}</span>
                                         </td>
                                         <td className="freq-cell">
                                             <div className="freq-bar-container">
-                                                <div className="freq-bar" style={{ width: `${q.frequency}%` }}></div>
+                                                <div className="freq-bar" style={{ width: `${locked ? (Math.random() * 40 + 20) : q.frequency}%`, opacity: locked ? 0.2 : 1 }}></div>
                                             </div>
                                         </td>
                                         <td className="acc-cell">
-                                            {q.acceptanceRate.toFixed(1)}%
+                                            {locked ? '--' : `${q.acceptanceRate.toFixed(1)}%`}
                                         </td>
                                         <td className="actions-cell">
-                                            <div className="action-btns">
-                                                <a href={q.leetcodeUrl} target="_blank" rel="noreferrer" title="LeetCode" className="btn-icon">
-                                                    <FaExternalLinkAlt />
-                                                </a>
-                                                <Link to={`/search/${q.questionId}`} title="Video Solution" className="btn-icon">
-                                                    <FaPlay />
-                                                </Link>
-                                                <Link to={`/solution/${q.questionId}`} title="AI Solution" className="btn-pill">
-                                                    <FaBolt /> Solution
-                                                </Link>
-                                            </div>
+                                            {locked ? (
+                                                <button className="unlock-inline-btn" onClick={() => handleUnlock('single')}>Unlock Now</button>
+                                            ) : (
+                                                <div className="action-btns">
+                                                    <a href={q.leetcodeUrl} target="_blank" rel="noreferrer" title="LeetCode" className="btn-icon">
+                                                        <FaExternalLinkAlt />
+                                                    </a>
+                                                    <Link to={`/search/${q.questionId}`} title="Video Solution" className="btn-icon">
+                                                        <FaPlay />
+                                                    </Link>
+                                                    <Link to={`/solution/${q.questionId}`} title="AI Solution" className="btn-pill">
+                                                        <FaBolt /> Solution
+                                                    </Link>
+                                                </div>
+                                            )}
                                         </td>
                                     </tr>
                                 );
@@ -240,7 +295,7 @@ const CompanyDetailPage = () => {
                 </div>
             )}
 
-            <style jsx>{`
+            <style>{`
                 .company-detail-container {
                     padding: 8rem 5% 4rem;
                     max-width: 1400px;
@@ -573,6 +628,123 @@ const CompanyDetailPage = () => {
 
                 @keyframes spin {
                     to { transform: rotate(360deg); }
+                }
+
+                .unlock-banner-btn {
+                    background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
+                    color: white;
+                    border: none;
+                    padding: 0.8rem 1.5rem;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+                    transition: all 0.3s;
+                    box-shadow: 0 4px 15px rgba(245, 124, 0, 0.2);
+                }
+
+                .unlock-banner-btn:hover:not(:disabled) {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 20px rgba(245, 124, 0, 0.4);
+                }
+
+                .premium-upsell-card {
+                    margin-bottom: 2rem;
+                    background: linear-gradient(135deg, rgba(245, 124, 0, 0.1) 0%, rgba(20, 20, 20, 0.8) 100%);
+                    border: 1px dashed var(--accent-orange);
+                    padding: 2.5rem;
+                    border-radius: 20px;
+                    text-align: center;
+                    backdrop-filter: blur(10px);
+                }
+
+                .upsell-content h3 {
+                    font-size: 1.8rem;
+                    margin-bottom: 0.8rem;
+                }
+
+                .upsell-content h3 span {
+                    color: var(--accent-orange);
+                }
+
+                .upsell-content p {
+                    color: #aaa;
+                    margin-bottom: 2rem;
+                    max-width: 600px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .upsell-actions {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1.5rem;
+                    flex-wrap: wrap;
+                }
+
+                .primary-btn {
+                    background: var(--accent-orange);
+                    color: white;
+                    border: none;
+                    padding: 1rem 2.5rem;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+
+                .secondary-btn {
+                    background: rgba(255, 255, 255, 0.05);
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    padding: 1rem 2.5rem;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+
+                .primary-btn:hover { background: #ff9800; transform: scale(1.02); }
+                .secondary-btn:hover { background: rgba(255, 255, 255, 0.1); transform: scale(1.02); }
+
+                .locked-row {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                }
+
+                .locked-row td {
+                    filter: blur(5px);
+                    transition: filter 0.3s;
+                }
+
+                .locked-row .status-cell, 
+                .locked-row .actions-cell {
+                    filter: none !important;
+                    opacity: 1 !important;
+                }
+
+                .lock-icon {
+                    font-size: 1.2rem;
+                    color: #555;
+                }
+
+                .unlock-inline-btn {
+                    background: transparent;
+                    border: 1px solid var(--accent-orange);
+                    color: var(--accent-orange);
+                    padding: 0.4rem 1rem;
+                    border-radius: 8px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+
+                .unlock-inline-btn:hover {
+                    background: var(--accent-orange);
+                    color: white;
                 }
 
                 @media (max-width: 992px) {

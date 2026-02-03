@@ -55,7 +55,7 @@ export const SolvedProvider = ({ children }) => {
 
         try {
             const API_BASE = import.meta.env.VITE_API_URL || '';
-            const response = await axios.post(`${API_BASE}/api/sync/${username}`);
+            const response = await axios.post(`${API_BASE}/api/sync/${username}`, {}, { withCredentials: true });
 
             const { solvedStats, recentSolved } = response.data;
 
