@@ -82,7 +82,11 @@ export const SolvedProvider = ({ children }) => {
 
         } catch (err) {
             console.error("Sync Error:", err);
-            setSyncError(err.response?.data?.error || 'Sync failed');
+            if (err.response?.status === 404) {
+                setSyncError('User not found or profile is private');
+            } else {
+                setSyncError(err.response?.data?.error || 'Sync failed');
+            }
         } finally {
             setIsSyncing(false);
         }

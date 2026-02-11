@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
-import { FaEnvelope, FaLock, FaUser, FaTimes } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaUser, FaTimes, FaGoogle } from 'react-icons/fa';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -85,8 +85,19 @@ const LoginPage = () => {
                     </button>
                 </form>
 
+                <div className="auth-separator">
+                    <span>OR</span>
+                </div>
+
+                <button
+                    className="google-btn"
+                    onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || ''}/api/auth/google`}
+                >
+                    <FaGoogle style={{ marginRight: '10px' }} /> Continue with Google
+                </button>
+
                 <div className="auth-footer">
-                    <p>New to LeetVision? <Link to="/signup">Create an Account</Link></p>
+                    <p>New user? <Link to="/signup">Signup</Link></p>
                 </div>
             </div>
 
@@ -275,12 +286,55 @@ const LoginPage = () => {
                 }
 
                 .auth-footer {
-                    margin-top: 2.5rem;
+                    margin-top: 1.5rem;
                     text-align: center;
                     color: #666;
                     font-size: 0.95rem;
-                    padding-top: 2rem;
+                    padding-top: 1.5rem;
                     border-top: 1px solid rgba(255, 255, 255, 0.05);
+                }
+
+                .auth-separator {
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    margin: 1.5rem 0;
+                    color: #444;
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                }
+
+                .auth-separator::before,
+                .auth-separator::after {
+                    content: '';
+                    flex: 1;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                }
+
+                .auth-separator span {
+                    padding: 0 1rem;
+                }
+
+                .google-btn {
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.05);
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    padding: 1rem;
+                    border-radius: 14px;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .google-btn:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-color: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-2px);
                 }
 
                 .auth-footer a {

@@ -60,5 +60,67 @@
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=pyt-RGt7slA"
     }
+  ],
+  "3": [
+    {
+      "id": "wiGpQwVHdE0",
+      "questionId": "3",
+      "title": "Longest Substring Without Repeating Characters - Leetcode 3 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/wiGpQwVHdE0/hqdefault.jpg",
+      "viewCount": 796238,
+      "likeCount": 10434,
+      "publishedAt": "2020-06-27T19:34:44Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=wiGpQwVHdE0"
+    },
+    {
+      "id": "-zSxTJkcdAo",
+      "questionId": "3",
+      "title": "L3. Longest Substring Without Repeating Characters | 2 Pointers and Sliding Window Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/-zSxTJkcdAo/hqdefault.jpg",
+      "viewCount": 549652,
+      "likeCount": 12090,
+      "publishedAt": "2024-03-27T03:40:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=-zSxTJkcdAo"
+    },
+    {
+      "id": "VvS_CtSIeiQ",
+      "questionId": "3",
+      "title": "Length of longest substring without repeating characters | LeetCode #3 | Top 150 interview question",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/VvS_CtSIeiQ/hqdefault.jpg",
+      "viewCount": 68002,
+      "likeCount": 917,
+      "publishedAt": "2022-06-26T18:33:55Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=VvS_CtSIeiQ"
+    },
+    {
+      "id": "U2ppEzBaMck",
+      "questionId": "3",
+      "title": "Longest Repeating Substring without repeating characters (LeetCode 3) | Two pointer approach",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/U2ppEzBaMck/hqdefault.jpg",
+      "viewCount": 44852,
+      "likeCount": 1094,
+      "publishedAt": "2025-02-11T08:00:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=U2ppEzBaMck"
+    },
+    {
+      "id": "BKy7H8rEmco",
+      "questionId": "3",
+      "title": "LeetCode 3 Solution in Hindi | Longest Substring Without Repeating Characters | LeetCode Playlist",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/BKy7H8rEmco/hqdefault.jpg",
+      "viewCount": 23166,
+      "likeCount": 352,
+      "publishedAt": "2023-07-12T14:30:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=BKy7H8rEmco"
+    }
   ]
 }

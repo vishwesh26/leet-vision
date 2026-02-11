@@ -1,0 +1,157 @@
+#leetvision-overlay {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 161, 22, 0.3);
+    border-radius: 16px;
+    z-index: 999999;
+    color: white;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+    animation: lv-slide-in 0.3s ease-out;
+}
+
+@keyframes lv-slide-in {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.lv-header {
+    background: rgba(255, 161, 22, 0.1);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lv-header span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffa116;
+}
+
+#lv-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.lv-content {
+    padding: 20px;
+}
+
+.lv-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.lv-content p {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+#lv-view-full {
+    width: 100%;
+    padding: 10px;
+    background: #ffa116;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#lv-view-full:hover {
+    background: #ffb84d;
+    transform: translateY(-2px);
+}
+
+/* Video Section Styles */
+.lv-videos-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+
+.lv-videos-container h4 {
+    margin: 0 0 12px 0;
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.lv-video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lv-video-item {
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 10px;
+    transition: background 0.2s;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.lv-video-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.lv-thumb {
+    flex-shrink: 0;
+    width: 80px;
+    height: 45px;
+    border-radius: 6px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.lv-duration {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.65rem;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.lv-video-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.lv-v-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #eee;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3px;
+}
+
+.lv-v-meta {
+    font-size: 0.7rem;
+    color: #777;
+}

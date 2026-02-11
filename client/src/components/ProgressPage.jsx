@@ -4,7 +4,7 @@ import ProgressGraph from './ProgressGraph';
 import SEO from './SEO';
 
 const ProgressPage = () => {
-    const { leetcodeUsername, userStats, recentSubmissions, syncWithLeetCode, isSyncing, disconnect } = useSolved();
+    const { leetcodeUsername, userStats, recentSubmissions, syncWithLeetCode, isSyncing, disconnect, syncError } = useSolved();
 
     const streak = useMemo(() => {
 
@@ -65,6 +65,19 @@ const ProgressPage = () => {
                 <p style={{ color: '#888', marginBottom: '2rem' }}>Enter your username below to visualize your coding journey.</p>
 
                 <div style={{ maxWidth: '400px', margin: '0 auto', background: '#1a1a1a', padding: '2rem', borderRadius: '12px', border: '1px solid #333' }}>
+                    {syncError && (
+                        <div style={{
+                            background: 'rgba(255, 68, 68, 0.1)',
+                            border: '1px solid rgba(255, 68, 68, 0.2)',
+                            color: '#ff4444',
+                            padding: '0.8rem',
+                            borderRadius: '8px',
+                            marginBottom: '1rem',
+                            fontSize: '0.9rem'
+                        }}>
+                            {syncError}
+                        </div>
+                    )}
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         const val = e.target.username.value;

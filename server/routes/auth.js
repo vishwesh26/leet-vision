@@ -7,6 +7,7 @@ const Purchase = require('../models/Purchase');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_keep_it_safe';
 const JWT_EXPIRES_IN = '30d';
+const passport = require('passport');
 
 // Helper to create token
 const signToken = (id) => {
@@ -14,6 +15,40 @@ const signToken = (id) => {
         expiresIn: JWT_EXPIRES_IN
     });
 };
+
+// Google Auth Routes
+router.get('/google', (req, res, next) => {
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+        return res.status(400).send('Google OAuth is not configured. Please add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to your .env file.');
+    }
+    passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
+});
+
+router.get('/google/callback', (req, res, next) => {
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+        return res.redirect('/login?error=oauth_not_configured');
+    }
+    passport.authenticate('google', { failureRedirect: '/login', session: false })(req, res, next);
+}, (req, res) => {
+        // Successful authentication
+        const token = signToken(req.user._id);
+        
+        // Send cookie
+        res.cookie('jwt', token, {
+            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Lax'
+        });
+
+        // Redirect to frontend (homepage or dashboard)
+        const redirectUrl = process.env.NODE_ENV === 'production' 
+            ? 'https://leet-vision.vercel.app/' 
+            : 'http://localhost:5173/';
+            
+        res.redirect(redirectUrl);
+    }
+);
 
 // Sign Up
 router.post('/signup', async (req, res) => {
@@ -107,6 +142,7 @@ router.post('/login', async (req, res) => {
                     id: user._id,
                     name: user.name,
                     email: user.email,
+                    isAdmin: user.isAdmin,
                     ownedCompanies
                 }
             }
@@ -160,6 +196,7 @@ router.get('/me', async (req, res) => {
                     id: currentUser._id,
                     name: currentUser.name,
                     email: currentUser.email,
+                    isAdmin: currentUser.isAdmin,
                     ownedCompanies
                 }
             }

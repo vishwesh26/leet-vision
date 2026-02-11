@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const CompanyQuestion = require('./models/CompanyQuestion');
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
@@ -23,8 +24,16 @@ const Purchase = require('./models/Purchase');
 const StoredVideo = require('./models/StoredVideo');
 const SurveyResponse = require('./models/SurveyResponse');
 const jwt = require('jsonwebtoken');
+const Concept = require('./models/Concept');
+const UniversalProblem = require('./models/UniversalProblem');
+const Explanation = require('./models/Explanation');
+const Report = require('./models/Report');
+const { protect, admin } = require('./middleware/authMiddleware');
+const passport = require('passport');
+require('./config/passport');
 
 const app = express();
+app.use(passport.initialize());
 const PORT = process.env.PORT || 5000;
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
@@ -76,6 +85,44 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/payment', paymentRoutes);
 
+// Report Endpoint
+app.post('/api/report', async (req, res) => {
+    try {
+        const { questionId, title, platform, reason, details, correctSolution } = req.body;
+        
+        if (!questionId || !reason) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const newReport = await Report.create({
+            questionId,
+            title,
+            platform,
+            reason,
+            details,
+            correctSolution
+        });
+
+        console.log(`Report received for ${questionId}: ${reason}`);
+        res.status(201).json({ status: 'success', message: 'Report submitted successfully', data: newReport });
+    } catch (err) {
+        console.error('Report Submission Error:', err);
+        res.status(500).json({ error: 'Failed to submit report' });
+    }
+});
+
+// Get All Reports (Admin)
+// Import middleware at the top if not already there, but for now assuming it's available or will be imported
+app.get('/api/reports', protect, admin, async (req, res) => {
+    try {
+        const reports = await Report.find().sort({ createdAt: -1 });
+        res.json(reports);
+    } catch (err) {
+        console.error('Error fetching reports:', err);
+        res.status(500).json({ error: 'Failed to fetch reports' });
+    }
+});
+
 // Logo Proxy to avoid frontend 404s
 app.get('/api/logo/:domain', async (req, res) => {
     const { domain } = req.params;
@@ -121,6 +168,36 @@ try {
     console.error('Error loading problems.json:', err);
     // Fallback or empty
     problemsDb = [];
+}
+
+// Load Company Plans
+let companyPlans = {};
+try {
+    companyPlans = require('./data/company_plans.json');
+    console.log(`Loaded plans for ${Object.keys(companyPlans).length} companies.`);
+} catch (err) {
+    console.error('Error loading company_plans.json:', err);
+    companyPlans = {};
+}
+
+// Load Companies DB
+let companiesDb = {};
+try {
+    companiesDb = require('./data/companies.json');
+    console.log(`Loaded ${Object.keys(companiesDb).length} companies from database.`);
+} catch (err) {
+    console.error('Error loading companies.json:', err);
+}
+
+// Load Custom Lists
+let blind75Ids = [];
+let top100Ids = [];
+try {
+    blind75Ids = require('./data/blind75.json');
+    top100Ids = require('./data/top100.json');
+    console.log(`Loaded custom lists: Blind 75 (${blind75Ids.length}), Top 100 (${top100Ids.length})`);
+} catch (e) {
+    console.error("Failed to load custom lists:", e.message);
 }
 
 // Helper: Get or Fetch Video (Quota Efficient)
@@ -275,6 +352,95 @@ app.get('/', (req, res) => {
     res.send('LeetCode Video Search API (Efficient Cached) is running');
 });
 
+// --- Universal System Helpers ---
+const normalizeConceptKey = (title) => {
+    return slugify(title, { replacement: '_', lower: true, strict: true }).toUpperCase();
+};
+
+const getOrFetchUniversalVideos = async (title, conceptId) => {
+    if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === 'YOUR_YOUTUBE_API_KEY_HERE') return [];
+
+    try {
+        const query = `${title} DSA explanation`;
+        console.log(`[YouTube Fetch] Query: "${query}" for Concept: ${conceptId}`);
+
+        const searchRes = await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
+            params: { part: 'snippet', q: query, type: 'video', maxResults: 5, key: YOUTUBE_API_KEY }
+        });
+
+        const items = searchRes.data.items || [];
+        console.log(`[YouTube Search] Query: "${query}" - Found: ${items.length} items`);
+        
+        if (items.length === 0) {
+            console.log(`[YouTube Search] Full data:`, JSON.stringify(searchRes.data).substring(0, 500));
+            return [];
+        }
+
+        const videoIds = searchRes.data.items.map(item => item.id.videoId).join(',');
+        const statsRes = await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
+            params: { part: 'statistics,snippet,contentDetails', id: videoIds, key: YOUTUBE_API_KEY }
+        });
+
+        console.log(`[YouTube Stats] Retrieved stats for ${statsRes.data.items ? statsRes.data.items.length : 0} videos`);
+
+        let videos = statsRes.data.items.map(vid => {
+            const duration = vid.contentDetails.duration;
+            let seconds = 0;
+            const matches = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+            if (matches) {
+                seconds = (parseInt(matches[1]) || 0) * 3600 + (parseInt(matches[2]) || 0) * 60 + (parseInt(matches[3]) || 0);
+            }
+
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            const formattedDuration = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+
+            return {
+                url: `https://www.youtube.com/watch?v=${vid.id}`,
+                title: vid.snippet.title,
+                channel: vid.snippet.channelTitle,
+                views: parseInt(vid.statistics.viewCount) || 0,
+                duration: formattedDuration,
+                duration_secs: seconds, // Keep raw seconds for sorting
+                thumbnail: vid.snippet.thumbnails.high.url
+            };
+        });
+
+        videos.sort((a, b) => {
+            const aIdeal = a.duration_secs >= 240 && a.duration_secs <= 1500;
+            const bIdeal = b.duration_secs >= 240 && b.duration_secs <= 1500;
+            if (aIdeal && !bIdeal) return -1;
+            if (!aIdeal && bIdeal) return 1;
+            return b.views - a.views;
+        });
+
+        if (conceptId) {
+            const videoLinks = videos.slice(0, 3).map((v, i) => ({ 
+                url: v.url, 
+                title: v.title, 
+                channel: v.channel,
+                views: v.views, 
+                duration: v.duration, 
+                thumbnail: v.thumbnail, 
+                rank: i + 1 
+            }));
+            console.log(`[YouTube Fetch] Saving ${videoLinks.length} videos to DB for Concept: ${conceptId._id || conceptId}`);
+            const updated = await Explanation.findOneAndUpdate(
+                { concept_id: conceptId._id || conceptId },
+                { $set: { video_links: videoLinks } },
+                { new: true }
+            );
+            console.log(`[YouTube Fetch] Update Result - Found: ${!!updated}, Links: ${updated ? updated.video_links.length : 0}`);
+            return videoLinks; // Return the saved links
+        }
+
+        return videos.slice(0, 3).map((v, i) => ({ ...v, rank: i + 1 }));
+    } catch (e) {
+        console.error("Universal Video Fetch Error:", e.message);
+        return [];
+    }
+};
+
 // Search Endpoint (Manual - Always Fetch)
 app.get('/api/search/:questionId', async (req, res) => {
     const { questionId } = req.params;
@@ -290,23 +456,6 @@ app.get('/api/search/:questionId', async (req, res) => {
     return res.status(404).json({ error: 'No video found' });
 });
 
-// Curated Top 100 Liked Questions List
-const TOP_100_IDS = [
-  1, 2, 3, 4, 5, 10, 11, 15, 17, 19, 20, 21, 22, 23, 31, 32, 33, 34, 35, 39,
-  41, 42, 46, 48, 49, 53, 55, 56, 62, 64, 70, 72, 75, 76, 78, 79, 84, 85, 94, 96, 98,
-  101, 102, 104, 105, 114, 121, 124, 128, 136, 139, 141, 142, 146, 148, 152, 155, 160, 169, 198,
-  200, 206, 207, 208, 215, 221, 226, 234, 236, 238, 239, 240, 253, 279, 283, 287, 295, 297, 300, 
-  301, 309, 322, 337, 338, 347, 394, 399, 406, 416, 437, 438, 448, 494, 543, 560, 581, 617, 647, 739
-];
-
-// Curated Blind 75 List
-const BLIND_75_IDS = [
-  1, 121, 217, 238, 15, 11, 153, 33, 3, 424, 76, 242, 49, 20, 125, 5, 647, 198, 213, 300, 322, 
-  139, 1143, 62, 190, 191, 338, 268, 371, 54, 48, 73, 206, 21, 143, 19, 141, 23, 104, 100, 226, 
-  102, 572, 98, 230, 235, 105, 211, 208, 252, 253, 435, 56, 57, 269, 200, 133, 417, 207, 210, 
-  261, 323, 212, 79, 347, 39, 128, 295
-];
-
 // List Endpoint
 app.get('/api/list/:type', async (req, res) => {
     try {
@@ -319,17 +468,14 @@ app.get('/api/list/:type', async (req, res) => {
         if (!Array.isArray(problemsDb)) problemsDb = [];
 
         if (type === 'top-100') {
-            // Strictly use the curated list
-            filtered = problemsDb.filter(p => TOP_100_IDS.includes(parseInt(p.id)));
-             // Ensure they are sorted by ID (Ascending)
-            filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+            // Filter DB by Top 100 IDs
+            // We want to preserve the order of top100Ids
+            filtered = top100Ids.map(id => problemsDb.find(p => p.id === id.toString())).filter(Boolean);
+            
         } else if (type === 'blind-75') {
-            // Use Curated Blind 75 List (Fixed Sequence)
-            filtered = problemsDb.filter(p => BLIND_75_IDS.includes(parseInt(p.id)));
-            // Sort by order in BLIND_75_IDS
-            filtered.sort((a, b) => {
-                return BLIND_75_IDS.indexOf(parseInt(a.id)) - BLIND_75_IDS.indexOf(parseInt(b.id));
-            });
+             // Filter DB by Blind 75 IDs
+            filtered = blind75Ids.map(id => problemsDb.find(p => p.id === id.toString())).filter(Boolean);
+
         } else if (type === 'difficulty') {
             filtered = problemsDb.filter(p => p.difficulty === difficulty);
             filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
@@ -412,6 +558,7 @@ app.post('/api/sync/:username', async (req, res) => {
     `;
 
     try {
+        console.log(`[LeetCode Sync] Attempting sync for user: ${username}`);
         const response = await axios.post('https://leetcode.com/graphql', {
             query: query,
             variables: { username, limit: 20 }
@@ -423,7 +570,15 @@ app.post('/api/sync/:username', async (req, res) => {
             }
         });
 
-        if (!response.data.data.matchedUser) {
+        // LeetCode returns errors in the body with status 200 sometimes
+        if (response.data.errors) {
+            console.warn(`[LeetCode Sync] LeetCode API returned errors for ${username}:`, response.data.errors[0].message);
+            if (response.data.errors[0].message.includes("user does not exist")) {
+                return res.status(404).json({ error: `LeetCode user '${username}' not found. Please check your username.` });
+            }
+        }
+
+        if (!response.data.data || !response.data.data.matchedUser) {
              return res.status(404).json({ error: 'User not found or profile is private' });
         }
 
@@ -440,15 +595,84 @@ app.post('/api/sync/:username', async (req, res) => {
             calendar: calendar
         };
 
-        // Just return the raw list, let frontend handle deduplication
+        console.log(`[LeetCode Sync] SUCCESS for ${username}: ${solvedStats.total} solved`);
+
         res.json({
             solvedStats,
             recentSolved: recent
         });
 
     } catch (err) {
-        console.error('LeetCode Sync Error:', err.message);
+        console.error('[LeetCode Sync] Server Error:', err.message);
         res.status(500).json({ error: 'Failed to sync with LeetCode', details: err.message });
+    }
+});
+// Company Plan Endpoint
+app.get('/api/company/:name/plan', async (req, res) => {
+    try {
+        const companyName = req.params.name.toLowerCase();
+        const plan = companyPlans[companyName];
+
+        if (!plan) {
+            return res.status(404).json({ error: 'Company plan not found' });
+        }
+
+        // Deep copy to avoid mutating cache
+        const enrichedPlan = JSON.parse(JSON.stringify(plan));
+
+        // Enriched DSA IDs with full video/problem objects
+        const levels = Object.keys(enrichedPlan);
+        
+        for (const level of levels) {
+            const levelData = enrichedPlan[level];
+            if (levelData.dsa_ids && levelData.dsa_ids.length > 0) {
+                const problems = await Promise.all(levelData.dsa_ids.map(async (id) => {
+                    // Find problem details from problemsDb
+                    const problemDetails = problemsDb.find(p => p.id === id.toString()) || { id, title: `Problem ${id}`, difficulty: 'Unknown' };
+                    
+                    // Fetch video
+                    const videos = await getOrFetchVideo(id, false); 
+                    
+                    return {
+                        ...problemDetails,
+                        video: (videos && videos.length > 0) ? videos[0] : null
+                    };
+                }));
+                levelData.problems = problems; // Attach enriched array
+            } else {
+                levelData.problems = [];
+            }
+        }
+
+        res.json({ company: companyName, plan: enrichedPlan });
+
+    } catch (err) {
+        console.error("Company Plan API Error:", err);
+        res.status(500).json({ error: 'Failed to fetch company plan' });
+    }
+});
+
+// Daily Challenge Endpoint
+app.get('/api/daily-challenge', async (req, res) => {
+    try {
+        if (!problemsDb || problemsDb.length === 0) {
+            return res.status(503).json({ error: 'Problems database not loaded' });
+        }
+
+        const today = new Date();
+        const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+        const index = seed % problemsDb.length;
+        const problem = problemsDb[index];
+        const videos = await getOrFetchVideo(problem.id, false); 
+        
+        res.json({
+            ...problem,
+            video: (videos && videos.length > 0) ? videos[0] : null
+        });
+
+    } catch (err) {
+        console.error("Daily Challenge Error:", err);
+        res.status(500).json({ error: 'Failed to generate daily challenge' });
     }
 });
 
@@ -465,7 +689,9 @@ if (!fs.existsSync(SOLUTIONS_DIR)) {
     try { fs.mkdirSync(SOLUTIONS_DIR, { recursive: true }); } catch (e) {}
 }
 
+console.log("Checking GEMINI_API_KEY:", process.env.GEMINI_API_KEY ? "FOUND (starts with AIza)" : "MISSING");
 const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
+console.log("AI Service Status:", genAI ? "INITIALIZED" : "DISABLED (Check .env)");
 
 // Connect to MongoDB
 const connectDB = async () => {
@@ -608,9 +834,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
           "difficulty": "Easy, Medium, or Hard",
           "topics": ["Topic", "Topic"],
           "problemStatement": "Clear, concise problem description.",
-          "examples": [
-             { "input": "...", "output": "...", "explanation": "Brief, clear explanation." }
-          ],
+
           "approaches": [
              {
                "name": "Brute Force",
@@ -717,26 +941,6 @@ app.get('/api/solution/:questionId', async (req, res) => {
         return res.status(500).json({ error: "Server Error", details: err.message });
     }
 });
-
-// Helper to load companies data lazily or just read it here
-let companiesDb = {};
-try {
-    const companiesData = fs.readFileSync(path.join(__dirname, 'data', 'companies.json'), 'utf8');
-    companiesDb = JSON.parse(companiesData);
-    console.log(`Loaded ${Object.keys(companiesDb).length} companies from database.`);
-} catch (err) {
-    console.error('Error loading companies.json:', err);
-}
-
-// Load Company Plans
-let companyPlans = {};
-try {
-    companyPlans = require('./data/company_plans.json');
-    console.log(`Loaded plans for ${Object.keys(companyPlans).length} companies.`);
-} catch (err) {
-    console.error('Error loading company_plans.json:', err);
-    companyPlans = {};
-}
 
 // Company-Wise Questions API (Paginated & Searchable)
 app.get('/api/companies', async (req, res) => {
@@ -1085,5 +1289,446 @@ const server = app.listen(PORT, () => {
 
 // Keep process alive (deployment/environment fix)
 setInterval(() => {}, 60000);
+
+// --- Universal Problem Explanation System ---
+
+// API: Resolve Problem (Entry point for Extension)
+app.post('/api/resolve-problem', async (req, res) => {
+    const { title, platform, url } = req.body;
+    if (!title || !platform || !url) {
+        return res.status(400).json({ error: "Missing required fields: title, platform, url" });
+    }
+
+    try {
+        await connectDB();
+        const slug = slugify(title, { lower: true, strict: true });
+
+        // 1. Try exact match in problems
+        let problem = await UniversalProblem.findOne({ platform, slug }).populate('concept_id');
+
+        if (problem) {
+            const conceptId = problem.concept_id._id || problem.concept_id;
+            let explanation = await Explanation.findOne({ concept_id: conceptId });
+            let finalVideos = (explanation && explanation.video_links) ? explanation.video_links : [];
+            
+            // Auto-fetch videos if missing
+            const needsFetch = explanation && (!explanation.video_links || explanation.video_links.length === 0);
+            if (needsFetch) {
+                console.log(`Auto-fetching videos for: ${title}`);
+                const fetchedVideos = await getOrFetchUniversalVideos(title, conceptId);
+                finalVideos = fetchedVideos;
+            }
+
+            return res.json({
+                status: 'found',
+                problem,
+                explanation: explanation ? { ...explanation.toObject(), video_links: finalVideos } : null,
+                concept: problem.concept_id
+            });
+        }
+
+        // 2. If not found, look for ANY problem with same normalized title to reuse concept
+        const conceptKey = normalizeConceptKey(title);
+        let existingConcept = await Concept.findOne({ concept_key: conceptKey });
+
+        if (existingConcept) {
+            // Create problem mapping for this platform
+            problem = await UniversalProblem.create({
+                platform,
+                title,
+                slug,
+                url,
+                concept_id: existingConcept._id
+            });
+            let explanation = await Explanation.findOne({ concept_id: existingConcept._id });
+
+            // Auto-fetch videos if missing
+            if (explanation && (!explanation.video_links || explanation.video_links.length === 0)) {
+                console.log(`Auto-fetching videos for: ${title} (mapped concept)`);
+                await getOrFetchUniversalVideos(title, existingConcept._id);
+                explanation = await Explanation.findOne({ concept_id: existingConcept._id });
+            }
+
+            return res.json({
+                status: 'mapped',
+                problem,
+                explanation,
+                concept: existingConcept
+            });
+        }
+
+        // 3. New Concept: Trigger Generation
+        return res.json({ 
+            status: 'pending', 
+            message: "Concept not found. Please trigger generation.",
+            canGenerate: true,
+            title,
+            platform,
+            url
+        });
+    } catch (err) {
+        console.error("Resolve Error:", err.message);
+        if (err.status === 429) {
+            return res.status(429).json({ 
+                error: "Intelligence Layer over-clocked. Please wait 60 seconds.",
+                code: "RATE_LIMIT_EXCEEDED"
+            });
+        }
+        res.status(500).json({ error: "System Error", details: err.message });
+    }
+});
+
+// API: Generate Concept & Explanation
+// Helper: Get or Generate Concept & Explanation
+async function getOrGenerateConcept(title, platform = null, url = null) {
+    const conceptKey = normalizeConceptKey(title);
+    let concept = await Concept.findOne({ concept_key: conceptKey });
+
+    if (!concept) {
+        if (!genAI) throw new Error("AI Service Unavailable (genAI is null)");
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        
+        const prompt = `
+        You are an expert DSA coding tutor. Generate a premium, concise solution guide for the coding problem titled: "${title}" from platform: "${platform || 'General'}".
+        Follow the structure of a high-end technical publication (similar to NeetCode or LeetCode Premium).
+        
+        Return ONLY a JSON object:
+        {
+          "concept_key": "${conceptKey}",
+          "topic": "Main Topic (e.g. String, DP, Graph, Recursion)",
+          "pattern": "Specific Pattern (e.g. Sliding Window, Monotonic Stack)",
+          "difficulty_estimate": "Easy, Medium, or Hard",
+          "source_url": "The official GeeksforGeeks practice URL following the format: https://www.geeksforgeeks.org/problems/[slug]/1",
+          "explanation": {
+            "analytical_overview": "Deep technical overview of the problem's nature. Write in clear, short, distinct sentences. Do NOT use long run-on sentences.",
+
+            "complexity_table": [
+                { "method": "Brute Force", "time": "O(...)", "space": "O(...)" },
+                { "method": "Optimal", "time": "O(...)", "space": "O(...)" }
+            ],
+            "approaches": [
+              {
+                "name": "Brute Force Approach",
+                "concept": "High-level idea (1-2 sentences).",
+                "steps": ["Step 1", "Step 2"],
+                "complexity": { "time": "O(...)", "space": "O(...)" },
+                "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
+              },
+              {
+                "name": "Optimal Approach",
+                "concept": "Optimization insight (1-2 sentences).",
+                "steps": ["Step 1", "Step 2"],
+                "complexity": { "time": "O(...)", "space": "O(...)" },
+                "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
+              }
+            ],
+            "common_mistakes": ["Pitfall 1", "Pitfall 2"]
+          }
+        }
+        
+        RULES:
+        1. "difficulty_estimate" must be exactly "Easy", "Medium", or "Hard".
+        2. "complexity" fields must only contain Big O (e.g. O(N)).
+        3. Provide exactly 2 or 3 approaches.
+        4. Tone: Professional, pedagogical, and concise. Avoid fluff.
+        5. For GeeksforGeeks, the "source_url" SHOULD be in the format: https://www.geeksforgeeks.org/problems/[slug]/1
+        `;
+
+        let result;
+        try {
+            result = await model.generateContent(prompt);
+        } catch (genErr) {
+            console.error("AI Generation Critical Error:", genErr.message);
+            if (genErr.status === 429 || genErr.message?.includes('429')) {
+                const limitErr = new Error("AI Quotient Exhausted");
+                limitErr.status = 429;
+                throw limitErr;
+            }
+            throw genErr;
+        }
+
+        const response = await result.response;
+        let text = response.text();
+        text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+        
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (jErr) {
+            try {
+                // Attempt to clean up common AI mistakes
+                const cleanedText = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
+                data = JSON.parse(cleanedText);
+            } catch (jErr2) {
+                console.error("AI JSON Parse Error:", jErr2.message);
+                throw new Error("AI generated invalid JSON structure.");
+            }
+        }
+
+        // Normalize difficulty
+        let normalizedDifficulty = 'Easy';
+        const rawDiff = (data.difficulty_estimate || 'Easy').toLowerCase();
+        if (rawDiff.includes('hard')) normalizedDifficulty = 'Hard';
+        else if (rawDiff.includes('medium')) normalizedDifficulty = 'Medium';
+
+        // Create Concept (Handle Race Condition)
+        try {
+            concept = await Concept.create({
+                concept_key: data.concept_key,
+                topic: data.topic,
+                pattern: data.pattern,
+                difficulty_estimate: normalizedDifficulty
+            });
+
+            // Create Explanation only if Concept creation succeeded (we are the winner)
+            await Explanation.create({
+                concept_id: concept._id,
+                analytical_overview: data.explanation.analytical_overview,
+                complexity_table: data.explanation.complexity_table,
+                approaches: data.explanation.approaches,
+                step_by_step: data.explanation.step_by_step || [],
+                common_mistakes: data.explanation.common_mistakes || [],
+                ai_generated: true
+            });
+
+            // Trigger video fetch (background)
+            getOrFetchUniversalVideos(title, concept._id).catch(err => console.error("Background Video Fetch Error:", err));
+
+        } catch (dbErr) {
+            if (dbErr.code === 11000) {
+                console.log(`[Race Condition Detected] Concept '${data.concept_key}' already created. Fetching existing...`);
+                concept = await Concept.findOne({ concept_key: data.concept_key });
+                if (!concept) throw new Error("Race condition handled but concept still missing.");
+            } else {
+                throw dbErr;
+            }
+        }
+
+
+    }
+
+    // Sync UniversalProblem mapping if provided
+    if (platform) {
+        let finalUrl = url || data.source_url;
+        const slug = slugify(title).toLowerCase();
+
+        // For GFG, ensure we use the provided URL if it exists and is valid, otherwise fallback
+        if (platform === 'geeksforgeeks') {
+            const rawUrl = url || data.source_url || '';
+            if (rawUrl.includes('geeksforgeeks.org')) {
+                finalUrl = rawUrl; // Trust the source/DB URL first
+            } else {
+                finalUrl = `https://www.geeksforgeeks.org/problems/${slug}/1`;
+            }
+        }
+
+        if (finalUrl) {
+            await UniversalProblem.findOneAndUpdate(
+                { platform, slug },
+                { concept_id: concept._id, title, url: finalUrl },
+                { upsert: true }
+            );
+        }
+    }
+
+    const explanation = await Explanation.findOne({ concept_id: concept._id });
+    const relatedProblems = await UniversalProblem.find({ concept_id: concept._id });
+
+    return { concept, explanation, relatedProblems };
+}
+
+// API: Generate Concept & Explanation
+app.post('/api/generate-concept', async (req, res) => {
+    const { title, platform, url } = req.body;
+    if (!title) return res.status(400).json({ error: "Title required" });
+
+    try {
+        await connectDB();
+        const result = await getOrGenerateConcept(title, platform, url);
+        res.json(result);
+    } catch (err) {
+        console.error("Generation Error:", err.message);
+        if (err.status === 429) {
+            return res.status(429).json({ 
+                error: "Intelligence Layer over-clocked. Please wait 60 seconds.",
+                code: "RATE_LIMIT_EXCEEDED"
+            });
+        }
+        res.status(500).json({ error: "AI Generation Failed", details: err.message });
+    }
+});
+
+// API: Universal Problem Resolver (Lazy Load)
+app.get('/api/universe/resolve/:platform/:slug', async (req, res) => {
+    const { platform, slug } = req.params;
+    try {
+        await connectDB();
+        
+        let problem = await UniversalProblem.findOne({ platform, slug });
+        
+        if (!problem) {
+            return res.status(404).json({ error: "Problem not trackable in this star sector." });
+        }
+
+        // Use helper to find or generate
+        console.log(`[Universe Resolve] Processing: ${platform}/${slug} (${problem.title})`);
+        const result = await getOrGenerateConcept(problem.title, platform, problem.url);
+        console.log(`[Universe Resolve] Success for: ${slug}`);
+        res.json(result);
+
+    } catch (err) {
+        console.error("Resolve Error:", err.message);
+        if (err.status === 429) {
+            return res.status(429).json({ 
+                error: "Intelligence Layer over-clocked. Please try again in 30-60 seconds.",
+                code: "RATE_LIMIT_EXCEEDED"
+            });
+        }
+        res.status(500).json({ 
+            error: "System encountered an error during inference.",
+            details: err.message,
+            stack: err.stack
+        });
+    }
+});
+
+// API: Bulk skeletal seed
+app.post('/api/universe/bulk-seed', async (req, res) => {
+    const { problems, platform } = req.body;
+    if (!problems || !Array.isArray(problems)) return res.status(400).json({ error: "Problems array required" });
+
+    try {
+        await connectDB();
+        const results = { created: 0, skipped: 0, errors: 0 };
+
+        for (const title of problems) {
+            try {
+                const slug = slugify(title, { lower: true, strict: true });
+                const url = `https://www.geeksforgeeks.org/problems/${slug}/1`;
+                
+                const existing = await UniversalProblem.findOne({ platform, slug });
+                if (!existing) {
+                    await UniversalProblem.create({ platform, title, slug, url });
+                    results.created++;
+                } else {
+                    results.skipped++;
+                }
+            } catch (pErr) {
+                results.errors++;
+            }
+        }
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// API: Get Concept Details
+app.get('/api/concept/:id', async (req, res) => {
+    try {
+        await connectDB();
+        const concept = await Concept.findById(req.params.id);
+        if (!concept) return res.status(404).json({ error: "Concept not found" });
+
+        // --- Auto-Linker Logic ---
+        // 1. Derive potential slugs/titles from concept_key
+        const normalizedKey = concept.concept_key.toLowerCase();
+        const potentialSlug = slugify(concept.concept_key, { lower: true, strict: true });
+        
+        // 2. Find orphans that match this concept
+        // We look for problems with NO concept_id that match the slug pattern
+        await UniversalProblem.updateMany(
+            {
+                concept_id: { $exists: false },
+                $or: [
+                    { slug: potentialSlug },
+                    { title: { $regex: new RegExp(`^${concept.concept_key}$`, 'i') } } // Case-insensitive exact title match
+                ]
+            },
+            { $set: { concept_id: concept._id } }
+        );
+        // -------------------------
+
+        const explanation = await Explanation.findOne({ concept_id: concept._id });
+        const relatedProblems = await UniversalProblem.find({ concept_id: concept._id });
+
+        res.json({
+            concept,
+            explanation,
+            relatedProblems
+        });
+    } catch (err) {
+        console.error("Fetch Concept Error:", err);
+        res.status(500).json({ error: "Fetch error" });
+    }
+});
+
+// API: Get Topic Statistics for a Platform
+app.get('/api/universal-problems/topics', async (req, res) => {
+    try {
+        await connectDB();
+        const { platform } = req.query;
+        if (!platform) return res.status(400).json({ error: "Platform required" });
+
+        const stats = await UniversalProblem.aggregate([
+            { $match: { platform } },
+            { $unwind: "$tags" },
+            { $group: { _id: "$tags", count: { $sum: 1 } } },
+            { $sort: { _id: 1 } }
+        ]);
+
+        const topics = stats.map(s => ({ tag: s._id, count: s.count }));
+        res.json(topics);
+    } catch (err) {
+        console.error("Fetch Topics Error:", err);
+        res.status(500).json({ error: "Fetch error" });
+    }
+});
+
+// API: Get All Universal Problems (for Explore page)
+app.get('/api/universal-problems', async (req, res) => {
+    try {
+        await connectDB();
+        const { platform, page = 1, limit = 30, tag, search } = req.query;
+        let query = {};
+
+        if (search) {
+            const searchRegex = new RegExp(search, 'i');
+            query.$or = [
+                { title: { $regex: searchRegex } },
+                { slug: { $regex: searchRegex } }
+            ];
+        }
+
+        
+        if (platform && platform !== 'all') {
+            query.platform = platform;
+        }
+
+        if (tag) {
+            query.tags = tag;
+        }
+
+        const skip = (parseInt(page) - 1) * parseInt(limit);
+        
+        const problems = await UniversalProblem.find(query)
+            .populate('concept_id')
+            .sort({ last_seen_at: -1 }) // Ensure consistent sort order
+            .skip(skip)
+            .limit(parseInt(limit));
+            
+        const total = await UniversalProblem.countDocuments(query);
+
+        res.json({
+            problems,
+            total,
+            page: parseInt(page),
+            pages: Math.ceil(total / limit)
+        });
+    } catch (err) {
+        console.error("Fetch Universal Problems Error:", err);
+        res.status(500).json({ error: "Fetch error" });
+    }
+});
 
 module.exports = app;

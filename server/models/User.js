@@ -14,9 +14,19 @@ const userSchema = new mongoose.Schema({
         trim: true,
         match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address']
     },
+    googleId: {
+        type: String,
+        unique: true,
+        sparse: true // Allows multiple null/undefined values
+    },
+    avatar: {
+        type: String
+    },
     passwordHash: {
         type: String,
-        required: [true, 'Please provide a password'],
+        required: function() {
+            return !this.googleId; // Required ONLY if Google ID is missing
+        },
         minlength: 6,
         select: false // Don't return password hash by default
     },
@@ -31,7 +41,11 @@ const userSchema = new mongoose.Schema({
     },
     purchasedPlans: [{
         type: String // List of plan IDs or company names
-    }]
+    }],
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const User = mongoose.model('User', userSchema);

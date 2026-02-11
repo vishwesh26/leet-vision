@@ -12,7 +12,7 @@ import LandingPage from './components/LandingPage';
 import ListPage from './components/ListPage';
 import SearchPage from './components/SearchPage';
 import SavedPage from './components/SavedPage';
-import RoadmapPage from './components/RoadmapPage';
+
 import DailyPage from './components/DailyPage';
 import CompanyPrepPage from './components/CompanyPrepPage';
 import ProgressPage from './components/ProgressPage';
@@ -30,10 +30,18 @@ import DailyTechPage from './components/DailyTechPage';
 import CompanyListingPage from './components/CompanyListingPage';
 import CompanyDetailPage from './components/CompanyDetailPage';
 import SurveyAnalytics from './components/SurveyAnalytics';
+import ConceptPage from './components/ConceptPage';
+import UniversalExplore from './components/UniversalExplore';
+
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginPage from './components/LoginPage';
+import SignupPage from './components/SignupPage';
+import ReportSolutionPage from './components/ReportSolutionPage';
+import AdminReports from './components/AdminReports';
 
 function AppContent({ savedVideos, onToggleSave }) {
-  const user = null;
-  const logout = () => { };
+  const { user, logout } = useAuth();
+
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -51,10 +59,15 @@ function AppContent({ savedVideos, onToggleSave }) {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/solution/${searchQuery.trim()}`);
+    const query = searchQuery.trim();
+    // Use regex to strictly check for positive integers
+    if (query && /^\d+$/.test(query)) {
+      navigate(`/solution/${query}`);
       setSearchQuery('');
       setIsSearchOpen(false);
+    } else {
+      // Optional: Provide feedback or just do nothing as requested "nothing should be search"
+      // For better UX, we could clear it or shake, but user said "nothing should be search".
     }
   };
 
@@ -72,7 +85,7 @@ function AppContent({ savedVideos, onToggleSave }) {
         <div className="nav-center">
           <ul className="nav-links">
             <li className="nav-item"><Link to="/top-100-leetcode" style={{ color: 'inherit', textDecoration: 'none' }}>Top 100</Link></li>
-            <li className="nav-item"><Link to="/blind-75" style={{ color: 'inherit', textDecoration: 'none' }}>Blind 75</Link></li>
+
             <li className="nav-item dropdown">
               Difficulty ▾
               <div className="dropdown-content">
@@ -91,13 +104,13 @@ function AppContent({ savedVideos, onToggleSave }) {
                 <div><Link to="/topics/graph" style={{ color: 'inherit', textDecoration: 'none' }}>Graphs</Link></div>
               </div>
             </li>
-            <li className="nav-item"><Link to="/interview-roadmap" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</Link></li>
+
             <li className="nav-item"><Link to="/companies" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
             <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
             <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>My Progress</Link></li>
             <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
-            <li className="nav-item"><Link to="/daily-tech" style={{ color: 'var(--accent-orange)', textDecoration: 'none', fontWeight: 600 }}>Daily Tech</Link></li>
-            <li className="nav-item"><Link to="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>Blog</Link></li>
+
+            <li className="nav-item"><Link to="/explore" style={{ color: 'var(--accent-orange)', textDecoration: 'none', fontWeight: 600 }}>All Platform Problem</Link></li>
           </ul>
 
           {/* Download Extension Button (Desktop Only) */}
@@ -115,7 +128,7 @@ function AppContent({ savedVideos, onToggleSave }) {
             <form onSubmit={handleSearchSubmit} className="nav-search-form">
               <input
                 type="text"
-                placeholder="question no. eg. 12"
+                placeholder="LeetCode Question No."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus={isSearchOpen}
@@ -132,6 +145,30 @@ function AppContent({ savedVideos, onToggleSave }) {
               {isSearchOpen ? <FaTimes /> : <FaSearch />}
             </button>
           </div>
+        </div>
+
+        <div className="nav-auth">
+          {user ? (
+            <div className="nav-user-profile dropdown">
+              <div className="user-trigger">
+                <FaUserCircle size={24} color="#ffa116" />
+                <span className="user-name">{user.name.split(' ')[0]}</span>
+              </div>
+              <div className="dropdown-content user-dropdown">
+                <div style={{ padding: '10px 15px', borderBottom: '1px solid #333', color: '#888', fontSize: '0.85rem' }}>
+                  {user.email}
+                </div>
+                {/* <div><Link to="/profile">Profile</Link></div> */}
+                <div onClick={logout} style={{ color: '#ff4444' }}>
+                  <FaSignOutAlt style={{ marginRight: '8px' }} /> Logout
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="auth-buttons">
+              <Link to="/login" className="login-btn">Log In</Link>
+            </div>
+          )}
         </div>
 
         {/* Mobile Actions: Menu */}
@@ -157,7 +194,7 @@ function AppContent({ savedVideos, onToggleSave }) {
         <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="mobile-menu-content">
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
-            <Link to="/blind-75" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Blind 75 List</Link>
+
             <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
 
             <div className="mobile-divider">Difficulty</div>
@@ -176,7 +213,6 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/companies" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Browse All Companies</Link>
 
             <div className="mobile-divider">More</div>
-            <Link to="/interview-roadmap" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Roadmap</Link>
             <Link to="/daily" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Daily Challenge</Link>
             <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
           </div>
@@ -203,23 +239,59 @@ function AppContent({ savedVideos, onToggleSave }) {
               padding: 12px 16px;
               display: block;
               cursor: pointer;
+              color: white;
+              text-decoration: none;
           }
           .dropdown-content div:hover { background-color: #333; }
+          
+          /* Auth Styles */
+          .nav-auth { margin-left: 20px; display: flex; align-items: center; }
+          .auth-buttons { display: flex; gap: 12px; }
+          .login-btn {
+              padding: 8px 16px;
+              border-radius: 8px;
+              color: #ccc;
+              text-decoration: none;
+              font-weight: 600;
+              transition: 0.2s;
+          }
+          .login-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+          .signup-btn {
+              padding: 8px 16px;
+              border-radius: 8px;
+              background: #ffa116;
+              color: black;
+              text-decoration: none;
+              font-weight: 700;
+              transition: 0.2s;
+          }
+          .signup-btn:hover { background: #ffbe4d; transform: translateY(-1px); }
+
+          .nav-user-profile { cursor: pointer; }
+          .user-trigger { display: flex; align-items: center; gap: 8px; padding: 4px; }
+          .user-name { font-weight: 600; font-size: 0.95rem; }
+          .user-dropdown { right: 0; left: auto; min-width: 180px; }
+          
+          @media (max-width: 768px) {
+              .nav-auth { display: none; } /* Hide on mobile, move to menu if needed */
+          }
         `}</style>
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route path="/search/:questionId" element={<SearchPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/solution/:id" element={<SolutionPage />} />
           <Route path="/top-100-leetcode" element={<ListPage type="top-100" title="Top 100 Liked Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-          <Route path="/blind-75" element={<ListPage type="blind-75" title="Blind 75 Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+
           <Route path="/leetcode-easy" element={<ListPage type="difficulty" title="Easy Questions" param="Easy" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/leetcode-medium" element={<ListPage type="difficulty" title="Medium Questions" param="Medium" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/leetcode-hard" element={<ListPage type="difficulty" title="Hard Questions" param="Hard" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/topics/:topic" element={<ListPage type="topic" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/company/:company" element={<CompanyPrepPage savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
-          <Route path="/interview-roadmap" element={<RoadmapPage />} />
+
           <Route path="/companies" element={<CompanyListingPage />} />
           <Route path="/company-questions/:companyName" element={<CompanyDetailPage />} />
           <Route path="/company-questions" element={<CompanyPage />} />
@@ -229,11 +301,17 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/admin/reports" element={<AdminReports />} />
           <Route path="/admin/survey" element={<SurveyAnalytics />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="/daily-tech" element={<DailyTechPage />} />
+          <Route path="/concept/:id" element={<ConceptPage />} />
+          <Route path="/universe/solution/:platform/:slug" element={<ConceptPage />} />
+          <Route path="/report-solution" element={<ReportSolutionPage />} />
+          <Route path="/explore" element={<UniversalExplore />} />
         </Routes>
       </div>
 
@@ -283,12 +361,14 @@ function App() {
 
   return (
     <HelmetProvider>
-      <SolvedProvider>
-        <BrowserRouter>
-          <AppContent savedVideos={savedVideos} onToggleSave={handleToggleSave} />
-          <Analytics />
-        </BrowserRouter>
-      </SolvedProvider>
+      <AuthProvider>
+        <SolvedProvider>
+          <BrowserRouter>
+            <AppContent savedVideos={savedVideos} onToggleSave={handleToggleSave} />
+            <Analytics />
+          </BrowserRouter>
+        </SolvedProvider>
+      </AuthProvider>
     </HelmetProvider>
   );
 }

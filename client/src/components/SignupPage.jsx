@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
-import { FaEnvelope, FaLock, FaUser, FaArrowRight, FaTimes } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaUser, FaArrowRight, FaTimes, FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 
 const SignupPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [localError, setLocalError] = useState('');
     const { signup, loading } = useAuth();
     const navigate = useNavigate();
@@ -84,14 +85,24 @@ const SignupPage = () => {
 
                     <div className="form-group">
                         <label><FaLock /> Password</label>
-                        <input
-                            type="password"
-                            placeholder="Min. 6 characters"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            autoComplete="new-password"
-                        />
+                        <div className="password-input-wrapper">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Min. 6 characters"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                autoComplete="new-password"
+                            />
+                            <button
+                                type="button"
+                                className="toggle-password"
+                                onClick={() => setShowPassword(!showPassword)}
+                                tabIndex="-1"
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" className="auth-btn" disabled={loading}>
@@ -102,6 +113,17 @@ const SignupPage = () => {
                         )}
                     </button>
                 </form>
+
+                <div className="auth-separator">
+                    <span>OR</span>
+                </div>
+
+                <button
+                    className="google-btn"
+                    onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || ''}/api/auth/google`}
+                >
+                    <FaGoogle style={{ marginRight: '10px' }} /> Sign up with Google
+                </button>
 
                 <div className="auth-footer">
                     <p>Already have an account? <Link to="/login">Sign In</Link></p>
@@ -238,6 +260,33 @@ const SignupPage = () => {
                     color: #fff;
                     font-size: 1rem;
                     transition: all 0.3s ease;
+                    width: 100%;
+                }
+
+                .password-input-wrapper {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                }
+                
+                .toggle-password {
+                    position: absolute;
+                    right: 12px;
+                    background: none;
+                    border: none;
+                    color: #888;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 8px;
+                    transition: 0.2s;
+                    border-radius: 50%;
+                }
+                
+                .toggle-password:hover {
+                    color: var(--accent-orange);
+                    background: rgba(255, 161, 22, 0.1);
                 }
 
                 .form-group input:focus {
@@ -289,12 +338,55 @@ const SignupPage = () => {
                 }
 
                 .auth-footer {
-                    margin-top: 2.5rem;
+                    margin-top: 1.5rem;
                     text-align: center;
                     color: #666;
                     font-size: 0.95rem;
-                    padding-top: 2rem;
+                    padding-top: 1.5rem;
                     border-top: 1px solid rgba(255, 255, 255, 0.05);
+                }
+
+                .auth-separator {
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    margin: 1.5rem 0;
+                    color: #444;
+                    font-size: 0.8rem;
+                    font-weight: 700;
+                }
+
+                .auth-separator::before,
+                .auth-separator::after {
+                    content: '';
+                    flex: 1;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                }
+
+                .auth-separator span {
+                    padding: 0 1rem;
+                }
+
+                .google-btn {
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.05);
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    padding: 1rem;
+                    border-radius: 14px;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .google-btn:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-color: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-2px);
                 }
 
                 .auth-footer a {

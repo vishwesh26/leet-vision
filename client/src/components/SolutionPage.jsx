@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -8,6 +8,7 @@ import SEO from './SEO';
 
 const SolutionPage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -256,8 +257,46 @@ const SolutionPage = () => {
                             Solve on LeetCode
                         </a>
                     </div>
+                    {/* Report Issue Button */}
+                    <div style={{ marginTop: '30px', textAlign: 'center' }}>
+                        <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '10px' }}>Found solution wrong?</p>
+                        <button
+                            onClick={() => navigate('/report-solution', {
+                                state: {
+                                    questionId: data.questionId,
+                                    title: data.title,
+                                    platform: data.platform || 'LeetCode'
+                                }
+                            })}
+                            style={{
+                                background: 'transparent',
+                                border: '1px solid #333',
+                                color: '#888',
+                                padding: '8px 16px',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                fontSize: '0.85rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                width: '100%',
+                                justifyContent: 'center',
+                                transition: '0.2s'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.borderColor = '#ff5252';
+                                e.target.style.color = '#ff5252';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.borderColor = '#333';
+                                e.target.style.color = '#888';
+                            }}
+                        >
+                            <IoMdCreate /> Report Issue
+                        </button>
+                    </div>
                 </aside>
-            </div>
+            </div >
 
             <style>{`
                 .solution-page-container {
@@ -371,7 +410,7 @@ const SolutionPage = () => {
                     .problem-title { font-size: 1.8rem; }
                 }
             `}</style>
-        </div>
+        </div >
     );
 };
 

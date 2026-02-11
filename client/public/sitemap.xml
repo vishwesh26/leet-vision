@@ -2,129 +2,183 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://leet-vision.vercel.app/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/top-100-leetcode</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/blind-75</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/leetcode-easy</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/leetcode-medium</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/leetcode-hard</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/topics/array</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/topics/string</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/topics/Dynamic%20Programming</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/topics/tree</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/topics/graph</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/company-questions</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/interview-roadmap</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/daily</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/daily-tech</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/blog</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/about</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/how-it-works</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/privacy-policy</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/terms</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/contact</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/beyond-the-llm-why-agentic-ai-is-the-new-gold-standard-for-faang-engineering-interviews-in-2026</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/the-vibe-coding-debt-lessons-from-the-135000-openclaw-security-exposure</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/the-architecture-of-restraint-why-the-future-of-software-demands-more-than-just-raw-capability</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/the-architecture-of-restraint-why-modern-software-development-is-outpacing-our-ability-to-manage-it</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/beyond-the-hype-why-ai-driven-digital-transformation-demands-full-stack-ml-engineers-by-2026</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/geopolitical-fault-lines-architecting-resilience-in-the-era-of-hyper-fragmentation</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/the-trust-barrier-why-docusigns-ceo-warns-developers-against-over-reliance-on-llms-for-high-stakes-documentation</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/beyond-the-editor-navigating-the-five-stages-of-ai-grief-as-a-career-developer</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://leet-vision.vercel.app/blog/scaling-engineering-beyond-100-how-organizational-architecture-dictates-your-codes-future</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://leet-vision.vercel.app/blog/the-problem-first-revolution-taking-ai-from-notebooks-to-enterprise-production</loc>

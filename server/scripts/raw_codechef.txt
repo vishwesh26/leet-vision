@@ -1,0 +1,172 @@
+Module 9: Binary Search
+Question Name: Good Numbers
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/DIVNUMB
+
+Question Name: Array Intersection
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/ARRINT
+
+Question Name: Partner Search
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/PRTSCH
+
+Question Name: Is It There
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/IIT
+
+Question Name: Sum with min index
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/SMININD
+
+Question Name: Increasing-Decreasing Sequence
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/INCDECS
+
+Question Name: Selected Digits
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/SDIGIT
+
+Question Name: Binary Search - Books in Library
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/PREP11
+
+Question Name: Binary Search - Paint Walls
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/PREP08
+
+Question Name: Binary Search - Range Search
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/PREP38
+
+Question Name: Binary Search - Power Function
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_06/problems/PREP39
+
+Module 10: Graphs
+Question Name: Graphs - Capture Regions
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_12/problems/PREP35
+
+Question Name: Graphs - Word Ladder
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_12/problems/PREP36
+
+Question Name: Graphs - Red Blue Lakes
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_12/problems/PREP37
+
+Question Name: Graphs - Clone a graph
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_12/problems/PREP50
+
+Question Name: Graphs - Valid Path
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_12/problems/PREP49
+
+Module 11: Trees
+Question Name: Find the Subtree
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/SUBTCH
+
+Question Name: Reconstruct the Tree
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/RECTREE
+
+Question Name: Counting Nodes
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/CNTND
+
+Question Name: Regenerate Tree
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/REGTRE
+
+Question Name: Triplet LCA
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/LCAN3
+
+Question Name: Trees - Inorder Traversal
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/PREP64
+
+Question Name: Trees - Branch Sum
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/PREP29
+
+Question Name: Trees - Path Sum
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/PREP65
+
+Question Name: Trees - Lowest Common Ancestor
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/PREP67
+
+Question Name: Trees - Height of a Tree
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_07/problems/PREP66
+
+Module 12: Hashing
+Question Name: Hashing - Four Sum
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_13/problems/PREP27
+
+Question Name: Hashing - Points on Line
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_13/problems/PREP28
+
+Question Name: Hashing - Copy List
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_13/problems/PREP53
+
+Question Name: Hashing - Minimum Window Substring
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_13/problems/PREP51
+
+Question Name: Hashing - Valid Sudoku
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_13/problems/PREP52
+
+Module 13: Two pointers
+Question Name: Divide The String
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/DTS
+
+Question Name: Special Substring
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/SPSBTR
+
+Question Name: Minimum Similar Substring
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/MINSIM
+
+Question Name: Longest Good Substring
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/LGDSTR
+
+Question Name: Maximum Common Elements
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/PREP17
+
+Question Name: Trapping Rainwater
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/PREP19
+
+Question Name: Remove Duplicates
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/PREP69
+
+Question Name: Difference Pairs
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/PREP68
+
+Question Name: Find Array Min
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_11/problems/PREP18
+
+Module 14: Dynamic Programming
+Question Name: Dynamic Programming - String Distance
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_14/problems/PREP32
+
+Question Name: Dynamic Programming - Minimum Jumps
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_14/problems/PREP31
+
+Question Name: Dynamic Programming - Rod Cutting
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_14/problems/PREP34
+
+Question Name: Dynamic Programming - Longest Valid Parentheses
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_14/problems/PREP33
+
+Question Name: Maximum Product Subarray
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_14/problems/PREP48
+
+Module 15: Bit Manipulation
+Question Name: Bit Manipulation - Count set bits
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_15/problems/PREP44
+
+Question Name: Bit Manipulation - Single Number
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_15/problems/PREP45
+
+Question Name: Bit Manipulation - Sum of Bits
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_15/problems/PREP16
+
+Question Name: Bit Manipulation - Reverse Bits
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_15/problems/PREP46
+
+Question Name: Bit Manipulation - Divide Integers
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_15/problems/PREP47
+
+Module 16: Backtracking
+Question Name: Backtracking - Find Unique Permutations
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_16/problems/PREP24
+
+Question Name: Backtracking - Subsets
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_16/problems/PREP42
+
+Question Name: Backtracking - Find Valid Parenthesis
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_16/problems/PREP41
+
+Question Name: Backtracking - Unique Combinations Sum
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_16/problems/PREP40
+
+Question Name: Backtracking - Palindrome Partitioning
+Question Link: https://www.codechef.com/practice/course/interview-dsa/DSAPREP_16/problems/PREP43
