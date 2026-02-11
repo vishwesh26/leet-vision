@@ -33,6 +33,7 @@ const passport = require('passport');
 require('./config/passport');
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(passport.initialize());
 const PORT = process.env.PORT || 5000;
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
