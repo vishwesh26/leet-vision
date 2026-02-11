@@ -42,9 +42,8 @@ router.get('/google/callback', (req, res, next) => {
         });
 
         // Redirect to frontend (homepage or dashboard)
-        const redirectUrl = process.env.NODE_ENV === 'production' 
-            ? 'https://leet-vision.vercel.app/' 
-            : 'http://localhost:5173/';
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+        const redirectUrl = frontendUrl.endsWith('/') ? frontendUrl : `${frontendUrl}/`;
             
         res.redirect(redirectUrl);
     }

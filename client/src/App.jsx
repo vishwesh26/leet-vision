@@ -145,6 +145,12 @@ function AppContent({ savedVideos, onToggleSave }) {
               {isSearchOpen ? <FaTimes /> : <FaSearch />}
             </button>
           </div>
+
+          {!user && (
+            <Link to="/login" className="mobile-navbar-login">
+              Log In
+            </Link>
+          )}
         </div>
 
         <div className="nav-auth">
@@ -193,9 +199,30 @@ function AppContent({ savedVideos, onToggleSave }) {
         {/* Mobile Menu Overlay */}
         <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
           <div className="mobile-menu-content">
+            {user ? (
+              <div className="mobile-account-section">
+                <div className="mobile-user-info" style={{ padding: '15px 20px', display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.05)', borderRadius: '12px', marginBottom: '10px' }}>
+                  <FaUserCircle size={32} color="#ffa116" />
+                  <div style={{ overflow: 'hidden' }}>
+                    <div style={{ fontWeight: 600, color: 'white', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.name}</div>
+                    <div style={{ fontSize: '0.75rem', color: '#888', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{user.email}</div>
+                  </div>
+                </div>
+                <div className="mobile-link" onClick={() => { logout(); setIsMobileMenuOpen(false); }} style={{ color: '#ff4444', display: 'flex', alignItems: 'center' }}>
+                  <FaSignOutAlt style={{ marginRight: '8px' }} /> Logout
+                </div>
+                <div className="mobile-divider">Navigation</div>
+              </div>
+            ) : (
+              <div className="mobile-account-section">
+                <Link to="/login" className="mobile-link" style={{ background: '#ffa116', color: 'black', fontWeight: 700, textAlign: 'center', borderRadius: '8px', marginBottom: '15px' }} onClick={() => setIsMobileMenuOpen(false)}>Log In</Link>
+                <div className="mobile-divider">Navigation</div>
+              </div>
+            )}
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
 
             <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
+            <Link to="/explore" className="mobile-link highlight" style={{ color: 'var(--accent-orange)' }} onClick={() => setIsMobileMenuOpen(false)}>All Platform Problem</Link>
 
             <div className="mobile-divider">Difficulty</div>
             <Link to="/leetcode-easy" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Easy</Link>
@@ -274,6 +301,23 @@ function AppContent({ savedVideos, onToggleSave }) {
           
           @media (max-width: 768px) {
               .nav-auth { display: none; } /* Hide on mobile, move to menu if needed */
+              
+              .mobile-navbar-login {
+                  display: block;
+                  background: var(--accent-orange);
+                  color: white !important;
+                  padding: 6px 16px;
+                  border-radius: 20px;
+                  font-size: 0.85rem;
+                  font-weight: 700;
+                  text-decoration: none;
+                  margin-left: 10px;
+                  box-shadow: 0 4px 12px rgba(245, 124, 0, 0.2);
+              }
+          }
+
+          @media (min-width: 769px) {
+              .mobile-navbar-login { display: none; }
           }
         `}</style>
 
