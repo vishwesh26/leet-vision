@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Purchase = require('../models/Purchase');
+const OTP = require('../models/OTP');
+const sendEmail = require('../utils/email.js');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_keep_it_safe';
 const JWT_EXPIRES_IN = '30d';
@@ -51,29 +53,154 @@ router.get('/google/callback', (req, res, next) => {
     }
 );
 
-// Sign Up
-router.post('/signup', async (req, res) => {
+// Send OTP
+router.post('/send-otp', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { email } = req.body;
 
-        // 1. Check if user already exists
+        if (!email) {
+            return res.status(400).json({ status: 'fail', message: 'Please provide an email' });
+        }
+
+        // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ status: 'fail', message: 'User with this email already exists' });
         }
 
-        // 2. Hash password
+        // Generate 6-digit OTP
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+        // Save OTP to DB
+        await OTP.findOneAndUpdate(
+            { email },
+            { otp, createdAt: Date.now() },
+            { upsert: true, new: true, setDefaultsOnInsert: true }
+        );
+
+        // Send Email
+        try {
+            await sendEmail({
+                email,
+                subject: 'Your LeetVision Verification Code',
+                message: `Your verification code is ${otp}. It will expire in 10 minutes.`,
+                html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+                        <h2 style="color: #f57c00; text-align: center;">LeetVision Verification</h2>
+                        <p>Hi there,</p>
+                        <p>Welcome to LeetVision! Use the code below to verify your email and complete your signup:</p>
+                        <div style="background: #f4f4f4; padding: 15px; text-align: center; font-size: 24px; font-weight: bold; letter-spacing: 5px; color: #333; border-radius: 5px; margin: 20px 0;">
+                            ${otp}
+                        </div>
+                        <p>This code will expire in 10 minutes.</p>
+                        <p>If you didn't request this code, please ignore this email.</p>
+                        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+                        <p style="font-size: 12px; color: #888; text-align: center;">© 2026 LeetVision. Built for the Bold.</p>
+                    </div>
+                `
+            });
+
+            res.status(200).json({ status: 'success', message: 'OTP sent to your email' });
+        } catch (emailErr) {
+            console.error('Email sending failed:', emailErr);
+            // In development, if email fails, we might still want to know the OTP for testing
+            if (process.env.NODE_ENV !== 'production') {
+                return res.status(500).json({ 
+                    status: 'error', 
+                    message: 'Failed to send email. Check your .env config.',
+                    debugOtp: otp // ONLY for dev
+                });
+            }
+            res.status(500).json({ status: 'error', message: 'Failed to send OTP email' });
+        }
+
+    } catch (err) {
+        console.error('Send OTP Error:', err);
+        res.status(500).json({ status: 'error', message: err.message });
+    }
+});
+
+// Sign Up
+router.post('/signup', async (req, res) => {
+    try {
+        const { name, email, password, otp } = req.body;
+
+        // 1. Verify OTP
+        if (!otp) {
+            return res.status(400).json({ status: 'fail', message: 'Please provide the verification code' });
+        }
+
+        const otpRecord = await OTP.findOne({ email, otp });
+        if (!otpRecord) {
+            return res.status(400).json({ status: 'fail', message: 'Invalid or expired verification code' });
+        }
+
+        // 2. Check if user already exists (extra safety)
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ status: 'fail', message: 'User with this email already exists' });
+        }
+
+        // 3. Hash password
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
 
-        // 3. Create user
+        // 4. Create user
         const newUser = await User.create({
             name,
             email,
             passwordHash
         });
 
-        // 4. Generate token
+        // 5. Delete OTP record after successful signup
+        await OTP.deleteOne({ _id: otpRecord._id });
+
+        // 6. Send Welcome Email (Non-blocking)
+        sendEmail({
+            email: newUser.email,
+            subject: 'Welcome to LeetVision! 🚀 Your Journey Starts Now',
+            message: `Hi ${newUser.name}, welcome to LeetVision! We're excited to help you conquer your DSA preparation.`,
+            html: `
+                <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: auto; padding: 0; border: 1px solid #e0e0e0; border-radius: 16px; overflow: hidden; background-color: #ffffff;">
+                    <div style="background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%); padding: 40px 20px; text-align: center;">
+                        <h1 style="color: white; margin: 0; font-size: 28px; letter-spacing: -0.5px;">Welcome to LeetVision, ${newUser.name.split(' ')[0]}!</h1>
+                        <p style="color: rgba(255,255,255,0.9); margin-top: 10px; font-size: 16px;">The future of your tech career starts here.</p>
+                    </div>
+                    
+                    <div style="padding: 30px 40px;">
+                        <p style="font-size: 16px; color: #444; line-height: 1.6;">
+                            We're absolutely thrilled to have you on board! You've just taken a massive step towards mastering data structures and algorithms.
+                        </p>
+                        
+                        <div style="margin: 30px 0; background: #fff8f1; border-radius: 12px; padding: 20px;">
+                            <h3 style="color: #e65100; margin-top: 0;">What's next for you?</h3>
+                            <ul style="padding-left: 20px; color: #555; line-height: 1.8;">
+                                <li><strong>Explore All Platform Problems</strong>: Access curated problems from LeetCode, HackerRank, and more.</li>
+                                <li><strong>Curated Solutions</strong>: Get high-quality, step-by-step explanations for every problem.</li>
+                                <li><strong>Track Progress</strong>: Connect your LeetCode account to see your growth in real-time.</li>
+                            </ul>
+                        </div>
+
+                        <div style="text-align: center; margin: 35px 0;">
+                            <a href="https://leet-vision.vercel.app" style="background-color: #f57c00; color: white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 12px rgba(245, 124, 0, 0.3);">Start Solving Now</a>
+                        </div>
+
+                        <p style="font-size: 14px; color: #666; font-style: italic; text-align: center;">
+                            "The best way to predict the future is to create it." - Let's build yours together.
+                        </p>
+                    </div>
+
+                    <div style="background-color: #f9f9f9; padding: 20px; text-align: center; border-top: 1px solid #eee;">
+                        <p style="font-size: 12px; color: #999; margin: 0;">
+                            © 2026 LeetVision. Built with ❤️ for the Bold.<br>
+                            If you have any questions, just hit reply!
+                        </p>
+                    </div>
+                </div>
+            `
+        }).catch(err => console.error('Welcome email failed:', err));
+
+        // 7. Generate token
         const token = signToken(newUser._id);
 
         // 5. Send cookie (HttpOnly)
@@ -198,6 +325,8 @@ router.get('/me', async (req, res) => {
                     name: currentUser.name,
                     email: currentUser.email,
                     isAdmin: currentUser.isAdmin,
+                    subscriptionExpiry: currentUser.subscriptionExpiry,
+                    subscriptionType: currentUser.subscriptionType,
                     ownedCompanies
                 }
             }

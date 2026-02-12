@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FaGlobe, FaSearch, FaExternalLinkAlt, FaBrain, FaPlay, FaChevronDown, FaChevronUp, FaLock } from 'react-icons/fa';
+import { FaGlobe, FaSearch, FaExternalLinkAlt, FaBrain, FaPlay, FaChevronDown, FaChevronUp, FaLock, FaPlus, FaEdit } from 'react-icons/fa';
 import { SiLeetcode, SiHackerrank, SiGeeksforgeeks, SiCodechef } from 'react-icons/si';
 
 const UniversalExplore = () => {
     // Auth State
     const { user } = useAuth();
-    const isGuest = !user;
+    const hasFullAccess = user && user.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date();
+    const isGuest = !user || !hasFullAccess;
 
     // Global State
     const [platform, setPlatform] = useState('all');
@@ -242,24 +243,44 @@ const UniversalExplore = () => {
                 .platform-tab {
                     padding: 12px 24px;
                     border-radius: 12px;
-                    border: 1px solid transparent;
-                    background: transparent;
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: rgba(255, 255, 255, 0.03);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
                     color: #888;
                     cursor: pointer;
                     font-weight: 600;
-                    transition: 0.3s;
+                    transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
                     font-size: 0.95rem;
                     text-transform: capitalize;
                     white-space: nowrap;
+                    position: relative;
+                    overflow: hidden;
                 }
                 .platform-tab:hover {
                     color: #fff;
-                    background: rgba(255,255,255,0.05);
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: rgba(255, 255, 255, 0.2);
+                    transform: translateY(-2px);
                 }
                 .platform-tab.active {
+                    background: rgba(255, 161, 22, 0.15);
+                    color: #fff;
+                    border-color: rgba(255, 161, 22, 0.5);
+                    box-shadow: 0 8px 32px 0 rgba(255, 161, 22, 0.3),
+                                inset 0 0 15px rgba(255, 161, 22, 0.1);
+                    text-shadow: 0 0 10px rgba(255, 161, 22, 0.5);
+                }
+                .platform-tab.active::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 20%;
+                    right: 20%;
+                    height: 2px;
                     background: #ffa116;
-                    color: #000;
-                    box-shadow: 0 4px 15px rgba(255, 161, 22, 0.3);
+                    box-shadow: 0 0 10px #ffa116;
+                    border-radius: 2px;
                 }
 
                 /* Grid Header */
@@ -462,17 +483,17 @@ const UniversalExplore = () => {
                             // Global View
                             <>
                                 <div className="problems-list" style={{ position: 'relative' }}>
-                                    {(isGuest ? displayProblems.slice(0, 20) : displayProblems).map(p => (
+                                    {(isGuest ? displayProblems.slice(0, 4) : displayProblems).map(p => (
                                         <ProblemRow key={p._id} p={p} />
                                     ))}
 
-                                    {isGuest && displayProblems.length > 0 && (
+                                    {isGuest && displayProblems.length > 4 && (
                                         <div className="login-gate">
                                             <div className="gate-content">
                                                 <FaLock size={40} style={{ marginBottom: '15px', color: '#ffa116' }} />
                                                 <h3>Unlock the Full Universe</h3>
-                                                <p>Join LeetVision to access all {displayProblems.length}+ problems across platforms.</p>
-                                                <Link to="/login" className="gate-btn">Login to Continue</Link>
+                                                <p>{user ? "Upgrade to Premium to access all problems." : `Join LeetVision to access all ${displayProblems.length}+ problems across platforms.`}</p>
+                                                <Link to={user ? "/pricing" : "/login"} className="gate-btn">{user ? "Get Premium" : "Login to Continue"}</Link>
                                             </div>
                                             <div className="gate-blur"></div>
                                         </div>
@@ -547,8 +568,8 @@ const UniversalExplore = () => {
                                         <div className="gate-content">
                                             <FaLock size={40} style={{ marginBottom: '15px', color: '#ffa116' }} />
                                             <h3>Unlock All Topics</h3>
-                                            <p>Join LeetVision to access all {topics.length}+ topics and their problems.</p>
-                                            <Link to="/login" className="gate-btn">Login to Continue</Link>
+                                            <p>{user ? "Upgrade to Premium to access all topics." : `Join LeetVision to access all ${topics.length}+ topics and their problems.`}</p>
+                                            <Link to={user ? "/pricing" : "/login"} className="gate-btn">{user ? "Get Premium" : "Login to Continue"}</Link>
                                         </div>
                                         <div className="gate-blur"></div>
                                     </div>
@@ -564,6 +585,7 @@ const UniversalExplore = () => {
 
 // Helper Component for consistency
 const ProblemRow = ({ p }) => {
+    const { user } = useAuth();
     // Determine platform icon
     const getPlatformIcon = (platform) => {
         switch (platform) {
@@ -664,53 +686,36 @@ const ProblemRow = ({ p }) => {
 
             {/* Solution Link */}
             <div>
-                {p.concept_id ? (
-                    <Link to={p.platform === 'leetcode' && p.questionId ? `/solution/${p.questionId}` : `/universe/solution/${p.platform}/${p.slug}`} style={{
+                <Link
+                    to={p.platform === 'leetcode' && p.questionId ? `/solution/${p.questionId}` : `/universe/solution/${p.platform}/${p.slug}`}
+                    style={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '6px',
                         padding: '8px 14px',
-                        background: 'rgba(255, 161, 22, 0.1)',
-                        color: '#ffa116',
+                        background: p.concept_id ? 'rgba(255, 161, 22, 0.1)' : '#1a1a1a',
+                        color: p.concept_id ? '#ffa116' : '#666',
                         borderRadius: '8px',
                         textDecoration: 'none',
                         fontSize: '0.8rem',
-                        fontWeight: 700,
-                        border: '1px solid rgba(255, 161, 22, 0.2)',
+                        fontWeight: p.concept_id ? 700 : 600,
+                        border: p.concept_id ? '1px solid rgba(255, 161, 22, 0.2)' : '1px solid #333',
                         transition: '0.2s'
                     }}
-                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 161, 22, 0.2)'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 161, 22, 0.1)'}
-                    >
-                        <FaBrain size={12} /> Solution
-                    </Link>
-                ) : (
-                    <Link to={p.platform === 'leetcode' && p.questionId ? `/solution/${p.questionId}` : `/universe/solution/${p.platform}/${p.slug}`} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '6px',
-                        padding: '8px 14px',
-                        background: '#1a1a1a',
-                        color: '#666',
-                        borderRadius: '8px',
-                        textDecoration: 'none',
-                        fontSize: '0.8rem',
-                        fontWeight: 600,
-                        border: '1px solid #333',
-                        transition: '0.2s'
-                    }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = '#555';
-                            e.currentTarget.style.color = '#ccc';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor = '#333';
-                            e.currentTarget.style.color = '#666';
+                >
+                    {p.concept_id && <FaBrain size={12} />} Solution
+                </Link>
+                {user?.isAdmin && (
+                    <Link
+                        to={`/admin/${p.hasSolution ? 'edit' : 'add'}-solution/${p.platform === 'leetcode' ? p.questionId : p.slug}`}
+                        style={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px',
+                            marginTop: '6px', fontSize: '0.7rem', color: p.hasSolution ? '#4db6ac' : '#ffa116',
+                            textDecoration: 'none', fontWeight: 600
                         }}
                     >
-                        Solution
+                        {p.hasSolution ? <><FaEdit size={10} /> Edit</> : <><FaPlus size={10} /> Add</>}
                     </Link>
                 )}
             </div>

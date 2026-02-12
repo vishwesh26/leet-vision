@@ -53,14 +53,17 @@ const CompanyDetailPage = () => {
 
             const response = await axios.get(`${API_BASE}/api/company/${encodeURIComponent(companyName)}/questions`, { params, withCredentials: true });
 
-            // Client-side override for access if backend check fails 
-            // but user object says we own it
+            // Client-side override for access 
+            // 1. Check if user has active subscription
+            const hasActiveSubscription = user?.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date();
+
+            // 2. Check individual company ownership
             const isOwnedLocally = user?.ownedCompanies?.includes(companyName) || user?.ownedCompanies?.length > 10;
 
             setQuestions(response.data.questions);
             setTotal(response.data.total);
             setPages(response.data.pages);
-            setHasAccess(response.data.hasAccess || isOwnedLocally);
+            setHasAccess(response.data.hasAccess || isOwnedLocally || hasActiveSubscription);
         } catch (err) {
             console.error("Error fetching questions:", err);
         } finally {
@@ -197,13 +200,18 @@ const CompanyDetailPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {questions.map((q) => {
+                            {questions.map((q, index) => {
                                 const solved = isProblemSolved({ id: q.questionId });
-                                const locked = false; // Always unlocked for production
+                                const locked = !hasAccess && index >= 4;
+
                                 return (
-                                    <tr key={q._id} className={`${solved ? 'solved-row' : ''}`}>
+                                    <tr key={q._id} className={`${solved ? 'solved-row' : ''} ${locked ? 'locked-row' : ''}`}>
                                         <td className="status-cell">
-                                            {solved ? <span className="solved-badge">Done</span> : <span className="todo-dot"></span>}
+                                            {locked ? (
+                                                <span className="lock-icon">🔒</span>
+                                            ) : (
+                                                solved ? <span className="solved-badge">Done</span> : <span className="todo-dot"></span>
+                                            )}
                                         </td>
                                         <td className="title-cell">
                                             <div className="q-title-wrap">
@@ -229,23 +237,47 @@ const CompanyDetailPage = () => {
                                             {`${q.acceptanceRate.toFixed(1)}%`}
                                         </td>
                                         <td className="actions-cell">
-                                            <div className="action-btns">
-                                                <a href={q.leetcodeUrl} target="_blank" rel="noreferrer" title="LeetCode" className="btn-icon">
-                                                    <FaExternalLinkAlt />
-                                                </a>
-                                                <Link to={`/search/${q.questionId}`} title="Video Solution" className="btn-icon">
-                                                    <FaPlay />
-                                                </Link>
-                                                <Link to={`/solution/${q.questionId}`} title="AI Solution" className="btn-pill">
-                                                    <FaBolt /> Solution
-                                                </Link>
-                                            </div>
+                                            {locked ? (
+                                                <button className="unlock-inline-btn" onClick={() => handleUnlock('yearly_sub')}>
+                                                    Unlock All
+                                                </button>
+                                            ) : (
+                                                <div className="action-btns">
+                                                    <a href={q.leetcodeUrl} target="_blank" rel="noreferrer" title="LeetCode" className="btn-icon">
+                                                        <FaExternalLinkAlt />
+                                                    </a>
+                                                    <Link to={`/search/${q.questionId}`} title="Video Solution" className="btn-icon">
+                                                        <FaPlay />
+                                                    </Link>
+                                                    <Link to={`/solution/${q.questionId}`} title="AI Solution" className="btn-pill">
+                                                        <FaBolt /> Solution
+                                                    </Link>
+                                                </div>
+                                            )}
                                         </td>
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </table>
+
+                    {/* Premium Upsell Gate */}
+                    {!hasAccess && questions.length > 4 && (
+                        <div className="premium-upsell-card">
+                            <div className="upsell-content">
+                                <h3>Unlock <span>{total - 4}+</span> More Questions</h3>
+                                <p>Get full access to all interview questions from top tech companies including {companyName} with LeetVision Premium.</p>
+                                <div className="upsell-actions">
+                                    <button className="primary-btn" onClick={() => handleUnlock('yearly_sub')}>
+                                        Get Premium Access
+                                    </button>
+                                    <button className="secondary-btn" onClick={() => handleUnlock('monthly_sub')}>
+                                        Try Monthly (₹50)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {questions.length === 0 && (
                         <div className="no-questions">

@@ -8,21 +8,39 @@ const SignupPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [otp, setOtp] = useState('');
+    const [step, setStep] = useState(1); // 1: Info, 2: OTP
     const [showPassword, setShowPassword] = useState(false);
     const [localError, setLocalError] = useState('');
-    const { signup, loading } = useAuth();
+    const [localSuccess, setLocalSuccess] = useState('');
+
+    const { signup, sendOtp, loading } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSendOtp = async (e) => {
         e.preventDefault();
         setLocalError('');
+        setLocalSuccess('');
 
         if (password.length < 6) {
             setLocalError('Password must be at least 6 characters');
             return;
         }
 
-        const result = await signup(name, email, password);
+        const result = await sendOtp(email);
+        if (result.success) {
+            setLocalSuccess('Verification code sent to your email!');
+            setStep(2);
+        } else {
+            setLocalError(result.message);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLocalError('');
+
+        const result = await signup(name, email, password, otp);
         if (result.success) {
             navigate('/');
         } else {
@@ -48,8 +66,8 @@ const SignupPage = () => {
                     <div className="auth-brand" onClick={() => navigate('/')}>
                         Leet<span>Vision</span>
                     </div>
-                    <h2>Create Account</h2>
-                    <p>Start your journey to tech excellence</p>
+                    <h2>{step === 1 ? 'Create Account' : 'Verify Email'}</h2>
+                    <p>{step === 1 ? 'Start your journey to tech excellence' : `Enter the 6-digit code sent to ${email}`}</p>
                 </div>
 
                 {localError && (
@@ -58,61 +76,102 @@ const SignupPage = () => {
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="auth-form">
-                    <div className="form-group">
-                        <label><FaUser /> Full Name</label>
-                        <input
-                            type="text"
-                            placeholder="Vishwesh Shinde"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                            autoComplete="name"
-                        />
+                {localSuccess && (
+                    <div className="auth-success">
+                        {localSuccess}
                     </div>
+                )}
 
-                    <div className="form-group">
-                        <label><FaEnvelope /> Email Address</label>
-                        <input
-                            type="email"
-                            placeholder="you@email.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            autoComplete="email"
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label><FaLock /> Password</label>
-                        <div className="password-input-wrapper">
+                {step === 1 ? (
+                    <form onSubmit={handleSendOtp} className="auth-form">
+                        <div className="form-group">
+                            <label><FaUser /> Full Name</label>
                             <input
-                                type={showPassword ? "text" : "password"}
-                                placeholder="Min. 6 characters"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                type="text"
+                                placeholder="Vishwesh Shinde"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 required
-                                autoComplete="new-password"
+                                autoComplete="name"
                             />
+                        </div>
+
+                        <div className="form-group">
+                            <label><FaEnvelope /> Email Address</label>
+                            <input
+                                type="email"
+                                placeholder="you@email.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                autoComplete="email"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label><FaLock /> Password</label>
+                            <div className="password-input-wrapper">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Min. 6 characters"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    autoComplete="new-password"
+                                />
+                                <button
+                                    type="button"
+                                    className="toggle-password"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    tabIndex="-1"
+                                >
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" className="auth-btn" disabled={loading}>
+                            {loading ? (
+                                <div className="btn-loader"></div>
+                            ) : (
+                                <>Get Verification Code <FaArrowRight style={{ marginLeft: '10px', fontSize: '0.8rem' }} /></>
+                            )}
+                        </button>
+                    </form>
+                ) : (
+                    <form onSubmit={handleSubmit} className="auth-form">
+                        <div className="form-group">
+                            <label><FaLock /> Verification Code</label>
+                            <input
+                                type="text"
+                                placeholder="Enter 6-digit OTP"
+                                value={otp}
+                                onChange={(e) => setOtp(e.target.value)}
+                                required
+                                maxLength="6"
+                                style={{ letterSpacing: '4px', textAlign: 'center', fontSize: '1.2rem' }}
+                            />
+                        </div>
+
+                        <button type="submit" className="auth-btn" disabled={loading}>
+                            {loading ? (
+                                <div className="btn-loader"></div>
+                            ) : (
+                                <>Verify & Sign Up <FaArrowRight style={{ marginLeft: '10px', fontSize: '0.8rem' }} /></>
+                            )}
+                        </button>
+
+                        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
                             <button
                                 type="button"
-                                className="toggle-password"
-                                onClick={() => setShowPassword(!showPassword)}
-                                tabIndex="-1"
+                                onClick={() => setStep(1)}
+                                style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer', fontSize: '0.9rem' }}
                             >
-                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                Edit registration details
                             </button>
                         </div>
-                    </div>
-
-                    <button type="submit" className="auth-btn" disabled={loading}>
-                        {loading ? (
-                            <div className="btn-loader"></div>
-                        ) : (
-                            <>Sign Up <FaArrowRight style={{ marginLeft: '10px', fontSize: '0.8rem' }} /></>
-                        )}
-                    </button>
-                </form>
+                    </form>
+                )}
 
                 <div className="auth-separator">
                     <span>OR</span>
@@ -215,10 +274,7 @@ const SignupPage = () => {
                     font-size: 1rem;
                 }
 
-                .auth-error {
-                    background: rgba(255, 100, 100, 0.1);
-                    border: 1px solid rgba(255, 100, 100, 0.2);
-                    color: #ff6464;
+                .auth-error, .auth-success {
                     padding: 1rem;
                     border-radius: 12px;
                     margin-bottom: 2rem;
@@ -227,6 +283,18 @@ const SignupPage = () => {
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                }
+
+                .auth-error {
+                    background: rgba(255, 100, 100, 0.1);
+                    border: 1px solid rgba(255, 100, 100, 0.2);
+                    color: #ff6464;
+                }
+
+                .auth-success {
+                    background: rgba(100, 255, 100, 0.1);
+                    border: 1px solid rgba(100, 255, 100, 0.2);
+                    color: #64ff64;
                 }
 
                 .auth-form {
@@ -410,7 +478,7 @@ const SignupPage = () => {
                     }
                 }
             `}</style>
-        </div>
+        </div >
     );
 };
 

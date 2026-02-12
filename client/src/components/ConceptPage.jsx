@@ -7,6 +7,48 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { IoIosArrowDown, IoIosArrowUp, IoMdCreate } from 'react-icons/io';
 import SEO from './SEO';
 
+const PremiumLoader = ({ platform }) => {
+    const [msgIdx, setMsgIdx] = useState(0);
+    const messages = platform
+        ? [
+            "Extracting Canonical Knowledge...",
+            "Analyzing Algorithm Patterns...",
+            "Synthesizing Efficient Logic...",
+            "Mapping Universe Connections...",
+            "Finalizing Article Layout..."
+        ]
+        : [
+            "Mapping Knowledge Graph...",
+            "Connecting Neural Nodes...",
+            "Expanding Logic Sector...",
+            "Optimizing Core Patterns...",
+            "Assembling Research Data..."
+        ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setMsgIdx(prev => (prev + 1) % messages.length);
+        }, 4000);
+        return () => clearInterval(interval);
+    }, [messages.length]);
+
+    return (
+        <div className="premium-loader-container">
+            <div className="brain-pulse-wrapper">
+                <div className="brain-glow"></div>
+                <FaBrain className="brain-icon-premium" />
+            </div>
+            <div className="loading-status-container">
+                <h2 className="loading-title-premium">Intelligence Layer</h2>
+                <p className="loading-msg-premium" key={msgIdx}>{messages[msgIdx]}</p>
+            </div>
+            <div className="loading-progress-bar">
+                <div className="loading-progress-fill"></div>
+            </div>
+        </div>
+    );
+};
+
 const ConceptPage = () => {
     const { id, platform, slug } = useParams();
     const navigate = useNavigate();
@@ -61,17 +103,7 @@ const ConceptPage = () => {
         }
     };
 
-    if (loading) return (
-        <div className="loading-container-concept">
-            <div className="loader-concept"></div>
-            <h2 style={{ marginTop: '2rem', color: '#888', fontWeight: 400 }}>
-                {platform ? "Extracting Canonical Knowledge..." : "Mapping Knowledge Graph..."}
-            </h2>
-            <p style={{ color: '#555', fontSize: '0.9rem', marginTop: '1rem' }}>
-                {platform ? "This might take a few seconds as our AI analyzes the core patterns." : "Connecting neural nodes..."}
-            </p>
-        </div>
-    );
+    if (loading) return <PremiumLoader platform={platform} />;
 
     if (error || !data) return (
         <div className="error-container-concept">
@@ -104,7 +136,7 @@ const ConceptPage = () => {
                     <nav className="breadcrumb">
                         <Link to="/explore">All Platform Problem</Link>
                         <FaChevronRight size={10} />
-                        <span>Intelligence Layer</span>
+                        <span>Loading Article</span>
                     </nav>
 
                     <header className="concept-header-premium">

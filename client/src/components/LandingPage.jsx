@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FaPlayCircle, FaChartLine, FaBuilding, FaCode, FaArrowRight, FaTimes, FaCheck } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaArrowRight, FaTimes } from 'react-icons/fa';
+import { SiLeetcode, SiHackerrank, SiGeeksforgeeks, SiCodechef } from 'react-icons/si';
 import axios from 'axios';
 import SEO from './SEO';
 
@@ -22,14 +23,6 @@ const SurveyModal = ({ isOpen, onClose }) => {
         }
     };
 
-    const handlePriceSelect = (val) => {
-        if (val === 'Other') {
-            setShowCustomInput(true);
-        } else {
-            submitSurvey(response, val);
-        }
-    };
-
     const submitSurvey = async (resVal, priceVal) => {
         setIsSubmitting(true);
         try {
@@ -43,13 +36,12 @@ const SurveyModal = ({ isOpen, onClose }) => {
             setTimeout(() => onClose(), 2000);
         } catch (err) {
             console.error("Survey failed:", err);
-            // If already submitted (429), still mark as completed locally
             if (err.response && err.response.status === 429) {
                 localStorage.setItem('leetvision_survey_completed', 'true');
                 setIsSubmitted(true);
                 setTimeout(() => onClose(), 2000);
             } else {
-                onClose(); // Close anyway to not annoy user
+                onClose();
             }
         } finally {
             setIsSubmitting(false);
@@ -98,36 +90,11 @@ const SurveyModal = ({ isOpen, onClose }) => {
 
                 {isSubmitted ? (
                     <div style={{ padding: '20px 0' }}>
-                        <div style={{
-                            width: '60px',
-                            height: '60px',
-                            background: 'rgba(76, 175, 80, 0.1)',
-                            color: '#4caf50',
-                            borderRadius: '50%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            margin: '0 auto 20px',
-                            fontSize: '1.5rem'
-                        }}>
-                            <FaCheck />
-                        </div>
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>Thank You!</h3>
                         <p style={{ color: '#888' }}>Your feedback helps us build a better LeetVision.</p>
                     </div>
                 ) : (
                     <>
-                        <div style={{
-                            fontSize: '0.9rem',
-                            color: 'var(--accent-orange)',
-                            fontWeight: '600',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px',
-                            marginBottom: '10px'
-                        }}>
-                            Quick Survey
-                        </div>
-
                         {step === 1 ? (
                             <>
                                 <h3 style={{ fontSize: '1.5rem', lineHeight: '1.3', marginBottom: '1.5rem' }}>
@@ -145,16 +112,7 @@ const SurveyModal = ({ isOpen, onClose }) => {
                                                 background: '#181818',
                                                 color: 'white',
                                                 fontWeight: '500',
-                                                cursor: 'pointer',
-                                                transition: 'all 0.2s'
-                                            }}
-                                            onMouseEnter={e => {
-                                                e.currentTarget.style.borderColor = 'var(--accent-orange)';
-                                                e.currentTarget.style.background = 'rgba(255,161,22,0.05)';
-                                            }}
-                                            onMouseLeave={e => {
-                                                e.currentTarget.style.borderColor = '#222';
-                                                e.currentTarget.style.background = '#181818';
+                                                cursor: 'pointer'
                                             }}
                                         >
                                             {opt}
@@ -165,87 +123,27 @@ const SurveyModal = ({ isOpen, onClose }) => {
                         ) : (
                             <>
                                 <h3 style={{ fontSize: '1.5rem', lineHeight: '1.3', marginBottom: '1.5rem' }}>
-                                    {showCustomInput ? "What's your preferred price?" : "What's a fair price for a one-time bundle?"}
+                                    What's a fair price for a one-time bundle?
                                 </h3>
-
-                                {showCustomInput ? (
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                                        <input
-                                            type="text"
-                                            placeholder="Enter amount (e.g. ₹499)"
-                                            value={customPrice}
-                                            onChange={(e) => setCustomPrice(e.target.value)}
-                                            autoFocus
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                    {['₹149', '₹199', '₹299', 'Other'].map(opt => (
+                                        <button
+                                            key={opt}
+                                            onClick={() => submitSurvey(response, opt)}
                                             style={{
                                                 padding: '14px',
                                                 borderRadius: '12px',
-                                                background: '#050505',
-                                                border: '1px solid #333',
+                                                border: '1px solid #222',
+                                                background: '#181818',
                                                 color: 'white',
-                                                textAlign: 'center',
-                                                fontSize: '1rem',
-                                                outline: 'none',
-                                                borderColor: customPrice ? 'var(--accent-orange)' : '#333'
+                                                fontWeight: '500',
+                                                cursor: 'pointer'
                                             }}
-                                        />
-                                        <div style={{ display: 'flex', gap: '10px' }}>
-                                            <button
-                                                onClick={() => setShowCustomInput(false)}
-                                                style={{ flex: 1, padding: '12px', borderRadius: '10px', background: '#222', color: 'white', border: 'none', cursor: 'pointer' }}
-                                            >
-                                                Back
-                                            </button>
-                                            <button
-                                                onClick={() => submitSurvey(response, customPrice || 'Other')}
-                                                disabled={isSubmitting}
-                                                style={{
-                                                    flex: 1,
-                                                    padding: '12px',
-                                                    borderRadius: '10px',
-                                                    background: 'var(--accent-orange)',
-                                                    color: 'white',
-                                                    border: 'none',
-                                                    cursor: 'pointer',
-                                                    fontWeight: 'bold',
-                                                    opacity: isSubmitting ? 0.7 : 1
-                                                }}
-                                            >
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                        {['₹149', '₹199', '₹299', 'Other'].map(opt => (
-                                            <button
-                                                key={opt}
-                                                onClick={() => handlePriceSelect(opt)}
-                                                disabled={isSubmitting}
-                                                style={{
-                                                    padding: '14px',
-                                                    borderRadius: '12px',
-                                                    border: '1px solid #222',
-                                                    background: '#181818',
-                                                    color: 'white',
-                                                    fontWeight: '500',
-                                                    cursor: 'pointer',
-                                                    transition: 'all 0.2s',
-                                                    opacity: isSubmitting ? 0.7 : 1
-                                                }}
-                                                onMouseEnter={e => {
-                                                    e.currentTarget.style.borderColor = 'var(--accent-orange)';
-                                                    e.currentTarget.style.background = 'rgba(255,161,22,0.05)';
-                                                }}
-                                                onMouseLeave={e => {
-                                                    e.currentTarget.style.borderColor = '#222';
-                                                    e.currentTarget.style.background = '#181818';
-                                                }}
-                                            >
-                                                {opt}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
+                                        >
+                                            {opt}
+                                        </button>
+                                    ))}
+                                </div>
                             </>
                         )}
                     </>
@@ -256,6 +154,7 @@ const SurveyModal = ({ isOpen, onClose }) => {
 };
 
 const LandingPage = () => {
+    const navigate = useNavigate();
     const [showNote, setShowNote] = useState(true);
     const [showSurvey, setShowSurvey] = useState(false);
 
@@ -266,350 +165,393 @@ const LandingPage = () => {
         }
     }, []);
 
+    const platforms = [
+        { name: 'LEETCODE', icon: <SiLeetcode /> },
+        { name: 'GEEKSFORGEEKS', icon: <SiGeeksforgeeks /> },
+        { name: 'CODECHEF', icon: <SiCodechef /> },
+        { name: 'HACKERRANK', icon: <SiHackerrank /> }
+    ];
+
     return (
-        <>
+        <div className="landing-v2" style={{ position: 'relative', overflowX: 'hidden' }}>
             <SurveyModal isOpen={showSurvey} onClose={() => setShowSurvey(false)} />
             <SEO title="LeetVision - Visual Coding Preparation Platform" description="Master Data Structures and Algorithms with curated video solutions, company-specific plans, and progress tracking." path="/" />
 
-            {/* Custom Styles for Animation and Premium UI */}
-            <style>{`
-                @keyframes float {
-                    0% { transform: translateY(0px); }
-                    50% { transform: translateY(-10px); }
-                    100% { transform: translateY(0px); }
-                }
-                
-                .premium-grid-bg {
-                    background-size: 40px 40px;
-                    background-image: linear-gradient(to right, rgba(255, 161, 22, 0.05) 1px, transparent 1px),
-                                      linear-gradient(to bottom, rgba(255, 161, 22, 0.05) 1px, transparent 1px);
-                    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-                }
-                
-                .minimal-card {
-                    background: #111;
-                    border: 1px solid #222;
-                    transition: all 0.3s ease;
-                    position: relative;
-                    overflow: hidden;
-                }
-                .minimal-card:hover {
-                    border-color: var(--accent-orange);
-                    transform: translateY(-5px);
-                    background: rgba(255, 161, 22, 0.03);
-                    box-shadow: 0 10px 40px -10px rgba(255, 161, 22, 0.2);
-                }
+            {/* Premium Background */}
+            <div className="grid-bg" style={{ position: 'fixed', inset: 0, zIndex: 0 }}></div>
 
-                .hero-text-gradient {
-                    background: linear-gradient(135deg, #fff 0%, #ffa116 100%);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    filter: drop-shadow(0 0 20px rgba(255, 161, 22, 0.3));
-                }
-                
-                .glow-spotlight {
-                    position: absolute;
-                    top: -20%;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 600px;
-                    height: 600px;
-                    background: radial-gradient(circle, rgba(255, 161, 22, 0.15) 0%, transparent 70%);
-                    filter: blur(80px);
-                    z-index: 0;
-                    pointer-events: none;
-                }
+            {/* Background Glows & Particles */}
+            <div className="hero-glow" style={{ top: '10%', left: '10%' }}></div>
+            <div className="hero-glow" style={{ bottom: '10%', right: '10%', background: 'radial-gradient(circle, rgba(100, 100, 255, 0.1) 0%, transparent 70%)' }}></div>
 
-                @keyframes bounceIn {
-                    0% { opacity: 0; transform: translateY(-20px); }
-                    100% { opacity: 1; transform: translateY(0); }
-                }
+            {/* Animated Particles (Digital Pulses) */}
+            <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+                {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
+                    <div key={i} className="float-slow" style={{
+                        position: 'absolute',
+                        top: `${Math.random() * 100}%`,
+                        left: `${Math.random() * 100}%`,
+                        width: '1px',
+                        height: '1px',
+                        background: i % 2 === 0 ? 'var(--accent-orange)' : 'white',
+                        boxShadow: `0 0 5px ${i % 2 === 0 ? 'var(--accent-orange)' : 'white'}`,
+                        borderRadius: '50%',
+                        opacity: 0.2,
+                        animationDelay: `${i * 1.2}s`,
+                        animationDuration: `${5 + Math.random() * 5}s`
+                    }}></div>
+                ))}
+            </div>
 
-                .sticky-note-arrow {
-                    position: absolute;
-                    top: -15px;
-                    right: 40px;
-                    width: 0; 
-                    height: 0; 
-                    border-left: 10px solid transparent;
-                    border-right: 10px solid transparent;
-                    border-bottom: 15px solid rgba(30, 30, 30, 0.95);
-                }
-
-            `}</style>
-
-            <div className="landing-container" style={{ background: '#050505', minHeight: '100vh', color: 'white', overflowX: 'hidden', position: 'relative' }}>
-
-                {/* Background Decor */}
-                <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-                    <div className="premium-grid-bg" style={{ position: 'absolute', inset: 0 }}></div>
-                    <div className="glow-spotlight"></div>
-                </div>
-
-                {/* Sticky Note for Extension (Desktop Only) */}
-                {showNote && (
-                    <div className="desktop-only" style={{
-                        position: 'fixed',
-                        top: '80px', /* Moved down slightly */
-                        right: '15px', /* Moved right to align with button edge */
-                        width: '240px', /* Smaller width */
-                        background: '#111',
-                        border: '1px solid var(--accent-orange)',
-                        color: '#eee',
-                        padding: '1rem 1rem 1rem 1.5rem', /* Extra left padding for close btn? No, absolute positioning. */
-                        zIndex: 1000,
-                        boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
-                        animation: 'bounceIn 0.8s ease-out forwards 0.5s',
-                        opacity: 0,
-                        fontFamily: '"Caveat", cursive',
-                        transform: 'rotate(-2deg)',
-                        borderRadius: '2px 2px 20px 2px',
-                    }}>
-                        {/* Close Button (Left Side) */}
-                        <div
-                            onClick={() => setShowNote(false)}
-                            style={{
-                                position: 'absolute',
-                                top: '5px',
-                                left: '5px',
-                                cursor: 'pointer',
-                                color: '#666',
-                                transition: 'color 0.2s',
-                                zIndex: 10,
-                                padding: '2px'
-                            }}
-                            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-orange)'}
-                            onMouseLeave={(e) => e.currentTarget.style.color = '#666'}
-                            title="Close Note"
-                        >
-                            <FaTimes size={12} />
-                        </div>
-
-                        {/* Shadow for folded corner */}
-                        <div style={{
-                            content: '""',
-                            position: 'absolute',
-                            bottom: '15px',
-                            right: '5px',
-                            width: '20px', /* Smaller fold */
-                            height: '20px',
-                            background: 'linear-gradient(135deg, transparent 50%, rgba(255, 161, 22, 0.2) 50%)',
-                            zIndex: -1,
-                        }}></div>
-
-                        {/* Arrow pointing up (Dark) - Aligned to button center approx */}
-                        <div style={{
-                            position: 'absolute',
-                            top: '-15px',
-                            left: '20px', /* Moved to Left */
-                            width: '0',
-                            height: '0',
-                            borderLeft: '10px solid transparent', /* Smaller arrow */
-                            borderRight: '10px solid transparent',
-                            borderBottom: '15px solid var(--accent-orange)',
-                        }}></div>
-                        <div style={{
-                            position: 'absolute',
-                            top: '-13px',
-                            left: '20px', /* Moved to Left */
-                            width: '0',
-                            height: '0',
-                            borderLeft: '10px solid transparent',
-                            borderRight: '10px solid transparent',
-                            borderBottom: '15px solid #111',
-                        }}></div>
-
-                        <h4 style={{ margin: '0 0 0.25rem', fontWeight: '700', fontSize: '1.4rem', lineHeight: '1', color: 'var(--accent-orange)' }}>
-                            Hey There! 👋
-                        </h4>
-                        <p style={{ margin: 0, fontSize: '1.1rem', lineHeight: '1.2', fontWeight: '500' }}>
-                            Download the extension to watch video solutions directly on the <strong>LeetCode website itself</strong>!
-                            <br />
-                            <span style={{ fontSize: '0.9rem', color: '#ff6b6b', fontWeight: 'bold' }}>* Compatible with Edge Browser only</span>
-                            <span style={{ display: 'block', marginTop: '5px', fontSize: '1rem', color: '#888' }}>
-                                &uarr; Click the button to get started!
-                            </span>
-                        </p>
-                    </div>
-                )}
-
-                {/* Hero Section */}
-                <section style={{
-                    position: 'relative',
-                    padding: '0rem 2rem 4rem',
-                    textAlign: 'center',
-                    zIndex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    minHeight: '80vh'
+            {/* Sticky Note for Extension (Desktop Only) */}
+            {showNote && (
+                <div style={{
+                    position: 'fixed',
+                    top: '100px',
+                    right: '2rem',
+                    width: '240px',
+                    background: '#111',
+                    border: '1px solid var(--accent-orange)',
+                    padding: '1.5rem',
+                    zIndex: 1000,
+                    borderRadius: '2px 2px 20px 2px',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+                    transform: 'rotate(-2deg)'
                 }}>
+                    <button onClick={() => setShowNote(false)} style={{ position: 'absolute', top: '10px', left: '10px', background: 'none', border: 'none', color: '#555', cursor: 'pointer' }}><FaTimes /></button>
+                    <h4 className="text-cursive" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Pro Tip 👋</h4>
+                    <p style={{ fontSize: '0.9rem', color: '#aaa', lineHeight: '1.4' }}>
+                        Get our Edge extension to watch solutions directly on LeetCode!
+                    </p>
+                    <div style={{ marginTop: '1rem', width: '0', height: '0', borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '15px solid var(--accent-orange)', position: 'absolute', top: '-15px', right: '40px' }}></div>
+                </div>
+            )}
 
-                    <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-                        <div style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            padding: '6px 14px',
-                            borderRadius: '30px',
-                            background: 'rgba(255, 161, 22, 0.1)',
-                            color: 'var(--accent-orange)',
-                            fontWeight: '600',
-                            fontSize: '0.9rem',
-                            marginBottom: '2rem',
-                            border: '1px solid rgba(255, 161, 22, 0.2)',
-                            boxShadow: '0 0 20px rgba(255, 161, 22, 0.1)'
-                        }}>
-                            <span style={{ width: '6px', height: '6px', background: 'var(--accent-orange)', borderRadius: '50%', display: 'inline-block', boxShadow: '0 0 10px var(--accent-orange)' }}></span>
-                            Visual Coding Interview Prep
-                        </div>
+            {/* Hero Section */}
+            <section style={{
+                position: 'relative',
+                padding: '1rem 2rem 6rem',
+                zIndex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '100vh',
+                textAlign: 'center'
+            }}>
+                <div style={{ maxWidth: '1200px', width: '100%', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '4rem' }}>
 
-                        <h1 style={{
-                            fontSize: 'clamp(3rem, 6vw, 5rem)',
-                            lineHeight: '1.1',
-                            marginBottom: '1.5rem',
+                    {/* Hero Text Content - Centered */}
+                    <div style={{ flex: '1', minWidth: '300px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+                        <h1 className="text-editorial" style={{
+                            fontSize: 'clamp(3.5rem, 8vw, 7.5rem)',
+                            marginBottom: '3rem',
                             fontWeight: '800',
-                            letterSpacing: '-2px',
-                            color: 'white'
+                            color: 'white',
+                            lineHeight: '0.85'
                         }}>
-                            Clarify Your <br />
-                            <span className="hero-text-gradient">Code Vision</span>
+                            GET ACCESS TO <br />
+                            <span className="shimmer" style={{ color: 'var(--accent-orange)', display: 'inline-block' }}>HUNDREDS</span> <br />
+                            <span className="text-cursive" style={{ fontSize: '0.8em', color: 'white' }}>of Coding Solutions</span> <br />
+                            AVAILABLE
                         </h1>
 
-                        <p style={{
-                            fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
-                            color: '#aaa',
-                            maxWidth: '650px',
-                            margin: '0 auto 3rem',
-                            lineHeight: '1.6',
-                            fontWeight: '400',
-                            textShadow: '0 2px 10px rgba(0,0,0,0.8)' /* Shadow for readability against orbits */
-                        }}>
-                            Master algorithms with <strong style={{ color: 'var(--accent-orange)' }}>visual explanations</strong>. <br />
-                            No noise. Just clear, curated paths to success.
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', flexDirection: 'column' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                <div className="glass-pill"
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '15px',
+                                        padding: '15px 30px',
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => navigate('/companies')}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        {[
+                                            { logo: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg", name: 'Google' },
+                                            { logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", name: 'Microsoft' },
+                                            { logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg", name: 'Meta' }
+                                        ].map((company, i) => (
+                                            <div key={company.name} style={{
+                                                width: '36px',
+                                                height: '36px',
+                                                borderRadius: '50%',
+                                                background: company.name === 'Microsoft' ? 'transparent' : 'rgba(255,255,255,0.05)',
+                                                border: '1px solid rgba(255,255,255,0.1)',
+                                                marginLeft: i > 0 ? '-12px' : '0',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                overflow: 'hidden',
+                                                zIndex: 3 - i,
+                                                boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
+                                            }}>
+                                                <img
+                                                    src={company.logo}
+                                                    alt={company.name}
+                                                    style={{
+                                                        width: company.name === 'Microsoft' ? '80%' : '70%',
+                                                        height: company.name === 'Microsoft' ? '80%' : '70%',
+                                                        objectFit: 'contain'
+                                                    }}
+                                                />
+                                            </div>
+                                        ))}
+                                        <div style={{
+                                            width: '36px',
+                                            height: '36px',
+                                            borderRadius: '50%',
+                                            background: '#222',
+                                            border: '1px solid rgba(255,255,255,0.1)',
+                                            marginLeft: '-12px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '0.9rem',
+                                            color: '#888',
+                                            fontWeight: '700',
+                                            zIndex: 0
+                                        }}>
+                                            +
+                                        </div>
+                                    </div>
+                                    <div
+                                        style={{
+                                            background: 'var(--accent-orange)',
+                                            color: 'white',
+                                            border: 'none',
+                                            width: '44px',
+                                            height: '44px',
+                                            borderRadius: '50%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            boxShadow: '0 15px 30px rgba(245, 124, 0, 0.4)',
+                                            transition: 'transform 0.3s ease'
+                                        }}
+                                    >
+                                        <FaArrowRight size={18} />
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={() => window.location.href = '/explore'}
+                                    style={{
+                                        background: 'rgba(255,255,255,0.05)',
+                                        color: 'white',
+                                        border: '1px solid rgba(255,255,255,0.1)',
+                                        padding: '15px 35px',
+                                        borderRadius: '30px',
+                                        fontSize: '1.1rem',
+                                        fontWeight: '700',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s ease'
+                                    }}
+                                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                                >
+                                    Explore Solutions
+                                </button>
+                            </div>
+
+                            <p style={{
+                                fontSize: '1.25rem',
+                                color: '#666',
+                                maxWidth: '380px',
+                                lineHeight: '1.5',
+                                marginTop: '1rem'
+                            }}>
+                                Master your interview technical rounds with clear-sighted video guides.
+                                Focused. Visual. Effective.
+                            </p>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+            </section>
+
+            {/* Trust Marquee */}
+            <section style={{ padding: '6rem 0', zIndex: 1, position: 'relative', borderTop: '1px solid rgba(255,255,255,0.03)' }}>
+                <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                    <div style={{ color: 'var(--accent-orange)', fontSize: '0.9rem', fontWeight: '800', letterSpacing: '4px', textTransform: 'uppercase', opacity: 0.8 }}>
+                        The company questions we provide
+                    </div>
+                </div>
+                <div className="marquee-container">
+                    <div className="marquee-content">
+                        {['GOOGLE', 'AMAZON', 'META', 'MICROSOFT', 'NETFLIX', 'UBER', 'AIRBNB', 'ADOBE', 'APPLE', 'NVIDIA'].map(company => (
+                            <div key={company} style={{ fontSize: '2.2rem', fontWeight: '800', color: '#888', letterSpacing: '4px', opacity: 0.8 }}>
+                                {company}
+                            </div>
+                        ))}
+                        {['GOOGLE', 'AMAZON', 'META', 'MICROSOFT', 'NETFLIX', 'UBER', 'AIRBNB', 'ADOBE', 'APPLE', 'NVIDIA'].map(company => (
+                            <div key={company + '_2'} style={{ fontSize: '2.2rem', fontWeight: '800', color: '#888', letterSpacing: '4px', opacity: 0.8 }}>
+                                {company}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Benefits Sections - Realistic Features */}
+            <section style={{ padding: '6rem 2rem', maxWidth: '1100px', margin: '0 auto', zIndex: 1, position: 'relative' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem' }}>
+
+                    {/* Curated Solutions Card */}
+                    <div className="glass-card-3d" style={{ padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', overflow: 'hidden' }}>
+                        <div className="text-cursive" style={{ fontSize: '2rem', opacity: 0.5 }}>01.</div>
+                        <h2 className="text-editorial" style={{ fontSize: '2.5rem', fontWeight: '800', lineHeight: '0.9' }}>CURATED <br />SOLUTIONS</h2>
+                        <p style={{ color: '#888', fontSize: '1rem', lineHeight: '1.6' }}>
+                            Hand-picked video solutions for the most frequent interview questions. We focus on clarity and understanding.
                         </p>
-
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-                            <Link to="/top-100-leetcode" style={{
-                                padding: '1rem 3rem',
-                                background: 'var(--accent-orange)',
-                                color: 'white',
-                                fontWeight: 'bold',
-                                borderRadius: '12px',
-                                fontSize: '1rem',
-                                textDecoration: 'none',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '10px',
-                                boxShadow: '0 0 30px rgba(255, 161, 22, 0.4)',
-                                transition: 'all 0.2s ease',
-                            }}
-                                onMouseEnter={e => {
-                                    e.currentTarget.style.transform = 'translateY(-2px)';
-                                    e.currentTarget.style.boxShadow = '0 0 40px rgba(255, 161, 22, 0.6)';
-                                }}
-                                onMouseLeave={e => {
-                                    e.currentTarget.style.transform = 'translateY(0)';
-                                    e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 161, 22, 0.4)';
-                                }}
-                            >
-                                Start Solving <FaArrowRight />
-                            </Link>
-
-                            <Link to="/companies" style={{
-                                padding: '1rem 3rem',
-                                background: 'rgba(5,5,5,0.6)', /* Semi-transparent back for readability */
-                                backdropFilter: 'blur(10px)',
-                                color: 'white',
-                                fontWeight: '500',
-                                borderRadius: '12px',
-                                fontSize: '1rem',
-                                textDecoration: 'none',
-                                border: '1px solid #333',
-                                transition: 'all 0.2s ease'
-                            }}
-                                onMouseEnter={e => {
-                                    e.currentTarget.style.borderColor = 'var(--accent-orange)';
-                                    e.currentTarget.style.color = 'var(--accent-orange)';
-                                    e.currentTarget.style.background = 'rgba(255,161,22,0.05)';
-                                }}
-                                onMouseLeave={e => {
-                                    e.currentTarget.style.borderColor = '#333';
-                                    e.currentTarget.style.color = 'white';
-                                    e.currentTarget.style.background = 'rgba(5,5,5,0.6)';
-                                }}
-                            >
-                                Explore Companies
-                            </Link>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Features Grid */}
-                <section style={{ padding: '6rem 2rem', maxWidth: '1300px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-                    <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-                        <h2 style={{ fontSize: '2rem', marginBottom: '1rem', fontWeight: '600', letterSpacing: '-1px' }}>Everything you need.</h2>
-                        <p style={{ color: '#666' }}>Focused tools for efficient preparation.</p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-
-                        {/* Feature 1 */}
-                        <div className="minimal-card" style={{ padding: '2.5rem', borderRadius: '12px' }}>
-                            <div style={{ marginBottom: '1.5rem', color: 'var(--accent-orange)' }}>
-                                <FaBuilding style={{ fontSize: '1.5rem' }} />
-                            </div>
-                            <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600' }}>Company Hubs</h3>
-                            <p style={{ color: '#aaa', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                                Targeted preparation plans for top tech companies. Curated experience-based roadmaps.
-                            </p>
-                        </div>
-
-                        {/* Feature 2 */}
-                        <div className="minimal-card" style={{ padding: '2.5rem', borderRadius: '12px' }}>
-                            <div style={{ marginBottom: '1.5rem', color: '#4db6ac' }}>
-                                <FaPlayCircle style={{ fontSize: '1.5rem' }} />
-                            </div>
-                            <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600' }}>Visual Solutions</h3>
-                            <p style={{ color: '#aaa', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                                High-quality video explanations for every problem. Understand the logic, not just the code.
-                            </p>
-                        </div>
-
-                        {/* Feature 3 */}
-                        <div className="minimal-card" style={{ padding: '2.5rem', borderRadius: '12px' }}>
-                            <div style={{ marginBottom: '1.5rem', color: '#6464ff' }}>
-                                <FaChartLine style={{ fontSize: '1.5rem' }} />
-                            </div>
-                            <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600' }}>Progress Tracking</h3>
-                            <p style={{ color: '#aaa', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                                Visualize your consistency and mastery across data structures and algorithms.
-                            </p>
-                        </div>
-
-                        {/* Feature 4 */}
-                        <div className="minimal-card" style={{ padding: '2.5rem', borderRadius: '12px' }}>
-                            <div style={{ marginBottom: '1.5rem', color: '#ff6464' }}>
-                                <FaCode style={{ fontSize: '1.5rem' }} />
-                            </div>
-                            <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600' }}>Daily Challenges</h3>
-                            <p style={{ color: '#aaa', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                                Build a habit with a daily curated problem. Stay sharp with regular practice.
-                            </p>
-                        </div>
-
+                    {/* Company Prep Card */}
+                    <div className="glass-card-3d" style={{ padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', overflow: 'hidden' }}>
+                        <div className="text-cursive" style={{ fontSize: '2rem', opacity: 0.5 }}>02.</div>
+                        <h2 className="text-editorial" style={{ fontSize: '2.5rem', fontWeight: '800', lineHeight: '0.9' }}>COMPANY <br />FOCUS</h2>
+                        <p style={{ color: '#888', fontSize: '1rem', lineHeight: '1.6' }}>
+                            Direct insights into the questions asked at top-tier companies. Prepare exactly for where you want to go.
+                        </p>
                     </div>
-                </section>
 
-                {/* Footer */}
-                <footer style={{ padding: '3rem 2rem', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', color: '#555', position: 'relative', zIndex: 1 }}>
-                    <p style={{ marginBottom: '0.5rem' }}>&copy; 2026 Vishwesh Shinde. All Rights Reserved.</p>
-                    <p style={{ fontSize: '0.8rem' }}>Helping you clear the noise and focus on the code.</p>
-                </footer>
+                    {/* Master Patterns Card */}
+                    <div className="glass-card-3d" style={{ padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', overflow: 'hidden' }}>
+                        <div className="text-cursive" style={{ fontSize: '2rem', opacity: 0.5 }}>03.</div>
+                        <h2 className="text-editorial" style={{ fontSize: '2.5rem', fontWeight: '800', lineHeight: '0.9' }}>MASTER <br />PATTERNS</h2>
+                        <p style={{ color: '#888', fontSize: '1rem', lineHeight: '1.6' }}>
+                            Solve one, master a hundred. Our guides help you recognize and apply patterns across any coding problem.
+                        </p>
+                    </div>
 
-            </div>
-        </>
+                </div>
+            </section>
+
+            {/* Platform Support Section - Animated Marquee */}
+            <section className="platform-marquee-section" style={{ zIndex: 1, position: 'relative', overflow: 'hidden' }}>
+                <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                    <h3 className="text-editorial" style={{ fontSize: '2.2rem', opacity: 0.9, letterSpacing: '2px', fontWeight: '800' }}>
+                        COMPATIBLE WITH EVERY MAJOR PLATFORM
+                    </h3>
+                </div>
+
+                <div className="marquee-container">
+                    <div className="platform-marquee-content">
+                        {platforms.map(p => (
+                            <div key={p.name} className="platform-badge">
+                                {p.icon} <span>{p.name}</span>
+                            </div>
+                        ))}
+                        {/* Duplicate for seamless loop */}
+                        {platforms.map(p => (
+                            <div key={p.name + '_loop'} className="platform-badge">
+                                {p.icon} <span>{p.name}</span>
+                            </div>
+                        ))}
+                        {/* More duplicates to fill space */}
+                        {platforms.map(p => (
+                            <div key={p.name + '_loop2'} className="platform-badge">
+                                {p.icon} <span>{p.name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div style={{ textAlign: 'center', marginTop: '3rem', opacity: 0.6, fontSize: '1.1rem', fontWeight: '600', color: 'white' }}>
+                    + Video solutions for 1000+ problems
+                </div>
+            </section>
+
+            {/* Premium Call to Action */}
+            <section style={{ padding: '0 2rem 8rem', zIndex: 1, position: 'relative' }}>
+                <div className="perspective-1000">
+                    <Link to="/pricing" className="premium-cta-card" style={{
+                        maxWidth: '1000px',
+                        margin: '0 auto',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '6rem 2rem',
+                        textAlign: 'center',
+                        textDecoration: 'none',
+                        color: 'white',
+                        borderRadius: '32px',
+                        overflow: 'hidden'
+                    }}>
+                        {/* Elite Visual Effects */}
+                        <div className="premium-mesh"></div>
+                        <div className="premium-noise"></div>
+                        <div className="border-beam"></div>
+
+                        <div className="text-cursive" style={{
+                            fontSize: '1.5rem',
+                            marginBottom: '0.5rem',
+                            color: 'var(--accent-orange)',
+                            position: 'relative',
+                            zIndex: 2
+                        }}>
+                            Elevate your vision
+                        </div>
+
+                        <div style={{ position: 'relative', width: '100%' }}>
+                            {/* Crown positioned above "GO" */}
+                            <img
+                                src="/gold-crown.png"
+                                alt="Crown"
+                                style={{
+                                    position: 'absolute',
+                                    top: '20px',
+                                    left: '340px',
+                                    transform: 'translateX(-160%) rotate(-15deg)', /* Adjust X to align with "GO" */
+                                    width: '100px',
+                                    height: 'auto',
+                                    pointerEvents: 'none',
+                                    zIndex: 10
+                                }}
+                            />
+                            <h2 className="text-editorial premium-gold-text" style={{
+                                fontSize: 'clamp(3rem, 10vw, 6rem)',
+                                fontWeight: '900',
+                                marginBottom: '3rem',
+                                position: 'relative',
+                                zIndex: 2,
+                                lineHeight: '1', /* Increased from 0.8 to avoid clipping */
+                                textAlign: 'center'
+                            }}>
+                                GO PREMIUM
+                            </h2>
+                        </div>
+
+                        <div className="premium-button">
+                            Explore Elite Plans
+                        </div>
+
+                        {/* Additional floating light in background */}
+                        <div className="float-slow" style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: '300px',
+                            height: '300px',
+                            background: 'radial-gradient(circle, rgba(245, 124, 0, 0.05) 0%, transparent 70%)',
+                            filter: 'blur(100px)',
+                            zIndex: 0
+                        }}></div>
+                    </Link>
+                </div>
+            </section>
+
+        </div>
     );
 };
 

@@ -45,6 +45,15 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    subscriptionExpiry: {
+        type: Date,
+        default: null
+    },
+    subscriptionType: {
+        type: String,
+        enum: ['none', 'monthly', 'yearly'],
+        default: 'none'
     }
 });
 

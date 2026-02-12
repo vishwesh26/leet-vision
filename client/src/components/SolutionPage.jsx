@@ -3,12 +3,50 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { IoIosArrowDown, IoIosArrowUp, IoMdFlash, IoMdTrophy, IoMdList, IoMdCreate, IoMdLink, IoMdPlay } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp, IoMdFlash, IoMdTrophy, IoMdList, IoMdCreate, IoMdLink, IoMdPlay, IoMdSettings } from 'react-icons/io';
+import { FaBrain } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
+
+const PremiumLoader = () => {
+    const [msgIdx, setMsgIdx] = useState(0);
+    const messages = [
+        "Crafting your article...",
+        "Synthesizing visual logic...",
+        "Optimizing performance patterns...",
+        "Mapping brain nodes...",
+        "Generating code implementations...",
+        "Polishing the final draft..."
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setMsgIdx(prev => (prev + 1) % messages.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="premium-loader-container">
+            <div className="brain-pulse-wrapper">
+                <div className="brain-glow"></div>
+                <FaBrain className="brain-icon-premium" />
+            </div>
+            <div className="loading-status-container">
+                <h2 className="loading-title-premium">Intelligence Layer</h2>
+                <p className="loading-msg-premium" key={msgIdx}>{messages[msgIdx]}</p>
+            </div>
+            <div className="loading-progress-bar">
+                <div className="loading-progress-fill"></div>
+            </div>
+        </div>
+    );
+};
 
 const SolutionPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -26,35 +64,50 @@ const SolutionPage = () => {
     };
 
     useEffect(() => {
+        let ignore = false;
+
         const fetchSolution = async (retryCount = 0) => {
-            setLoading(true);
-            setError('');
+            if (!ignore) {
+                setLoading(true);
+                setError('');
+            }
+
             try {
                 const API_BASE = import.meta.env.VITE_API_URL || '';
                 // Increased timeout to 60s for AI generation
                 const response = await axios.get(`${API_BASE}/api/solution/${id}`, {
                     timeout: 60000
                 });
-                setData(response.data);
+
+                if (!ignore) {
+                    setData(response.data);
+                    setError('');
+                }
             } catch (err) {
+                if (ignore) return;
+
                 console.error("Fetch Error:", err);
 
                 // If it's a network error or timeout, and we haven't retried yet, try once more
-                // This handles cases where the first request triggers generation but times out,
-                // and the second one (retry) will likely hit the database.
-                if (retryCount < 1 && (err.code === 'ERR_NETWORK' || err.code === 'ECONNABORTED')) {
+                if (retryCount < 1 && (err.code === 'ERR_NETWORK' || err.code === 'ECONNABORTED' || err.response?.status === 500)) {
                     console.log("Retrying fetch...");
-                    setTimeout(() => fetchSolution(retryCount + 1), 2000);
+                    setTimeout(() => {
+                        if (!ignore) fetchSolution(retryCount + 1);
+                    }, 2000);
                     return;
                 }
 
-                setError('Failed to load solution. The AI generation might be taking longer than expected. Please try refreshing the page.');
+                setError(err.response?.data?.error || err.response?.data?.details || 'Failed to load solution. The AI generation might be taking longer than expected. Please try refreshing the page.');
             } finally {
-                setLoading(false);
+                if (!ignore) setLoading(false);
             }
         };
 
         if (id) fetchSolution();
+
+        return () => {
+            ignore = true;
+        };
     }, [id]);
 
     const scrollToSection = (ref) => {
@@ -71,13 +124,7 @@ const SolutionPage = () => {
         setActiveLangs(prev => ({ ...prev, [approachIndex]: lang }));
     };
 
-    if (loading) return (
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#080808', color: '#fff' }}>
-            <div className="loader" style={{ width: '50px', height: '50px', border: '3px solid #333', borderTopColor: '#f57c00', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
-            <h2 style={{ marginTop: '2rem', color: '#888', fontWeight: 400 }}>Crafting your article...</h2>
-            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-        </div>
-    );
+    if (loading) return <PremiumLoader />;
 
     if (error || !data) return (
         <div style={{ padding: '4rem', textAlign: 'center', background: '#080808', minHeight: '100vh', color: '#ff6b6b' }}>
@@ -110,15 +157,25 @@ const SolutionPage = () => {
                     <header className="article-header">
                         <div className="header-top">
                             <h1 className="problem-title">{id}. {data.title}</h1>
-                            <div className="difficulty-tag">
-                                <IoMdFlash color="#f57c00" />
-                                <span style={{ color: difficulty === 'Hard' ? '#ff4b2b' : difficulty === 'Easy' ? '#00c853' : '#f57c00' }}>{difficulty}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                {user?.isAdmin && (
+                                    <button
+                                        onClick={() => navigate(`/admin/edit-solution/${id}`)}
+                                        style={{ background: 'rgba(245, 124, 0, 0.1)', border: '1px solid #f57c00', color: '#f57c00', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontWeight: 600 }}
+                                    >
+                                        <IoMdSettings /> Edit Solution
+                                    </button>
+                                )}
+                                <div className="difficulty-tag">
+                                    <IoMdFlash color="#f57c00" />
+                                    <span style={{ color: difficulty === 'Hard' ? '#ff4b2b' : difficulty === 'Easy' ? '#00c853' : '#f57c00' }}>{difficulty}</span>
+                                </div>
                             </div>
                         </div>
 
                         <div className="tags-container">
-                            <a href={`https://leetcode.com/problems/${data.slug || id}/`} target="_blank" rel="noreferrer" className="practice-link">
-                                <IoMdLink /> Practice Here
+                            <a href={data.url || `https://leetcode.com/problems/${data.slug || id}/`} target="_blank" rel="noreferrer" className="practice-link">
+                                <IoMdLink /> Practice {data.platform && data.platform !== 'leetcode' ? `on ${data.platform.toUpperCase()}` : 'Here'}
                             </a>
                             {topics.map(t => (
                                 <span key={t} className="topic-tag">#{t}</span>
@@ -145,6 +202,48 @@ const SolutionPage = () => {
                             ))}
                         </div>
                     </section>
+                    {/* Analytical Overview Section */}
+                    {data.analyticalOverview && (
+                        <section id="analytical-overview" className="section-container">
+                            <div className="analytical-overview-card">
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.2rem' }}>
+                                    <FaBrain color="#f57c00" />
+                                    <h3 style={{ margin: 0 }}>Analytical Overview</h3>
+                                </div>
+                                <p>{data.analyticalOverview}</p>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* Complexity Table Section */}
+                    {complexityTable.length > 0 && (
+                        <section ref={sections.complexity} id="complexity-section" className="section-container">
+                            <h2 className="section-title">Complexity Analysis :</h2>
+                            <div className="complexity-table-wrapper">
+                                <table className="complexity-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Method</th>
+                                            <th>Time</th>
+                                            <th>Space</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {complexityTable.map((row, idx) => (
+                                            <tr key={idx}>
+                                                <td className="method-name">
+                                                    {row.method}
+                                                    <span className="info-icon" title="Theoretical complexity analysis">?</span>
+                                                </td>
+                                                <td className="complexity-val">{row.time}</td>
+                                                <td className="complexity-val">{row.space}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    )}
 
                     {/* Approaches Section */}
                     <section ref={sections.approaches} id="approaches">
@@ -252,9 +351,9 @@ const SolutionPage = () => {
                     <div className="sidebar-card">
                         <IoMdTrophy size={30} color="#f57c00" style={{ marginBottom: '1rem' }} />
                         <div className="card-title">Master Problem Solving</div>
-                        <p className="card-text">Practice makes perfect. Try to solve this on LeetCode without hints.</p>
-                        <a href={`https://leetcode.com/problems/${data.slug || id}/`} target="_blank" rel="noreferrer" className="practice-link" style={{ marginTop: '1.5rem', width: '100%', justifyContent: 'center', background: '#f57c00', color: '#000', border: 'none' }}>
-                            Solve on LeetCode
+                        <p className="card-text">Practice makes perfect. Try to solve this on {data.platform || 'LeetCode'} without hints.</p>
+                        <a href={data.url || `https://leetcode.com/problems/${data.slug || id}/`} target="_blank" rel="noreferrer" className="practice-link" style={{ marginTop: '1.5rem', width: '80%', justifyContent: 'center', background: '#f57c00', color: '#000', border: 'none' }}>
+                            Solve on {data.platform && data.platform !== 'leetcode' ? data.platform.toUpperCase() : 'LeetCode'}
                         </a>
                     </div>
                     {/* Report Issue Button */}

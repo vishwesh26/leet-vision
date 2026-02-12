@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import SEO from './SEO';
 import { useSolved } from '../context/SolvedContext';
+import { useAuth } from '../context/AuthContext';
 
 const companies = [
     { id: 'google', name: 'Google' },
@@ -14,6 +15,9 @@ const companies = [
 ];
 
 const CompanyPage = () => {
+    const { user } = useAuth();
+    const hasFullAccess = user && user.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date();
+
     const [selectedCompany, setSelectedCompany] = useState(companies[0]);
     const [problems, setProblems] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -54,9 +58,10 @@ const CompanyPage = () => {
     const askedProblems = problems.filter(p => p.companyStatus.type === 'asked' && (filterDifficulty === 'All' || p.difficulty === filterDifficulty));
     const similarProblems = problems.filter(p => p.companyStatus.type === 'similar' && (filterDifficulty === 'All' || p.difficulty === filterDifficulty));
 
-    const ProblemCard = ({ problem }) => {
+    const ProblemCard = ({ problem, index }) => {
         const isAsked = problem.companyStatus.type === 'asked';
         const solved = isProblemSolved(problem);
+        const locked = !hasFullAccess && index >= 4;
 
         return (
             <div key={problem.id} style={{
@@ -67,107 +72,140 @@ const CompanyPage = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1rem',
-                position: 'relative'
+                position: 'relative',
+                opacity: locked ? 0.6 : 1,
+                cursor: locked ? 'not-allowed' : 'default'
             }}>
-                {/* Badge */}
-                <div style={{
-                    alignSelf: 'flex-start',
-                    display: 'inline-block',
-                    padding: '0.3rem 0.8rem',
-                    borderRadius: '4px',
-                    fontSize: '0.75rem',
-                    fontWeight: 'bold',
-                    textTransform: 'uppercase',
-                    background: isAsked ? 'rgba(76, 175, 80, 0.15)' : 'rgba(255, 193, 7, 0.15)',
-                    color: isAsked ? '#4caf50' : '#ffc107',
-                    border: `1px solid ${isAsked ? '#4caf50' : '#ffc107'}`
-                }}>
-                    {isAsked ? `Asked by ${selectedCompany.name}` : `Similar to ${selectedCompany.name}`}
-                </div>
-
-                {/* Title */}
-                <div>
-                    <h3 style={{ fontSize: '1.2rem', margin: 0, lineHeight: 1.4 }}>
-                        <span style={{ color: '#888', marginRight: '0.5rem' }}>#{problem.id}.</span>
-                        {problem.title}
-                    </h3>
-                </div>
-
-                {/* Tags */}
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                    <span style={{
-                        color: problem.difficulty === 'Easy' ? '#00b8a3' : problem.difficulty === 'Medium' ? '#ffc01e' : '#ff375f',
-                        background: problem.difficulty === 'Easy' ? '#00b8a322' : problem.difficulty === 'Medium' ? '#ffc01e22' : '#ff375f22',
-                        padding: '0.2rem 0.6rem',
-                        borderRadius: '4px',
-                        fontSize: '0.8rem'
+                {locked && (
+                    <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'rgba(0,0,0,0.6)',
+                        backdropFilter: 'blur(4px)',
+                        zIndex: 10,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '12px',
+                        padding: '1rem',
+                        textAlign: 'center'
                     }}>
-                        {problem.difficulty}
-                    </span>
-                    {problem.topics.slice(0, 2).map(t => (
-                        <span key={t} style={{ background: '#333', color: '#aaa', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem' }}>
-                            {t}
-                        </span>
-                    ))}
-                </div>
-
-                {/* Actions */}
-                <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.8rem', paddingTop: '1rem', borderTop: '1px solid #2a2a2a' }}>
-                    <div style={{ display: 'flex', gap: '0.8rem' }}>
-                        <a
-                            href={`https://leetcode.com/problems/${problem.slug}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{
-                                flex: 1,
-                                textAlign: 'center',
-                                background: '#333',
-                                color: 'white',
-                                padding: '0.6rem',
-                                borderRadius: '6px',
-                                textDecoration: 'none',
-                                fontSize: '0.9rem'
-                            }}
-                        >
-                            LeetCode ↗
-                        </a>
-                        <a
-                            href={`/search/${problem.id}`}
-                            style={{
-                                flex: 1,
-                                textAlign: 'center',
-                                background: '#333',
-                                color: 'white',
-                                padding: '0.6rem',
-                                borderRadius: '6px',
-                                textDecoration: 'none',
-                                fontSize: '0.9rem'
-                            }}
-                        >
-                            Video ▶
-                        </a>
-                    </div>
-                    <a
-                        href={`/solution/${problem.id}`}
-                        style={{
-                            width: '100%',
-                            textAlign: 'center',
-                            background: 'linear-gradient(135deg, #f57c00 0%, #ff9800 100%)',
+                        <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🔒</span>
+                        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '0.5rem', color: 'white' }}>Premium Only</div>
+                        <Link to="/pricing" style={{
+                            background: 'var(--accent-orange)',
                             color: 'white',
-                            padding: '0.6rem',
-                            borderRadius: '6px',
-                            border: 'none',
-                            fontSize: '0.9rem',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
+                            padding: '0.4rem 0.8rem',
+                            borderRadius: '4px',
+                            fontSize: '0.8rem',
                             textDecoration: 'none',
-                            boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
-                            boxSizing: 'border-box',
-                            display: 'block'
-                        }}
-                    >
-                        Optimized Solution ⚡
-                    </a>
+                            fontWeight: 'bold'
+                        }}>Upgrade to View</Link>
+                    </div>
+                )}
+
+                <div style={{ filter: locked ? 'blur(2px)' : 'none', display: 'flex', flexDirection: 'column', height: '100%', gap: '1rem' }}>
+                    {/* Badge */}
+                    <div style={{
+                        alignSelf: 'flex-start',
+                        display: 'inline-block',
+                        padding: '0.3rem 0.8rem',
+                        borderRadius: '4px',
+                        fontSize: '0.75rem',
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase',
+                        background: isAsked ? 'rgba(76, 175, 80, 0.15)' : 'rgba(255, 193, 7, 0.15)',
+                        color: isAsked ? '#4caf50' : '#ffc107',
+                        border: `1px solid ${isAsked ? '#4caf50' : '#ffc107'}`
+                    }}>
+                        {isAsked ? `Asked by ${selectedCompany.name}` : `Similar to ${selectedCompany.name}`}
+                    </div>
+
+                    {/* Title */}
+                    <div>
+                        <h3 style={{ fontSize: '1.2rem', margin: 0, lineHeight: 1.4 }}>
+                            <span style={{ color: '#888', marginRight: '0.5rem' }}>#{problem.id}.</span>
+                            {problem.title}
+                        </h3>
+                    </div>
+
+                    {/* Tags */}
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        <span style={{
+                            color: problem.difficulty === 'Easy' ? '#00b8a3' : problem.difficulty === 'Medium' ? '#ffc01e' : '#ff375f',
+                            background: problem.difficulty === 'Easy' ? '#00b8a322' : problem.difficulty === 'Medium' ? '#ffc01e22' : '#ff375f22',
+                            padding: '0.2rem 0.6rem',
+                            borderRadius: '4px',
+                            fontSize: '0.8rem'
+                        }}>
+                            {problem.difficulty}
+                        </span>
+                        {problem.topics.slice(0, 2).map(t => (
+                            <span key={t} style={{ background: '#333', color: '#aaa', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.8rem' }}>
+                                {t}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.8rem', paddingTop: '1rem', borderTop: '1px solid #2a2a2a' }}>
+                        <div style={{ display: 'flex', gap: '0.8rem' }}>
+                            <a
+                                href={`https://leetcode.com/problems/${problem.slug}`}
+                                target="_blank"
+                                rel="noreferrer"
+                                style={{
+                                    flex: 1,
+                                    textAlign: 'center',
+                                    background: '#333',
+                                    color: 'white',
+                                    padding: '0.6rem',
+                                    borderRadius: '6px',
+                                    textDecoration: 'none',
+                                    fontSize: '0.9rem'
+                                }}
+                            >
+                                LeetCode ↗
+                            </a>
+                            <Link
+                                to={`/search/${problem.id}`}
+                                style={{
+                                    flex: 1,
+                                    textAlign: 'center',
+                                    background: '#333',
+                                    color: 'white',
+                                    padding: '0.6rem',
+                                    borderRadius: '6px',
+                                    textDecoration: 'none',
+                                    fontSize: '0.9rem'
+                                }}
+                            >
+                                Video ▶
+                            </Link>
+                        </div>
+                        <Link
+                            to={`/solution/${problem.id}`}
+                            style={{
+                                width: '100%',
+                                textAlign: 'center',
+                                background: 'linear-gradient(135deg, #f57c00 0%, #ff9800 100%)',
+                                color: 'white',
+                                padding: '0.6rem',
+                                borderRadius: '6px',
+                                border: 'none',
+                                fontSize: '0.9rem',
+                                fontWeight: 'bold',
+                                cursor: 'pointer',
+                                textDecoration: 'none',
+                                boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
+                                boxSizing: 'border-box',
+                                display: 'block'
+                            }}
+                        >
+                            Optimized Solution ⚡
+                        </Link>
+                    </div>
                 </div>
 
                 {solved && <div style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '1.2rem' }} title="Solved">✅</div>}
@@ -291,7 +329,7 @@ const CompanyPage = () => {
                                 <div style={{ color: '#666', fontStyle: 'italic' }}>No questions found matching criteria.</div>
                             ) : (
                                 <div className="company-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
-                                    {askedProblems.map(p => <ProblemCard key={p.id} problem={p} />)}
+                                    {askedProblems.map((p, i) => <ProblemCard key={p.id} problem={p} index={i} />)}
                                 </div>
                             )}
                         </div>
@@ -317,7 +355,7 @@ const CompanyPage = () => {
                                 <div style={{ color: '#666', fontStyle: 'italic' }}>No questions found matching criteria.</div>
                             ) : (
                                 <div className="company-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
-                                    {similarProblems.map(p => <ProblemCard key={p.id} problem={p} />)}
+                                    {similarProblems.map((p, i) => <ProblemCard key={p.id} problem={p} index={i} />)}
                                 </div>
                             )}
                         </div>

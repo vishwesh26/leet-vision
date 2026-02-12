@@ -13,9 +13,21 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('MongoDB connection error:', err));
+const connectDB = async () => {
+    if (mongoose.connection.readyState >= 1) return;
+    if (!process.env.MONGODB_URI) {
+        console.warn("MONGODB_URI not set. Using File System cache only (Not persistent on Vercel).");
+        return;
+    }
+    try {
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log("MongoDB Connected");
+    } catch (err) {
+        console.error("MongoDB Connection Error:", err);
+    }
+};
+
+connectDB();
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/auth');
 const paymentRoutes = require('./routes/payment');
@@ -28,6 +40,36 @@ const Concept = require('./models/Concept');
 const UniversalProblem = require('./models/UniversalProblem');
 const Explanation = require('./models/Explanation');
 const Report = require('./models/Report');
+
+// Define Inline Solution Schema
+const solutionSchema = new mongoose.Schema({
+    questionId: { type: String, required: true, unique: true },
+    title: String,
+    difficulty: String,
+    topics: Array,
+    problemStatement: String,
+    analyticalOverview: String,
+    examples: Array,
+    complexityTable: Array,
+    approaches: Array,
+    createdAt: { type: Date, default: Date.now }
+});
+
+// Define Inline Article Schema 
+const articleSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    slug: { type: String, required: true, unique: true },
+    summary: String,
+    content: String,
+    category: String,
+    publishedDate: { type: Date, default: Date.now },
+    source: String,
+    originalLink: String,
+    createdAt: { type: Date, default: Date.now }
+});
+
+const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
+const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
 const { protect, admin } = require('./middleware/authMiddleware');
 const passport = require('passport');
 require('./config/passport');
@@ -124,7 +166,158 @@ app.get('/api/reports', protect, admin, async (req, res) => {
     }
 });
 
-// Logo Proxy to avoid frontend 404s
+// Update or Add Solution (Admin Only)
+app.post('/api/admin/solution', protect, admin, async (req, res) => {
+    try {
+        const solutionData = req.body;
+        const { questionId, platform = 'leetcode' } = solutionData;
+
+        if (!questionId) {
+            return res.status(400).json({ status: 'fail', message: 'questionId is required' });
+        }
+
+        await connectDB();
+
+        if (platform === 'leetcode') {
+            // Standard LeetCode Solution Upsert
+            const updatedSolution = await Solution.findOneAndUpdate(
+                { questionId },
+                solutionData,
+                { new: true, upsert: true, runValidators: true }
+            );
+
+            // Delete local cache file if it exists
+            const solutionPath = path.join(SOLUTIONS_DIR, `${questionId}.json`);
+            if (fs.existsSync(solutionPath)) {
+                try { fs.unlinkSync(solutionPath); } catch (e) {}
+            }
+
+            return res.status(200).json({
+                status: 'success',
+                data: { solution: updatedSolution }
+            });
+        } else {
+            // Universal Platform (Explanation) Upsert
+            // 1. Find UniversalProblem
+            let problem = await UniversalProblem.findOne({ 
+                $or: [{ questionId }, { slug: questionId }] 
+            });
+
+            if (!problem) {
+                return res.status(404).json({ status: 'fail', message: 'Universal problem not found' });
+            }
+
+            // 2. Ensure Concept exists
+            let conceptId = problem.concept_id;
+            if (!conceptId) {
+                const conceptKey = normalizeConceptKey(solutionData.title);
+                // Try to find existing concept by key or create new
+                const concept = await Concept.findOneAndUpdate(
+                    { concept_key: conceptKey },
+                    { 
+                        $setOnInsert: { 
+                            topic: (solutionData.topics && solutionData.topics.length > 0) ? solutionData.topics[0] : 'General',
+                            difficulty_estimate: solutionData.difficulty || 'Medium'
+                        } 
+                    },
+                    { upsert: true, new: true }
+                );
+                conceptId = concept._id;
+                problem.concept_id = conceptId;
+                await problem.save();
+            }
+
+            // 3. Upsert Explanation
+            const explanationData = {
+                concept_id: conceptId,
+                analytical_overview: solutionData.analyticalOverview || solutionData.problemStatement,
+                examples: solutionData.examples || [],
+                approaches: solutionData.approaches || [],
+                ai_generated: false,
+                verified: true
+            };
+
+            const updatedExplanation = await Explanation.findOneAndUpdate(
+                { concept_id: conceptId },
+                explanationData,
+                { new: true, upsert: true, runValidators: true }
+            );
+
+            return res.status(200).json({
+                status: 'success',
+                data: { explanation: updatedExplanation }
+            });
+        }
+    } catch (err) {
+        console.error("Admin Solution Update Error:", err);
+        res.status(500).json({ status: 'error', message: err.message });
+    }
+});
+
+// Get Question Info (Admin Only - No AI Generation)
+app.get('/api/admin/question/:id', protect, admin, async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        // 1. Check LeetCode Database (problemsDb)
+        const leetcodeProblem = problemsDb.find(p => p.id === id || p.titleSlug === id);
+        if (leetcodeProblem) {
+            return res.json({
+                status: 'success',
+                data: {
+                    questionId: leetcodeProblem.id,
+                    title: leetcodeProblem.title,
+                    difficulty: leetcodeProblem.difficulty,
+                    topics: leetcodeProblem.topics || [],
+                    platform: 'leetcode'
+                }
+            });
+        }
+
+        // 2. Check Structured Platforms (CodeChef, GFG, HackerRank)
+        const structuredMatch = structuredQuestions.find(q => 
+            q.title.toLowerCase() === id.toLowerCase() || 
+            q.title.replace(/\s+/g, '-').toLowerCase() === id.toLowerCase()
+        );
+
+        if (structuredMatch) {
+            return res.json({
+                status: 'success',
+                data: {
+                    questionId: id,
+                    title: structuredMatch.title,
+                    difficulty: structuredMatch.difficulty,
+                    topics: structuredMatch.topics || [],
+                    problemStatement: structuredMatch.summary || structuredMatch.description,
+                    platform: structuredMatch.platform
+                }
+            });
+        }
+
+        // 3. Check Universal Problems in DB
+        const universalProblem = await UniversalProblem.findOne({ 
+            $or: [{ questionId: id }, { slug: id }] 
+        }).populate('concept_id');
+
+        if (universalProblem) {
+            return res.json({
+                status: 'success',
+                data: {
+                    questionId: universalProblem.questionId || universalProblem.slug,
+                    title: universalProblem.title,
+                    difficulty: universalProblem.difficulty,
+                    topics: universalProblem.tags || [],
+                    platform: universalProblem.platform
+                }
+            });
+        }
+
+        res.status(404).json({ status: 'fail', message: 'Question not found in any source' });
+    } catch (err) {
+        console.error("Admin Question Fetch Error:", err);
+        res.status(500).json({ status: 'error', message: err.message });
+    }
+});
 app.get('/api/logo/:domain', async (req, res) => {
     const { domain } = req.params;
     try {
@@ -161,14 +354,25 @@ app.get('/api/logo/:domain', async (req, res) => {
 
 // Load problems database (Using require for Vercel bundling compatibility)
 let problemsDb = [];
+let structuredQuestions = []; // Initialize structuredQuestions
 try {
     // Vercel handles require() better than fs.readFileSync for static assets
     problemsDb = require('./data/problems.json');
-    console.log(`Loaded ${problemsDb.length} problems from database.`);
+    console.log(`Loaded ${problemsDb.length} problems from problems.json`);
+    
+    // Load structured questions for CodeChef, GFG, HackerRank
+    const questionsPath = path.join(__dirname, '..', 'questions.json');
+    if (fs.existsSync(questionsPath)) {
+        structuredQuestions = JSON.parse(fs.readFileSync(questionsPath, 'utf8'));
+        console.log(`Loaded ${structuredQuestions.length} structured questions from questions.json`);
+    } else {
+        console.warn('questions.json not found at expected path:', questionsPath);
+    }
 } catch (err) {
-    console.error('Error loading problems.json:', err);
+    console.error('Error loading problem database or structured questions:', err);
     // Fallback or empty
     problemsDb = [];
+    structuredQuestions = [];
 }
 
 // Load Company Plans
@@ -504,16 +708,20 @@ app.get('/api/list/:type', async (req, res) => {
         const total = filtered.length;
         const paginatedItems = filtered.slice(startIndex, endIndex);
 
-        // Attach Video Data (Only cached)
+        // Attach Video Data & Check for Solution
         const results = await Promise.all(paginatedItems.map(async (problem) => {
             try {
-                const videos = await getOrFetchVideo(problem.id, false); // FALSE = Do NOT live fetch
+                const [videos, solutionExists] = await Promise.all([
+                    getOrFetchVideo(problem.id, false),
+                    Solution.exists({ questionId: problem.id })
+                ]);
                 return {
                     ...problem,
-                    video: (videos && videos.length > 0) ? videos[0] : null
+                    video: (videos && videos.length > 0) ? videos[0] : null,
+                    hasSolution: !!solutionExists
                 };
             } catch (innerErr) {
-                console.warn(`Failed to attach video for ${problem.id}:`, innerErr);
+                console.warn(`Failed to enrich problem ${problem.id}:`, innerErr);
                 return problem;
             }
         }));
@@ -680,68 +888,15 @@ app.get('/api/daily-challenge', async (req, res) => {
 
 
 
-// ---------------------------------------------
-// AI Solution Generator + MongoDB Persistence
-// ---------------------------------------------
+//AI Solution Generator Logic
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-// File Cache Fallback (Legacy/Dev)
 const SOLUTIONS_DIR = path.join(__dirname, 'data', 'solutions');
 if (!fs.existsSync(SOLUTIONS_DIR)) {
     try { fs.mkdirSync(SOLUTIONS_DIR, { recursive: true }); } catch (e) {}
 }
 
-console.log("Checking GEMINI_API_KEY:", process.env.GEMINI_API_KEY ? "FOUND (starts with AIza)" : "MISSING");
 const genAI = process.env.GEMINI_API_KEY ? new GoogleGenerativeAI(process.env.GEMINI_API_KEY) : null;
-console.log("AI Service Status:", genAI ? "INITIALIZED" : "DISABLED (Check .env)");
-
-// Connect to MongoDB
-const connectDB = async () => {
-    if (mongoose.connection.readyState >= 1) return;
-    if (!process.env.MONGODB_URI) {
-        console.warn("MONGODB_URI not set. Using File System cache only (Not persistent on Vercel).");
-        return;
-    }
-    try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log("MongoDB Connected");
-    } catch (err) {
-        console.error("MongoDB Connection Error:", err);
-    }
-};
-
-// Define Solution Schema
-const solutionSchema = new mongoose.Schema({
-    questionId: { type: String, required: true, unique: true },
-    title: String,
-    difficulty: String,
-    topics: Array,
-    problemStatement: String,
-    analyticalOverview: String,
-    examples: Array,
-    complexityTable: Array,
-    approaches: Array,
-    createdAt: { type: Date, default: Date.now }
-});
-
-// Define Article Schema for Tech News
-const articleSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
-    summary: String,
-    content: String,
-    category: String,
-    publishedDate: { type: Date, default: Date.now },
-    source: String,
-    originalLink: String,
-    createdAt: { type: Date, default: Date.now }
-});
-
-// Get Models
-const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
-const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
+console.log("AI Service Status:", genAI ? "INITIALIZED" : "DISABLED");
 
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
@@ -751,12 +906,12 @@ app.get('/api/solution/:questionId', async (req, res) => {
         // 1. Check MongoDB (Primary Persistent Storage)
         if (mongoose.connection.readyState === 1) {
             try {
+                // Try standard Solution model first (LeetCode)
                 const dbSolution = await Solution.findOne({ questionId });
                 if (dbSolution && dbSolution.approaches && dbSolution.approaches.length > 0) {
                     console.log(`Solution DB HIT for ${questionId}`);
                     const problemEntry = problemsDb.find(p => p.id === questionId);
                     
-                    // Fetch Video
                     const videos = await getOrFetchVideo(questionId);
                     const topVideo = videos.find(v => v.isMostAccurate) || videos[0];
 
@@ -766,8 +921,35 @@ app.get('/api/solution/:questionId', async (req, res) => {
                         video: topVideo,
                         source: 'database' 
                     });
-                } else if (dbSolution) {
-                    console.warn(`DB HIT for ${questionId} but data incomplete (empty approaches). Regenerating...`);
+                }
+
+                // 2. Try Universal System Fallback (Non-LeetCode)
+                const universalProblem = await UniversalProblem.findOne({ 
+                    $or: [{ questionId }, { slug: questionId }] 
+                }).populate('concept_id');
+
+                if (universalProblem && universalProblem.concept_id) {
+                    const explanation = await Explanation.findOne({ 
+                        concept_id: universalProblem.concept_id._id || universalProblem.concept_id 
+                    });
+
+                    if (explanation) {
+                        console.log(`Universal Solution DB HIT for ${questionId}`);
+                        return res.json({
+                            questionId: universalProblem.questionId || universalProblem.slug,
+                            title: universalProblem.title,
+                            difficulty: universalProblem.difficulty,
+                            topics: universalProblem.tags || [],
+                            platform: universalProblem.platform,
+                            url: universalProblem.url,
+                            problemStatement: explanation.analytical_overview,
+                            analyticalOverview: explanation.analytical_overview,
+                            examples: explanation.examples || [],
+                            complexityTable: explanation.complexity_table || [],
+                            approaches: explanation.approaches || [],
+                            source: 'universal_database'
+                        });
+                    }
                 }
             } catch (dbErr) {
                 console.error("DB Read Error:", dbErr);
@@ -821,59 +1003,114 @@ app.get('/api/solution/:questionId', async (req, res) => {
             return res.status(503).json({ error: "AI Service Unavailable (Key missing)" });
         }
 
-        console.log(`Generating Solution for ${questionId}...`);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        // Check if it's a structured platform (CodeChef, GFG, HackerRank)
+        // Match by title or ID (encoded as title/slug)
+        const structuredMatch = structuredQuestions.find(q => 
+            q.title.toLowerCase() === questionId.toLowerCase() || 
+            q.title.replace(/\s+/g, '-').toLowerCase() === questionId.toLowerCase()
+        );
+
+        const isStructuredPlatform = structuredMatch && ['codechef', 'geeksforgeeks', 'hackerrank'].includes(structuredMatch.platform);
+
+        console.log(`Generating Solution for ${questionId}... ${isStructuredPlatform ? '(Structured Data Found)' : '(Standard Generic)'}`);
         
-        const prompt = `
-        You are an expert DSA coding tutor. Generate a premium, concise solution guide for LeetCode question "${questionId}".
-        Follow the structure of a professional technical article similar to premium platforms like NeetCode or LeetCode Editorial.
+        let model;
+        try {
+            model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+        } catch (mErr) {
+            console.warn("Model gemini-3-flash-preview initialization failed, falling back to 1.5-flash");
+            model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+        }
+        
+        let prompt;
+        if (isStructuredPlatform) {
+            prompt = `
+            You are an expert DSA coding tutor. Read this structured problem record carefully:
+            ${JSON.stringify(structuredMatch, null, 2)}
 
-        Required JSON Structure:
-        {
-          "questionId": "${questionId}",
-          "title": "Problem Title",
-          "difficulty": "Easy, Medium, or Hard",
-          "topics": ["Topic", "Topic"],
-          "problemStatement": "Clear, concise problem description.",
+            Your Task:
+            Understand the problem from summary + input + output + constraints.
+            Generate a correct and optimized solution. Do not reliance only on title.
+            Do not hallucinate extra requirements. Respect input/output format strictly.
+            
+            Return ONLY a JSON object in this format:
+            {
+              "approach": "High-level optimization insight and breakthrough logic.",
+              "timeComplexity": "O(...)",
+              "spaceComplexity": "O(...)",
+              "code": "Clean, optimized JavaScript code with comments."
+            }
 
-          "approaches": [
-             {
-               "name": "Brute Force",
-               "concept": "1-2 sentence high-level idea.",
-               "steps": ["Step 1", "Step 2"],
-               "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
-             },
-             {
-               "name": "Better Approach",
-               "concept": "1-2 sentence optimization insight.",
-               "steps": ["Step 1", "Step 2"],
-               "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
-             },
-             {
-               "name": "Optimal Solution",
-               "concept": "1-2 sentence breakthrough logic.",
-               "steps": ["Step 1", "Step 2"],
-               "complexity": { "time": "O(...)", "space": "O(...)" },
-               "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
-             }
-          ]
+            If information is insufficient, respond: "INSUFFICIENT_PROBLEM_DETAILS"
+            `;
+        } else {
+            prompt = `
+            You are an expert DSA coding tutor. Generate a premium, concise solution guide for LeetCode question "${questionId}".
+            Follow the structure of a professional technical article similar to premium platforms like NeetCode or LeetCode Editorial.
+
+            Required JSON Structure:
+            {
+              "questionId": "${questionId}",
+              "title": "Problem Title",
+              "difficulty": "Easy, Medium, or Hard",
+              "topics": ["Topic", "Topic"],
+              "problemStatement": "Clear, concise problem description.",
+
+              "approaches": [
+                 {
+                   "name": "Brute Force",
+                   "concept": "1-2 sentence high-level idea.",
+                   "steps": ["Step 1", "Step 2"],
+                   "complexity": { "time": "O(...)", "space": "O(...)" },
+                   "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
+                 },
+                 {
+                   "name": "Better Approach",
+                   "concept": "1-2 sentence optimization insight.",
+                   "steps": ["Step 1", "Step 2"],
+                   "complexity": { "time": "O(...)", "space": "O(...)" },
+                   "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
+                 },
+                 {
+                   "name": "Optimal Solution",
+                   "concept": "1-2 sentence breakthrough logic.",
+                   "steps": ["Step 1", "Step 2"],
+                   "complexity": { "time": "O(...)", "space": "O(...)" },
+                   "codes": { "python": "...", "javascript": "...", "cpp": "...", "java": "..." }
+                 }
+              ]
+            }
+
+            Rules:
+            1. Return ONLY valid JSON.
+            2. Provide exactly these 3 approaches: "Brute Force", "Better Approach", and "Optimal Solution".
+            3. "complexity" fields (time, space) must ONLY contain Big O notation (e.g., "O(N)") with NO DESCRIPTIVE TEXT.
+            4. Tone: Professional, pedagogical, and concise. Avoid fluff.
+            `;
         }
 
-        Rules:
-        1. Return ONLY valid JSON.
-        2. Provide exactly these 3 approaches: "Brute Force", "Better Approach", and "Optimal Solution".
-        3. No "analyticalOverview" or "complexityTable" fields.
-        4. "complexity" fields (time, space) must ONLY contain Big O notation (e.g., "O(N)") with NO DESCRIPTIVE TEXT.
-        5. "concept" and "steps" should be punchy and clear.
-        6. Tone: Professional, pedagogical, and concise. Avoid fluff.
-        `;
+        let result;
+        try {
+            result = await model.generateContent(prompt);
+        } catch (genErr) {
+            console.error("AI Generation Error (Attempt 1):", genErr.message);
+            // Dynamic fallback if 2.0-flash isn't available in this region/project
+            if (genErr.message.includes('404') || genErr.message.includes('not found') || genErr.message.includes('503') || genErr.message.includes('400')) {
+                console.log("Switching to gemini-3-flash-preview fallback...");
+                const fallbackModel = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+                result = await fallbackModel.generateContent(prompt);
+            } else {
+                throw genErr;
+            }
+        }
 
-        const result = await model.generateContent(prompt);
         const response = await result.response;
         let text = response.text();
         text = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+        if (text === "INSUFFICIENT_PROBLEM_DETAILS" && isStructuredPlatform) {
+            return res.status(400).json({ error: "INSUFFICIENT_PROBLEM_DETAILS" });
+        }
 
         let jsonResponse;
         try {
@@ -883,23 +1120,51 @@ app.get('/api/solution/:questionId', async (req, res) => {
                 const JSON5 = require('json5'); 
                 jsonResponse = JSON5.parse(text);
             } catch (e2) {
+                 console.error("AI JSON Parse Error. Raw Text:", text.substring(0, 500));
                  return res.status(500).json({ error: "AI generated invalid JSON" });
             }
         }
+
+        // 4. Map Structured Response to Standard Schema
+        if (isStructuredPlatform) {
+            jsonResponse = {
+                questionId: questionId,
+                title: structuredMatch.title,
+                difficulty: structuredMatch.difficulty,
+                topics: structuredMatch.topics,
+                problemStatement: structuredMatch.summary,
+                approaches: [
+                    {
+                        name: "Optimal Solution",
+                        concept: jsonResponse.approach,
+                        steps: ["Analyze constraints", "Implement optimized logic", "Verify edge cases"],
+                        complexity: {
+                            time: jsonResponse.timeComplexity,
+                            space: jsonResponse.spaceComplexity
+                        },
+                        codes: {
+                            javascript: jsonResponse.code,
+                            python: "# Python version coming soon",
+                            cpp: "// C++ version coming soon",
+                            java: "// Java version coming soon"
+                        }
+                    }
+                ]
+            };
+        }
  
-        // 4. Save to MongoDB
+        // 5. Save to MongoDB
         let dbStatus = "skipped";
         if (jsonResponse && (jsonResponse.approaches || jsonResponse.solutions)) {
             // Save to DB
             try {
-                await Solution.create({
-                    questionId: questionId,
-                    ...jsonResponse
-                });
+                // Ensure questionId matches exactly the requested one for storage
+                if (!jsonResponse.questionId) jsonResponse.questionId = questionId;
+
+                await Solution.create(jsonResponse);
                 console.log(`Saved ${questionId} to MongoDB`);
                 dbStatus = "success";
             } catch (saveErr) {
-                // Ignore duplicate key error safely
                 if (saveErr.code === 11000) {
                     dbStatus = "duplicate_skipped";
                 } else {
@@ -915,15 +1180,16 @@ app.get('/api/solution/:questionId', async (req, res) => {
                 }
             } catch (e) {}
         } else {
+             console.error("Incomplete AI Data:", JSON.stringify(jsonResponse).substring(0, 200));
              return res.status(500).json({ error: "Incomplete AI Data" });
         }
 
         // 5. Enrich with slug and video
-        const problemEntry = problemsDb.find(p => p.id === questionId);
+        const problemEntry = problemsDb.find(p => String(p.id) === String(questionId));
         
         // Fetch Video
         const videos = await getOrFetchVideo(questionId);
-        const topVideo = videos.find(v => v.isMostAccurate) || videos[0];
+        const topVideo = videos.find(v => v.isMostAccurate) || (videos && videos.length > 0 ? videos[0] : null);
 
         const enrichedResponse = { 
             ...jsonResponse, 
@@ -935,11 +1201,13 @@ app.get('/api/solution/:questionId', async (req, res) => {
 
         return res.json(enrichedResponse);
 
-        return res.json({ ...jsonResponse, source: 'ai_generated' });
-
     } catch (err) {
         console.error("Solution API Error:", err);
-        return res.status(500).json({ error: "Server Error", details: err.message });
+        return res.status(500).json({ 
+            error: "Server Error", 
+            details: err.message,
+            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined 
+        });
     }
 });
 
@@ -972,11 +1240,19 @@ app.get('/api/company/:name/questions', async (req, res) => {
             try {
                 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_keep_it_safe';
                 const decoded = jwt.verify(token, JWT_SECRET);
-                const purchase = await Purchase.findOne({
-                    userId: decoded.id, // Corrected from 'userId' to 'id'
-                    companies: name
-                });
-                if (purchase) hasAccess = true;
+                
+                // 1. Check for active subscription first
+                const user = await User.findById(decoded.id);
+                if (user && user.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date()) {
+                    hasAccess = true;
+                } else {
+                    // 2. Fallback to individual company purchase
+                    const purchase = await Purchase.findOne({
+                        userId: decoded.id,
+                        companies: name
+                    });
+                    if (purchase) hasAccess = true;
+                }
             } catch (err) {
                 // Token invalid or expired, proceed as guest
             }
@@ -1387,7 +1663,7 @@ async function getOrGenerateConcept(title, platform = null, url = null) {
 
     if (!concept) {
         if (!genAI) throw new Error("AI Service Unavailable (genAI is null)");
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a premium, concise solution guide for the coding problem titled: "${title}" from platform: "${platform || 'General'}".
@@ -1714,14 +1990,22 @@ app.get('/api/universal-problems', async (req, res) => {
         
         const problems = await UniversalProblem.find(query)
             .populate('concept_id')
-            .sort({ last_seen_at: -1 }) // Ensure consistent sort order
+            .sort({ last_seen_at: -1 })
             .skip(skip)
             .limit(parseInt(limit));
             
         const total = await UniversalProblem.countDocuments(query);
 
+        const problemsWithStatus = await Promise.all(problems.map(async (p) => {
+            const hasSolution = p.concept_id ? await Explanation.exists({ concept_id: p.concept_id }) : false;
+            return {
+                ...p.toObject(),
+                hasSolution: !!hasSolution
+            };
+        }));
+
         res.json({
-            problems,
+            problems: problemsWithStatus,
             total,
             page: parseInt(page),
             pages: Math.ceil(total / limit)

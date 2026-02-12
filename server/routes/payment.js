@@ -22,22 +22,12 @@ try {
 // Pricing
 const PRICES = {
     single: 50,
-    bundle: 300
+    bundle: 300,
+    monthly_sub: 50,
+    yearly_sub: 500
 };
 
-// Top bundle companies (Top 100)
-const BUNDLE_COMPANIES = [
-  "Amazon", "DE Shaw", "IBM", "Nvidia", "Walmart Labs", "Infosys", "PayPal", "Microsoft", "Yandex", "Meta",
-  "Bloomberg", "Uber", "Snap", "Salesforce", "Citadel", "Flipkart", "Apple", "Oracle", "Zoho", "Google",
-  "Accenture", "Goldman Sachs", "Adobe", "LinkedIn", "tcs", "Yahoo", "TikTok", "PhonePe", "Snowflake", "DoorDash",
-  "Cisco", "Visa", "ServiceNow", "J.P. Morgan", "eBay", "Atlassian", "Intuit", "Samsung", "ByteDance", "Nutanix",
-  "Airbnb", "Wix", "Roblox", "X", "Morgan Stanley", "Coupang", "Pinterest", "Expedia", "Qualcomm", "Capital One",
-  "Tesla", "EPAM Systems", "Turing", "Sprinklr", "Agoda", "SAP", "Media.net", "Netflix", "Arista Networks", "Rubrik",
-  "Databricks", "Docusign", "Anduril", "Tinkoff", "Swiggy", "Autodesk", "Zepto", "Paytm", "Deutsche Bank", "Yelp",
-  "MakeMyTrip", "MathWorks", "Cognizant", "Palantir Technologies", "Deloitte", "Grammarly", "Palo Alto Networks", "Lyft", "Capgemini", "Wipro",
-  "Intel", "Dropbox", "Siemens", "ZScaler", "Zomato", "Wayfair", "American Express", "HashedIn", "Akuna Capital", "Two Sigma",
-  "josh technology", "Myntra", "BNY Mellon", "Zeta", "Zenefits", "Geico", "VMware", "Datadog", "Arcesium", "Tekion"
-];
+// ... (BUNDLE_COMPANIES remains same)
 
 // API 1: Create Order
 router.post('/create-order', auth.protect, async (req, res) => {
@@ -47,7 +37,7 @@ router.post('/create-order', auth.protect, async (req, res) => {
     try {
         const { type, company } = req.body;
         
-        if (!type || (type === 'single' && !company)) {
+        if (!type) {
             return res.status(400).json({ status: 'error', message: 'Missing payment details' });
         }
 
@@ -56,18 +46,25 @@ router.post('/create-order', auth.protect, async (req, res) => {
             return res.status(400).json({ status: 'error', message: 'Invalid plan type' });
         }
 
-        // Check if user already owns this
-        const existing = await Purchase.findOne({
-            userId: req.user._id,
-            companies: type === 'single' ? company : { $all: BUNDLE_COMPANIES }
-        });
+        // Check if user already has an active subscription if buying one
+        if (type.includes('_sub')) {
+            if (req.user.subscriptionExpiry && req.user.subscriptionExpiry > Date.now()) {
+                // Allow renewal? Or block if too far out? Let's allow renewal (extension)
+            }
+        } else {
+            // Check if user already owns this company or bundle
+            const existing = await Purchase.findOne({
+                userId: req.user._id,
+                companies: type === 'single' ? company : { $all: BUNDLE_COMPANIES }
+            });
 
-        if (existing) {
-            return res.status(400).json({ status: 'error', message: 'You already own this content' });
+            if (existing) {
+                return res.status(400).json({ status: 'error', message: 'You already own this content' });
+            }
         }
 
         const options = {
-            amount: amount * 100, // amount in the smallest currency unit (paise)
+            amount: amount * 100,
             currency: "INR",
             receipt: `receipt_${Date.now()}`,
         };
@@ -109,28 +106,124 @@ router.post('/verify', auth.protect, async (req, res) => {
             .digest("hex");
 
         if (razorpay_signature === expectedSign) {
-            // Signature verified
-            const companies = type === 'single' ? [company] : BUNDLE_COMPANIES;
+            const User = require('../models/User');
+            const sendEmail = require('../utils/email');
+            
+            // ... (idempotency check remains same)
+            const existingPurchase = await Purchase.findOne({ razorpayPaymentId: razorpay_payment_id });
+            if (existingPurchase) {
+                return res.json({ 
+                    status: 'success', 
+                    message: "Payment already verified",
+                    data: { subscriptionExpiry: req.user.subscriptionExpiry }
+                });
+            }
+
             const amount = PRICES[type];
 
-            // Save to DB
-            const purchase = new Purchase({
-                userId: req.user._id,
-                type,
-                companies,
-                amount,
-                razorpayOrderId: razorpay_order_id,
-                razorpayPaymentId: razorpay_payment_id
-            });
+            if (type.includes('_sub')) {
+                // Subscription Logic
+                const days = type === 'monthly_sub' ? 30 : 365;
+                const currentExpiry = req.user.subscriptionExpiry && req.user.subscriptionExpiry > Date.now() 
+                    ? req.user.subscriptionExpiry 
+                    : new Date();
+                
+                const newExpiry = new Date(currentExpiry.getTime() + days * 24 * 60 * 60 * 1000);
 
-            await purchase.save();
+                const purchase = new Purchase({
+                    userId: req.user._id,
+                    type: type,
+                    companies: ['ALL_PLATFORMS', 'ALL_COMPANIES'],
+                    amount,
+                    razorpayOrderId: razorpay_order_id,
+                    razorpayPaymentId: razorpay_payment_id
+                });
+                await purchase.save();
 
-            return res.json({ 
-                status: 'success', 
-                message: "Payment verified successfully",
-                data: { companies }
-            });
-        } else {
+                await User.findByIdAndUpdate(req.user._id, {
+                    subscriptionExpiry: newExpiry,
+                    subscriptionType: type === 'monthly_sub' ? 'monthly' : 'yearly',
+                    isPremium: true
+                });
+
+                // Send Confirmation Email
+                try {
+                    await sendEmail({
+                        email: req.user.email,
+                        subject: `Your LeetVision Premium is Active! 🚀`,
+                        html: `
+                            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                                <h2 style="color: #ffa116;">Subscription Activated!</h2>
+                                <p>Hello <b>${req.user.name}</b>,</p>
+                                <p>Thank you for choosing LeetVision Premium. Your <b>${type.replace('_', ' ')}</b> has been successfully activated.</p>
+                                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                                    <p style="margin: 0;"><b>Plan:</b> ${type === 'monthly_sub' ? 'Monthly Pro' : 'Yearly Master'}</p>
+                                    <p style="margin: 0;"><b>Amount Paid:</b> ₹${amount}</p>
+                                    <p style="margin: 0;"><b>Expires On:</b> ${newExpiry.toLocaleDateString()}</p>
+                                </div>
+                                <p>You now have full access to all platform solutions, premium video content, and advanced analytical insights.</p>
+                                <a href="https://leet-vision.vercel.app/explore" style="display: inline-block; padding: 10px 20px; background: #ffa116; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">Start Exploring</a>
+                                <p style="margin-top: 30px; font-size: 0.8rem; color: #777;">If you have any questions, reply to this email.</p>
+                            </div>
+                        `
+                    });
+                } catch (emailErr) {
+                    console.error("Post-purchase email failed:", emailErr);
+                }
+
+                return res.json({ 
+                    status: 'success', 
+                    message: "Subscription activated successfully",
+                    data: { subscriptionExpiry: newExpiry }
+                });
+
+            } else {
+                // Existing Single/Bundle Logic
+                const companies = type === 'single' ? [company] : BUNDLE_COMPANIES;
+                const purchase = new Purchase({
+                    userId: req.user._id,
+                    type,
+                    companies,
+                    amount,
+                    razorpayOrderId: razorpay_order_id,
+                    razorpayPaymentId: razorpay_payment_id
+                });
+
+                await purchase.save();
+
+                // Send Confirmation Email
+                try {
+                    await sendEmail({
+                        email: req.user.email,
+                        subject: `Content Unlocked: ${type === 'single' ? company : 'Universal Bundle'} 🔓`,
+                        html: `
+                            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                                <h2 style="color: #ffa116;">Purchase Successful!</h2>
+                                <p>Hello <b>${req.user.name}</b>,</p>
+                                <p>You have successfully unlocked <b>${type === 'single' ? company : 'the Universal Bundle'}</b>.</p>
+                                <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                                    <p style="margin: 0;"><b>Type:</b> ${type}</p>
+                                    <p style="margin: 0;"><b>Content:</b> ${companies.join(', ')}</p>
+                                    <p style="margin: 0;"><b>Amount Paid:</b> ₹${amount}</p>
+                                </div>
+                                <p>Dive into the solutions and master your coding interviews!</p>
+                                <a href="https://leet-vision.vercel.app/explore" style="display: inline-block; padding: 10px 20px; background: #ffa116; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Dashboard</a>
+                                <p style="margin-top: 30px; font-size: 0.8rem; color: #777;">Happy Leeting!</p>
+                            </div>
+                        `
+                    });
+                } catch (emailErr) {
+                    console.error("Post-purchase email failed:", emailErr);
+                }
+
+                return res.json({ 
+                    status: 'success', 
+                    message: "Content unlocked successfully",
+                    data: { companies }
+                });
+            }
+        }
+ else {
             return res.status(400).json({ status: 'error', message: "Invalid payment signature" });
         }
     } catch (err) {

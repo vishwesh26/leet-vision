@@ -83,6 +83,7 @@ body {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 1.2rem; /* Reduced from 2rem */
   list-style: none;
   margin: 0;
@@ -542,6 +543,12 @@ h1.hero-title span {
 
 /* Solution Button inside Table */
 .btn-solution {
+    --accent-orange: #f57c00;
+    --accent-pink: #d946ef;
+    --accent-purple: #a855f7;
+    --bg-black: #050505;
+    --glass-white: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -1387,3 +1394,414 @@ so they inherit default .video-card styles
     color: white;
 }
 
+/* Premium Loader Styles */
+.premium-loader-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #080808;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    padding: 2rem;
+    text-align: center;
+}
+
+.brain-pulse-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.brain-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--accent-orange) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: pulse-glow 2s ease-in-out infinite;
+    filter: blur(15px);
+}
+
+.brain-icon-premium {
+    font-size: 4rem;
+    color: var(--accent-orange);
+    z-index: 2;
+    filter: drop-shadow(0 0 15px rgba(245, 124, 0, 0.4));
+    animation: float-brain 3s ease-in-out infinite;
+}
+
+.loading-status-container {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-title-premium {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
+}
+
+.loading-msg-premium {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+    animation: fade-in-out 4s infinite;
+    min-height: 1.2em;
+}
+
+.loading-progress-bar {
+    width: 200px;
+    height: 2px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    margin-top: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: var(--accent-orange);
+    box-shadow: 0 0 10px var(--accent-orange);
+    animation: slide-progress 2s linear infinite;
+    border-radius: 10px;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(0.8); opacity: 0.15; }
+    50% { transform: scale(1.2); opacity: 0.4; }
+}
+
+@keyframes float-brain {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes slide-progress {
+    0% { left: -30%; }
+    100% { left: 100%; }
+}
+
+@keyframes fade-in-out {
+    0%, 100% { opacity: 0; transform: translateY(5px); }
+    20%, 80% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- Landing Page Redesign Styles --- */
+.landing-v2 {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.grid-bg {
+  background-size: 50px 50px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.text-editorial {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.text-cursive {
+  font-family: 'Caveat', cursive;
+  color: var(--accent-orange);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 55%
+  );
+  animation: shimmerAnim 3s infinite;
+}
+
+@keyframes shimmerAnim {
+  0% { transform: translate(-30%, 30%); }
+  100% { transform: translate(30%, -30%); }
+}
+
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+  display: inline-flex;
+  gap: 4rem;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+.hero-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245, 124, 0, 0.15) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.rotate-3d {
+  transform: rotateX(10deg) rotateY(-10deg);
+  transition: transform 0.5s ease;
+}
+
+.rotate-3d:hover {
+  transform: rotateX(0deg) rotateY(0deg);
+}
+
+.deep-shadow {
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 18px 36px -18px rgba(0, 0, 0, 0.5);
+}
+
+.floating-hero-image {
+  animation: floatHero 8s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+}
+
+@keyframes floatHero {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-30px) rotate(2deg); }
+  66% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+.glass-card-3d {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.glass-card-3d:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(245, 124, 0, 0.3);
+}
+
+/* Premium CTA Enhancements */
+.premium-cta-card {
+    position: relative;
+    background: #050505 !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    overflow: hidden;
+}
+
+.premium-mesh {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 0% 0%, rgba(245, 124, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 100% 0%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(245, 124, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+    opacity: 0.6;
+    z-index: 0;
+    animation: mesh-float 20s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-float {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.2) rotate(2deg); }
+}
+
+.border-beam {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.border-beam::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+    background-size: 200% 100%;
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    padding: 1px;
+    animation: beam-travel 4s linear infinite;
+}
+
+@keyframes beam-travel {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.premium-gold-text {
+    background: linear-gradient(to bottom, #fff 20%, var(--accent-orange) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(245, 124, 0, 0.3));
+    letter-spacing: -4px;
+}
+
+.premium-button {
+    background: linear-gradient(180deg, #fff 0%, #ddd 100%);
+    color: #000 !important;
+    padding: 0.8rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.premium-button:hover {
+    background: #fff;
+}
+
+.premium-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Platform Marquee Styles */
+.platform-marquee-section {
+    padding: 6rem 0;
+    background: rgba(255, 255, 255, 0.01);
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.platform-badge {
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.2rem 3rem;
+    border-radius: 16px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #000000;
+    white-space: nowrap;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.platform-badge svg {
+    font-size: 2rem;
+}
+
+.platform-badge:hover {
+    transform: translateY(-8px) scale(1.05);
+    background: #ffffff;
+    box-shadow: 0 20px 60px rgba(245, 124, 0, 0.4);
+}
+
+.platform-marquee-content {
+    display: flex;
+    gap: 3rem;
+    animation: platform-marquee 30s linear infinite;
+    width: max-content;
+}
+
+@keyframes platform-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Navbar Premium Button Enhancements */
+.nav-premium-btn {
+  background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
+  color: white !important;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 4px 15px rgba(245, 124, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-premium-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 124, 0, 0.5);
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  filter: brightness(1.1);
+}
+
+/* Floating Crown Styles is now handled inline in LandingPage.jsx for better control */

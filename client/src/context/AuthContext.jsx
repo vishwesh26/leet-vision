@@ -54,12 +54,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Sign Up
-    const signup = async (name, email, password) => {
+    const signup = async (name, email, password, otp) => {
         setLoading(true);
         setError(null);
         try {
             const response = await axios.post(`${API_BASE}/api/auth/signup`,
-                { name, email, password },
+                { name, email, password, otp },
                 { withCredentials: true }
             );
 
@@ -111,12 +111,31 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Send OTP
+    const sendOtp = async (email) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await axios.post(`${API_BASE}/api/auth/send-otp`, { email });
+            if (response.data.status === 'success') {
+                return { success: true };
+            }
+        } catch (err) {
+            const message = err.response?.data?.message || 'Failed to send verification code';
+            setError(message);
+            return { success: false, message };
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const value = {
         user,
         loading,
         error,
         login,
         signup,
+        sendOtp,
         logout,
         refreshUser
     };

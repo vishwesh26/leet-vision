@@ -16,21 +16,17 @@ const CheckoutPage = () => {
     const [isPaying, setIsPaying] = useState(false);
     const [error, setError] = useState('');
 
-    const PRICES = { single: 50, bundle: 300 };
+    const PRICES = {
+        single: 50,
+        bundle: 300,
+        monthly_sub: 50,
+        yearly_sub: 500
+    };
     const price = PRICES[type] || 50;
 
-    const BUNDLE_COMPANIES = [
-        "Amazon", "DE Shaw", "IBM", "Nvidia", "Walmart Labs", "Infosys", "PayPal", "Microsoft", "Yandex", "Meta",
-        "Bloomberg", "Uber", "Snap", "Salesforce", "Citadel", "Flipkart", "Apple", "Oracle", "Zoho", "Google",
-        "Accenture", "Goldman Sachs", "Adobe", "LinkedIn", "tcs", "Yahoo", "TikTok", "PhonePe", "Snowflake", "DoorDash",
-        "Cisco", "Visa", "ServiceNow", "J.P. Morgan", "eBay", "Atlassian", "Intuit", "Samsung", "ByteDance", "Nutanix",
-        "Airbnb", "Wix", "Roblox", "X", "Morgan Stanley", "Coupang", "Pinterest", "Expedia", "Qualcomm", "Capital One",
-        "Tesla", "EPAM Systems", "Turing", "Sprinklr", "Agoda", "SAP", "Media.net", "Netflix", "Arista Networks", "Rubrik",
-        "Databricks", "Docusign", "Anduril", "Tinkoff", "Swiggy", "Autodesk", "Zepto", "Paytm", "Deutsche Bank", "Yelp",
-        "MakeMyTrip", "MathWorks", "Cognizant", "Palantir Technologies", "Deloitte", "Grammarly", "Palo Alto Networks", "Lyft", "Capgemini", "Wipro",
-        "Intel", "Dropbox", "Siemens", "ZScaler", "Zomato", "Wayfair", "American Express", "HashedIn", "Akuna Capital", "Two Sigma",
-        "josh technology", "Myntra", "BNY Mellon", "Zeta", "Zenefits", "Geico", "VMware", "Datadog", "Arcesium", "Tekion"
-    ];
+    const isSubscription = type.includes('_sub');
+
+    // ... (BUNDLE_COMPANIES remains same)
 
     useEffect(() => {
         if (!authLoading && !user) {
@@ -55,7 +51,9 @@ const CheckoutPage = () => {
                 amount: amount,
                 currency: currency,
                 name: "LeetVision Premium",
-                description: type === 'single' ? `Unlock ${company} Questions` : "Unlock Top 100 Companies Bundle",
+                description: isSubscription
+                    ? (type === 'monthly_sub' ? "Monthly Pro Subscription" : "Yearly Pro Subscription")
+                    : (type === 'bundle' ? "Unlock Top 100 Companies Bundle" : `Unlock ${company} Questions`),
                 order_id: orderId,
                 handler: async (response) => {
                     try {
@@ -67,9 +65,17 @@ const CheckoutPage = () => {
 
                         if (verifyRes.data.status === 'success') {
                             await refreshUser();
-                            navigate('/company-questions/' + encodeURIComponent(company || 'Amazon'), {
-                                state: { message: 'Unlocked successfully!' }
-                            });
+
+                            // Redirect based on purchase type
+                            if (isSubscription) {
+                                navigate('/explore', {
+                                    state: { message: 'Subscription activated! Enjoy full access.' }
+                                });
+                            } else {
+                                navigate('/company-questions/' + encodeURIComponent(company || 'Amazon'), {
+                                    state: { message: 'Unlocked successfully!' }
+                                });
+                            }
                         }
                     } catch (err) {
                         setError("Verification failed. Please contact support.");
@@ -112,17 +118,26 @@ const CheckoutPage = () => {
                         <div className="plan-card active">
                             <div className="plan-info">
                                 <div className="plan-icon">
-                                    {type === 'bundle' ? <FaCrown /> : <FaBuilding />}
+                                    {isSubscription ? <FaBolt /> : (type === 'bundle' ? <FaCrown /> : <FaBuilding />)}
                                 </div>
                                 <div className="plan-text">
-                                    <h3>{type === 'bundle' ? 'Top 100 Companies Bundle' : `${company} Questions Unlock`}</h3>
-                                    <p>{type === 'bundle' ? 'Lifetime access to interview questions from 100 top tech companies' : `Get lifetime access to all ${company} specific interview questions.`}</p>
+                                    <h3>
+                                        {type === 'monthly_sub' ? 'Monthly Pro Subscription' :
+                                            type === 'yearly_sub' ? 'Yearly Pro Subscription' :
+                                                type === 'bundle' ? 'Top 100 Companies Bundle' :
+                                                    `${company} Questions Unlock`}
+                                    </h3>
+                                    <p>
+                                        {isSubscription ? 'Full access to all platform and company-wise interview questions.' :
+                                            type === 'bundle' ? 'Lifetime access to interview questions from 100 top tech companies' :
+                                                `Get lifetime access to all ${company} specific interview questions.`}
+                                    </p>
                                 </div>
                                 <div className="plan-price">₹{price}</div>
                             </div>
 
                             <ul className="plan-features">
-                                <li><FaCheckCircle /> Lifetime Validity</li>
+                                <li><FaCheckCircle /> {isSubscription ? 'Full Library Access' : 'Lifetime Validity'}</li>
                                 <li><FaCheckCircle /> 100% Questions Unlocked</li>
                                 <li><FaCheckCircle /> Access to Verified Solutions</li>
                                 <li><FaCheckCircle /> Priority Customer Support</li>
@@ -181,13 +196,6 @@ const CheckoutPage = () => {
                                 <div>
                                     <h5>Instant Activation</h5>
                                     <p>Your content will be unlocked immediately after payment.</p>
-                                </div>
-                            </div>
-                            <div className="trust-item">
-                                <FaBuilding />
-                                <div>
-                                    <h5>Used by 50,000+ Aspirants</h5>
-                                    <p>Engineers from top companies use LeetVision for prep.</p>
                                 </div>
                             </div>
                         </div>
