@@ -354,23 +354,22 @@ app.get('/api/logo/:domain', async (req, res) => {
 
 // Load problems database (Using require for Vercel bundling compatibility)
 let problemsDb = [];
-let structuredQuestions = []; // Initialize structuredQuestions
+let structuredQuestions = []; 
 try {
     // Vercel handles require() better than fs.readFileSync for static assets
     problemsDb = require('./data/problems.json');
     console.log(`Loaded ${problemsDb.length} problems from problems.json`);
     
     // Load structured questions for CodeChef, GFG, HackerRank
-    const questionsPath = path.join(__dirname, '..', 'questions.json');
-    if (fs.existsSync(questionsPath)) {
-        structuredQuestions = JSON.parse(fs.readFileSync(questionsPath, 'utf8'));
+    try {
+        structuredQuestions = require('./data/questions.json');
         console.log(`Loaded ${structuredQuestions.length} structured questions from questions.json`);
-    } else {
-        console.warn('questions.json not found at expected path:', questionsPath);
+    } catch (qErr) {
+        console.warn('questions.json not found in server/data/, fallback to empty');
+        structuredQuestions = [];
     }
 } catch (err) {
     console.error('Error loading problem database or structured questions:', err);
-    // Fallback or empty
     problemsDb = [];
     structuredQuestions = [];
 }
@@ -1018,8 +1017,13 @@ app.get('/api/solution/:questionId', async (req, res) => {
         try {
             model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
         } catch (mErr) {
-            console.warn("Model gemini-3-flash-preview initialization failed, falling back to 1.5-flash");
-            model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+            console.warn("Model gemini-3-flash-preview initialization failed, falling back to 2.0-flash");
+            try {
+                model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+            } catch (mErr2) {
+                console.warn("Model gemini-2.0-flash initialization failed, falling back to 1.5-flash");
+                model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            }
         }
         
         let prompt;
@@ -1094,14 +1098,23 @@ app.get('/api/solution/:questionId', async (req, res) => {
             result = await model.generateContent(prompt);
         } catch (genErr) {
             console.error("AI Generation Error (Attempt 1):", genErr.message);
-            // Dynamic fallback if 2.0-flash isn't available in this region/project
-            if (genErr.message.includes('404') || genErr.message.includes('not found') || genErr.message.includes('503') || genErr.message.includes('400')) {
-                console.log("Switching to gemini-3-flash-preview fallback...");
-                const fallbackModel = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
-                result = await fallbackModel.generateContent(prompt);
-            } else {
-                throw genErr;
+            // Dynamic fallback chain: 3-flash-preview -> 2.0-flash -> 1.5-flash
+            const fallbackModels = ["gemini-2.0-flash", "gemini-1.5-flash"];
+            let success = false;
+            
+            for (const fallbackName of fallbackModels) {
+                try {
+                    console.log(`Switching to ${fallbackName} fallback...`);
+                    const fallbackModel = genAI.getGenerativeModel({ model: fallbackName });
+                    result = await fallbackModel.generateContent(prompt);
+                    success = true;
+                    break;
+                } catch (fallbackErr) {
+                    console.error(`${fallbackName} fallback failed:`, fallbackErr.message);
+                }
             }
+            
+            if (!success) throw genErr;
         }
 
         const response = await result.response;
@@ -1663,7 +1676,16 @@ async function getOrGenerateConcept(title, platform = null, url = null) {
 
     if (!concept) {
         if (!genAI) throw new Error("AI Service Unavailable (genAI is null)");
-        const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+        let model;
+        try {
+            model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+        } catch (e) {
+            try {
+                model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+            } catch (e2) {
+                model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            }
+        }
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a premium, concise solution guide for the coding problem titled: "${title}" from platform: "${platform || 'General'}".
