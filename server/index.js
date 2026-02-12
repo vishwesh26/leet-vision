@@ -1017,13 +1017,8 @@ app.get('/api/solution/:questionId', async (req, res) => {
         try {
             model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
         } catch (mErr) {
-            console.warn("Model gemini-3-flash-preview initialization failed, falling back to 2.0-flash");
-            try {
-                model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-            } catch (mErr2) {
-                console.warn("Model gemini-2.0-flash initialization failed, falling back to 1.5-flash");
-                model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-            }
+            console.warn("Model gemini-3-flash-preview initialization failed");
+            model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
         }
         
         let prompt;
@@ -1097,24 +1092,8 @@ app.get('/api/solution/:questionId', async (req, res) => {
         try {
             result = await model.generateContent(prompt);
         } catch (genErr) {
-            console.error("AI Generation Error (Attempt 1):", genErr.message);
-            // Dynamic fallback chain: 3-flash-preview -> 2.0-flash -> 1.5-flash
-            const fallbackModels = ["gemini-2.0-flash", "gemini-1.5-flash"];
-            let success = false;
-            
-            for (const fallbackName of fallbackModels) {
-                try {
-                    console.log(`Switching to ${fallbackName} fallback...`);
-                    const fallbackModel = genAI.getGenerativeModel({ model: fallbackName });
-                    result = await fallbackModel.generateContent(prompt);
-                    success = true;
-                    break;
-                } catch (fallbackErr) {
-                    console.error(`${fallbackName} fallback failed:`, fallbackErr.message);
-                }
-            }
-            
-            if (!success) throw genErr;
+            console.error("AI Generation Error:", genErr.message);
+            throw genErr;
         }
 
         const response = await result.response;
@@ -1676,16 +1655,7 @@ async function getOrGenerateConcept(title, platform = null, url = null) {
 
     if (!concept) {
         if (!genAI) throw new Error("AI Service Unavailable (genAI is null)");
-        let model;
-        try {
-            model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
-        } catch (e) {
-            try {
-                model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-            } catch (e2) {
-                model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-            }
-        }
+        const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
         
         const prompt = `
         You are an expert DSA coding tutor. Generate a premium, concise solution guide for the coding problem titled: "${title}" from platform: "${platform || 'General'}".
