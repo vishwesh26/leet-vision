@@ -1599,6 +1599,23 @@ so they inherit default .video-card styles
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .hero-main-title {
+    font-size: 3.5rem !important; /* Reduced from 5rem */
+    line-height: 0.9 !important;
+  }
+  
+  .hero-cta-btn {
+    padding: 10px 20px !important; /* Smaller on mobile */
+    font-size: 0.9rem !important;
+    gap: 10px !important;
+  }
+  
+  .hero-cta-btn.secondary {
+    padding: 10px 20px !important;
+  }
+}
+
 .perspective-1000 {
   perspective: 1000px;
 }

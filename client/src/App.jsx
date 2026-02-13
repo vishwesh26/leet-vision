@@ -29,7 +29,6 @@ import BlogPost from './components/BlogPost';
 import DailyTechPage from './components/DailyTechPage';
 import CompanyListingPage from './components/CompanyListingPage';
 import CompanyDetailPage from './components/CompanyDetailPage';
-import SurveyAnalytics from './components/SurveyAnalytics';
 import ConceptPage from './components/ConceptPage';
 import UniversalExplore from './components/UniversalExplore';
 
@@ -376,7 +375,6 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/terms" element={<Terms />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/admin/reports" element={<AdminReports />} />
-          <Route path="/admin/survey" element={<SurveyAnalytics />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:id" element={<BlogPost />} />

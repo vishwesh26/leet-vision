@@ -5,164 +5,12 @@ import { SiLeetcode, SiHackerrank, SiGeeksforgeeks, SiCodechef } from 'react-ico
 import axios from 'axios';
 import SEO from './SEO';
 
-const SurveyModal = ({ isOpen, onClose }) => {
-    const [step, setStep] = useState(1);
-    const [response, setResponse] = useState('');
-    const [price, setPrice] = useState('');
-    const [customPrice, setCustomPrice] = useState('');
-    const [showCustomInput, setShowCustomInput] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
-    const handleResponse = (val) => {
-        setResponse(val);
-        if (val === 'Yes' || val === 'Maybe') {
-            setStep(2);
-        } else {
-            submitSurvey(val, "N/A");
-        }
-    };
-
-    const submitSurvey = async (resVal, priceVal) => {
-        setIsSubmitting(true);
-        try {
-            const API_BASE = import.meta.env.VITE_API_URL || '';
-            await axios.post(`${API_BASE}/api/survey`, {
-                response: resVal,
-                pricePoint: priceVal
-            });
-            localStorage.setItem('leetvision_survey_completed', 'true');
-            setIsSubmitted(true);
-            setTimeout(() => onClose(), 2000);
-        } catch (err) {
-            console.error("Survey failed:", err);
-            if (err.response && err.response.status === 429) {
-                localStorage.setItem('leetvision_survey_completed', 'true');
-                setIsSubmitted(true);
-                setTimeout(() => onClose(), 2000);
-            } else {
-                onClose();
-            }
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    if (!isOpen) return null;
-
-    return (
-        <div style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '20px',
-            background: 'rgba(0,0,0,0.8)',
-            backdropFilter: 'blur(8px)'
-        }}>
-            <div style={{
-                background: '#111',
-                border: '1px solid #333',
-                borderRadius: '24px',
-                padding: '2.5rem',
-                maxWidth: '450px',
-                width: '100%',
-                position: 'relative',
-                boxShadow: '0 25px 50px -12px rgba(255, 161, 22, 0.2)',
-                textAlign: 'center'
-            }}>
-                <button
-                    onClick={onClose}
-                    style={{
-                        position: 'absolute',
-                        top: '20px',
-                        right: '20px',
-                        background: 'transparent',
-                        border: 'none',
-                        color: '#555',
-                        cursor: 'pointer'
-                    }}
-                >
-                    <FaTimes />
-                </button>
-
-                {isSubmitted ? (
-                    <div style={{ padding: '20px 0' }}>
-                        <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>Thank You!</h3>
-                        <p style={{ color: '#888' }}>Your feedback helps us build a better LeetVision.</p>
-                    </div>
-                ) : (
-                    <>
-                        {step === 1 ? (
-                            <>
-                                <h3 style={{ fontSize: '1.5rem', lineHeight: '1.3', marginBottom: '1.5rem' }}>
-                                    Would you pay for Top 100 companies interview question bundles?
-                                </h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                    {['Yes', 'Maybe', 'No'].map(opt => (
-                                        <button
-                                            key={opt}
-                                            onClick={() => handleResponse(opt)}
-                                            style={{
-                                                padding: '14px',
-                                                borderRadius: '12px',
-                                                border: '1px solid #222',
-                                                background: '#181818',
-                                                color: 'white',
-                                                fontWeight: '500',
-                                                cursor: 'pointer'
-                                            }}
-                                        >
-                                            {opt}
-                                        </button>
-                                    ))}
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <h3 style={{ fontSize: '1.5rem', lineHeight: '1.3', marginBottom: '1.5rem' }}>
-                                    What's a fair price for a one-time bundle?
-                                </h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                    {['₹149', '₹199', '₹299', 'Other'].map(opt => (
-                                        <button
-                                            key={opt}
-                                            onClick={() => submitSurvey(response, opt)}
-                                            style={{
-                                                padding: '14px',
-                                                borderRadius: '12px',
-                                                border: '1px solid #222',
-                                                background: '#181818',
-                                                color: 'white',
-                                                fontWeight: '500',
-                                                cursor: 'pointer'
-                                            }}
-                                        >
-                                            {opt}
-                                        </button>
-                                    ))}
-                                </div>
-                            </>
-                        )}
-                    </>
-                )}
-            </div>
-        </div>
-    );
-};
 
 const LandingPage = () => {
     const navigate = useNavigate();
     const [showNote, setShowNote] = useState(true);
-    const [showSurvey, setShowSurvey] = useState(false);
-
     useEffect(() => {
-        const isSurveyDone = localStorage.getItem('leetvision_survey_completed');
-        if (!isSurveyDone) {
-            setShowSurvey(true);
-        }
+        // Survey removed
     }, []);
 
     const platforms = [
@@ -174,7 +22,6 @@ const LandingPage = () => {
 
     return (
         <div className="landing-v2" style={{ position: 'relative', overflowX: 'hidden' }}>
-            <SurveyModal isOpen={showSurvey} onClose={() => setShowSurvey(false)} />
             <SEO title="LeetVision - Visual Coding Preparation Platform" description="Master Data Structures and Algorithms with curated video solutions, company-specific plans, and progress tracking." path="/" />
 
             {/* Premium Background */}
@@ -244,8 +91,8 @@ const LandingPage = () => {
                     {/* Hero Text Content - Centered */}
                     <div style={{ flex: '1', minWidth: '300px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-                        <h1 className="text-editorial" style={{
-                            fontSize: 'clamp(3.5rem, 8vw, 7.5rem)',
+                        <h1 className="text-editorial hero-main-title" style={{
+                            fontSize: 'clamp(3rem, 12vw, 7.5rem)',
                             marginBottom: '3rem',
                             fontWeight: '800',
                             color: 'white',
@@ -259,7 +106,7 @@ const LandingPage = () => {
 
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', flexDirection: 'column' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                                <div className="glass-pill"
+                                <div className="glass-pill hero-cta-btn"
                                     style={{
                                         display: 'flex',
                                         alignItems: 'center',
@@ -337,6 +184,7 @@ const LandingPage = () => {
                                     </div>
                                 </div>
                                 <button
+                                    className="hero-cta-btn secondary"
                                     onClick={() => window.location.href = '/explore'}
                                     style={{
                                         background: 'rgba(255,255,255,0.05)',
