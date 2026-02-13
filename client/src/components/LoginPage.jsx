@@ -127,6 +127,7 @@ const LoginPage = () => {
                     background-image: linear-gradient(to right, rgba(255, 161, 22, 0.05) 1px, transparent 1px),
                                       linear-gradient(to bottom, rgba(255, 161, 22, 0.05) 1px, transparent 1px);
                     mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+                    pointer-events: none;
                 }
                 
                 .glow-spotlight {
@@ -138,6 +139,7 @@ const LoginPage = () => {
                     height: 600px;
                     background: radial-gradient(circle, rgba(255, 161, 22, 0.15) 0%, transparent 70%);
                     filter: blur(80px);
+                    pointer-events: none;
                 }
 
                 .auth-card {

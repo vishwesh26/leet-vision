@@ -6,52 +6,57 @@ const PrivacyPolicy = () => {
     return (
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem 2rem', color: '#ddd', lineHeight: '1.8' }}>
             <SEO title="Privacy Policy" description="Privacy Policy for LeetVision" path="/privacy-policy" />
-            <h1 style={{ color: '#fff', fontSize: '2.5rem', marginBottom: '2rem' }}>Privacy Policy</h1>
-            <p>Last updated: January 2026</p>
+            <h1 style={{ color: '#fff', fontSize: '2.5rem', marginBottom: '2.5rem', fontFamily: 'Outfit, sans-serif' }}>Privacy Policy</h1>
+            <p>Last updated: February 2026</p>
 
-            <section style={{ marginBottom: '2rem' }}>
-                <h2 style={{ color: '#fff' }}>1. Introduction</h2>
-                <p>Welcome to LeetVision ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights.</p>
-            </section>
-
-            <section style={{ marginBottom: '2rem' }}>
-                <h2 style={{ color: '#fff' }}>2. The Data We Collect</h2>
-                <p>We do not require you to create an account to use the basic features of LeetVision. However, we may collect certain information such as:</p>
-                <ul>
-                    <li><strong>Usage Data:</strong> Information about how you use our website, products, and services.</li>
-                    <li><strong>Technical Data:</strong> IP address, browser type and version, time zone setting, and location.</li>
-                    <li><strong>LeetCode Username:</strong> If you choose to connect your LeetCode account for progress tracking, we store your username locally in your browser.</li>
+            <section style={{ marginBottom: '2.5rem' }}>
+                <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>1. Information We Collect</h2>
+                <p>We collect information to provide a better experience for our users. This includes:</p>
+                <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                    <li><strong>Account Information:</strong> Email addresses and phone numbers used for OTP-based authentication.</li>
+                    <li><strong>Subscription Data:</strong> Details of your Premium subscription status and transaction history (payment details are handled by secure third parties).</li>
+                    <li><strong>Usage Activity:</strong> Data on which problems you solve, video solutions watched, and your progress across different coding platforms.</li>
+                    <li><strong>Technical Logs:</strong> IP addresses, browser types, and device identification for security and analytics.</li>
                 </ul>
             </section>
 
-            <section style={{ marginBottom: '2rem' }}>
-                <h2 style={{ color: '#fff' }}>3. How We Use Your Data</h2>
-                <p>We use your data only to provide and improve our services, specifically:</p>
-                <ul>
-                    <li>To personalize your experience.</li>
-                    <li>To track your problem-solving progress (if connected).</li>
-                    <li>To monitor and analyze usage trends.</li>
+            <section style={{ marginBottom: '2.5rem' }}>
+                <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>2. How We Use Information</h2>
+                <p>Your data is used strictly to enhance your preparation experience:</p>
+                <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                    <li>To verify your identity via OTP and secure your account.</li>
+                    <li>To synchronize your professional coding progress (e.g., LeetCode, GFG) with our dashboard.</li>
+                    <li>To provide personalized problem recommendations based on your history.</li>
+                    <li>To manage your Premium subscription benefits.</li>
                 </ul>
             </section>
 
-            <section style={{ marginBottom: '2rem' }}>
-                <h2 style={{ color: '#fff' }}>4. Third-Party Services</h2>
-                <p>We use third-party services that may collect information used to identify you:</p>
-                <ul>
-                    <li><strong>Google AdSense:</strong> We show ads to support the platform. Google uses cookies to serve ads based on your prior visits.</li>
-                    <li><strong>YouTube API:</strong> We display video solutions from YouTube. By using LeetVision, you agree to be bound by the YouTube Terms of Service.</li>
+            <section style={{ marginBottom: '2.5rem' }}>
+                <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>3. Data Sharing & Third Parties</h2>
+                <p>We do not sell your personal data. We use trusted third-party services for specific functions:</p>
+                <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                    <li><strong>Google AdSense:</strong> Serves personalized advertisements based on user interests.</li>
+                    <li><strong>YouTube:</strong> We use YouTube API Services to display educational content. Use is subject to the <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-orange)' }}>YouTube Terms of Service</a>.</li>
+                    <li><strong>Cloud Infrastructure:</strong> Your data is securely stored on Vercel and MongoDB clusters with industry-standard encryption.</li>
                 </ul>
             </section>
 
-            <section style={{ marginBottom: '2rem' }}>
-                <h2 style={{ color: '#fff' }}>5. Cookies</h2>
-                <p>We use cookies to enhance your experience. You can choose to disable cookies through your individual browser options.</p>
+            <section style={{ marginBottom: '2.5rem' }}>
+                <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>4. Data Security</h2>
+                <p>We implement robust security measures, including HTTPS encryption and secure session handling, to protect your data from unauthorized access or disclosure. However, no method of transmission over the internet is 100% secure.</p>
             </section>
 
-            <section style={{ marginBottom: '2rem' }}>
-                <h2 style={{ color: '#fff' }}>6. Contact Us</h2>
-                <p>If you have any questions about this privacy policy, please contact us at vishweshshinde26@gmail.com.</p>
+            <section style={{ marginBottom: '2.5rem' }}>
+                <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>5. Your Rights</h2>
+                <p>You have the right to access, correct, or request the deletion of your account data. You can manage your profile settings through the dashboard or contact us for data portability requests.</p>
             </section>
+
+            <div style={{ marginTop: '4rem', padding: '2rem', background: 'rgba(255,255,255,0.03)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <p style={{ fontSize: '0.9rem', textAlign: 'center' }}>
+                    Privacy concerns? Reach out at <strong>vishweshshinde26@gmail.com</strong>
+                </p>
+            </div>
+
             <AdSenseContainer slot="8240394871" />
         </div>
     );

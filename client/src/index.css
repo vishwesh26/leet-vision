@@ -1118,6 +1118,8 @@ so they inherit default .video-card styles
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(0, 0, 0, 0.2);
   color: #888;
+  position: relative;
+  z-index: 100;
 }
 
 .footer-links {
@@ -1515,6 +1517,7 @@ so they inherit default .video-card styles
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   mask-image: radial-gradient(circle at center, black, transparent 80%);
+  pointer-events: none;
 }
 
 .text-editorial {
