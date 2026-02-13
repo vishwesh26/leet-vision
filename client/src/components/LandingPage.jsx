@@ -52,19 +52,21 @@ const LandingPage = () => {
 
             {/* Sticky Note for Extension (Desktop Only) */}
             {showNote && (
-                <div style={{
-                    position: 'fixed',
-                    top: '100px',
-                    right: '2rem',
-                    width: '240px',
-                    background: '#111',
-                    border: '1px solid var(--accent-orange)',
-                    padding: '1.5rem',
-                    zIndex: 1000,
-                    borderRadius: '2px 2px 20px 2px',
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
-                    transform: 'rotate(-2deg)'
-                }}>
+                <div
+                    className="desktop-only"
+                    style={{
+                        position: 'fixed',
+                        top: '100px',
+                        right: '2rem',
+                        width: '240px',
+                        background: '#111',
+                        border: '1px solid var(--accent-orange)',
+                        padding: '1.5rem',
+                        zIndex: 1000,
+                        borderRadius: '2px 2px 20px 2px',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.5)',
+                        transform: 'rotate(-2deg)'
+                    }}>
                     <button onClick={() => setShowNote(false)} style={{ position: 'absolute', top: '10px', left: '10px', background: 'none', border: 'none', color: '#555', cursor: 'pointer' }}><FaTimes /></button>
                     <h4 className="text-cursive" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Pro Tip 👋</h4>
                     <p style={{ fontSize: '0.9rem', color: '#aaa', lineHeight: '1.4' }}>
