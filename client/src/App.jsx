@@ -40,6 +40,7 @@ import AdminReports from './components/AdminReports';
 import PricingPage from './components/PricingPage';
 import CheckoutPage from './components/CheckoutPage';
 import AdminSolutionEditor from './components/AdminSolutionEditor';
+import AdminEmailCampaign from './components/AdminEmailCampaign';
 
 function AppContent({ savedVideos, onToggleSave }) {
   const { user, logout } = useAuth();
@@ -390,6 +391,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/admin/edit-solution/:id" element={<AdminSolutionEditor />} />
           <Route path="/admin/add-solution/:id" element={<AdminSolutionEditor />} />
           <Route path="/admin/add-solution" element={<AdminSolutionEditor />} />
+          <Route path="/admin/email-campaign" element={<AdminEmailCampaign />} />
         </Routes>
       </div>
 

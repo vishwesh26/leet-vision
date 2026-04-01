@@ -54,6 +54,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['none', 'monthly', 'yearly'],
         default: 'none'
+    },
+    emailSubscribed: {
+        type: Boolean,
+        default: true  // Users are opted in by default
+    },
+    lastEmailSentAt: {
+        type: Date,
+        default: null
     }
 });
 

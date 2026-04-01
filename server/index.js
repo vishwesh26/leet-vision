@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -27,7 +28,6 @@ const connectDB = async () => {
     }
 };
 
-connectDB();
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/auth');
 const paymentRoutes = require('./routes/payment');
@@ -39,6 +39,12 @@ const Concept = require('./models/Concept');
 const UniversalProblem = require('./models/UniversalProblem');
 const Explanation = require('./models/Explanation');
 const Report = require('./models/Report');
+const { initCampaignScheduler, sendCampaignToAll, generateUnsubToken } = require('./utils/campaignScheduler');
+const { campaigns, getCampaignById, getRandomCampaign } = require('./utils/emailCampaigns');
+const sendEmail = require('./utils/email');
+
+// Initialize weekly campaign scheduler
+initCampaignScheduler();
 
 // Define Inline Solution Schema
 const solutionSchema = new mongoose.Schema({
@@ -123,9 +129,62 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+// Global middleware to ensure DB connection (crucial for Vercel Serverless)
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (err) {
+        console.error("Global DB Connection Error:", err);
+        res.status(500).json({ error: "Database connection failed" });
+    }
+});
+
 // Auth Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/payment', paymentRoutes);
+
+// ─── TEST PING ─────────────────────────────────────────────────────────────
+app.get('/api/ping', (req, res) => res.json({ message: 'pong' }));
+
+// ─── ADMIN CAMPAIGN ROUTES ──────────────────────────────────────────────────
+// GET /api/admin/test-auth
+app.get('/api/admin/test-auth', protect, admin, (req, res) => {
+    res.json({
+        status: 'success',
+        message: 'Admin authentication successful',
+        user: { id: req.user._id, name: req.user.name, email: req.user.email, isAdmin: req.user.isAdmin }
+    });
+});
+
+// GET /api/admin/campaigns
+app.get('/api/admin/campaigns', protect, admin, (req, res) => {
+    try {
+        res.json(campaigns.map(c => ({ id: c.id, type: c.type, subject: c.subject })));
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// POST /api/admin/send-campaign
+app.post('/api/admin/send-campaign', protect, admin, async (req, res) => {
+    try {
+        await connectDB();
+        const { campaignId, dryRun = false, specificEmail, customNote } = req.body;
+        const campaign = campaignId ? getCampaignById(campaignId) : getRandomCampaign();
+        if (!campaign) return res.status(404).json({ error: 'Campaign template not found' });
+
+        const result = await sendCampaignToAll(campaign, { dryRun, specificEmail, customNote });
+        res.json({
+            message: dryRun ? 'Dry run complete' : 'Campaign sent',
+            campaign: { id: campaign.id, subject: campaign.subject, type: campaign.type },
+            ...result
+        });
+    } catch (err) {
+        console.error('Send campaign error:', err);
+        res.status(500).json({ error: 'Failed to send campaign', details: err.message });
+    }
+});
 
 // Report Endpoint
 app.post('/api/report', async (req, res) => {
@@ -1931,6 +1990,49 @@ app.get('/api/universal-problems', async (req, res) => {
     } catch (err) {
         console.error("Fetch Universal Problems Error:", err);
         res.status(500).json({ error: "Fetch error" });
+    }
+});
+
+// ─── UNSUBSCRIBE ENDPOINT ────────────────────────────────────────────────────
+// One-click unsubscribe from campaign emails
+app.get('/api/unsubscribe', async (req, res) => {
+    const { token } = req.query;
+    if (!token) return res.status(400).send('Invalid unsubscribe link.');
+
+    try {
+        await connectDB();
+        const userId = Buffer.from(token, 'base64').toString('ascii');
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).send('User not found.');
+
+        user.emailSubscribed = false;
+        await user.save();
+
+        // Return a nice HTML page
+        res.send(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>Unsubscribed | LeetVision</title>
+            <style>
+                body { background: #0a0a0a; color: #fff; font-family: 'Segoe UI', Arial, sans-serif;
+                       display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+                .box { text-align: center; max-width: 400px; padding: 2rem; }
+                h1 { color: #f57c00; font-size: 1.8rem; margin-bottom: 0.5rem; }
+                p { color: #888; line-height: 1.6; }
+                a { color: #f57c00; text-decoration: none; }
+            </style>
+            </head>
+            <body>
+            <div class="box">
+                <h1>✅ Unsubscribed</h1>
+                <p>You've been removed from our campaign emails. We'll miss you!</p>
+                <p style="margin-top:1.5rem;"><a href="https://leet-vision.vercel.app">← Back to LeetVision</a></p>
+            </div>
+            </body></html>
+        `);
+    } catch (err) {
+        console.error('Unsubscribe error:', err);
+        res.status(500).send('Something went wrong.');
     }
 });
 

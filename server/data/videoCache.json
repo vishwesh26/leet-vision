@@ -549,6 +549,130 @@
       "videoUrl": "https://www.youtube.com/watch?v=f1q6BriScew"
     }
   ],
+  "96": [
+    {
+      "id": "Ox0TenN3Zpg",
+      "questionId": "96",
+      "title": "Unique Binary Search Trees - Leetcode 96 - Python Dynamic Programming",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/Ox0TenN3Zpg/hqdefault.jpg",
+      "viewCount": 90255,
+      "likeCount": 1654,
+      "publishedAt": "2020-06-24T08:27:55Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=Ox0TenN3Zpg"
+    },
+    {
+      "id": "OIc0mHgHUww",
+      "questionId": "96",
+      "title": "Unique Binary Search Trees | Count all structurally unique BSTs | Catalan number | Leetcode #96",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/OIc0mHgHUww/hqdefault.jpg",
+      "viewCount": 56653,
+      "likeCount": 1067,
+      "publishedAt": "2020-06-24T20:03:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=OIc0mHgHUww"
+    },
+    {
+      "id": "QjYhRTF8Acs",
+      "questionId": "96",
+      "title": "Unique Binary Search Trees | Dynamic Programming | Java | LeetCode - Medium - 96 | The Code Mate",
+      "channelTitle": "The Code Mate",
+      "thumbnail": "https://i.ytimg.com/vi/QjYhRTF8Acs/hqdefault.jpg",
+      "viewCount": 1247,
+      "likeCount": 18,
+      "publishedAt": "2020-06-24T11:14:35Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=QjYhRTF8Acs"
+    },
+    {
+      "id": "McBjjXtQoZI",
+      "questionId": "96",
+      "title": "Unique Binary Search Trees | Leetcode 96 | Java Solution",
+      "channelTitle": "Guneet Malhotra",
+      "thumbnail": "https://i.ytimg.com/vi/McBjjXtQoZI/hqdefault.jpg",
+      "viewCount": 141,
+      "likeCount": 5,
+      "publishedAt": "2021-08-15T07:12:54Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=McBjjXtQoZI"
+    },
+    {
+      "id": "BIF4wlYwclU",
+      "questionId": "96",
+      "title": "Unique Binary Search Trees - Leetcode 96 - Solution beats all others! (Kotlin)",
+      "channelTitle": "Vahid Hoss",
+      "thumbnail": "https://i.ytimg.com/vi/BIF4wlYwclU/hqdefault.jpg",
+      "viewCount": 41,
+      "likeCount": 1,
+      "publishedAt": "2022-11-21T15:00:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=BIF4wlYwclU"
+    }
+  ],
+  "101": [
+    {
+      "id": "JodJZjJtECE",
+      "questionId": "101",
+      "title": "Easy Google Interview Question! | Symmetric Binary Tree - Leetcode 101",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/JodJZjJtECE/hqdefault.jpg",
+      "viewCount": 467167,
+      "likeCount": 21940,
+      "publishedAt": "2024-01-17T16:38:57Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=JodJZjJtECE"
+    },
+    {
+      "id": "nKggNAiEpBE",
+      "questionId": "101",
+      "title": "L25. Check for Symmetrical Binary Trees | C++ | Java",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/nKggNAiEpBE/hqdefault.jpg",
+      "viewCount": 236221,
+      "likeCount": 7930,
+      "publishedAt": "2021-08-29T20:07:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=nKggNAiEpBE"
+    },
+    {
+      "id": "Mao9uzxwvmc",
+      "questionId": "101",
+      "title": "Symmetric Tree - Leetcode 101 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/Mao9uzxwvmc/hqdefault.jpg",
+      "viewCount": 62782,
+      "likeCount": 1403,
+      "publishedAt": "2023-03-13T01:39:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Mao9uzxwvmc"
+    },
+    {
+      "id": "lHLW1L8Qc5w",
+      "questionId": "101",
+      "title": "Symmetric Tree (Leetcode - 101) - (Amazon, Microsoft, Mentor (Siemens)) : Explanation ➕ Live Coding",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/lHLW1L8Qc5w/hqdefault.jpg",
+      "viewCount": 10415,
+      "likeCount": 438,
+      "publishedAt": "2023-03-13T04:05:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=lHLW1L8Qc5w"
+    },
+    {
+      "id": "8I8ulUJzibg",
+      "questionId": "101",
+      "title": "Symmetric Tree (LeetCode 101) | Full Iterative solution with animations diagrams | BFS",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/8I8ulUJzibg/hqdefault.jpg",
+      "viewCount": 6379,
+      "likeCount": 220,
+      "publishedAt": "2024-07-15T05:00:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=8I8ulUJzibg"
+    }
+  ],
   "102": [
     {
       "id": "6ZnyEApgFYg",
