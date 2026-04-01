@@ -703,6 +703,36 @@ const getOrFetchUniversalVideos = async (title, conceptId) => {
     }
 };
 
+// Companies for Question Endpoint
+app.get('/api/question/:questionId/companies', async (req, res) => {
+    try {
+        const { questionId } = req.params;
+        if (!questionId) return res.status(400).json({ error: 'Question ID required' });
+        
+        await connectDB(); // ensure DB connection
+        
+        // Find all records matching this question ID (or slug if they pass it)
+        const mappings = await CompanyQuestion.find({
+            $or: [
+                { questionId: questionId.toString() },
+                { leetcodeUrl: new RegExp('/' + questionId.toString() + '/?', 'i') } // Fallback for slug matching
+            ]
+        }).select('company -_id').lean();
+        
+        if (!mappings || mappings.length === 0) {
+            return res.json([]);
+        }
+        
+        // Extract unique companies
+        const uniqueCompanies = [...new Set(mappings.map(m => m.company))];
+        
+        res.json(uniqueCompanies);
+    } catch (err) {
+        console.error("API Question Companies Error:", err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // Search Endpoint (Manual - Always Fetch)
 app.get('/api/search/:questionId', async (req, res) => {
     const { questionId } = req.params;
