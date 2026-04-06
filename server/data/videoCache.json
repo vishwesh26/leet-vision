@@ -425,6 +425,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=BKy7H8rEmco"
     }
   ],
+  "10": [
+    {
+      "id": "HAA8mgxlov8",
+      "questionId": "10",
+      "title": "Regular Expression Matching - Dynamic Programming Top-Down Memoization - Leetcode 10",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/HAA8mgxlov8/hqdefault.jpg",
+      "viewCount": 234123,
+      "likeCount": 4377,
+      "publishedAt": "2021-02-02T15:45:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=HAA8mgxlov8"
+    },
+    {
+      "id": "KDPx7xuWxr0",
+      "questionId": "10",
+      "title": "Leetcode 10 Regular Expression Matching (Java) - Beats 100%",
+      "channelTitle": "TheAnalyticGuy",
+      "thumbnail": "https://i.ytimg.com/vi/KDPx7xuWxr0/hqdefault.jpg",
+      "viewCount": 6243,
+      "likeCount": 59,
+      "publishedAt": "2023-02-04T18:30:30Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=KDPx7xuWxr0"
+    },
+    {
+      "id": "klNy4aFdi_k",
+      "questionId": "10",
+      "title": "DSA Phir se with Sumeet | Leetcode 10 | Regular Expression Matching",
+      "channelTitle": "Pepcoding",
+      "thumbnail": "https://i.ytimg.com/vi/klNy4aFdi_k/hqdefault.jpg",
+      "viewCount": 5801,
+      "likeCount": 152,
+      "publishedAt": "2023-11-26T12:20:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=klNy4aFdi_k"
+    },
+    {
+      "id": "VFQddcCP46c",
+      "questionId": "10",
+      "title": "Regular Expression Matching: 10 - Dynamic Programming interview - google,apple,amazon,meta,microsoft",
+      "channelTitle": "Destination FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/VFQddcCP46c/hqdefault.jpg",
+      "viewCount": 2730,
+      "likeCount": 52,
+      "publishedAt": "2022-11-26T01:48:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=VFQddcCP46c"
+    },
+    {
+      "id": "c76PsMCZRYU",
+      "questionId": "10",
+      "title": "10. Regular Expression Matching | Leetcode Unlocked - Python",
+      "channelTitle": "Leetcode Unlocked",
+      "thumbnail": "https://i.ytimg.com/vi/c76PsMCZRYU/hqdefault.jpg",
+      "viewCount": 110,
+      "likeCount": 1,
+      "publishedAt": "2025-10-02T03:34:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=c76PsMCZRYU"
+    }
+  ],
   "11": [
     {
       "id": "UuiTKBwPgAo",

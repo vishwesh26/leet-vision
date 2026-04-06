@@ -14,19 +14,9 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 
 // Connect to MongoDB
-const connectDB = async () => {
-    if (mongoose.connection.readyState >= 1) return;
-    if (!process.env.MONGODB_URI) {
-        console.warn("MONGODB_URI not set. Using File System cache only (Not persistent on Vercel).");
-        return;
-    }
-    try {
-        await mongoose.connect(process.env.MONGODB_URI);
-        console.log("MongoDB Connected");
-    } catch (err) {
-        console.error("MongoDB Connection Error:", err);
-    }
-};
+const connectDB = require('./config/db');
+connectDB();
+
 
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/auth');
@@ -169,7 +159,7 @@ app.get('/api/admin/campaigns', protect, admin, (req, res) => {
 // POST /api/admin/send-campaign
 app.post('/api/admin/send-campaign', protect, admin, async (req, res) => {
     try {
-        await connectDB();
+
         const { campaignId, dryRun = false, specificEmail, customNote } = req.body;
         const campaign = campaignId ? getCampaignById(campaignId) : getRandomCampaign();
         if (!campaign) return res.status(404).json({ error: 'Campaign template not found' });
@@ -234,7 +224,7 @@ app.post('/api/admin/solution', protect, admin, async (req, res) => {
             return res.status(400).json({ status: 'fail', message: 'questionId is required' });
         }
 
-        await connectDB();
+
 
         if (platform === 'leetcode') {
             // Standard LeetCode Solution Upsert
@@ -709,7 +699,7 @@ app.get('/api/question/:questionId/companies', async (req, res) => {
         const { questionId } = req.params;
         if (!questionId) return res.status(400).json({ error: 'Question ID required' });
         
-        await connectDB(); // ensure DB connection
+ // ensure DB connection
         
         // Find all records matching this question ID (or slug if they pass it)
         const mappings = await CompanyQuestion.find({
@@ -988,7 +978,7 @@ console.log("AI Service Status:", genAI ? "INITIALIZED" : "DISABLED");
 app.get('/api/solution/:questionId', async (req, res) => {
     try {
         const { questionId } = req.params;
-        await connectDB();
+
 
         // 1. Check MongoDB (Primary Persistent Storage)
         if (mongoose.connection.readyState === 1) {
@@ -1294,7 +1284,7 @@ app.get('/api/solution/:questionId', async (req, res) => {
 // Company-Wise Questions API (Paginated & Searchable)
 app.get('/api/companies', async (req, res) => {
     try {
-        await connectDB();
+
         // Get unique companies and their counts
         const companies = await CompanyQuestion.aggregate([
             { $group: { _id: "$company", count: { $sum: 1 } } },
@@ -1493,7 +1483,7 @@ app.get('/api/company/:companyName', async (req, res) => {
 // Articles APIs
 app.get('/api/articles', async (req, res) => {
     try {
-        await connectDB();
+
         const { category, limit = 10, skip = 0 } = req.query;
         
         const query = category ? { category } : {};
@@ -1511,7 +1501,7 @@ app.get('/api/articles', async (req, res) => {
 
 app.get('/api/articles/:slug', async (req, res) => {
     try {
-        await connectDB();
+
         const { slug } = req.params;
         const article = await Article.findOne({ slug });
         
@@ -1584,7 +1574,7 @@ app.post('/api/resolve-problem', async (req, res) => {
     }
 
     try {
-        await connectDB();
+
         const slug = slugify(title, { lower: true, strict: true });
 
         // 1. Try exact match in problems
@@ -1827,7 +1817,7 @@ app.post('/api/generate-concept', async (req, res) => {
     if (!title) return res.status(400).json({ error: "Title required" });
 
     try {
-        await connectDB();
+
         const result = await getOrGenerateConcept(title, platform, url);
         res.json(result);
     } catch (err) {
@@ -1846,7 +1836,7 @@ app.post('/api/generate-concept', async (req, res) => {
 app.get('/api/universe/resolve/:platform/:slug', async (req, res) => {
     const { platform, slug } = req.params;
     try {
-        await connectDB();
+
         
         let problem = await UniversalProblem.findOne({ platform, slug });
         
@@ -1882,7 +1872,7 @@ app.post('/api/universe/bulk-seed', async (req, res) => {
     if (!problems || !Array.isArray(problems)) return res.status(400).json({ error: "Problems array required" });
 
     try {
-        await connectDB();
+
         const results = { created: 0, skipped: 0, errors: 0 };
 
         for (const title of problems) {
@@ -1910,7 +1900,7 @@ app.post('/api/universe/bulk-seed', async (req, res) => {
 // API: Get Concept Details
 app.get('/api/concept/:id', async (req, res) => {
     try {
-        await connectDB();
+
         const concept = await Concept.findById(req.params.id);
         if (!concept) return res.status(404).json({ error: "Concept not found" });
 
@@ -1950,7 +1940,7 @@ app.get('/api/concept/:id', async (req, res) => {
 // API: Get Topic Statistics for a Platform
 app.get('/api/universal-problems/topics', async (req, res) => {
     try {
-        await connectDB();
+
         const { platform } = req.query;
         if (!platform) return res.status(400).json({ error: "Platform required" });
 
@@ -1972,7 +1962,7 @@ app.get('/api/universal-problems/topics', async (req, res) => {
 // API: Get Curated List problems by IDs
 app.post('/api/universe/curated', async (req, res) => {
     try {
-        await connectDB();
+
         const { ids } = req.body;
         if (!ids || !Array.isArray(ids)) {
             return res.status(400).json({ error: "Missing ids array" });
@@ -2003,7 +1993,7 @@ app.post('/api/universe/curated', async (req, res) => {
 // API: Get All Universal Problems (for Explore page)
 app.get('/api/universal-problems', async (req, res) => {
     try {
-        await connectDB();
+
         const { platform, page = 1, limit = 30, tag, search } = req.query;
         let query = {};
 
@@ -2061,7 +2051,7 @@ app.get('/api/unsubscribe', async (req, res) => {
     if (!token) return res.status(400).send('Invalid unsubscribe link.');
 
     try {
-        await connectDB();
+
         const userId = Buffer.from(token, 'base64').toString('ascii');
         const user = await User.findById(userId);
         if (!user) return res.status(404).send('User not found.');
