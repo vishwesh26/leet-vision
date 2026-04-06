@@ -1825,3 +1825,276 @@ so they inherit default .video-card styles
 }
 
 /* Floating Crown Styles is now handled inline in LandingPage.jsx for better control */
+
+/* --- Roadmap / Skill Tree UI --- */
+
+.roadmap-hero {
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.roadmap-hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(245, 124, 0, 0.15) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(40px);
+}
+
+.timeline-container {
+    padding: 2rem 0;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline-node-wrapper {
+    display: flex;
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+/* The Glowing Vertical Line */
+.timeline-node-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 45px;
+    top: 60px;
+    bottom: -3rem;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(245, 124, 0, 0.5) 0%, rgba(200, 200, 200, 0.1) 100%);
+    box-shadow: 0 0 10px rgba(245, 124, 0, 0.3);
+    z-index: 0;
+}
+
+.timeline-node-wrapper:last-child::before {
+    display: none; /* No line after the last node */
+}
+
+/* The Core Node Circle */
+.timeline-icon-container {
+    width: 90px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.timeline-icon-glow {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    background: rgba(15, 15, 15, 1);
+    border: 2px solid rgba(245, 124, 0, 0.5);
+    box-shadow: 0 0 20px rgba(245, 124, 0, 0.2), inset 0 0 10px rgba(245, 124, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.timeline-node-wrapper.expanded .timeline-icon-glow {
+    border-color: #f57c00;
+    box-shadow: 0 0 25px rgba(245, 124, 0, 0.6), inset 0 0 15px rgba(245, 124, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.timeline-content {
+    flex: 1;
+    padding-left: 1rem;
+}
+
+/* Glassmorphic Unit Card */
+.roadmap-module-card {
+    background: rgba(20, 20, 25, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.roadmap-module-card:hover {
+    border-color: rgba(245, 124, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.roadmap-module-card.expanded {
+    border-color: rgba(245, 124, 0, 0.2);
+}
+
+.roadmap-module-header {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.roadmap-module-header h3 {
+    margin: 0 0 0.2rem 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.roadmap-module-subtitle {
+    color: #888;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Problem Pills List */
+.roadmap-problems-container {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.roadmap-problem-pill {
+    background: rgba(30, 30, 35, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.roadmap-problem-pill:hover {
+    background: rgba(40, 40, 45, 0.8);
+    transform: translateX(4px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pill-status {
+    width: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pill-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pill-id {
+    color: #666;
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: rgba(255,255,255,0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.pill-title {
+    color: #ddd;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.roadmap-problem-pill:hover .pill-title {
+    color: #fff;
+}
+
+.pill-difficulty {
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.pill-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.pill-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.pill-btn-generate {
+    background: rgba(255, 255, 255, 0.05);
+    color: #aaa;
+}
+
+.pill-btn-generate:hover {
+    background: #ffa116;
+    color: #000;
+}
+
+.pill-btn-view {
+    background: rgba(245, 124, 0, 0.15);
+    color: #ffa116;
+    border: 1px solid rgba(245, 124, 0, 0.3);
+}
+
+.pill-btn-view:hover {
+    background: #ffa116;
+    color: #000;
+}
+
+/* Enhanced Mobile Adjustments */
+@media (max-width: 768px) {
+    .timeline-node-wrapper::before {
+        left: 20px;
+    }
+    .timeline-icon-container {
+        width: 40px;
+    }
+    .timeline-icon-glow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .timeline-content {
+        padding-left: 0.5rem;
+    }
+    .roadmap-module-header {
+        padding: 1rem;
+    }
+    .roadmap-problem-pill {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        gap: 10px;
+    }
+    .pill-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .pill-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 5px;
+    }
+}
+

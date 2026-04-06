@@ -31,6 +31,7 @@ import CompanyListingPage from './components/CompanyListingPage';
 import CompanyDetailPage from './components/CompanyDetailPage';
 import ConceptPage from './components/ConceptPage';
 import UniversalExplore from './components/UniversalExplore';
+import BasicToAdvancePage from './components/BasicToAdvancePage';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './components/LoginPage';
@@ -88,6 +89,7 @@ function AppContent({ savedVideos, onToggleSave }) {
         <div className="nav-center">
           <ul className="nav-links">
             <li className="nav-item"><Link to="/top-100-leetcode" style={{ color: 'inherit', textDecoration: 'none' }}>Top 100</Link></li>
+            <li className="nav-item"><Link to="/basic-to-advance" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 400 }}>Roadmap</Link></li>
 
             <li className="nav-item dropdown">
               Difficulty ▾
@@ -234,6 +236,7 @@ function AppContent({ savedVideos, onToggleSave }) {
               </div>
             )}
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
+            <Link to="/basic-to-advance" className="mobile-link highlight" style={{ color: '#4db6ac' }} onClick={() => setIsMobileMenuOpen(false)}>Basic to Advance Roadmap</Link>
 
             <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
             <Link to="/explore" className="mobile-link highlight" style={{ color: 'var(--accent-orange)' }} onClick={() => setIsMobileMenuOpen(false)}>All Platform Problem</Link>
@@ -358,6 +361,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="/solution/:id" element={<SolutionPage />} />
           <Route path="/top-100-leetcode" element={<ListPage type="top-100" title="Top 100 Liked Questions" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
+          <Route path="/basic-to-advance" element={<BasicToAdvancePage />} />
 
           <Route path="/leetcode-easy" element={<ListPage type="difficulty" title="Easy Questions" param="Easy" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />
           <Route path="/leetcode-medium" element={<ListPage type="difficulty" title="Medium Questions" param="Medium" savedVideos={savedVideos} onToggleSave={onToggleSave} />} />

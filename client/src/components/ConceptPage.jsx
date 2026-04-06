@@ -6,23 +6,25 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { IoIosArrowDown, IoIosArrowUp, IoMdCreate } from 'react-icons/io';
 import SEO from './SEO';
+import { FaCoffee, FaBug } from 'react-icons/fa';
+
 
 const PremiumLoader = ({ platform }) => {
     const [msgIdx, setMsgIdx] = useState(0);
     const messages = platform
         ? [
-            "Extracting Canonical Knowledge...",
-            "Analyzing Algorithm Patterns...",
-            "Synthesizing Efficient Logic...",
-            "Mapping Universe Connections...",
-            "Finalizing Article Layout..."
+            "Searching the darkest corners of the codebase...",
+            "Persuading the compiler to be nice...",
+            "Brewing a fresh pot of coffee...",
+            "Untangling the spaghetti code...",
+            "Reversing the binary tree..."
         ]
         : [
-            "Mapping Knowledge Graph...",
-            "Connecting Neural Nodes...",
-            "Expanding Logic Sector...",
-            "Optimizing Core Patterns...",
-            "Assembling Research Data..."
+            "Reading the mystical documentation...",
+            "Asking rubber duck for advice...",
+            "Defragmenting memory...",
+            "Downloading more RAM...",
+            "Waiting for tests to pass..."
         ];
 
     useEffect(() => {
@@ -32,15 +34,17 @@ const PremiumLoader = ({ platform }) => {
         return () => clearInterval(interval);
     }, [messages.length]);
 
+    const icons = [<FaCode className="brain-icon-premium" style={{animation: 'spin 3s linear infinite'}} key="1" />, <FaCoffee className="brain-icon-premium" style={{animation: 'bounce 2s infinite'}} key="2" />, <FaBug className="brain-icon-premium" style={{animation: 'pulse 1.5s infinite'}} key="3" />];
+
     return (
         <div className="premium-loader-container">
             <div className="brain-pulse-wrapper">
-                <div className="brain-glow"></div>
-                <FaBrain className="brain-icon-premium" />
+                <div className="brain-glow" style={{ background: 'rgba(245, 124, 0, 0.3)' }}></div>
+                {icons[msgIdx % 3]}
             </div>
             <div className="loading-status-container">
-                <h2 className="loading-title-premium">Intelligence Layer</h2>
-                <p className="loading-msg-premium" key={msgIdx}>{messages[msgIdx]}</p>
+                <h2 className="loading-title-premium" style={{ animation: 'pulse 2s infinite' }}>Loading Solution...</h2>
+                <p className="loading-msg-premium" key={msgIdx} style={{ animation: 'fadeInUp 0.5s ease-out' }}>{messages[msgIdx]}</p>
             </div>
             <div className="loading-progress-bar">
                 <div className="loading-progress-fill"></div>

@@ -487,6 +487,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=rnkjquApJdw"
     }
   ],
+  "26": [
+    {
+      "id": "DEJAZBq0FDA",
+      "questionId": "26",
+      "title": "Remove Duplicates from Sorted Array - Leetcode 26 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/DEJAZBq0FDA/hqdefault.jpg",
+      "viewCount": 313381,
+      "likeCount": 5133,
+      "publishedAt": "2021-09-06T16:00:06Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=DEJAZBq0FDA"
+    },
+    {
+      "id": "xnj-GjdboGE",
+      "questionId": "26",
+      "title": "Remove Duplicates from Sorted Array | Leetcode 26 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/xnj-GjdboGE/hqdefault.jpg",
+      "viewCount": 95103,
+      "likeCount": 1435,
+      "publishedAt": "2023-05-12T11:07:32Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xnj-GjdboGE"
+    },
+    {
+      "id": "I0vmCnkcGW4",
+      "questionId": "26",
+      "title": "How To Remove Duplicates From Sorted Array ( LeetCode 26 ) | FREE DSA Course in JAVA | Lecture 65",
+      "channelTitle": "TAP ACADEMY",
+      "thumbnail": "https://i.ytimg.com/vi/I0vmCnkcGW4/hqdefault.jpg",
+      "viewCount": 83918,
+      "likeCount": 1812,
+      "publishedAt": "2023-02-02T12:30:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=I0vmCnkcGW4"
+    },
+    {
+      "id": "FVldriHfbt8",
+      "questionId": "26",
+      "title": "An Actually Easy, Easy Coding Interview Question | Remove Duplicates from Sorted Array - Leetcode 26",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/FVldriHfbt8/hqdefault.jpg",
+      "viewCount": 60040,
+      "likeCount": 3693,
+      "publishedAt": "2024-01-25T17:46:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=FVldriHfbt8"
+    },
+    {
+      "id": "Jg6NDNVrVTY",
+      "questionId": "26",
+      "title": "Leetcode 26 - Remove Duplicates from Sorted Array | Brute Force + Optimal Solutions ✅",
+      "channelTitle": "Brainstorming Code",
+      "thumbnail": "https://i.ytimg.com/vi/Jg6NDNVrVTY/hqdefault.jpg",
+      "viewCount": 283,
+      "likeCount": 8,
+      "publishedAt": "2024-04-20T17:06:41Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Jg6NDNVrVTY"
+    }
+  ],
   "79": [
     {
       "id": "pfiQ_PS1g8E",
@@ -733,6 +795,192 @@
       "publishedAt": "2023-11-07T11:11:19Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=8P5qG4OzopQ"
+    }
+  ],
+  "136": [
+    {
+      "id": "X6vgc_Iubf0",
+      "questionId": "136",
+      "title": "Single Number - Leetcode 136",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/X6vgc_Iubf0/hqdefault.jpg",
+      "viewCount": 230961,
+      "likeCount": 12167,
+      "publishedAt": "2024-06-26T14:00:28Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=X6vgc_Iubf0"
+    },
+    {
+      "id": "qMPX1AOa83k",
+      "questionId": "136",
+      "title": "Single Number - Leetcode 136 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/qMPX1AOa83k/hqdefault.jpg",
+      "viewCount": 143362,
+      "likeCount": 2871,
+      "publishedAt": "2022-01-04T17:00:35Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qMPX1AOa83k"
+    },
+    {
+      "id": "sFBCAl8yBfE",
+      "questionId": "136",
+      "title": "L5. Single Number-I | Bit Manipulation",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/sFBCAl8yBfE/hqdefault.jpg",
+      "viewCount": 114474,
+      "likeCount": 4079,
+      "publishedAt": "2024-03-09T08:58:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=sFBCAl8yBfE"
+    },
+    {
+      "id": "KNOw_goVGas",
+      "questionId": "136",
+      "title": "Single non-repeating element in an array (LeetCode 136) | Full solution with Examples",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/KNOw_goVGas/hqdefault.jpg",
+      "viewCount": 52468,
+      "likeCount": 857,
+      "publishedAt": "2020-06-16T13:16:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=KNOw_goVGas"
+    },
+    {
+      "id": "dUmaWUPRcLQ",
+      "questionId": "136",
+      "title": "Single Number | LeetCode problem 136 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/dUmaWUPRcLQ/hqdefault.jpg",
+      "viewCount": 23253,
+      "likeCount": 373,
+      "publishedAt": "2023-01-17T10:43:43Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=dUmaWUPRcLQ"
+    }
+  ],
+  "217": [
+    {
+      "id": "3OamzN90kPg",
+      "questionId": "217",
+      "title": "Contains Duplicate - Leetcode 217 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/3OamzN90kPg/hqdefault.jpg",
+      "viewCount": 1009435,
+      "likeCount": 9884,
+      "publishedAt": "2021-10-25T16:00:04Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=3OamzN90kPg"
+    },
+    {
+      "id": "El4DhjI9J3U",
+      "questionId": "217",
+      "title": "Contains Duplicate - Leetcode 217 - Python #shorts",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/El4DhjI9J3U/hqdefault.jpg",
+      "viewCount": 111833,
+      "likeCount": 3565,
+      "publishedAt": "2024-06-11T05:31:58Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=El4DhjI9J3U"
+    },
+    {
+      "id": "0LIctkgJ2hQ",
+      "questionId": "217",
+      "title": "Contains Duplicate (LeetCode 217) | Full solution with HashSet explanation | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/0LIctkgJ2hQ/hqdefault.jpg",
+      "viewCount": 34962,
+      "likeCount": 867,
+      "publishedAt": "2022-06-26T13:00:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=0LIctkgJ2hQ"
+    },
+    {
+      "id": "YlzXrmGTmy0",
+      "questionId": "217",
+      "title": "Contains Duplicate | LeetCode problem 217",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/YlzXrmGTmy0/hqdefault.jpg",
+      "viewCount": 13703,
+      "likeCount": 203,
+      "publishedAt": "2023-01-23T15:49:13Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=YlzXrmGTmy0"
+    },
+    {
+      "id": "xTzBc4sLcfg",
+      "questionId": "217",
+      "title": "LeetCode Problem: 217. Contains Duplicate | Java Solution",
+      "channelTitle": "Code for Interview",
+      "thumbnail": "https://i.ytimg.com/vi/xTzBc4sLcfg/hqdefault.jpg",
+      "viewCount": 12067,
+      "likeCount": 217,
+      "publishedAt": "2022-08-29T09:43:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xTzBc4sLcfg"
+    }
+  ],
+  "283": [
+    {
+      "id": "aayNRwUN3Do",
+      "questionId": "283",
+      "title": "Move Zeroes - Leetcode 283 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/aayNRwUN3Do/hqdefault.jpg",
+      "viewCount": 134648,
+      "likeCount": 3112,
+      "publishedAt": "2021-12-19T17:00:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=aayNRwUN3Do"
+    },
+    {
+      "id": "k5lIW5XxC7g",
+      "questionId": "283",
+      "title": "Move Zeroes (LeetCode 283) | Full Solution explained with examples | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/k5lIW5XxC7g/hqdefault.jpg",
+      "viewCount": 56157,
+      "likeCount": 1393,
+      "publishedAt": "2022-02-08T15:44:53Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=k5lIW5XxC7g"
+    },
+    {
+      "id": "AgiGd763srg",
+      "questionId": "283",
+      "title": "Move Zeros | LeetCode problem 283",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/AgiGd763srg/hqdefault.jpg",
+      "viewCount": 23683,
+      "likeCount": 380,
+      "publishedAt": "2023-02-21T18:08:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=AgiGd763srg"
+    },
+    {
+      "id": "A6_GZ1VYjBI",
+      "questionId": "283",
+      "title": "Move zeroes LeetCode Java solution in Hindi ( LeetCode 283 )",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/A6_GZ1VYjBI/hqdefault.jpg",
+      "viewCount": 7143,
+      "likeCount": 130,
+      "publishedAt": "2022-10-07T02:36:13Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=A6_GZ1VYjBI"
+    },
+    {
+      "id": "jLBMVvJlYDQ",
+      "questionId": "283",
+      "title": "Move Zeros - LeetCode 283 - Python - Visually Explained",
+      "channelTitle": "Hello Byte",
+      "thumbnail": "https://i.ytimg.com/vi/jLBMVvJlYDQ/hqdefault.jpg",
+      "viewCount": 6747,
+      "likeCount": 308,
+      "publishedAt": "2025-10-28T01:27:49Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jLBMVvJlYDQ"
     }
   ],
   "300": [
@@ -1037,6 +1285,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=AQ8mHCeEK_s"
     }
   ],
+  "412": [
+    {
+      "id": "FdqhMGzVa98",
+      "questionId": "412",
+      "title": "The Most Classic Coding Question! | FizzBuzz - Leetcode 412",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/FdqhMGzVa98/hqdefault.jpg",
+      "viewCount": 72418,
+      "likeCount": 3047,
+      "publishedAt": "2024-01-13T15:00:17Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=FdqhMGzVa98"
+    },
+    {
+      "id": "13gtlfrR6L8",
+      "questionId": "412",
+      "title": "Fizz Buzz | LeetCode 412 | C++, Java, Python",
+      "channelTitle": "Knowledge Center",
+      "thumbnail": "https://i.ytimg.com/vi/13gtlfrR6L8/hqdefault.jpg",
+      "viewCount": 8315,
+      "likeCount": 102,
+      "publishedAt": "2020-08-26T10:56:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=13gtlfrR6L8"
+    },
+    {
+      "id": "xw0ACIGEmGU",
+      "questionId": "412",
+      "title": "LeetCode 412. FizzBuzz | Interview Preparation | Tamil | code io",
+      "channelTitle": "code io - Tamil",
+      "thumbnail": "https://i.ytimg.com/vi/xw0ACIGEmGU/hqdefault.jpg",
+      "viewCount": 3699,
+      "likeCount": 102,
+      "publishedAt": "2023-04-30T14:32:32Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xw0ACIGEmGU"
+    },
+    {
+      "id": "a6ty9FQRrXQ",
+      "questionId": "412",
+      "title": "Leetcode 412: Fizz Buzz in Java | Step-by-Step Solution for Coding Interviews",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/a6ty9FQRrXQ/hqdefault.jpg",
+      "viewCount": 1618,
+      "likeCount": 36,
+      "publishedAt": "2025-10-27T14:00:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=a6ty9FQRrXQ"
+    },
+    {
+      "id": "wdcyuxmYAWI",
+      "questionId": "412",
+      "title": "Fizz Buzz | Leetcode 412 Solution",
+      "channelTitle": "Data Techie",
+      "thumbnail": "https://i.ytimg.com/vi/wdcyuxmYAWI/hqdefault.jpg",
+      "viewCount": 2,
+      "likeCount": 0,
+      "publishedAt": "2023-11-12T04:59:50Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=wdcyuxmYAWI"
+    }
+  ],
   "466": [
     {
       "id": "H9gyzCkxYwQ",
@@ -1159,6 +1469,130 @@
       "publishedAt": "2024-04-08T04:42:05Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=nFIUPfClaG4"
+    }
+  ],
+  "1480": [
+    {
+      "id": "fFJaIDUKDoA",
+      "questionId": "1480",
+      "title": "Running Sum of 1d Array | LeetCode 1480 | C++, Java, Python",
+      "channelTitle": "Knowledge Center",
+      "thumbnail": "https://i.ytimg.com/vi/fFJaIDUKDoA/hqdefault.jpg",
+      "viewCount": 25030,
+      "likeCount": 265,
+      "publishedAt": "2021-05-04T07:45:42Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=fFJaIDUKDoA"
+    },
+    {
+      "id": "3uMmKCZ_9Go",
+      "questionId": "1480",
+      "title": "Running Sum of 1d Array | Live Coding with Explanation | Leetcode - 1480",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/3uMmKCZ_9Go/hqdefault.jpg",
+      "viewCount": 9191,
+      "likeCount": 120,
+      "publishedAt": "2021-05-03T16:55:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3uMmKCZ_9Go"
+    },
+    {
+      "id": "cPzHm9_yaWY",
+      "questionId": "1480",
+      "title": "1480 Running Sum of 1d Array  | Leetcode",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/cPzHm9_yaWY/hqdefault.jpg",
+      "viewCount": 2472,
+      "likeCount": 50,
+      "publishedAt": "2022-07-21T06:27:19Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=cPzHm9_yaWY"
+    },
+    {
+      "id": "e6AGjk-68EU",
+      "questionId": "1480",
+      "title": "LeetCode - 1480. Running Sum of 1d Array | Day 3 May Challenge",
+      "channelTitle": "Aditya Mahajan",
+      "thumbnail": "https://i.ytimg.com/vi/e6AGjk-68EU/hqdefault.jpg",
+      "viewCount": 1921,
+      "likeCount": 32,
+      "publishedAt": "2021-05-03T12:02:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=e6AGjk-68EU"
+    },
+    {
+      "id": "MATtaDI7p2s",
+      "questionId": "1480",
+      "title": "Running Sum of 1d Array | LeetCode 1480 | English",
+      "channelTitle": "CodeClips with Abhishek Ranjan",
+      "thumbnail": "https://i.ytimg.com/vi/MATtaDI7p2s/hqdefault.jpg",
+      "viewCount": 355,
+      "likeCount": 4,
+      "publishedAt": "2021-08-30T13:37:27Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=MATtaDI7p2s"
+    }
+  ],
+  "1920": [
+    {
+      "id": "1svjL7Docuo",
+      "questionId": "1920",
+      "title": "Build Array from Permutation | Leetcode solutions - 1920",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/1svjL7Docuo/hqdefault.jpg",
+      "viewCount": 15516,
+      "likeCount": 261,
+      "publishedAt": "2023-01-22T06:30:06Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=1svjL7Docuo"
+    },
+    {
+      "id": "0Q7m9VFCrUI",
+      "questionId": "1920",
+      "title": "Build Array from Permutation | Follow Up Qn | Detailed Explanation | Leetcode 1920 |codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/0Q7m9VFCrUI/hqdefault.jpg",
+      "viewCount": 6112,
+      "likeCount": 317,
+      "publishedAt": "2025-05-06T02:00:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=0Q7m9VFCrUI"
+    },
+    {
+      "id": "s4xSuzZ3Zc4",
+      "questionId": "1920",
+      "title": "Build Array from Permutation | O(1) Space Solution | LeetCode 1920 | Cpp",
+      "channelTitle": "CodeClips with Abhishek Ranjan",
+      "thumbnail": "https://i.ytimg.com/vi/s4xSuzZ3Zc4/hqdefault.jpg",
+      "viewCount": 1224,
+      "likeCount": 18,
+      "publishedAt": "2022-12-10T20:37:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=s4xSuzZ3Zc4"
+    },
+    {
+      "id": "7kZkbnOgs5M",
+      "questionId": "1920",
+      "title": "Leetcode 1920 - Build Array From Permutation | Solution ✅",
+      "channelTitle": "Brainstorming Code",
+      "thumbnail": "https://i.ytimg.com/vi/7kZkbnOgs5M/hqdefault.jpg",
+      "viewCount": 739,
+      "likeCount": 12,
+      "publishedAt": "2024-04-23T10:51:24Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=7kZkbnOgs5M"
+    },
+    {
+      "id": "49GnNLKe42c",
+      "questionId": "1920",
+      "title": "LeetCode 1920 | Build Array from Permutation | Easy Explanation  | LeetCode Solutions",
+      "channelTitle": "CODE WITH PUSHPRAJ",
+      "thumbnail": "https://i.ytimg.com/vi/49GnNLKe42c/hqdefault.jpg",
+      "viewCount": 145,
+      "likeCount": 7,
+      "publishedAt": "2025-10-05T16:30:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=49GnNLKe42c"
     }
   ],
   "2062": [

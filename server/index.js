@@ -1969,6 +1969,37 @@ app.get('/api/universal-problems/topics', async (req, res) => {
     }
 });
 
+// API: Get Curated List problems by IDs
+app.post('/api/universe/curated', async (req, res) => {
+    try {
+        await connectDB();
+        const { ids } = req.body;
+        if (!ids || !Array.isArray(ids)) {
+            return res.status(400).json({ error: "Missing ids array" });
+        }
+        
+        const stringIds = ids.map(id => String(id));
+        
+        const problems = await UniversalProblem.find({
+            platform: 'leetcode',
+            questionId: { $in: stringIds }
+        }).populate('concept_id');
+
+        const problemsWithStatus = await Promise.all(problems.map(async (p) => {
+            const hasSolution = p.concept_id ? await Explanation.exists({ concept_id: p.concept_id }) : false;
+            return {
+                ...p.toObject(),
+                hasSolution: !!hasSolution
+            };
+        }));
+
+        res.json({ problems: problemsWithStatus });
+    } catch (err) {
+        console.error("Error fetching curated problems:", err);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
 // API: Get All Universal Problems (for Explore page)
 app.get('/api/universal-problems', async (req, res) => {
     try {

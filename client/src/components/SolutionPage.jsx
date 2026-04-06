@@ -8,15 +8,17 @@ import { FaBrain } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
 
+import { FaCoffee, FaCode, FaBug } from 'react-icons/fa';
+
 const PremiumLoader = () => {
     const [msgIdx, setMsgIdx] = useState(0);
     const messages = [
-        "Crafting your article...",
-        "Synthesizing visual logic...",
-        "Optimizing performance patterns...",
-        "Mapping brain nodes...",
-        "Generating code implementations...",
-        "Polishing the final draft..."
+        "Searching the darkest corners of the codebase...",
+        "Persuading the compiler to be nice...",
+        "Brewing a fresh pot of coffee...",
+        "Untangling the spaghetti code...",
+        "Reversing the binary tree...",
+        "Asking rubber duck for advice..."
     ];
 
     useEffect(() => {
@@ -26,15 +28,18 @@ const PremiumLoader = () => {
         return () => clearInterval(interval);
     }, []);
 
+    // Rotate icons for fun animation
+    const icons = [<FaCode className="brain-icon-premium" style={{animation: 'spin 3s linear infinite'}} key="1" />, <FaCoffee className="brain-icon-premium" style={{animation: 'bounce 2s infinite'}} key="2" />, <FaBug className="brain-icon-premium" style={{animation: 'pulse 1.5s infinite'}} key="3" />];
+
     return (
         <div className="premium-loader-container">
             <div className="brain-pulse-wrapper">
-                <div className="brain-glow"></div>
-                <FaBrain className="brain-icon-premium" />
+                <div className="brain-glow" style={{ background: 'rgba(245, 124, 0, 0.3)' }}></div>
+                {icons[msgIdx % 3]}
             </div>
             <div className="loading-status-container">
-                <h2 className="loading-title-premium">Intelligence Layer</h2>
-                <p className="loading-msg-premium" key={msgIdx}>{messages[msgIdx]}</p>
+                <h2 className="loading-title-premium" style={{ animation: 'pulse 2s infinite' }}>Loading Solution...</h2>
+                <p className="loading-msg-premium" key={msgIdx} style={{ animation: 'fadeInUp 0.5s ease-out' }}>{messages[msgIdx]}</p>
             </div>
             <div className="loading-progress-bar">
                 <div className="loading-progress-fill"></div>
