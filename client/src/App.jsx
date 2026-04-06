@@ -111,9 +111,9 @@ function AppContent({ savedVideos, onToggleSave }) {
             </li>
 
             <li className="nav-item"><Link to="/companies" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
-            <li className="nav-item"><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily</Link></li>
-            <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>My Progress</Link></li>
-            <li className="nav-item"><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved</Link></li>
+            <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>
+            <li className="nav-item"><Link to="/explore" style={{ color: 'var(--accent-orange)', textDecoration: 'none', fontWeight: 600 }}>Explore</Link></li>
+
             <li className="nav-item">
               <Link to="/pricing" className="nav-premium-btn">
                 {user?.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date() ? (
@@ -126,18 +126,14 @@ function AppContent({ savedVideos, onToggleSave }) {
               </Link>
             </li>
 
-            <li className="nav-item"><Link to="/explore" style={{ color: 'var(--accent-orange)', textDecoration: 'none', fontWeight: 600 }}>All Platform Problem</Link></li>
+            <li className="nav-item dropdown">
+              More ▾
+              <div className="dropdown-content">
+                <div><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily Challenge</Link></div>
+                <div><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved Videos</Link></div>
+              </div>
+            </li>
           </ul>
-
-          {/* Download Extension Button (Desktop Only) */}
-          <a
-            href="https://microsoftedge.microsoft.com/addons/detail/dogbidjabcbbhojhlnbfjilppgpenikb"
-            target="_blank"
-            rel="noreferrer"
-            className="download-extension-btn"
-          >
-            Download Extension
-          </a>
 
           {/* Navbar Search Integration */}
           <div className={`nav-search-container ${isSearchOpen ? 'active' : ''}`}>
@@ -170,6 +166,14 @@ function AppContent({ savedVideos, onToggleSave }) {
         </div>
 
         <div className="nav-auth">
+          <a
+            href="https://microsoftedge.microsoft.com/addons/detail/dogbidjabcbbhojhlnbfjilppgpenikb"
+            target="_blank"
+            rel="noreferrer"
+            className="extension-nav-link"
+          >
+            Extension
+          </a>
           {user ? (
             <div className="nav-user-profile dropdown">
               <div className="user-trigger">
