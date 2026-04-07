@@ -55,7 +55,7 @@ const CompanyDetailPage = () => {
             const API_BASE = import.meta.env.VITE_API_URL || '';
             const params = {
                 page,
-                limit: 50,
+                limit: 20,
                 sort: sortBy,
                 order: 'desc'
             };
@@ -338,9 +338,45 @@ const CompanyDetailPage = () => {
 
             {pages > 1 && (
                 <div className="pagination">
-                    <button disabled={page === 1} onClick={() => setPage(page - 1)}>Prev</button>
-                    <span>Page {page} of {pages}</span>
-                    <button disabled={page === pages} onClick={() => setPage(page + 1)}>Next</button>
+                    <button
+                        className="page-btn"
+                        disabled={page === 1}
+                        onClick={() => setPage(page - 1)}
+                    >
+                        ← Prev
+                    </button>
+
+                    <div className="page-numbers">
+                        {Array.from({ length: pages }, (_, i) => i + 1)
+                            .filter(p => p === 1 || p === pages || Math.abs(p - page) <= 2)
+                            .reduce((acc, p, idx, arr) => {
+                                if (idx > 0 && p - arr[idx - 1] > 1) acc.push('...');
+                                acc.push(p);
+                                return acc;
+                            }, [])
+                            .map((p, idx) =>
+                                p === '...' ? (
+                                    <span key={`ellipsis-${idx}`} className="page-ellipsis">…</span>
+                                ) : (
+                                    <button
+                                        key={p}
+                                        className={`page-num-btn ${page === p ? 'page-num-active' : ''}`}
+                                        onClick={() => setPage(p)}
+                                    >
+                                        {p}
+                                    </button>
+                                )
+                            )
+                        }
+                    </div>
+
+                    <button
+                        className="page-btn"
+                        disabled={page === pages}
+                        onClick={() => setPage(page + 1)}
+                    >
+                        Next →
+                    </button>
                 </div>
             )}
 
@@ -761,28 +797,77 @@ const CompanyDetailPage = () => {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    gap: 2rem;
-                    margin-top: 3rem;
-                    color: #666;
+                    gap: 0.8rem;
+                    margin-top: 2.5rem;
+                    flex-wrap: wrap;
                 }
 
-                .pagination button {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    color: white;
-                    padding: 0.6rem 1.5rem;
+                .page-btn {
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    color: #ccc;
+                    padding: 0.55rem 1.2rem;
                     border-radius: 10px;
                     cursor: pointer;
-                    transition: all 0.2s;
+                    font-size: 0.88rem;
+                    font-weight: 600;
+                    font-family: var(--font-family);
+                    transition: all 0.2s ease;
+                    letter-spacing: 0.3px;
                 }
 
-                .pagination button:hover:not(:disabled) {
-                    background: rgba(255, 255, 255, 0.08);
+                .page-btn:hover:not(:disabled) {
+                    background: rgba(245, 124, 0, 0.1);
+                    border-color: rgba(245, 124, 0, 0.4);
+                    color: #ffa116;
                 }
 
-                .pagination button:disabled {
-                    opacity: 0.3;
+                .page-btn:disabled {
+                    opacity: 0.25;
                     cursor: not-allowed;
+                }
+
+                .page-numbers {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.3rem;
+                }
+
+                .page-num-btn {
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.06);
+                    color: #888;
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 0.88rem;
+                    font-family: var(--font-family);
+                    transition: all 0.2s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .page-num-btn:hover {
+                    background: rgba(245, 124, 0, 0.08);
+                    border-color: rgba(245, 124, 0, 0.3);
+                    color: #ffa116;
+                }
+
+                .page-num-active {
+                    background: rgba(245, 124, 0, 0.15) !important;
+                    border-color: rgba(245, 124, 0, 0.6) !important;
+                    color: #ffa116 !important;
+                    font-weight: 700;
+                    box-shadow: 0 0 0 2px rgba(245, 124, 0, 0.1);
+                }
+
+                .page-ellipsis {
+                    color: #444;
+                    font-size: 1rem;
+                    padding: 0 0.2rem;
+                    user-select: none;
                 }
 
                 .no-questions {
