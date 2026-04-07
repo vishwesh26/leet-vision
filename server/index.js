@@ -1301,7 +1301,7 @@ app.get('/api/companies', async (req, res) => {
 app.get('/api/company/:name/questions', async (req, res) => {
     try {
         const { name } = req.params;
-        const { page = 1, limit = 50, sort = 'frequency', order = 'desc', search = '', difficulty = '' } = req.query;
+        const { page = 1, limit = 50, sort = 'frequency', order = 'desc', search = '', difficulty = '', topic = '' } = req.query;
         
         // Access Control Logic
         let hasAccess = false;
@@ -1331,6 +1331,7 @@ app.get('/api/company/:name/questions', async (req, res) => {
         const query = { company: name };
         if (search) query.title = { $regex: search, $options: 'i' };
         if (difficulty) query.difficulty = difficulty;
+        if (topic) query.topics = { $in: [topic] }; // Filter by topic (checks array membership)
 
         const skip = (page - 1) * limit;
         const sortObj = {};

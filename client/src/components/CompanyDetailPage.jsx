@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import SEO from './SEO';
-import { FaExternalLinkAlt, FaPlay, FaBolt, FaSearch, FaFilter, FaBuilding } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaPlay, FaBolt, FaSearch, FaBuilding } from 'react-icons/fa';
 import { useSolved } from '../context/SolvedContext';
 import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
@@ -25,6 +25,17 @@ const CompanyDetailPage = () => {
     const [difficulty, setDifficulty] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('frequency');
+    const [selectedTopic, setSelectedTopic] = useState('');
+
+    const COMMON_TOPICS = [
+        'Array', 'String', 'Hash Table', 'Dynamic Programming', 'Math',
+        'Sorting', 'Greedy', 'Depth-First Search', 'Breadth-First Search',
+        'Binary Search', 'Two Pointers', 'Sliding Window', 'Stack', 'Queue',
+        'Linked List', 'Tree', 'Binary Tree', 'Graph', 'Heap (Priority Queue)',
+        'Backtracking', 'Recursion', 'Divide and Conquer', 'Union Find',
+        'Trie', 'Bit Manipulation', 'Design', 'Matrix', 'Monotonic Stack',
+        'Prefix Sum', 'Segment Tree', 'Topological Sort', 'Simulation',
+    ];
 
     // Helper to get logo URL (Using Google Favicon Service as it's less likely to be blocked)
     const getLogoUrl = (name) => {
@@ -50,6 +61,7 @@ const CompanyDetailPage = () => {
             };
             if (difficulty) params.difficulty = difficulty;
             if (searchTerm) params.search = searchTerm;
+            if (selectedTopic) params.topic = selectedTopic;
 
             const response = await axios.get(`${API_BASE}/api/company/${encodeURIComponent(companyName)}/questions`, { params, withCredentials: true });
 
@@ -73,7 +85,7 @@ const CompanyDetailPage = () => {
 
     useEffect(() => {
         fetchQuestions();
-    }, [companyName, page, difficulty, sortBy, user]);
+    }, [companyName, page, difficulty, sortBy, selectedTopic, user]);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -146,36 +158,66 @@ const CompanyDetailPage = () => {
                 </div>
             </div>
 
+            {/* ── Controls Bar ── */}
             <div className="controls-bar">
                 <form className="search-mini" onSubmit={handleSearch}>
-                    <FaSearch />
+                    <FaSearch className="search-icon" />
                     <input
                         type="text"
-                        placeholder="Search questions..."
+                        placeholder="Search questions…"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
+                    {searchTerm && (
+                        <button type="button" className="clear-btn" onClick={() => { setSearchTerm(''); setPage(1); fetchQuestions(); }}>✕</button>
+                    )}
                 </form>
 
                 <div className="filters-group">
-                    {/* Purchase UI removed for production */}
-                    <div className="filter-select">
-                        <FaFilter />
+                    {/* Difficulty */}
+                    <div className={`filter-pill ${difficulty ? 'filter-pill--active' : ''}`}>
+                        <label>Difficulty</label>
                         <select value={difficulty} onChange={(e) => { setDifficulty(e.target.value); setPage(1); }}>
-                            <option value="">All Difficulties</option>
-                            <option value="Easy">Easy</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Hard">Hard</option>
+                            <option value="">All</option>
+                            <option value="Easy">🟢 Easy</option>
+                            <option value="Medium">🟡 Medium</option>
+                            <option value="Hard">🔴 Hard</option>
                         </select>
+                        <span className="chevron">▾</span>
                     </div>
 
-                    <div className="filter-select">
+                    {/* Topic */}
+                    <div className={`filter-pill ${selectedTopic ? 'filter-pill--active' : ''}`}>
+                        <label>Topic</label>
+                        <select value={selectedTopic} onChange={(e) => { setSelectedTopic(e.target.value); setPage(1); }}>
+                            <option value="">All</option>
+                            {COMMON_TOPICS.map(t => (
+                                <option key={t} value={t}>{t}</option>
+                            ))}
+                        </select>
+                        <span className="chevron">▾</span>
+                    </div>
+
+                    {/* Sort */}
+                    <div className="filter-pill">
+                        <label>Sort</label>
                         <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); setPage(1); }}>
                             <option value="frequency">Most Frequent</option>
                             <option value="acceptanceRate">High Acceptance</option>
                             <option value="title">Alphabetical</option>
                         </select>
+                        <span className="chevron">▾</span>
                     </div>
+
+                    {/* Active filter clear */}
+                    {(difficulty || selectedTopic) && (
+                        <button
+                            className="clear-filters-btn"
+                            onClick={() => { setDifficulty(''); setSelectedTopic(''); setPage(1); }}
+                        >
+                            ✕ Clear
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -220,7 +262,14 @@ const CompanyDetailPage = () => {
                                                 </span>
                                                 <div className="q-topics">
                                                     {q.topics.slice(0, 3).map(t => (
-                                                        <span key={t} className="topic-tag">{t}</span>
+                                                        <span
+                                                            key={t}
+                                                            className={`topic-tag ${selectedTopic === t ? 'topic-tag-active' : ''}`}
+                                                            onClick={() => { setSelectedTopic(selectedTopic === t ? '' : t); setPage(1); }}
+                                                            title={`Filter by ${t}`}
+                                                        >
+                                                            {t}
+                                                        </span>
                                                     ))}
                                                 </div>
                                             </div>
@@ -391,58 +440,174 @@ const CompanyDetailPage = () => {
                     letter-spacing: 1px;
                 }
 
+                /* ── Controls Bar ── */
                 .controls-bar {
                     display: flex;
-                    justify-content: space-between;
+                    flex-wrap: wrap;
                     align-items: center;
-                    gap: 2rem;
+                    gap: 1rem;
                     margin-bottom: 2rem;
+                    padding: 1.2rem 1.5rem;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid rgba(255, 255, 255, 0.06);
+                    border-radius: 16px;
+                    backdrop-filter: blur(12px);
                 }
 
                 .search-mini {
                     flex: 1;
+                    min-width: 200px;
                     display: flex;
                     align-items: center;
                     gap: 0.8rem;
-                    background: rgba(255, 255, 255, 0.03);
+                    background: rgba(255, 255, 255, 0.04);
                     border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 12px;
-                    padding: 0 1.2rem;
+                    border-radius: 10px;
+                    padding: 0 1rem;
+                    transition: border-color 0.2s ease;
+                }
+
+                .search-mini:focus-within {
+                    border-color: rgba(245, 124, 0, 0.5);
+                    box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.08);
+                }
+
+                .search-mini .search-icon {
                     color: #555;
+                    flex-shrink: 0;
+                    font-size: 0.85rem;
                 }
 
                 .search-mini input {
                     background: transparent;
                     border: none;
                     color: white;
-                    padding: 1rem 0;
+                    padding: 0.8rem 0;
                     outline: none;
                     width: 100%;
+                    font-size: 0.95rem;
+                    font-family: var(--font-family);
                 }
 
+                .search-mini input::placeholder {
+                    color: #444;
+                }
+
+                .clear-btn {
+                    background: none;
+                    border: none;
+                    color: #555;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    padding: 0.2rem 0.4rem;
+                    border-radius: 4px;
+                    flex-shrink: 0;
+                    transition: color 0.2s;
+                }
+
+                .clear-btn:hover { color: #ccc; }
+
+                /* Filters */
                 .filters-group {
                     display: flex;
-                    gap: 1rem;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 0.6rem;
                 }
 
-                .filter-select {
+                .filter-pill {
+                    position: relative;
                     display: flex;
                     align-items: center;
-                    gap: 0.8rem;
-                    background: rgba(255, 255, 255, 0.03);
+                    gap: 0;
+                    background: rgba(255, 255, 255, 0.04);
                     border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 12px;
-                    padding: 0 1rem;
-                    color: #555;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    transition: all 0.2s ease;
+                    cursor: pointer;
                 }
 
-                .filter-select select {
+                .filter-pill:hover {
+                    border-color: rgba(245, 124, 0, 0.35);
+                    background: rgba(245, 124, 0, 0.05);
+                }
+
+                .filter-pill--active {
+                    border-color: rgba(245, 124, 0, 0.6) !important;
+                    background: rgba(245, 124, 0, 0.08) !important;
+                    box-shadow: 0 0 0 2px rgba(245, 124, 0, 0.12);
+                }
+
+                .filter-pill label {
+                    font-size: 0.72rem;
+                    font-weight: 700;
+                    color: #555;
+                    text-transform: uppercase;
+                    letter-spacing: 0.8px;
+                    padding: 0 0 0 0.9rem;
+                    pointer-events: none;
+                    user-select: none;
+                    white-space: nowrap;
+                }
+
+                .filter-pill--active label {
+                    color: #ffa116;
+                }
+
+                .filter-pill select {
                     background: transparent;
                     border: none;
                     color: #ccc;
-                    padding: 1rem 0;
+                    padding: 0.65rem 0.5rem 0.65rem 0.4rem;
                     outline: none;
                     cursor: pointer;
+                    font-size: 0.9rem;
+                    font-family: var(--font-family);
+                    appearance: none;
+                    -webkit-appearance: none;
+                    min-width: 80px;
+                }
+
+                .filter-pill--active select {
+                    color: #fff;
+                }
+
+                .filter-pill option {
+                    background: #1a1a1a;
+                    color: #ccc;
+                }
+
+                .filter-pill .chevron {
+                    font-size: 0.7rem;
+                    color: #444;
+                    padding-right: 0.7rem;
+                    pointer-events: none;
+                    user-select: none;
+                }
+
+                .filter-pill--active .chevron {
+                    color: #ffa116;
+                }
+
+                .clear-filters-btn {
+                    background: rgba(245, 124, 0, 0.1);
+                    border: 1px solid rgba(245, 124, 0, 0.4);
+                    color: #ffa116;
+                    padding: 0.5rem 0.9rem;
+                    border-radius: 10px;
+                    font-size: 0.82rem;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    font-family: var(--font-family);
+                    letter-spacing: 0.3px;
+                }
+
+                .clear-filters-btn:hover {
+                    background: rgba(245, 124, 0, 0.2);
+                    border-color: rgba(245, 124, 0, 0.7);
+                    transform: translateY(-1px);
                 }
 
                 .questions-table-wrapper {
@@ -516,6 +681,22 @@ const CompanyDetailPage = () => {
                     color: #666;
                     padding: 0.2rem 0.5rem;
                     border-radius: 4px;
+                    cursor: pointer;
+                    border: 1px solid transparent;
+                    transition: all 0.2s ease;
+                }
+
+                .topic-tag:hover {
+                    background: rgba(245, 124, 0, 0.1);
+                    color: #ffa116;
+                    border-color: rgba(245, 124, 0, 0.3);
+                }
+
+                .topic-tag-active {
+                    background: rgba(245, 124, 0, 0.15) !important;
+                    color: #ffa116 !important;
+                    border-color: rgba(245, 124, 0, 0.5) !important;
+                    font-weight: 700;
                 }
 
                 .freq-bar-container {
