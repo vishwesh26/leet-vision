@@ -320,84 +320,97 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* Premium Call to Action */}
+            {/* Call to Action - About & Mission */}
             <section style={{ padding: '0 2rem 8rem', zIndex: 1, position: 'relative' }}>
                 <div className="perspective-1000">
-                    <Link to="/pricing" className="premium-cta-card" style={{
+                    <div style={{
                         maxWidth: '1000px',
                         margin: '0 auto',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        padding: '6rem 2rem',
+                        padding: '5rem 3rem',
                         textAlign: 'center',
-                        textDecoration: 'none',
-                        color: 'white',
+                        background: '#111',
+                        border: '1px solid #333',
                         borderRadius: '32px',
+                        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
+                        position: 'relative',
                         overflow: 'hidden'
                     }}>
-                        {/* Elite Visual Effects */}
-                        <div className="premium-mesh"></div>
-                        <div className="premium-noise"></div>
-                        <div className="border-beam"></div>
+                        {/* Subtle Orange Glow */}
+                        <div style={{
+                            position: 'absolute',
+                            top: '0',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '100%',
+                            height: '100%',
+                            background: 'radial-gradient(ellipse at top, rgba(245, 124, 0, 0.15), transparent 60%)',
+                            pointerEvents: 'none',
+                        }}></div>
 
                         <div className="text-cursive" style={{
-                            fontSize: '1.5rem',
-                            marginBottom: '0.5rem',
+                            fontSize: '1.8rem',
+                            marginBottom: '1.5rem',
                             color: 'var(--accent-orange)',
                             position: 'relative',
                             zIndex: 2
                         }}>
-                            Elevate your vision
+                            Stop reading. Start visualizing.
                         </div>
 
-                        <div style={{ position: 'relative', width: '100%' }}>
-                            {/* Crown positioned above "GO" */}
-                            <img
-                                src="/gold-crown.png"
-                                alt="Crown"
-                                style={{
-                                    position: 'absolute',
-                                    top: '20px',
-                                    left: '340px',
-                                    transform: 'translateX(-160%) rotate(-15deg)', /* Adjust X to align with "GO" */
-                                    width: '100px',
-                                    height: 'auto',
-                                    pointerEvents: 'none',
-                                    zIndex: 10
-                                }}
-                            />
-                            <h2 className="text-editorial premium-gold-text" style={{
-                                fontSize: 'clamp(3rem, 10vw, 6rem)',
-                                fontWeight: '900',
-                                marginBottom: '3rem',
-                                position: 'relative',
-                                zIndex: 2,
-                                lineHeight: '1', /* Increased from 0.8 to avoid clipping */
-                                textAlign: 'center'
-                            }}>
-                                GO PREMIUM
-                            </h2>
-                        </div>
+                        <h2 className="text-editorial" style={{
+                            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                            fontWeight: '800',
+                            marginBottom: '1.5rem',
+                            color: 'white',
+                            position: 'relative',
+                            zIndex: 2,
+                            lineHeight: '1.2'
+                        }}>
+                            THE ULTIMATE <br/> INTERVIEW COMPANION
+                        </h2>
 
-                        <div className="premium-button">
-                            Explore Elite Plans
-                        </div>
+                        <p style={{
+                            color: '#aaa',
+                            fontSize: '1.1rem',
+                            lineHeight: '1.6',
+                            maxWidth: '700px',
+                            margin: '0 auto 3rem auto',
+                            position: 'relative',
+                            zIndex: 2
+                        }}>
+                            LeetVision bridges the gap between struggling with complex code and truly understanding algorithms. We aggregate the most frequently asked questions from top companies and provide <strong>clear, step-by-step video solutions</strong>. Whether it's LeetCode, CodeChef, or HackerRank, we help you recognize the patterns needed to crack your dream job.
+                        </p>
 
-                        {/* Additional floating light in background */}
-                        <div className="float-slow" style={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            width: '300px',
-                            height: '300px',
-                            background: 'radial-gradient(circle, rgba(245, 124, 0, 0.05) 0%, transparent 70%)',
-                            filter: 'blur(100px)',
-                            zIndex: 0
-                        }}></div>
-                    </Link>
+                        <Link to="/explore" style={{
+                            background: 'var(--accent-orange)',
+                            color: 'white',
+                            padding: '1rem 3rem',
+                            borderRadius: '50px',
+                            fontSize: '1.1rem',
+                            fontWeight: '700',
+                            textDecoration: 'none',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            transition: 'all 0.3s ease',
+                            boxShadow: '0 10px 20px rgba(245, 124, 0, 0.3)',
+                            position: 'relative',
+                            zIndex: 2
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-3px)';
+                            e.currentTarget.style.boxShadow = '0 15px 25px rgba(245, 124, 0, 0.4)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'none';
+                            e.currentTarget.style.boxShadow = '0 10px 20px rgba(245, 124, 0, 0.3)';
+                        }}>
+                            Start Learning Free
+                        </Link>
+                    </div>
                 </div>
             </section>
 

@@ -16,7 +16,7 @@ const companies = [
 
 const CompanyPage = () => {
     const { user } = useAuth();
-    const hasFullAccess = user && user.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date();
+    const hasFullAccess = !!user;
 
     const [selectedCompany, setSelectedCompany] = useState(companies[0]);
     const [problems, setProblems] = useState([]);
@@ -92,8 +92,8 @@ const CompanyPage = () => {
                         textAlign: 'center'
                     }}>
                         <span style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🔒</span>
-                        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '0.5rem', color: 'white' }}>Premium Only</div>
-                        <Link to="/pricing" style={{
+                        <div style={{ fontWeight: 'bold', fontSize: '0.9rem', marginBottom: '0.5rem', color: 'white' }}>Login to Access</div>
+                        <Link to="/login" style={{
                             background: 'var(--accent-orange)',
                             color: 'white',
                             padding: '0.4rem 0.8rem',
@@ -101,7 +101,7 @@ const CompanyPage = () => {
                             fontSize: '0.8rem',
                             textDecoration: 'none',
                             fontWeight: 'bold'
-                        }}>Upgrade to View</Link>
+                        }}>Login to View</Link>
                     </div>
                 )}
 

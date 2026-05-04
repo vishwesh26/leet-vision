@@ -8,8 +8,7 @@ import { SiLeetcode, SiHackerrank, SiGeeksforgeeks, SiCodechef } from 'react-ico
 const UniversalExplore = () => {
     // Auth State
     const { user } = useAuth();
-    const hasFullAccess = user && user.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date();
-    const isGuest = !user || !hasFullAccess;
+    const isGuest = !user;
 
     // Global State
     const [platform, setPlatform] = useState('all');
@@ -492,8 +491,8 @@ const UniversalExplore = () => {
                                             <div className="gate-content">
                                                 <FaLock size={40} style={{ marginBottom: '15px', color: '#ffa116' }} />
                                                 <h3>Unlock the Full Universe</h3>
-                                                <p>{user ? "Upgrade to Premium to access all problems." : `Join LeetVision to access all ${displayProblems.length}+ problems across platforms.`}</p>
-                                                <Link to={user ? "/pricing" : "/login"} className="gate-btn">{user ? "Get Premium" : "Login to Continue"}</Link>
+                                                <p>Join LeetVision to access all {displayProblems.length}+ problems across platforms.</p>
+                                                <Link to="/login" className="gate-btn">Login to Continue</Link>
                                             </div>
                                             <div className="gate-blur"></div>
                                         </div>
@@ -568,8 +567,8 @@ const UniversalExplore = () => {
                                         <div className="gate-content">
                                             <FaLock size={40} style={{ marginBottom: '15px', color: '#ffa116' }} />
                                             <h3>Unlock All Topics</h3>
-                                            <p>{user ? "Upgrade to Premium to access all topics." : `Join LeetVision to access all ${topics.length}+ topics and their problems.`}</p>
-                                            <Link to={user ? "/pricing" : "/login"} className="gate-btn">{user ? "Get Premium" : "Login to Continue"}</Link>
+                                            <p>Join LeetVision to access all {topics.length}+ topics and their problems.</p>
+                                            <Link to="/login" className="gate-btn">Login to Continue</Link>
                                         </div>
                                         <div className="gate-blur"></div>
                                     </div>

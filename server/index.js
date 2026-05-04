@@ -694,28 +694,39 @@ const getOrFetchUniversalVideos = async (title, conceptId) => {
 };
 
 // Companies for Question Endpoint
+// Accepts either a numeric questionId OR a slug string
 app.get('/api/question/:questionId/companies', async (req, res) => {
     try {
         const { questionId } = req.params;
         if (!questionId) return res.status(400).json({ error: 'Question ID required' });
-        
- // ensure DB connection
-        
-        // Find all records matching this question ID (or slug if they pass it)
-        const mappings = await CompanyQuestion.find({
-            $or: [
-                { questionId: questionId.toString() },
-                { leetcodeUrl: new RegExp('/' + questionId.toString() + '/?', 'i') } // Fallback for slug matching
-            ]
-        }).select('company -_id').lean();
-        
+
+        const isNumeric = /^\d+$/.test(questionId);
+
+        let query;
+        if (isNumeric) {
+            // Numeric ID: match by questionId field OR by leetcodeUrl containing the number
+            query = {
+                $or: [
+                    { questionId: questionId.toString() },
+                    { leetcodeUrl: new RegExp('/' + questionId + '/?$', 'i') }
+                ]
+            };
+        } else {
+            // Slug string: match by leetcodeUrl containing the slug
+            query = {
+                leetcodeUrl: new RegExp('/' + questionId.replace(/[-]/g, '[-]') + '/?', 'i')
+            };
+        }
+
+        const mappings = await CompanyQuestion.find(query).select('company -_id').lean();
+
         if (!mappings || mappings.length === 0) {
             return res.json([]);
         }
-        
+
         // Extract unique companies
         const uniqueCompanies = [...new Set(mappings.map(m => m.company))];
-        
+
         res.json(uniqueCompanies);
     } catch (err) {
         console.error("API Question Companies Error:", err);

@@ -66,16 +66,10 @@ const CompanyDetailPage = () => {
             const response = await axios.get(`${API_BASE}/api/company/${encodeURIComponent(companyName)}/questions`, { params, withCredentials: true });
 
             // Client-side override for access 
-            // 1. Check if user has active subscription
-            const hasActiveSubscription = user?.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date();
-
-            // 2. Check individual company ownership
-            const isOwnedLocally = user?.ownedCompanies?.includes(companyName) || user?.ownedCompanies?.length > 10;
-
             setQuestions(response.data.questions);
             setTotal(response.data.total);
             setPages(response.data.pages);
-            setHasAccess(response.data.hasAccess || isOwnedLocally || hasActiveSubscription);
+            setHasAccess(!!user);
         } catch (err) {
             console.error("Error fetching questions:", err);
         } finally {
@@ -287,8 +281,8 @@ const CompanyDetailPage = () => {
                                         </td>
                                         <td className="actions-cell">
                                             {locked ? (
-                                                <button className="unlock-inline-btn" onClick={() => handleUnlock('yearly_sub')}>
-                                                    Unlock All
+                                                <button className="unlock-inline-btn" onClick={() => navigate('/login')}>
+                                                    Login to Unlock
                                                 </button>
                                             ) : (
                                                 <div className="action-btns">
@@ -315,13 +309,10 @@ const CompanyDetailPage = () => {
                         <div className="premium-upsell-card">
                             <div className="upsell-content">
                                 <h3>Unlock <span>{total - 4}+</span> More Questions</h3>
-                                <p>Get full access to all interview questions from top tech companies including {companyName} with LeetVision Premium.</p>
+                                <p>Login to your LeetVision account to get full access to all interview questions from top tech companies including {companyName}.</p>
                                 <div className="upsell-actions">
-                                    <button className="primary-btn" onClick={() => handleUnlock('yearly_sub')}>
-                                        Get Premium Access
-                                    </button>
-                                    <button className="secondary-btn" onClick={() => handleUnlock('monthly_sub')}>
-                                        Try Monthly (₹50)
+                                    <button className="primary-btn" onClick={() => navigate('/login')}>
+                                        Login to Continue
                                     </button>
                                 </div>
                             </div>

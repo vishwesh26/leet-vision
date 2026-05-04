@@ -114,17 +114,6 @@ function AppContent({ savedVideos, onToggleSave }) {
             <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>
             <li className="nav-item"><Link to="/explore" style={{ color: 'var(--accent-orange)', textDecoration: 'none', fontWeight: 600 }}>Explore</Link></li>
 
-            <li className="nav-item">
-              <Link to="/pricing" className="nav-premium-btn">
-                {user?.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date() ? (
-                  <span title={`Expires: ${new Date(user.subscriptionExpiry).toLocaleDateString()}`}>
-                    Premium ({user.subscriptionType})
-                  </span>
-                ) : (
-                  "Premium"
-                )}
-              </Link>
-            </li>
 
             <li className="nav-item dropdown">
               More ▾
@@ -244,21 +233,7 @@ function AppContent({ savedVideos, onToggleSave }) {
 
             <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
             <Link to="/explore" className="mobile-link highlight" style={{ color: 'var(--accent-orange)' }} onClick={() => setIsMobileMenuOpen(false)}>All Platform Problem</Link>
-            {user?.subscriptionExpiry && new Date(user.subscriptionExpiry) > new Date() ? (
-              <div style={{ padding: '10px 20px', background: 'rgba(245, 124, 0, 0.1)', borderRadius: '12px', marginBottom: '10px', border: '1px solid rgba(245, 124, 0, 0.2)' }}>
-                <div style={{ color: 'var(--accent-orange)', fontWeight: 700, fontSize: '0.9rem', marginBottom: '4px' }}>
-                  👑 Active Plan: {user.subscriptionType.charAt(0).toUpperCase() + user.subscriptionType.slice(1)}
-                </div>
-                <div style={{ color: '#888', fontSize: '0.75rem' }}>
-                  Expires on: {new Date(user.subscriptionExpiry).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
-                </div>
-                <Link to="/pricing" style={{ color: '#aaa', fontSize: '0.8rem', textDecoration: 'underline', marginTop: '8px', display: 'block' }} onClick={() => setIsMobileMenuOpen(false)}>
-                  Manage Subscription
-                </Link>
-              </div>
-            ) : (
-              <Link to="/pricing" className="mobile-link highlight" style={{ color: 'var(--accent-orange)', fontWeight: 700 }} onClick={() => setIsMobileMenuOpen(false)}>Premium Plans 👑</Link>
-            )}
+
 
             <div className="mobile-divider">Difficulty</div>
             <Link to="/leetcode-easy" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Easy</Link>
