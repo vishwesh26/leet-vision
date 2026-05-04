@@ -32,6 +32,7 @@ import CompanyDetailPage from './components/CompanyDetailPage';
 import ConceptPage from './components/ConceptPage';
 import UniversalExplore from './components/UniversalExplore';
 import BasicToAdvancePage from './components/BasicToAdvancePage';
+import WelcomePopup from './components/WelcomePopup';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './components/LoginPage';
@@ -53,6 +54,9 @@ function AppContent({ savedVideos, onToggleSave }) {
 
   const { leetcodeUsername, disconnect, syncWithLeetCode, isSyncing } = useSolved();
   const [showConnectModal, setShowConnectModal] = useState(false);
+
+  // Welcome popup — shown only once per browser
+  const [showWelcome, setShowWelcome] = useState(false);
 
   // Search State
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -78,6 +82,8 @@ function AppContent({ savedVideos, onToggleSave }) {
   return (
     <>
       <div className="background-glow"></div>
+
+      <WelcomePopup />
 
       {showConnectModal && <ConnectModal onClose={() => setShowConnectModal(false)} />}
 
