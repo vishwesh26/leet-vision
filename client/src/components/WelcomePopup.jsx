@@ -227,19 +227,20 @@ const WelcomePopup = () => {
                         letterSpacing: '3px',
                         color: 'var(--accent-orange)',
                         textTransform: 'uppercase',
-                        marginBottom: '0.75rem',
+                        marginBottom: '1rem',
                     }}>
                         Welcome to LeetVision
                     </div>
 
                     <h2 style={{
-                        fontSize: '1.9rem',
+                        fontSize: '2rem',
                         fontWeight: '800',
                         color: 'white',
                         margin: '0 0 1rem 0',
-                        lineHeight: '1.2',
+                        lineHeight: '1.3',
                     }}>
-                        Company Questions<br />Are Now <span style={{ color: 'var(--accent-orange)' }}>100% Free!</span>
+                        Your Dream Company's<br />Questions Are Now{' '}
+                        <span style={{ color: 'var(--accent-orange)' }}>Freeeeeeeee......! 🚀</span>
                     </h2>
 
                     <p style={{
@@ -248,23 +249,8 @@ const WelcomePopup = () => {
                         lineHeight: '1.6',
                         margin: '0 0 2rem 0',
                     }}>
-                        Access every company-wise interview question from <strong style={{ color: '#ccc' }}>Google, Amazon, Meta, Microsoft</strong> and more — completely free. Just log in and start practicing.
+                        No subscriptions. Just log in and start cracking interviews.
                     </p>
-
-                    {/* Feature pills */}
-                    <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                        {['Company Questions', 'Video Solutions', 'Progress Tracking'].map(f => (
-                            <span key={f} style={{
-                                background: 'rgba(245, 124, 0, 0.1)',
-                                border: '1px solid rgba(245, 124, 0, 0.25)',
-                                color: 'var(--accent-orange)',
-                                padding: '0.35rem 0.9rem',
-                                borderRadius: '50px',
-                                fontSize: '0.8rem',
-                                fontWeight: '600',
-                            }}>✓ {f}</span>
-                        ))}
-                    </div>
 
                     {/* CTA Buttons */}
                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -290,24 +276,7 @@ const WelcomePopup = () => {
                         >
                             <FaBuilding size={14} /> Explore Companies
                         </Link>
-                        <button
-                            onClick={handleClose}
-                            style={{
-                                background: 'transparent',
-                                color: '#888',
-                                padding: '0.85rem 1.5rem',
-                                borderRadius: '50px',
-                                fontWeight: '600',
-                                fontSize: '0.9rem',
-                                border: '1px solid #333',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease',
-                            }}
-                            onMouseEnter={e => { e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = '#555'; }}
-                            onMouseLeave={e => { e.currentTarget.style.color = '#888'; e.currentTarget.style.borderColor = '#333'; }}
-                        >
-                            Maybe Later
-                        </button>
+                        
                     </div>
                 </div>
             </div>
