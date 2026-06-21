@@ -12,6 +12,8 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "axios": "^1.13.2",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
@@ -19,8 +21,14 @@
     "express-rate-limit": "^8.5.2",
     "helmet": "^8.2.0",
     "json5": "^2.2.3",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.21.0",
     "node-cache": "^5.1.2",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^8.0.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "razorpay": "^2.9.6",
     "slugify": "^1.6.6"
   }
 }
