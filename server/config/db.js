@@ -27,7 +27,7 @@ const connectDB = async () => {
     }
 
     const options = {
-        maxPoolSize: 10,        // Atlas Shared/Free Tier limit is 500 connections. 10 is safe per instance.
+        maxPoolSize: process.env.VERCEL ? 3 : 10, // Optimize pool size for Vercel serverless to avoid connection exhaustion
         serverSelectionTimeoutMS: 5000,
         socketTimeoutMS: 45000,
         connectTimeoutMS: 10000,

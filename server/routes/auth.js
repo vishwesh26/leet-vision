@@ -10,6 +10,7 @@ const sendEmail = require('../utils/email.js');
 const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret_keep_it_safe';
 const JWT_EXPIRES_IN = '30d';
 const passport = require('passport');
+const { authLimiter, otpLimiter } = require('../middleware/rateLimiter');
 
 // Helper to create token
 const signToken = (id) => {
@@ -54,12 +55,26 @@ router.get('/google/callback', (req, res, next) => {
 );
 
 // Send OTP
-router.post('/send-otp', async (req, res) => {
+router.post('/send-otp', otpLimiter, async (req, res) => {
     try {
         const { email } = req.body;
 
         if (!email) {
             return res.status(400).json({ status: 'fail', message: 'Please provide an email' });
+        }
+
+        // Stateful DB Cooldown Check to prevent spamming the same email
+        const existingOtp = await OTP.findOne({ email });
+        if (existingOtp) {
+            const timePassed = Date.now() - new Date(existingOtp.createdAt).getTime();
+            const cooldown = 60000; // 60 seconds
+            if (timePassed < cooldown) {
+                const secondsLeft = Math.ceil((cooldown - timePassed) / 1000);
+                return res.status(429).json({
+                    status: 'fail',
+                    message: `Please wait ${secondsLeft} seconds before requesting another code.`
+                });
+            }
         }
 
         // Check if user already exists
@@ -121,7 +136,7 @@ router.post('/send-otp', async (req, res) => {
 });
 
 // Sign Up
-router.post('/signup', async (req, res) => {
+router.post('/signup', authLimiter, async (req, res) => {
     try {
         const { name, email, password, otp } = req.body;
 
@@ -231,7 +246,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // Login
-router.post('/login', async (req, res) => {
+router.post('/login', authLimiter, async (req, res) => {
     try {
         const { email, password } = req.body;
 

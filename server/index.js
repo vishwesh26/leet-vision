@@ -66,11 +66,48 @@ const articleSchema = new mongoose.Schema({
 const Solution = mongoose.models.Solution || mongoose.model('Solution', solutionSchema);
 const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
 const { protect, admin } = require('./middleware/authMiddleware');
+const { reportLimiter, aiGenerationLimiter } = require('./middleware/rateLimiter');
 const passport = require('passport');
 require('./config/passport');
+const helmet = require('helmet');
+const mongoSanitize = require('./middleware/mongoSanitizer');
 
 const app = express();
 app.set("trust proxy", 1);
+
+// Security Middlewares
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://va.vercel-scripts.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            imgSrc: [
+                "'self'", 
+                "data:", 
+                "https://logo.clearbit.com", 
+                "https://www.google.com", 
+                "https://icon.horse", 
+                "https://i.ytimg.com", 
+                "https://lh3.googleusercontent.com"
+            ],
+            frameSrc: ["'self'", "https://www.youtube.com", "https://youtube.com"],
+            connectSrc: [
+                "'self'", 
+                "https://leet-vision.vercel.app", 
+                "http://localhost:5000", 
+                "http://localhost:5173", 
+                "https://challenges.cloudflare.com", 
+                "https://vitals.vercel-insights.com"
+            ]
+        }
+    },
+    crossOriginEmbedderPolicy: false // Allowed to embed third-party players like YouTube
+}));
+
+app.use(mongoSanitize);
+
 app.use(passport.initialize());
 const PORT = process.env.PORT || 5000;
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
@@ -177,7 +214,7 @@ app.post('/api/admin/send-campaign', protect, admin, async (req, res) => {
 });
 
 // Report Endpoint
-app.post('/api/report', async (req, res) => {
+app.post('/api/report', reportLimiter, async (req, res) => {
     try {
         const { questionId, title, platform, reason, details, correctSolution } = req.body;
         
@@ -1091,6 +1128,15 @@ app.get('/api/solution/:questionId', async (req, res) => {
             return res.status(503).json({ error: "AI Service Unavailable (Key missing)" });
         }
 
+        // Run rate limiter manually before calling AI to protect quota/budget
+        await new Promise((resolve) => {
+            aiGenerationLimiter(req, res, (err) => {
+                if (err) return;
+                resolve();
+            });
+        });
+        if (res.headersSent) return;
+
         // Check if it's a structured platform (CodeChef, GFG, HackerRank)
         // Match by title or ID (encoded as title/slug)
         const structuredMatch = structuredQuestions.find(q => 
@@ -1824,7 +1870,7 @@ async function getOrGenerateConcept(title, platform = null, url = null) {
 }
 
 // API: Generate Concept & Explanation
-app.post('/api/generate-concept', async (req, res) => {
+app.post('/api/generate-concept', aiGenerationLimiter, async (req, res) => {
     const { title, platform, url } = req.body;
     if (!title) return res.status(400).json({ error: "Title required" });
 
@@ -1854,6 +1900,19 @@ app.get('/api/universe/resolve/:platform/:slug', async (req, res) => {
         
         if (!problem) {
             return res.status(404).json({ error: "Problem not trackable in this star sector." });
+        }
+
+        // Check if concept already exists in the database. If not, trigger AI rate limit.
+        const conceptKey = normalizeConceptKey(problem.title);
+        const existingConcept = await Concept.findOne({ concept_key: conceptKey });
+        if (!existingConcept) {
+            await new Promise((resolve) => {
+                aiGenerationLimiter(req, res, (err) => {
+                    if (err) return;
+                    resolve();
+                });
+            });
+            if (res.headersSent) return;
         }
 
         // Use helper to find or generate

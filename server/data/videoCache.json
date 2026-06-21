@@ -1347,6 +1347,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=AQ8mHCeEK_s"
     }
   ],
+  "380": [
+    {
+      "id": "j4KwhBziOpg",
+      "questionId": "380",
+      "title": "Insert Delete GetRandom O(1) - Leetcode 380 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/j4KwhBziOpg/hqdefault.jpg",
+      "viewCount": 79475,
+      "likeCount": 1821,
+      "publishedAt": "2022-03-16T16:45:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=j4KwhBziOpg"
+    },
+    {
+      "id": "3yTnLrNdJGo",
+      "questionId": "380",
+      "title": "Insert Delete GetRandom O(1) | Detailed | Google | Leetcode 380",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/3yTnLrNdJGo/hqdefault.jpg",
+      "viewCount": 25286,
+      "likeCount": 701,
+      "publishedAt": "2022-11-29T04:44:53Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3yTnLrNdJGo"
+    },
+    {
+      "id": "Cbt6Ocj1XIA",
+      "questionId": "380",
+      "title": "Insert Delete GetRandom O(1) | leetcode 380 | Hindi",
+      "channelTitle": "Codebix",
+      "thumbnail": "https://i.ytimg.com/vi/Cbt6Ocj1XIA/hqdefault.jpg",
+      "viewCount": 7065,
+      "likeCount": 211,
+      "publishedAt": "2020-06-12T09:16:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Cbt6Ocj1XIA"
+    },
+    {
+      "id": "69_s7mh8NYo",
+      "questionId": "380",
+      "title": "Leetcode | 380. Insert Delete GetRandom O(1) | Medium | Java Solution",
+      "channelTitle": "Developer Docs",
+      "thumbnail": "https://i.ytimg.com/vi/69_s7mh8NYo/hqdefault.jpg",
+      "viewCount": 6061,
+      "likeCount": 95,
+      "publishedAt": "2024-01-16T04:52:41Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=69_s7mh8NYo"
+    },
+    {
+      "id": "PY_SXm7QAfs",
+      "questionId": "380",
+      "title": "LeetCode 380: Insert Delete GetRandom O(1) | Java Solution | HashMap + ArrayList",
+      "channelTitle": "Code Scribbler",
+      "thumbnail": "https://i.ytimg.com/vi/PY_SXm7QAfs/hqdefault.jpg",
+      "viewCount": 378,
+      "likeCount": 5,
+      "publishedAt": "2025-06-05T07:00:21Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=PY_SXm7QAfs"
+    }
+  ],
   "412": [
     {
       "id": "FdqhMGzVa98",
