@@ -144,14 +144,25 @@ const saveCache = () => {
     }
 };
 
-app.use(cors({
-    origin: [
-        'http://localhost:5173', 
-        'http://localhost:5174', 
-        'http://localhost:3000',
-        'https://leet-vision.vercel.app'
-    ],
-    credentials: true
+const allowedOrigins = [
+    'http://localhost:5173', 
+    'http://localhost:5174', 
+    'http://localhost:3000',
+    'https://leet-vision.vercel.app'
+];
+
+app.use(cors((req, callback) => {
+    let corsOptions;
+    // Allow all origins for the external integration API
+    if (req.originalUrl && req.originalUrl.startsWith('/api/external')) {
+        corsOptions = { origin: true }; // Reflect origin (allows any domain to query)
+    } else {
+        corsOptions = {
+            origin: allowedOrigins,
+            credentials: true
+        };
+    }
+    callback(null, corsOptions);
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -2155,6 +2166,89 @@ app.get('/api/unsubscribe', async (req, res) => {
     } catch (err) {
         console.error('Unsubscribe error:', err);
         res.status(500).send('Something went wrong.');
+    }
+});
+
+// ─── EXTERNAL INTEGRATION API ENDPOINT ───────────────────────────────────────
+// Dedicated API endpoint for external AI interview web apps to retrieve questions
+app.get('/api/external/questions', async (req, res) => {
+    try {
+        // 1. API Key Authentication Check
+        const apiKey = req.headers['x-api-key'] || req.query.apiKey;
+        const configApiKey = process.env.EXTERNAL_API_KEY || 'leet_vision_secret_dev_key';
+
+        if (!apiKey || apiKey !== configApiKey) {
+            return res.status(401).json({ error: 'Unauthorized: Invalid or missing API Key.' });
+        }
+
+        const { company, topic, difficulty, random, limit = 10, page = 1 } = req.query;
+
+        // Escape helper for safe regex searches
+        const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+        // 2. Build Query
+        const query = {};
+
+        if (company) {
+            query.company = { $regex: new RegExp(`^${escapeRegExp(company.trim())}$`, 'i') };
+        }
+
+        if (difficulty) {
+            query.difficulty = { $regex: new RegExp(`^${escapeRegExp(difficulty.trim())}$`, 'i') };
+        }
+
+        if (topic) {
+            query.topics = { $regex: new RegExp(`^${escapeRegExp(topic.trim())}$`, 'i') };
+        }
+
+        const limitVal = Math.min(parseInt(limit) || 10, 100);
+        const pageVal = Math.max(parseInt(page) || 1, 1);
+        const skipVal = (pageVal - 1) * limitVal;
+
+        // 3. Retrieve Questions
+        let questions = [];
+        let total = 0;
+
+        if (random === 'true') {
+            // Aggregate using sample
+            const pipeline = [];
+            if (Object.keys(query).length > 0) {
+                pipeline.push({ $match: query });
+            }
+            pipeline.push({ $sample: { size: limitVal } });
+            
+            questions = await CompanyQuestion.aggregate(pipeline);
+            // In random mode, total represents how many we retrieved in this sample
+            total = questions.length;
+        } else {
+            // Standard query
+            total = await CompanyQuestion.countDocuments(query);
+            questions = await CompanyQuestion.find(query)
+                .sort({ frequency: -1 }) // Sort by frequency (most asked)
+                .skip(skipVal)
+                .limit(limitVal);
+        }
+
+        res.json({
+            success: true,
+            total,
+            page: random === 'true' ? 1 : pageVal,
+            limit: limitVal,
+            questions: questions.map(q => ({
+                id: q.questionId,
+                title: q.title,
+                difficulty: q.difficulty,
+                topics: q.topics,
+                leetcodeUrl: q.leetcodeUrl,
+                company: q.company,
+                frequency: q.frequency,
+                acceptanceRate: q.acceptanceRate
+            }))
+        });
+
+    } catch (err) {
+        console.error("External Integration API Error:", err);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
