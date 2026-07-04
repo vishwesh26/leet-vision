@@ -155,3 +155,42 @@
     font-size: 0.7rem;
     color: #777;
 }
+
+/* Company Tags & Logos CSS */
+.lv-companies-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 12px;
+}
+.lv-companies-container h4 {
+    margin: 0 0 10px 0;
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.lv-companies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.lv-company-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #eee;
+}
+.lv-company-logo {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    object-fit: contain;
+    background: white;
+    padding: 1px;
+}

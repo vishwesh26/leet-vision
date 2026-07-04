@@ -103,7 +103,8 @@ app.use(helmet({
             ]
         }
     },
-    crossOriginEmbedderPolicy: false // Allowed to embed third-party players like YouTube
+    crossOriginEmbedderPolicy: false, // Allowed to embed third-party players like YouTube
+    crossOriginResourcePolicy: { policy: "cross-origin" } // Allows logos to be loaded by browser extensions on other domains
 }));
 
 app.use(mongoSanitize);
@@ -153,9 +154,13 @@ const allowedOrigins = [
 
 app.use(cors((req, callback) => {
     let corsOptions;
-    // Allow all origins for the external integration API
-    if (req.originalUrl && req.originalUrl.startsWith('/api/external')) {
-        corsOptions = { origin: true }; // Reflect origin (allows any domain to query)
+    // Allow all origins for external, logo, and question companies endpoints
+    if (req.originalUrl && (
+        req.originalUrl.startsWith('/api/external') || 
+        req.originalUrl.startsWith('/api/logo') || 
+        req.originalUrl.includes('/companies')
+    )) {
+        corsOptions = { origin: true }; // Reflect origin
     } else {
         corsOptions = {
             origin: allowedOrigins,
