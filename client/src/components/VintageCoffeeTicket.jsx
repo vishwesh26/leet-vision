@@ -1,3 +1,4 @@
+// Rebuild trigger: 2026-07-11T02:47:58
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
