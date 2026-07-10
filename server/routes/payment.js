@@ -41,13 +41,23 @@ router.post('/create-order', auth.protect, async (req, res) => {
             return res.status(400).json({ status: 'error', message: 'Missing payment details' });
         }
 
-        const amount = PRICES[type];
-        if (!amount) {
-            return res.status(400).json({ status: 'error', message: 'Invalid plan type' });
+        let amount;
+        if (type === 'coffee') {
+            amount = Number(req.body.amount);
+            if (isNaN(amount) || amount < 10) {
+                return res.status(400).json({ status: 'error', message: 'Please provide a valid amount (minimum ₹10)' });
+            }
+        } else {
+            amount = PRICES[type];
+            if (!amount) {
+                return res.status(400).json({ status: 'error', message: 'Invalid plan type' });
+            }
         }
 
         // Check if user already has an active subscription if buying one
-        if (type.includes('_sub')) {
+        if (type === 'coffee') {
+            // No ownership check needed for coffee donations
+        } else if (type.includes('_sub')) {
             if (req.user.subscriptionExpiry && req.user.subscriptionExpiry > Date.now()) {
                 // Allow renewal? Or block if too far out? Let's allow renewal (extension)
             }
@@ -119,9 +129,50 @@ router.post('/verify', auth.protect, async (req, res) => {
                 });
             }
 
-            const amount = PRICES[type];
+            let amount;
+            if (type === 'coffee') {
+                amount = Number(req.body.amount);
+            } else {
+                amount = PRICES[type];
+            }
 
-            if (type.includes('_sub')) {
+            if (type === 'coffee') {
+                const purchase = new Purchase({
+                    userId: req.user._id,
+                    type: 'coffee',
+                    companies: ['coffee_donation'],
+                    amount,
+                    razorpayOrderId: razorpay_order_id,
+                    razorpayPaymentId: razorpay_payment_id
+                });
+                await purchase.save();
+
+                // Send Confirmation Email
+                try {
+                    await sendEmail({
+                        email: req.user.email,
+                        subject: `Thank you for buying me a coffee! ☕`,
+                        html: `
+                            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                                <h2 style="color: #ffa116;">Thank you so much!</h2>
+                                <p>Hello <b>${req.user.name}</b>,</p>
+                                <p>I really appreciate your support. Your coffee contribution of <b>₹${amount}</b> helps keep Leet-Vision alive and running!</p>
+                                <p>It took me many late nights to build this project, and knowing it helped you makes all the effort worth it.</p>
+                                <p>Have a wonderful day and happy coding!</p>
+                                <p style="margin-top: 30px; font-size: 0.8rem; color: #777;">Leet-Vision Developer</p>
+                            </div>
+                        `
+                    });
+                } catch (emailErr) {
+                    console.error("Post-coffee email failed:", emailErr);
+                }
+
+                return res.json({ 
+                    status: 'success', 
+                    message: "Thank you for buying me a coffee!",
+                    data: { amount }
+                });
+            } else if (type.includes('_sub')) {
                 // Subscription Logic
                 const days = type === 'monthly_sub' ? 30 : 365;
                 const currentExpiry = req.user.subscriptionExpiry && req.user.subscriptionExpiry > Date.now() 

@@ -611,6 +611,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=Jg6NDNVrVTY"
     }
   ],
+  "48": [
+    {
+      "id": "Z0R2u6gd3GU",
+      "questionId": "48",
+      "title": "Rotate Matrix/Image by 90 Degrees | Brute - Optimal",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/Z0R2u6gd3GU/hqdefault.jpg",
+      "viewCount": 548372,
+      "likeCount": 17641,
+      "publishedAt": "2023-03-30T06:43:45Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=Z0R2u6gd3GU"
+    },
+    {
+      "id": "fMSJSS7eO1w",
+      "questionId": "48",
+      "title": "Rotate Image - Matrix - Leetcode 48",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/fMSJSS7eO1w/hqdefault.jpg",
+      "viewCount": 321181,
+      "likeCount": 6253,
+      "publishedAt": "2021-01-24T15:30:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=fMSJSS7eO1w"
+    },
+    {
+      "id": "-jhbxNJijyE",
+      "questionId": "48",
+      "title": "Rotate Image - Leetcode 48 - Arrays & Strings (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/-jhbxNJijyE/hqdefault.jpg",
+      "viewCount": 32659,
+      "likeCount": 694,
+      "publishedAt": "2024-06-13T19:02:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=-jhbxNJijyE"
+    },
+    {
+      "id": "Ux058jpRB9Y",
+      "questionId": "48",
+      "title": "Rotate Image (Leetcode 48) | Full solution with examples visuals and animation | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/Ux058jpRB9Y/hqdefault.jpg",
+      "viewCount": 29169,
+      "likeCount": 764,
+      "publishedAt": "2021-09-03T17:56:02Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Ux058jpRB9Y"
+    },
+    {
+      "id": "I48Z8QlQH8c",
+      "questionId": "48",
+      "title": "Rotate Image | Simplest Explanation | Detailed | Leetcode 48 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/I48Z8QlQH8c/hqdefault.jpg",
+      "viewCount": 25599,
+      "likeCount": 774,
+      "publishedAt": "2022-07-24T23:30:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=I48Z8QlQH8c"
+    }
+  ],
   "79": [
     {
       "id": "pfiQ_PS1g8E",
@@ -1533,6 +1595,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=pGBLi27ugk4"
     }
   ],
+  "594": [
+    {
+      "id": "tgkpqp5-6Os",
+      "questionId": "594",
+      "title": "Longest Harmonious Subsequence | Live Coding with Explanation | Leetcode #594",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/tgkpqp5-6Os/hqdefault.jpg",
+      "viewCount": 10208,
+      "likeCount": 216,
+      "publishedAt": "2021-02-04T12:19:44Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=tgkpqp5-6Os"
+    },
+    {
+      "id": "M-MMjMe0P0U",
+      "questionId": "594",
+      "title": "Longest Harmonious Subsequence | Test your IQ | Leetcode 594 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/M-MMjMe0P0U/hqdefault.jpg",
+      "viewCount": 8243,
+      "likeCount": 461,
+      "publishedAt": "2025-06-30T01:09:33Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=M-MMjMe0P0U"
+    },
+    {
+      "id": "YBhWOe3yGSk",
+      "questionId": "594",
+      "title": "594. Longest Harmonious Subsequence | Leetcode Daily - Python",
+      "channelTitle": "Leetcode Daily",
+      "thumbnail": "https://i.ytimg.com/vi/YBhWOe3yGSk/hqdefault.jpg",
+      "viewCount": 1378,
+      "likeCount": 36,
+      "publishedAt": "2025-06-30T00:13:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=YBhWOe3yGSk"
+    },
+    {
+      "id": "9Imj8yG86AY",
+      "questionId": "594",
+      "title": "594. Longest Harmonious Subsequence | Two Pointers | Sliding Window | HashMap | Leetcode",
+      "channelTitle": "Rapid Syntax",
+      "thumbnail": "https://i.ytimg.com/vi/9Imj8yG86AY/hqdefault.jpg",
+      "viewCount": 896,
+      "likeCount": 25,
+      "publishedAt": "2025-06-30T04:14:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=9Imj8yG86AY"
+    },
+    {
+      "id": "YhdG0lRZfIA",
+      "questionId": "594",
+      "title": "Leetcode 594. Longest Harmonious Subsequence | Leetcode 594 Explained in Python | HashMap Logic",
+      "channelTitle": "StatLearn Tech",
+      "thumbnail": "https://i.ytimg.com/vi/YhdG0lRZfIA/hqdefault.jpg",
+      "viewCount": 761,
+      "likeCount": 16,
+      "publishedAt": "2025-06-29T19:27:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=YhdG0lRZfIA"
+    }
+  ],
   "739": [
     {
       "id": "cTBiBSnjO3c",
@@ -1655,6 +1779,68 @@
       "publishedAt": "2021-08-30T13:37:27Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=MATtaDI7p2s"
+    }
+  ],
+  "1763": [
+    {
+      "id": "20mjBSByOaQ",
+      "questionId": "1763",
+      "title": "LeetCode 1763. Longest Nice Substring  | BiWeekly Contest 46| C++ | Algorithm Explained",
+      "channelTitle": "Cherry Coding [IIT-G]",
+      "thumbnail": "https://i.ytimg.com/vi/20mjBSByOaQ/hqdefault.jpg",
+      "viewCount": 11478,
+      "likeCount": 269,
+      "publishedAt": "2021-02-20T19:12:41Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=20mjBSByOaQ"
+    },
+    {
+      "id": "JUvt_9KMDzk",
+      "questionId": "1763",
+      "title": "Longest Nice Substring | LeetCode 1763 | Coders Camp",
+      "channelTitle": "Coders Camp",
+      "thumbnail": "https://i.ytimg.com/vi/JUvt_9KMDzk/hqdefault.jpg",
+      "viewCount": 8218,
+      "likeCount": 112,
+      "publishedAt": "2021-02-21T02:11:58Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=JUvt_9KMDzk"
+    },
+    {
+      "id": "Xl0mO-Nrp_E",
+      "questionId": "1763",
+      "title": "Leetcode 1763. Longest Nice Substring | Recursion Visualized | Code Explanation",
+      "channelTitle": "Algorithm Analysis",
+      "thumbnail": "https://i.ytimg.com/vi/Xl0mO-Nrp_E/hqdefault.jpg",
+      "viewCount": 4290,
+      "likeCount": 70,
+      "publishedAt": "2021-02-21T06:39:31Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Xl0mO-Nrp_E"
+    },
+    {
+      "id": "SANHOqI1-e0",
+      "questionId": "1763",
+      "title": "LeetCode 1763 | Longest Nice Substring | Divide & Conquer | Java",
+      "channelTitle": "Sleepy Cracker",
+      "thumbnail": "https://i.ytimg.com/vi/SANHOqI1-e0/hqdefault.jpg",
+      "viewCount": 1175,
+      "likeCount": 7,
+      "publishedAt": "2023-10-08T20:51:35Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=SANHOqI1-e0"
+    },
+    {
+      "id": "kYfM0SkonZg",
+      "questionId": "1763",
+      "title": "Day 551: LeetCode Problem 1763. Longest Nice Substring - Swift",
+      "channelTitle": "iOSxBank",
+      "thumbnail": "https://i.ytimg.com/vi/kYfM0SkonZg/hqdefault.jpg",
+      "viewCount": 176,
+      "likeCount": 7,
+      "publishedAt": "2025-11-06T17:01:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=kYfM0SkonZg"
     }
   ],
   "1920": [

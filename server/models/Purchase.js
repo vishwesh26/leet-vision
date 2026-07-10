@@ -8,7 +8,7 @@ const purchaseSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['single', 'bundle', 'monthly_sub', 'yearly_sub'],
+        enum: ['single', 'bundle', 'monthly_sub', 'yearly_sub', 'coffee'],
         required: true
     },
     companies: [{

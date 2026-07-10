@@ -6,6 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { IoIosArrowDown, IoIosArrowUp, IoMdCreate } from 'react-icons/io';
 import SEO from './SEO';
+import VintageCoffeeTicket from './VintageCoffeeTicket';
 import { FaCoffee, FaBug } from 'react-icons/fa';
 
 
@@ -274,6 +275,66 @@ const ConceptPage = () => {
                             </div>
                         )}
                     </section>
+
+                    {/* Buy Me a Coffee Support Card */}
+                    <div className="coffee-support-card" style={{
+                        background: 'linear-gradient(135deg, rgba(255, 161, 22, 0.05) 0%, rgba(255, 161, 22, 0.02) 100%)',
+                        border: '1px solid rgba(255, 161, 22, 0.15)',
+                        borderRadius: '20px',
+                        padding: '2.5rem',
+                        marginTop: '4rem',
+                        textAlign: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '1.2rem',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
+                    }}>
+                        <div style={{
+                            background: 'rgba(255, 161, 22, 0.1)',
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '50%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            border: '1px solid rgba(255, 161, 22, 0.2)'
+                        }}>
+                            <FaCoffee size={26} color="#ffa116" />
+                        </div>
+                        <h3 style={{ margin: 0, color: '#fff', fontSize: '1.4rem', fontWeight: 700 }}>Buy me a coffee</h3>
+                        <p style={{ margin: 0, color: '#aaa', fontSize: '1.05rem', lineHeight: 1.6, maxWidth: '500px' }}>
+                            "This took me all nights to build this. Hope it was helpful for you. Buy me a coffee."
+                        </p>
+                        <button 
+                            onClick={() => navigate('/buy-me-a-coffee')}
+                            style={{
+                                background: '#ffa116',
+                                color: '#000',
+                                border: 'none',
+                                padding: '0.9rem 2rem',
+                                fontSize: '1rem',
+                                fontWeight: 700,
+                                borderRadius: '50px',
+                                cursor: 'pointer',
+                                transition: '0.2s',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.6rem',
+                                marginTop: '0.5rem'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.transform = 'translateY(-2px)';
+                                e.target.style.background = '#ffbe4d';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.transform = 'none';
+                                e.target.style.background = '#ffa116';
+                            }}
+                        >
+                            <FaCoffee /> Buy Me a Coffee
+                        </button>
+                    </div>
                 </main>
 
                 <aside className="concept-sidebar">
@@ -298,6 +359,8 @@ const ConceptPage = () => {
                             ))}
                         </div>
                     </section>
+
+                    <VintageCoffeeTicket />
 
                     {explanation.video_links && explanation.video_links.length > 0 && (
                         <section className="sidebar-group shadow-premium">

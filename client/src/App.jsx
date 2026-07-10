@@ -33,6 +33,7 @@ import ConceptPage from './components/ConceptPage';
 import UniversalExplore from './components/UniversalExplore';
 import BasicToAdvancePage from './components/BasicToAdvancePage';
 import WelcomePopup from './components/WelcomePopup';
+import BuyMeACoffeePage from './components/BuyMeACoffeePage';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './components/LoginPage';
@@ -375,6 +376,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/explore" element={<UniversalExplore />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/buy-me-a-coffee" element={<BuyMeACoffeePage />} />
 
           {/* Admin Routes */}
           <Route path="/admin/edit-solution/:id" element={<AdminSolutionEditor />} />

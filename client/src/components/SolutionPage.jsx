@@ -7,6 +7,7 @@ import { IoIosArrowDown, IoIosArrowUp, IoMdFlash, IoMdTrophy, IoMdList, IoMdCrea
 import { FaBrain } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
+import VintageCoffeeTicket from './VintageCoffeeTicket';
 
 import { FaCoffee, FaCode, FaBug } from 'react-icons/fa';
 
@@ -339,19 +340,7 @@ const SolutionPage = () => {
                     </div>
                 </main>
 
-                {/* Sidebar Navigation */}
                 <aside className="article-sidebar">
-                    <div className="sidebar-nav">
-                        <h4>On this page</h4>
-                        <ul>
-                            <li onClick={() => scrollToSection(sections.video)} className={videoVisible ? 'active' : ''}>Video Tutorial</li>
-                            <li onClick={() => scrollToSection(sections.problem)}>Problem Statement</li>
-                            <li onClick={() => scrollToSection(sections.complexity)}>Complexity Table</li>
-                            {approaches.map((a, i) => (
-                                <li key={i} onClick={() => scrollToSection(sections.approaches)} className="sub-item">{i + 1}. {a.name.split(' ')[0]}</li>
-                            ))}
-                        </ul>
-                    </div>
 
                     <div className="sidebar-card">
                         <IoMdTrophy size={30} color="#f57c00" style={{ marginBottom: '1rem' }} />
@@ -361,6 +350,9 @@ const SolutionPage = () => {
                             Solve on {data.platform && data.platform !== 'leetcode' ? data.platform.toUpperCase() : 'LeetCode'}
                         </a>
                     </div>
+
+                    <VintageCoffeeTicket />
+
                     {/* Report Issue Button */}
                     <div style={{ marginTop: '30px', textAlign: 'center' }}>
                         <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '10px' }}>Found solution wrong?</p>
