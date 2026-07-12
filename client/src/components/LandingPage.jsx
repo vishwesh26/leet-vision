@@ -22,7 +22,9 @@ const LandingPage = () => {
 
     return (
         <div className="landing-v2" style={{ position: 'relative', overflowX: 'hidden' }}>
-            <SEO title="LeetVision - Visual Coding Preparation Platform" description="Master Data Structures and Algorithms with curated video solutions, company-specific plans, and progress tracking." path="/" />
+            <SEO title="LeetVision - Visual Coding Preparation Platform" description="Master Data Structures and Algorithms with curated video solutions, company-specific plans, and progress tracking." path="/">
+                <meta name="google-adsense-account" content="ca-pub-2403388488389670" />
+            </SEO>
 
             {/* Premium Background */}
             <div className="grid-bg" style={{ position: 'fixed', inset: 0, zIndex: 0 }}></div>
