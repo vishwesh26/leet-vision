@@ -1,0 +1,76 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Topic {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String     @unique
+  difficulty  String     // Easy, Medium, Hard
+  order       Int
+  category    String     // Stage 1 - Fundamentals, Stage 2 - Interview Patterns, etc.
+  status      String     // draft, published
+  publishedAt DateTime?
+  subTopics   SubTopic[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model SubTopic {
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  topicId          String            @db.ObjectId
+  topic            Topic             @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  title            String
+  slug             String            @unique
+  content          String
+  readingTime      Int
+  codeExamples     Json              // JSON array of code templates and annotations
+  leetcodeProblems PracticeProblem[]
+  article          Article?
+  status           String            @default("Draft")
+  updatedAt        DateTime          @updatedAt
+  createdAt        DateTime          @default(now())
+}
+
+model Article {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  subTopicId  String   @unique @db.ObjectId
+  subTopic    SubTopic @relation(fields: [subTopicId], references: [id], onDelete: Cascade)
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PracticeProblem {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  subTopicId          String   @db.ObjectId
+  subTopic            SubTopic @relation(fields: [subTopicId], references: [id], onDelete: Cascade)
+  leetcodeProblemName String
+  leetcodeProblemId   String
+  difficulty          String
+  pattern             String
+  leetcodeUrl         String
+  leetVisionUrl       String
+  createdAt           DateTime @default(now())
+}
+
+model RelatedTopic {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  topicId        String   @db.ObjectId
+  relatedTopicId String   @db.ObjectId
+  createdAt      DateTime @default(now())
+}
+
+model GenerationLog {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  topicSlug    String
+  status       String    // PENDING, SUCCESS, FAILED
+  startedAt    DateTime  @default(now())
+  completedAt  DateTime?
+  errorMessage String?
+}

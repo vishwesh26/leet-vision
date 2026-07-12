@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/daily-release?secret=leet_vision_secret_cron_key_123",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+import type { Metadata } from "next";
+import Script from "next/script";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import MainLayout from "@/components/MainLayout";
+import { prisma } from "@/lib/prisma";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "LeetVision DSA Docs | Elite Algorithms Documentation",
+  description: "High-quality, comprehensive Data Structures & Algorithms documentation engineered for LeetCode interview preparation.",
+};
+
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  // Fetch only published subtopic slugs to know what is active
+  let publishedSlugs: string[] = [];
+  try {
+    const subtopics = await prisma.subTopic.findMany({
+      select: { slug: true }
+    });
+    publishedSlugs = subtopics.map((s) => s.slug);
+  } catch (e) {
+    console.error("Failed to fetch published subtopics for sidebar layout:", e);
+  }
+
+  return (
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-0000000000000000'}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
+      <body className="min-h-full flex flex-col dark:bg-[#060607]">
+        <MainLayout publishedSlugs={publishedSlugs}>{children}</MainLayout>
+      </body>
+    </html>
+  );
+}

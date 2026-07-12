@@ -95,7 +95,6 @@ function AppContent({ savedVideos, onToggleSave }) {
 
         <div className="nav-center">
           <ul className="nav-links">
-            <li className="nav-item"><Link to="/top-100-leetcode" style={{ color: 'inherit', textDecoration: 'none' }}>Top 100</Link></li>
             <li className="nav-item"><Link to="/basic-to-advance" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 400 }}>Roadmap</Link></li>
 
             <li className="nav-item dropdown">
@@ -119,16 +118,8 @@ function AppContent({ savedVideos, onToggleSave }) {
 
             <li className="nav-item"><Link to="/companies" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
             <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>
-            <li className="nav-item"><Link to="/explore" style={{ color: 'var(--accent-orange)', textDecoration: 'none', fontWeight: 600 }}>Explore</Link></li>
+            <li className="nav-item"><a href="/docs" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 600 }}>Docs</a></li>
 
-
-            <li className="nav-item dropdown">
-              More ▾
-              <div className="dropdown-content">
-                <div><Link to="/daily" style={{ color: 'inherit', textDecoration: 'none' }}>Daily Challenge</Link></div>
-                <div><Link to="/saved" style={{ color: 'inherit', textDecoration: 'none' }}>Saved Videos</Link></div>
-              </div>
-            </li>
           </ul>
 
           {/* Navbar Search Integration */}
@@ -238,9 +229,9 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/top-100-leetcode" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Top 100 Questions</Link>
             <Link to="/basic-to-advance" className="mobile-link highlight" style={{ color: '#4db6ac' }} onClick={() => setIsMobileMenuOpen(false)}>Basic to Advance Roadmap</Link>
 
-            <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>My Progress</Link>
-            <Link to="/explore" className="mobile-link highlight" style={{ color: 'var(--accent-orange)' }} onClick={() => setIsMobileMenuOpen(false)}>All Platform Problem</Link>
-
+            <Link to="/companies" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
+            <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>Progress Tracking</Link>
+            <Link to="/docs" className="mobile-link highlight" style={{ color: '#ffa116' }} onClick={() => setIsMobileMenuOpen(false)}>DSA Docs</Link>
 
             <div className="mobile-divider">Difficulty</div>
             <Link to="/leetcode-easy" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Easy</Link>
