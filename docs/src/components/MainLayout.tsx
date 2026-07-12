@@ -40,7 +40,7 @@ export default function MainLayout({
 
             {/* Back button to main website */}
             <a
-              href="https://leet-vision.vercel.app"
+              href="https://leet-vision.com"
               className="hidden sm:flex items-center gap-1.5 text-xs text-gray-500 hover:text-brand transition-colors"
             >
               <ArrowLeft size={14} /> Back to Main Site
@@ -109,8 +109,8 @@ export default function MainLayout({
           <div>© {new Date().getFullYear()} LeetVision. All rights reserved.</div>
           <div className="flex gap-4">
             <Link href="/" className="hover:underline">Home</Link>
-            <a href="https://leet-vision.vercel.app/about" className="hover:underline">About</a>
-            <a href="https://leet-vision.vercel.app/contact" className="hover:underline">Contact</a>
+            <a href="https://leet-vision.com/about" className="hover:underline">About</a>
+            <a href="https://leet-vision.com/contact" className="hover:underline">Contact</a>
           </div>
         </div>
       </footer>

@@ -3,17 +3,17 @@ import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, path, children }) => {
     const fullTitle = `${title} | LeetVision`;
-    const fullUrl = `https://leet-vision.vercel.app${path}`;
+    const fullUrl = `https://leet-vision.com${path}`;
 
     const schemaData = {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "LeetVision",
-        "url": "https://leet-vision.vercel.app/",
+        "url": "https://leet-vision.com/",
         "description": "Visual LeetCode solutions and coding interview roadmap.",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://leet-vision.vercel.app/search/{search_term_string}",
+            "target": "https://leet-vision.com/search/{search_term_string}",
             "query-input": "required name=search_term_string"
         }
     };
@@ -23,8 +23,8 @@ const SEO = ({ title, description, path, children }) => {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "LeetVision",
-        "url": "https://leet-vision.vercel.app/",
-        "logo": "https://leet-vision.vercel.app/logo.png", // Ensure you have a logo or text fallback
+        "url": "https://leet-vision.com/",
+        "logo": "https://leet-vision.com/logo.png", // Ensure you have a logo or text fallback
         "sameAs": [
             "https://www.instagram.com/vishwesh_shinde",
             "https://www.linkedin.com/in/vishweshshinde"

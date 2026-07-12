@@ -95,7 +95,7 @@ app.use(helmet({
             frameSrc: ["'self'", "https://www.youtube.com", "https://youtube.com"],
             connectSrc: [
                 "'self'", 
-                "https://leet-vision.vercel.app", 
+                "https://leet-vision.com", 
                 "http://localhost:5000", 
                 "http://localhost:5173", 
                 "https://challenges.cloudflare.com", 
@@ -149,7 +149,7 @@ const allowedOrigins = [
     'http://localhost:5173', 
     'http://localhost:5174', 
     'http://localhost:3000',
-    'https://leet-vision.vercel.app'
+    'https://leet-vision.com'
 ];
 
 app.use(cors((req, callback) => {
@@ -2164,7 +2164,7 @@ app.get('/api/unsubscribe', async (req, res) => {
             <div class="box">
                 <h1>✅ Unsubscribed</h1>
                 <p>You've been removed from our campaign emails. We'll miss you!</p>
-                <p style="margin-top:1.5rem;"><a href="https://leet-vision.vercel.app">← Back to LeetVision</a></p>
+                <p style="margin-top:1.5rem;"><a href="https://leet-vision.com">← Back to LeetVision</a></p>
             </div>
             </body></html>
         `);

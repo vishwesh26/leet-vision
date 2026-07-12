@@ -10,7 +10,7 @@ const AdSenseContainer = ({ slot, format = 'auto', responsive = 'true', style = 
         }, 2000); // 2 second delay
 
         return () => clearTimeout(timer);
-    }, []);
+    }, []); 
 
     useEffect(() => {
         if (shouldRender) {

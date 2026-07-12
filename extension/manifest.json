@@ -12,7 +12,7 @@
         "https://www.hackerrank.com/*",
         "https://www.geeksforgeeks.org/*",
         "https://www.codechef.com/*",
-        "https://leet-vision.vercel.app/*"
+        "https://leet-vision.com/*"
     ],
     "background": {
         "service_worker": "background.js"

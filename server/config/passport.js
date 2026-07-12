@@ -66,7 +66,7 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
                           </div>
 
                           <div style="text-align: center; margin: 35px 0;">
-                              <a href="https://leet-vision.vercel.app" style="background-color: #f57c00; color: white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 12px rgba(245, 124, 0, 0.3);">Start Solving Now</a>
+                              <a href="https://leet-vision.com" style="background-color: #f57c00; color: white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 12px rgba(245, 124, 0, 0.3);">Start Solving Now</a>
                           </div>
 
                           <p style="font-size: 14px; color: #666; font-style: italic; text-align: center;">

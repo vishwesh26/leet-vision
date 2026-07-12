@@ -7,7 +7,7 @@ const Terms = () => {
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '4rem 2rem', color: '#ddd', lineHeight: '1.8' }}>
             <SEO title="Terms of Service" description="Terms of Service for LeetVision" path="/terms" />
             <h1 style={{ color: '#fff', fontSize: '2.5rem', marginBottom: '2.5rem', fontFamily: 'Outfit, sans-serif' }}>Terms of Service</h1>
-            <p>Last updated: February 2026</p>
+            <p>Last updated: July 2026</p>
 
             <section style={{ marginBottom: '2.5rem' }}>
                 <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>1. Acceptance of Terms</h2>

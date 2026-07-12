@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const BASE_URL = 'https://leet-vision.vercel.app';
+const BASE_URL = 'https://leet-vision.com';
 const PUBLIC_DIR = path.join(__dirname, '../../client/public');
 const SITEMAP_PATH = path.join(PUBLIC_DIR, 'sitemap.xml');
 
@@ -17,6 +17,12 @@ const articleSchema = new mongoose.Schema({
 });
 
 const Article = mongoose.models.Article || mongoose.model('Article', articleSchema);
+
+const subTopicSchema = new mongoose.Schema({
+    slug: { type: String, required: true, unique: true },
+    updatedAt: { type: Date, default: Date.now }
+});
+const SubTopic = mongoose.models.SubTopic || mongoose.model('SubTopic', subTopicSchema, 'SubTopic');
 
 const STATIC_PAGES = [
     { url: '/', priority: '1.0', changefreq: 'daily' },
@@ -39,7 +45,8 @@ const STATIC_PAGES = [
     { url: '/how-it-works', priority: '0.5', changefreq: 'monthly' },
     { url: '/privacy-policy', priority: '0.3', changefreq: 'monthly' },
     { url: '/terms', priority: '0.3', changefreq: 'monthly' },
-    { url: '/contact', priority: '0.5', changefreq: 'monthly' }
+    { url: '/contact', priority: '0.5', changefreq: 'monthly' },
+    { url: '/docs', priority: '0.9', changefreq: 'weekly' }
 ];
 
 async function generateSitemap() {
@@ -80,6 +87,18 @@ async function generateSitemap() {
             xml += `    <lastmod>${new Date(article.publishedDate).toISOString().split('T')[0]}</lastmod>\n`;
             xml += `    <changefreq>monthly</changefreq>\n`;
             xml += `    <priority>0.7</priority>\n`;
+            xml += `  </url>\n`;
+        });
+
+        // 2.5 Add Docs SubTopics (Now and Upcoming)
+        console.log('Fetching dynamic docs subtopics...');
+        const subtopics = await SubTopic.find({}, 'slug updatedAt');
+        subtopics.forEach(sub => {
+            xml += `  <url>\n`;
+            xml += `    <loc>${BASE_URL}/docs/concept/${sub.slug}</loc>\n`;
+            xml += `    <lastmod>${new Date(sub.updatedAt || Date.now()).toISOString().split('T')[0]}</lastmod>\n`;
+            xml += `    <changefreq>weekly</changefreq>\n`;
+            xml += `    <priority>0.8</priority>\n`;
             xml += `  </url>\n`;
         });
 

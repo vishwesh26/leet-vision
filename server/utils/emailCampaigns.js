@@ -28,12 +28,12 @@ const makeFooter = (unsubscribeUrl) => `
     <div class="footer">
         <p>You're receiving this because you signed up for LeetVision.<br>
         <a href="${unsubscribeUrl}">Unsubscribe</a> &nbsp;|&nbsp;
-        <a href="https://leet-vision.vercel.app">Visit LeetVision</a></p>
+        <a href="https://leet-vision.com">Visit LeetVision</a></p>
     </div>
 `;
 
-const SITE_URL = 'https://leet-vision.vercel.app';
-const API_URL = 'https://leet-vision.vercel.app/api';
+const SITE_URL = 'https://leet-vision.com';
+const API_URL = 'https://leet-vision.com/api';
 
 const campaigns = [
     // ─── FUNNY #1 ───────────────────────────────────────────────────────────

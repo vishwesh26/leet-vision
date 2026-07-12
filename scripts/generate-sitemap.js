@@ -6,7 +6,7 @@ const PROBLEMS_PATH = path.join(__dirname, '../server/data/problems.json');
 const SITEMAP_PATH = path.join(__dirname, '../client/public/sitemap.xml');
 
 // Base URL
-const BASE_URL = 'https://leet-vision.vercel.app';
+const BASE_URL = 'https://leet-vision.com';
 
 // Static Routes
 const staticRoutes = [

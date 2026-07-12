@@ -131,7 +131,7 @@ const injectOverlay = (data, questionId) => {
 
     document.getElementById('lv-close').onclick = () => div.remove();
     document.getElementById('lv-view-full').onclick = () => {
-        window.open(`https://leet-vision.vercel.app/concept/${data.concept._id}`, '_blank');
+        window.open(`https://leet-vision.com/concept/${data.concept._id}`, '_blank');
     };
 
     updateOverlayUI(data, questionId);

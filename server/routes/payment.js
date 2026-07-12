@@ -213,7 +213,7 @@ router.post('/verify', auth.protect, async (req, res) => {
                                     <p style="margin: 0;"><b>Expires On:</b> ${newExpiry.toLocaleDateString()}</p>
                                 </div>
                                 <p>You now have full access to all platform solutions, premium video content, and advanced analytical insights.</p>
-                                <a href="https://leet-vision.vercel.app/explore" style="display: inline-block; padding: 10px 20px; background: #ffa116; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">Start Exploring</a>
+                                <a href="https://leet-vision.com/explore" style="display: inline-block; padding: 10px 20px; background: #ffa116; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">Start Exploring</a>
                                 <p style="margin-top: 30px; font-size: 0.8rem; color: #777;">If you have any questions, reply to this email.</p>
                             </div>
                         `
@@ -258,7 +258,7 @@ router.post('/verify', auth.protect, async (req, res) => {
                                     <p style="margin: 0;"><b>Amount Paid:</b> ₹${amount}</p>
                                 </div>
                                 <p>Dive into the solutions and master your coding interviews!</p>
-                                <a href="https://leet-vision.vercel.app/explore" style="display: inline-block; padding: 10px 20px; background: #ffa116; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Dashboard</a>
+                                <a href="https://leet-vision.com/explore" style="display: inline-block; padding: 10px 20px; background: #ffa116; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Dashboard</a>
                                 <p style="margin-top: 30px; font-size: 0.8rem; color: #777;">Happy Leeting!</p>
                             </div>
                         `

@@ -1,4 +1,4 @@
-const API_BASE = "https://leet-vision.vercel.app/api";
+const API_BASE = "https://leet-vision.com/api";
 
 function arrayBufferToBase64(buffer) {
     let binary = '';
