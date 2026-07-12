@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "LeetVision DSA Docs | Elite Algorithms Documentation",
-  description: "High-quality, comprehensive Data Structures & Algorithms documentation engineered for LeetCode interview preparation.",
+  description: "The ultimate LeetCode helper and comprehensive Data Structures & Algorithms documentation engineered for competitive programming and interview preparation.",
+  keywords: ["leetcode", "leetcode helper", "dsa documentation", "algorithm patterns", "competitive programming", "leetcode visualizer"],
 };
 
 export default async function RootLayout({

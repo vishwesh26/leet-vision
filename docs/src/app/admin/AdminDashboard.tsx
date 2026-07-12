@@ -14,7 +14,7 @@ export default function AdminDashboard({ initialSubtopics }: { initialSubtopics:
   const handleAction = async (id: string, action: string, extraData: any = {}) => {
     setLoadingId(`${id}-${action}`);
     try {
-      const res = await fetch("/api/admin/subtopic", {
+      const res = await fetch("/docs/api/admin/subtopic", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action, id, ...extraData })
