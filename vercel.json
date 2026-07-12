@@ -2,12 +2,12 @@
     "version": 2,
     "rewrites": [
         {
-            "source": "/docs/:path*",
-            "destination": "https://leet-vision-docs.vercel.app/docs/:path*"
-        },
-        {
             "source": "/docs",
             "destination": "https://leet-vision-docs.vercel.app/docs"
+        },
+        {
+            "source": "/docs/(.*)",
+            "destination": "https://leet-vision-docs.vercel.app/docs/$1"
         },
         {
             "source": "/api/(.*)",
