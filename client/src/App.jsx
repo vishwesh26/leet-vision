@@ -124,18 +124,23 @@ function AppContent({ savedVideos, onToggleSave }) {
 
           {/* Navbar Search Integration */}
           <div className={`nav-search-container ${isSearchOpen ? 'active' : ''}`}>
-            <form onSubmit={handleSearchSubmit} className="nav-search-form">
+            <div className="nav-search-form">
               <input
                 type="text"
                 placeholder="LeetCode Question No."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearchSubmit(e);
+                  }
+                }}
                 autoFocus={isSearchOpen}
               />
-              <button type="submit" className="nav-search-btn">
+              <button type="button" className="nav-search-btn" onClick={handleSearchSubmit}>
                 <FaSearch />
               </button>
-            </form>
+            </div>
             <button
               className="nav-search-toggle"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
