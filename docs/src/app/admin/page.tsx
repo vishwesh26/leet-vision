@@ -18,5 +18,10 @@ export default async function AdminPage() {
     orderBy: { createdAt: 'desc' }
   });
 
-  return <AdminDashboard initialSubtopics={subtopics} />;
+  // Fetch all topics for the creation dropdown
+  const topics = await prisma.topic.findMany({
+    orderBy: { order: 'asc' }
+  });
+
+  return <AdminDashboard initialSubtopics={subtopics} topics={topics} />;
 }

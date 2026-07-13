@@ -425,6 +425,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=BKy7H8rEmco"
     }
   ],
+  "9": [
+    {
+      "id": "yubRKwixN-U",
+      "questionId": "9",
+      "title": "Palindrome Number - Leetcode 9 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/yubRKwixN-U/hqdefault.jpg",
+      "viewCount": 117359,
+      "likeCount": 2163,
+      "publishedAt": "2021-08-20T16:00:49Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=yubRKwixN-U"
+    },
+    {
+      "id": "U8UnNZhoPQk",
+      "questionId": "9",
+      "title": "LeetCode 9 | Palindrome Number | Day 1 | 100_Days_LeetCode_Challenge | Master DSA with edSlash",
+      "channelTitle": "edSlash",
+      "thumbnail": "https://i.ytimg.com/vi/U8UnNZhoPQk/hqdefault.jpg",
+      "viewCount": 101070,
+      "likeCount": 1804,
+      "publishedAt": "2023-10-18T03:39:54Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=U8UnNZhoPQk"
+    },
+    {
+      "id": "to4Ufp0MU4w",
+      "questionId": "9",
+      "title": "Palindrome Number | Leetcode problem 9 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/to4Ufp0MU4w/hqdefault.jpg",
+      "viewCount": 67144,
+      "likeCount": 833,
+      "publishedAt": "2022-09-14T16:41:35Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=to4Ufp0MU4w"
+    },
+    {
+      "id": "GhLd6bK4z9w",
+      "questionId": "9",
+      "title": "Leetcode | 9. Palindrome Number | Easy | Java Solution",
+      "channelTitle": "Developer Docs",
+      "thumbnail": "https://i.ytimg.com/vi/GhLd6bK4z9w/hqdefault.jpg",
+      "viewCount": 35427,
+      "likeCount": 327,
+      "publishedAt": "2023-02-27T07:27:40Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GhLd6bK4z9w"
+    },
+    {
+      "id": "ZCsT6bbQNAs",
+      "questionId": "9",
+      "title": "9. Palindrome Number - Leetcode (Python)",
+      "channelTitle": "Quoc Dat Phung",
+      "thumbnail": "https://i.ytimg.com/vi/ZCsT6bbQNAs/hqdefault.jpg",
+      "viewCount": 17770,
+      "likeCount": 322,
+      "publishedAt": "2023-04-19T08:00:14Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZCsT6bbQNAs"
+    }
+  ],
   "10": [
     {
       "id": "HAA8mgxlov8",
@@ -921,6 +983,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=8P5qG4OzopQ"
     }
   ],
+  "121": [
+    {
+      "id": "1pkOgXD63yU",
+      "questionId": "121",
+      "title": "Sliding Window: Best Time to Buy and Sell Stock - Leetcode 121 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/1pkOgXD63yU/hqdefault.jpg",
+      "viewCount": 1097593,
+      "likeCount": 19515,
+      "publishedAt": "2020-12-18T15:30:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=1pkOgXD63yU"
+    },
+    {
+      "id": "WBzZCm46mFo",
+      "questionId": "121",
+      "title": "Buy and Sell Stock Problem and Pow(X,N) Power exponential Problem - Leetcode | DSA Series",
+      "channelTitle": "Apna College",
+      "thumbnail": "https://i.ytimg.com/vi/WBzZCm46mFo/hqdefault.jpg",
+      "viewCount": 493925,
+      "likeCount": 8215,
+      "publishedAt": "2024-09-20T15:32:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=WBzZCm46mFo"
+    },
+    {
+      "id": "E2-heUEnZKU",
+      "questionId": "121",
+      "title": "Best Time To Buy & Sell Stock 1 (LeetCode 121) | Full solution with visuals and animation",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/E2-heUEnZKU/hqdefault.jpg",
+      "viewCount": 82798,
+      "likeCount": 2388,
+      "publishedAt": "2022-11-27T12:30:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=E2-heUEnZKU"
+    },
+    {
+      "id": "kJZrMGpyWpk",
+      "questionId": "121",
+      "title": "Best Time to Buy and Sell Stock - Leetcode 121 - Arrays & Strings (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/kJZrMGpyWpk/hqdefault.jpg",
+      "viewCount": 46779,
+      "likeCount": 952,
+      "publishedAt": "2024-06-19T21:10:37Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=kJZrMGpyWpk"
+    },
+    {
+      "id": "jQDIeuMIPGI",
+      "questionId": "121",
+      "title": "Best Time to Buy and Sell Stock | Leetcode 121 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/jQDIeuMIPGI/hqdefault.jpg",
+      "viewCount": 18243,
+      "likeCount": 327,
+      "publishedAt": "2025-02-07T17:21:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jQDIeuMIPGI"
+    }
+  ],
   "136": [
     {
       "id": "X6vgc_Iubf0",
@@ -1409,6 +1533,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=AQ8mHCeEK_s"
     }
   ],
+  "319": [
+    {
+      "id": "uQM9sldV7ms",
+      "questionId": "319",
+      "title": "LeetCode 319 | Bulb Switcher | Day 15 | 100 Days_LeetCode_Challenge | DSA with edSlash",
+      "channelTitle": "edSlash",
+      "thumbnail": "https://i.ytimg.com/vi/uQM9sldV7ms/hqdefault.jpg",
+      "viewCount": 10367,
+      "likeCount": 248,
+      "publishedAt": "2023-11-01T04:43:39Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=uQM9sldV7ms"
+    },
+    {
+      "id": "9XQxIvdqIt0",
+      "questionId": "319",
+      "title": "Bulb Switcher (Leetcode 319) - Medium (Hindi)",
+      "channelTitle": "The Hustling Engineer",
+      "thumbnail": "https://i.ytimg.com/vi/9XQxIvdqIt0/hqdefault.jpg",
+      "viewCount": 10365,
+      "likeCount": 266,
+      "publishedAt": "2021-04-17T08:39:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=9XQxIvdqIt0"
+    },
+    {
+      "id": "lyZhLR292yY",
+      "questionId": "319",
+      "title": "LeetCode 319. Bulb Switcher - Math Trick Fully Explained [Coding Interview Question]",
+      "channelTitle": "Shiran Afergan",
+      "thumbnail": "https://i.ytimg.com/vi/lyZhLR292yY/hqdefault.jpg",
+      "viewCount": 10213,
+      "likeCount": 409,
+      "publishedAt": "2022-02-02T16:29:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=lyZhLR292yY"
+    },
+    {
+      "id": "byFPYruQl2s",
+      "questionId": "319",
+      "title": "Bulb Switcher || Programming Maths || Leetcode 319",
+      "channelTitle": "Aryan Mittal",
+      "thumbnail": "https://i.ytimg.com/vi/byFPYruQl2s/hqdefault.jpg",
+      "viewCount": 8789,
+      "likeCount": 268,
+      "publishedAt": "2023-04-27T02:22:10Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=byFPYruQl2s"
+    },
+    {
+      "id": "q-7aoEILGb0",
+      "questionId": "319",
+      "title": "Bulb Switcher | With Intuition | AMAZON | Leetcode 319 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/q-7aoEILGb0/hqdefault.jpg",
+      "viewCount": 6791,
+      "likeCount": 319,
+      "publishedAt": "2023-04-27T12:11:47Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=q-7aoEILGb0"
+    }
+  ],
   "380": [
     {
       "id": "j4KwhBziOpg",
@@ -1657,6 +1843,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=YhdG0lRZfIA"
     }
   ],
+  "692": [
+    {
+      "id": "zW-8-6A2gxM",
+      "questionId": "692",
+      "title": "Top K Frequent Words -(Amazon, Bloomberg, Uber, Microsoft, Adobe...): Explanation ➕ Live Coding",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/zW-8-6A2gxM/hqdefault.jpg",
+      "viewCount": 9763,
+      "likeCount": 238,
+      "publishedAt": "2022-10-19T03:34:13Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=zW-8-6A2gxM"
+    },
+    {
+      "id": "4dPoGA4WfL4",
+      "questionId": "692",
+      "title": "Leetcode 692 Top K Frequent Words |  Coding Decoded SDE Sheet",
+      "channelTitle": "Coding Decoded",
+      "thumbnail": "https://i.ytimg.com/vi/4dPoGA4WfL4/hqdefault.jpg",
+      "viewCount": 4354,
+      "likeCount": 89,
+      "publishedAt": "2022-10-19T07:22:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=4dPoGA4WfL4"
+    },
+    {
+      "id": "oF3D2t4UULQ",
+      "questionId": "692",
+      "title": "Top K Frequent Words leetcode problem 692",
+      "channelTitle": "Rajnish Aryan",
+      "thumbnail": "https://i.ytimg.com/vi/oF3D2t4UULQ/hqdefault.jpg",
+      "viewCount": 1637,
+      "likeCount": 35,
+      "publishedAt": "2021-08-12T13:18:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=oF3D2t4UULQ"
+    },
+    {
+      "id": "0XgI2-2AYps",
+      "questionId": "692",
+      "title": "2 approaches to LeetCode 692. Top K Frequent Words  | JSer - JavaScript & Algorithm",
+      "channelTitle": "JSer",
+      "thumbnail": "https://i.ytimg.com/vi/0XgI2-2AYps/hqdefault.jpg",
+      "viewCount": 853,
+      "likeCount": 11,
+      "publishedAt": "2020-06-04T20:00:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=0XgI2-2AYps"
+    },
+    {
+      "id": "Bxh5_qAFAxg",
+      "questionId": "692",
+      "title": "How to Solve Top K Frequent Words (LeetCode 692) | Python + Heap + HashMap",
+      "channelTitle": "Code Confidence",
+      "thumbnail": "https://i.ytimg.com/vi/Bxh5_qAFAxg/hqdefault.jpg",
+      "viewCount": 58,
+      "likeCount": 1,
+      "publishedAt": "2025-10-30T02:13:47Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Bxh5_qAFAxg"
+    }
+  ],
   "739": [
     {
       "id": "cTBiBSnjO3c",
@@ -1719,6 +1967,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=nFIUPfClaG4"
     }
   ],
+  "1105": [
+    {
+      "id": "lFYPPPTp8qE",
+      "questionId": "1105",
+      "title": "Filling Bookcase Shelves - Leetcode 1105 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/lFYPPPTp8qE/hqdefault.jpg",
+      "viewCount": 20866,
+      "likeCount": 620,
+      "publishedAt": "2024-07-31T01:20:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=lFYPPPTp8qE"
+    },
+    {
+      "id": "pOtAvGIW8kQ",
+      "questionId": "1105",
+      "title": "Filling Bookcase Shelves | Recursion Memoization | Why not Greedy | Leetcode 1105 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/pOtAvGIW8kQ/hqdefault.jpg",
+      "viewCount": 14391,
+      "likeCount": 627,
+      "publishedAt": "2024-07-31T03:00:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=pOtAvGIW8kQ"
+    },
+    {
+      "id": "PvO1TCF_eSg",
+      "questionId": "1105",
+      "title": "1105. Filling Bookcase Shelves | DP | Leetcode Daily Challenge | DSA | Hindi",
+      "channelTitle": "ShashCode",
+      "thumbnail": "https://i.ytimg.com/vi/PvO1TCF_eSg/hqdefault.jpg",
+      "viewCount": 3529,
+      "likeCount": 147,
+      "publishedAt": "2024-07-31T06:39:44Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=PvO1TCF_eSg"
+    },
+    {
+      "id": "vIXK_zyRSJw",
+      "questionId": "1105",
+      "title": "1105. Filling Bookcase Shelves | Leetcode Daily (POTD) 31 July 2024 | Java | Hindi | Recursion | DP",
+      "channelTitle": "AlgorithmHQ",
+      "thumbnail": "https://i.ytimg.com/vi/vIXK_zyRSJw/hqdefault.jpg",
+      "viewCount": 1348,
+      "likeCount": 53,
+      "publishedAt": "2024-07-31T07:28:50Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=vIXK_zyRSJw"
+    },
+    {
+      "id": "f5eOmnZ3dok",
+      "questionId": "1105",
+      "title": "Filling Bookcase Shelves | Leetcode 1105 | DP | Recursion | Memoization | Java | Developer Coder",
+      "channelTitle": "Developer Coder",
+      "thumbnail": "https://i.ytimg.com/vi/f5eOmnZ3dok/hqdefault.jpg",
+      "viewCount": 54,
+      "likeCount": 4,
+      "publishedAt": "2024-07-31T15:48:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=f5eOmnZ3dok"
+    }
+  ],
   "1480": [
     {
       "id": "fFJaIDUKDoA",
@@ -1779,6 +2089,68 @@
       "publishedAt": "2021-08-30T13:37:27Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=MATtaDI7p2s"
+    }
+  ],
+  "1696": [
+    {
+      "id": "W8N8EeWDwKs",
+      "questionId": "1696",
+      "title": "Leetcode 1696. Jump Game VI [Monotone Queue]",
+      "channelTitle": "Fraz",
+      "thumbnail": "https://i.ytimg.com/vi/W8N8EeWDwKs/hqdefault.jpg",
+      "viewCount": 13831,
+      "likeCount": 352,
+      "publishedAt": "2020-12-24T07:43:44Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=W8N8EeWDwKs"
+    },
+    {
+      "id": "LiEcBMK5PQs",
+      "questionId": "1696",
+      "title": "Jump Game VI | Live Coding with Explanation | Leetcode - 1696",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/LiEcBMK5PQs/hqdefault.jpg",
+      "viewCount": 6152,
+      "likeCount": 110,
+      "publishedAt": "2021-12-30T13:06:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=LiEcBMK5PQs"
+    },
+    {
+      "id": "LzyahBCAYfY",
+      "questionId": "1696",
+      "title": "Jump Game VI | Leetcode 1696 | Live coding session 🏆🏆🏆",
+      "channelTitle": "Coding Decoded",
+      "thumbnail": "https://i.ytimg.com/vi/LzyahBCAYfY/hqdefault.jpg",
+      "viewCount": 5495,
+      "likeCount": 162,
+      "publishedAt": "2021-06-09T10:19:24Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=LzyahBCAYfY"
+    },
+    {
+      "id": "M_PzYd59_kk",
+      "questionId": "1696",
+      "title": "花花酱 LeetCode 1696. Jump Game VI - 刷题找工作 EP376",
+      "channelTitle": "Hua Hua",
+      "thumbnail": "https://i.ytimg.com/vi/M_PzYd59_kk/hqdefault.jpg",
+      "viewCount": 3266,
+      "likeCount": 68,
+      "publishedAt": "2020-12-20T20:06:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=M_PzYd59_kk"
+    },
+    {
+      "id": "BY1QYjGMA2g",
+      "questionId": "1696",
+      "title": "Leetcode - Jump Game VI (Python)",
+      "channelTitle": "Timothy H Chang",
+      "thumbnail": "https://i.ytimg.com/vi/BY1QYjGMA2g/hqdefault.jpg",
+      "viewCount": 2220,
+      "likeCount": 52,
+      "publishedAt": "2021-06-09T16:48:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=BY1QYjGMA2g"
     }
   ],
   "1763": [

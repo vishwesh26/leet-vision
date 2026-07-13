@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FaGlobe, FaSearch, FaExternalLinkAlt, FaBrain, FaPlay, FaChevronDown, FaChevronUp, FaLock, FaPlus, FaEdit } from 'react-icons/fa';
 import { SiLeetcode, SiHackerrank, SiGeeksforgeeks, SiCodechef } from 'react-icons/si';
+import SkeletonLoader from './SkeletonLoader';
 
 const UniversalExplore = () => {
     // Auth State
@@ -463,10 +464,19 @@ const UniversalExplore = () => {
                 </div>
 
                 {loading ? (
-                    <div className="state-msg">
-                        <div style={{ width: '40px', height: '40px', border: '3px solid #222', borderTopColor: '#ffa116', borderRadius: '50%', margin: '0 auto 20px', animation: 'spin 1s linear infinite' }}></div>
-                        Initializing Knowledge Stream...
-                        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+                    <div style={{ padding: '40px 0' }}>
+                        <div className="grid-header">
+                            <div>#ID</div>
+                            <div>Problem Title</div>
+                            <div>Platform</div>
+                            <div>Solution</div>
+                            <div>Difficulty</div>
+                        </div>
+                        <SkeletonLoader 
+                            variant="card" 
+                            count={8} 
+                            itemStyle={{ height: '70px', marginBottom: '10px', borderRadius: '16px', background: '#111', border: '1px solid #1a1a1a' }} 
+                        />
                     </div>
                 ) : (
                     <div className="problems-container">
@@ -550,9 +560,12 @@ const UniversalExplore = () => {
                                         {expandedTopics[tag] && (
                                             <div style={{ padding: '0 10px 10px 10px' }}>
                                                 {!topicProblems[tag] ? (
-                                                    <div style={{ padding: '30px', textAlign: 'center', color: '#666' }}>
-                                                        <div style={{ width: '20px', height: '20px', border: '2px solid #222', borderTopColor: '#ffa116', borderRadius: '50%', margin: '0 auto 10px', animation: 'spin 1s linear infinite' }}></div>
-                                                        Loading...
+                                                    <div style={{ padding: '10px 0' }}>
+                                                        <SkeletonLoader 
+                                                            variant="card" 
+                                                            count={3} 
+                                                            itemStyle={{ height: '70px', marginBottom: '10px', borderRadius: '16px', background: '#111', border: '1px solid #1a1a1a' }} 
+                                                        />
                                                     </div>
                                                 ) : topicProblems[tag].map(p => (
                                                     <ProblemRow key={p._id} p={p} />

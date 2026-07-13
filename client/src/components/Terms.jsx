@@ -16,7 +16,7 @@ const Terms = () => {
 
             <section style={{ marginBottom: '2.5rem' }}>
                 <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>2. Accounts and Subscriptions</h2>
-                <p>To access certain features, you may be required to register for an account using OTP (One-Time Password) verification. You are responsible for maintaining the confidentiality of your account access. We offer "Premium" subscriptions that provide enhanced features. Payments are handled via secure third-party processors. All sales are final unless otherwise required by law.</p>
+                <p>To access certain features, you may be required to register for an account using OTP (One-Time Password) verification. You are responsible for maintaining the confidentiality of your account access. Payments are handled via secure third-party processors. All sales are final unless otherwise required by law.</p>
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>

@@ -14,7 +14,6 @@ const PrivacyPolicy = () => {
                 <p>We collect information to provide a better experience for our users. This includes:</p>
                 <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
                     <li><strong>Account Information:</strong> Email addresses and phone numbers used for OTP-based authentication.</li>
-                    <li><strong>Subscription Data:</strong> Details of your Premium subscription status and transaction history (payment details are handled by secure third parties).</li>
                     <li><strong>Usage Activity:</strong> Data on which problems you solve, video solutions watched, and your progress across different coding platforms.</li>
                     <li><strong>Technical Logs:</strong> IP addresses, browser types, and device identification for security and analytics.</li>
                 </ul>
@@ -25,9 +24,9 @@ const PrivacyPolicy = () => {
                 <p>Your data is used strictly to enhance your preparation experience:</p>
                 <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
                     <li>To verify your identity via OTP and secure your account.</li>
-                    <li>To synchronize your professional coding progress (e.g., LeetCode, GFG) with our dashboard.</li>
+                    <li>To synchronize your professional coding progress with our dashboard.</li>
                     <li>To provide personalized problem recommendations based on your history.</li>
-                    <li>To manage your Premium subscription benefits.</li>
+                    
                 </ul>
             </section>
 

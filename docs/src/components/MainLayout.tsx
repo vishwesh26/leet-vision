@@ -7,10 +7,10 @@ import Sidebar from "./Sidebar";
 import ThemeToggle from "./ThemeToggle";
 import ProgressBar from "./ProgressBar";
 
-export default function MainLayout({ 
+export default function MainLayout({
   children,
   publishedSlugs = []
-}: { 
+}: {
   children: React.ReactNode;
   publishedSlugs?: string[];
 }) {
@@ -82,14 +82,14 @@ export default function MainLayout({
             <div className="relative w-80 max-w-xs flex-1 flex flex-col bg-white dark:bg-[#06080e] h-full shadow-xl">
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="absolute right-4 top-4 p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900 z-55"
+                className="absolute right-4 top-4 p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-900 z-[55]"
                 aria-label="Close Menu"
               >
                 <X size={18} />
               </button>
-              <Sidebar 
+              <Sidebar
                 publishedSlugs={publishedSlugs}
-                onCloseMobile={() => setMobileMenuOpen(false)} 
+                onCloseMobile={() => setMobileMenuOpen(false)}
               />
             </div>
           </div>

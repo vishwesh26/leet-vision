@@ -180,7 +180,7 @@ const BuyMeACoffeePage = () => {
                         color: #fff;
                         font-size: 2.5rem;
                         font-weight: 800;
-                        margin-bottom: 1.5rem;
+                        margin-bottom: 0.5rem;
                     }
                     .success-text {
                         color: #aaa;
@@ -247,30 +247,6 @@ const BuyMeACoffeePage = () => {
                         </span>
                     </h1>
 
-                    <ul className="benefits-list">
-                        <li>
-                            <span className="list-icon"><FaBolt /></span>
-                            <div>
-                                <h4>Fuel late nights & building</h4>
-                                <p>Keeps the server running and caffeine flowing.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span className="list-icon"><FaCode /></span>
-                            <div>
-                                <h4>Build better features</h4>
-                                <p>Enables faster releases of visual roadmaps & solutions.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span className="list-icon">♥</span>
-                            <div>
-                                <h4>Your support means a lot</h4>
-                                <p>No venture capital. Just developers helping developers.</p>
-                            </div>
-                        </li>
-                    </ul>
-
                     <div className="footer-copyright">
                         © 2026 Leet Vision · Built with ❤️ by Vishwesh
                     </div>
@@ -308,7 +284,7 @@ const BuyMeACoffeePage = () => {
                         {/* Selector Header */}
                         <div className="selector-meta">
                             <h2>Buy me a coffee</h2>
-                            <p>Pick your order — every cup funds the next feature.</p>
+                           
                         </div>
 
                         {/* Presets Grid */}
@@ -470,7 +446,7 @@ const BuyMeACoffeePage = () => {
                     border-radius: 20px;
                     padding: 1.5rem 1.8rem; /* Reduced padding to decrease height */
                     box-sizing: border-box;
-                    justify-content: space-between;
+                    justify-content: space-evenly;
                     margin-top: 0;
                 }
                 .back-nav-btn {
@@ -526,7 +502,6 @@ const BuyMeACoffeePage = () => {
                     font-size: 2.6rem; /* Decreased size */
                     font-weight: 800;
                     line-height: 1.15;
-                    margin: 0 0 1rem 0;
                     letter-spacing: -0.03em;
                 }
                 .coffee-handwrite-wrapper {

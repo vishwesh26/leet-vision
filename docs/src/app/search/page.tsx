@@ -119,7 +119,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
       </div>
 
       {/* Search Form */}
-      <form method="GET" action="/search" className="flex flex-col sm:flex-row gap-3">
+      <form method="GET" action="/docs/search" className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1 relative">
           <input
             type="text"

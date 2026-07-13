@@ -6,6 +6,7 @@ import { FaExternalLinkAlt, FaPlay, FaBolt, FaSearch, FaBuilding } from 'react-i
 import { useSolved } from '../context/SolvedContext';
 import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
+import SkeletonLoader from './SkeletonLoader';
 
 const CompanyDetailPage = () => {
     const { companyName } = useParams();
@@ -218,9 +219,24 @@ const CompanyDetailPage = () => {
             {/* Premium upsell removed for production */}
 
             {loading ? (
-                <div className="loader-container">
-                    <div className="spinner"></div>
-                    <p>Fetching curated questions...</p>
+                <div style={{ paddingTop: '20px' }}>
+                    <table className="questions-table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Title</th>
+                                <th>Difficulty</th>
+                                <th>Frequency</th>
+                                <th>Acceptance</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <SkeletonLoader 
+                        variant="row" 
+                        count={10} 
+                        itemStyle={{ height: '60px', marginBottom: '8px', borderRadius: '8px', background: '#111' }} 
+                    />
                 </div>
             ) : (
                 <div className="questions-table-wrapper">
@@ -865,26 +881,6 @@ const CompanyDetailPage = () => {
                     padding: 5rem;
                     text-align: center;
                     color: #555;
-                }
-
-                .loader-container {
-                    text-align: center;
-                    padding: 5rem 0;
-                    color: #888;
-                }
-
-                .spinner {
-                    width: 40px;
-                    height: 40px;
-                    border: 3px solid rgba(255, 255, 255, 0.1);
-                    border-top-color: var(--accent-orange);
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
-                    margin: 0 auto 1.5rem;
-                }
-
-                @keyframes spin {
-                    to { transform: rotate(360deg); }
                 }
 
                 .unlock-banner-btn {

@@ -44,6 +44,7 @@ import PricingPage from './components/PricingPage';
 import CheckoutPage from './components/CheckoutPage';
 import AdminSolutionEditor from './components/AdminSolutionEditor';
 import AdminEmailCampaign from './components/AdminEmailCampaign';
+import ResourcesPage from './components/ResourcesPage';
 
 function AppContent({ savedVideos, onToggleSave }) {
   const { user, logout } = useAuth();
@@ -236,7 +237,7 @@ function AppContent({ savedVideos, onToggleSave }) {
 
             <Link to="/companies" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Companies</Link>
             <Link to="/progress" className="mobile-link highlight" onClick={() => setIsMobileMenuOpen(false)}>Progress Tracking</Link>
-            <Link to="/docs" className="mobile-link highlight" style={{ color: '#ffa116' }} onClick={() => setIsMobileMenuOpen(false)}>DSA Docs</Link>
+            <a href="/docs" className="mobile-link highlight" style={{ color: '#ffa116' }} onClick={() => setIsMobileMenuOpen(false)}>DSA Docs</a>
 
             <div className="mobile-divider">Difficulty</div>
             <Link to="/leetcode-easy" className="mobile-link sub" onClick={() => setIsMobileMenuOpen(false)}>Easy</Link>
@@ -378,7 +379,8 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/admin/edit-solution/:id" element={<AdminSolutionEditor />} />
           <Route path="/admin/add-solution/:id" element={<AdminSolutionEditor />} />
           <Route path="/admin/add-solution" element={<AdminSolutionEditor />} />
-          <Route path="/admin/email-campaign" element={<AdminEmailCampaign />} />
+          <Route path="/admin/campaign" element={<AdminEmailCampaign />} />
+          <Route path="/resources" element={<ResourcesPage />} />
         </Routes>
       </div>
 
@@ -386,9 +388,8 @@ function AppContent({ savedVideos, onToggleSave }) {
         <p>Created by <span className="creator-name">Vishwesh Shinde</span></p>
         <div className="footer-links">
           <Link to="/about" className="footer-link">About</Link>
+          <Link to="/docs" className="footer-link">Docs</Link>
           <Link to="/how-it-works" className="footer-link">How it Works</Link>
-          <Link to="/daily-tech" className="footer-link">Daily Tech</Link>
-          <Link to="/blog" className="footer-link">Blog & Guides</Link>
           <Link to="/contact" className="footer-link">Contact</Link>
           <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
           <Link to="/terms" className="footer-link">Terms</Link>

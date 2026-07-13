@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { FaLightbulb, FaExchangeAlt, FaYoutube, FaCode, FaCheckCircle, FaChevronRight, FaBrain, FaExternalLinkAlt, FaTerminal, FaInfoCircle } from 'react-icons/fa';
+import { FaChevronRight, FaPlay, FaCopy, FaCheck, FaExclamationTriangle, FaLightbulb, FaBookOpen } from 'react-icons/fa';
+import SkeletonLoader from './SkeletonLoader';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { IoIosArrowDown, IoIosArrowUp, IoMdCreate } from 'react-icons/io';
@@ -10,49 +11,16 @@ import VintageCoffeeTicket from './VintageCoffeeTicket';
 import { FaCoffee, FaBug } from 'react-icons/fa';
 
 
-const PremiumLoader = ({ platform }) => {
-    const [msgIdx, setMsgIdx] = useState(0);
-    const messages = platform
-        ? [
-            "Searching the darkest corners of the codebase...",
-            "Persuading the compiler to be nice...",
-            "Brewing a fresh pot of coffee...",
-            "Untangling the spaghetti code...",
-            "Reversing the binary tree..."
-        ]
-        : [
-            "Reading the mystical documentation...",
-            "Asking rubber duck for advice...",
-            "Defragmenting memory...",
-            "Downloading more RAM...",
-            "Waiting for tests to pass..."
-        ];
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setMsgIdx(prev => (prev + 1) % messages.length);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, [messages.length]);
-
-    const icons = [<FaCode className="brain-icon-premium" style={{animation: 'spin 3s linear infinite'}} key="1" />, <FaCoffee className="brain-icon-premium" style={{animation: 'bounce 2s infinite'}} key="2" />, <FaBug className="brain-icon-premium" style={{animation: 'pulse 1.5s infinite'}} key="3" />];
-
-    return (
-        <div className="premium-loader-container">
-            <div className="brain-pulse-wrapper">
-                <div className="brain-glow" style={{ background: 'rgba(245, 124, 0, 0.3)' }}></div>
-                {icons[msgIdx % 3]}
-            </div>
-            <div className="loading-status-container">
-                <h2 className="loading-title-premium" style={{ animation: 'pulse 2s infinite' }}>Loading Solution...</h2>
-                <p className="loading-msg-premium" key={msgIdx} style={{ animation: 'fadeInUp 0.5s ease-out' }}>{messages[msgIdx]}</p>
-            </div>
-            <div className="loading-progress-bar">
-                <div className="loading-progress-fill"></div>
-            </div>
-        </div>
-    );
-};
+const ArticleSkeleton = () => (
+    <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
+        <SkeletonLoader variant="title" itemStyle={{ height: '40px', width: '60%', marginBottom: '20px' }} />
+        <SkeletonLoader variant="text" count={3} itemStyle={{ height: '20px', marginBottom: '10px' }} />
+        <br />
+        <SkeletonLoader variant="card" itemStyle={{ height: '200px', marginBottom: '30px', borderRadius: '12px' }} />
+        <SkeletonLoader variant="title" itemStyle={{ height: '30px', width: '40%', marginBottom: '20px' }} />
+        <SkeletonLoader variant="text" count={5} itemStyle={{ height: '20px', marginBottom: '10px' }} />
+    </div>
+);
 
 const ConceptPage = () => {
     const { id, platform, slug } = useParams();
@@ -108,7 +76,7 @@ const ConceptPage = () => {
         }
     };
 
-    if (loading) return <PremiumLoader platform={platform} />;
+    if (loading) return <ArticleSkeleton />;
 
     if (error || !data) return (
         <div className="error-container-concept">
@@ -524,8 +492,7 @@ const ConceptPage = () => {
                 .premium-video-card:hover .vid-title { color: var(--accent-orange); }
 
                 .loading-container-concept { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justifyContent: center; background: #080808; color: #fff; }
-                .loader-concept { width: 50px; height: 50px; border: 3px solid #333; borderTopColor: #f57c00; border-radius: 50%; animation: spin 1s linear infinite; }
-                @keyframes spin { to { transform: rotate(360deg); } }
+
 
                 .shadow-premium { box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 

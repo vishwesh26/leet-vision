@@ -13,7 +13,33 @@ export async function POST(req: Request) {
   if (!(await checkAuth())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
-    const { action, id, content, topicSlug, subtopicSlug } = await req.json();
+    const { action, id, content, topicSlug, subtopicSlug, topicId, title, slug } = await req.json();
+
+    if (action === 'create') {
+      const existing = await prisma.subTopic.findUnique({ where: { slug } });
+      if (existing) return NextResponse.json({ error: "Article with this slug already exists" }, { status: 400 });
+
+      const newSubTopic = await prisma.subTopic.create({
+        data: {
+          topicId,
+          title,
+          slug,
+          content,
+          readingTime: Math.max(1, Math.ceil(content.length / 1000)),
+          codeExamples: [],
+          status: 'Draft',
+        }
+      });
+      
+      await prisma.article.create({
+        data: {
+          subTopicId: newSubTopic.id,
+          content
+        }
+      });
+      
+      return NextResponse.json({ success: true, id: newSubTopic.id });
+    }
 
     if (action === 'approve') {
       await prisma.subTopic.update({

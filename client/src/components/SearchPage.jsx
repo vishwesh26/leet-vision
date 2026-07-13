@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import VideoCard from './VideoCard';
 import SEO from './SEO';
+import SkeletonLoader from './SkeletonLoader';
 
 const SearchPage = ({ savedVideos, onToggleSave }) => {
     const { questionId } = useParams();
@@ -65,7 +66,11 @@ const SearchPage = ({ savedVideos, onToggleSave }) => {
             <section className="results-container">
                 <h2 className="results-header">Results for "{questionId}"</h2>
 
-                {loading && <div className="loading-container">Loading...</div>}
+                {loading && (
+                    <div className="results-grid">
+                        <SkeletonLoader variant="video-card" count={4} />
+                    </div>
+                )}
 
                 {error && (
                     <div style={{ textAlign: 'center', marginTop: '3rem' }}>

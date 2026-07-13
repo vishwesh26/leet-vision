@@ -45,14 +45,14 @@ export default async function RootLayout({
     >
       <head>
         <meta name="google-adsense-account" content="ca-pub-2403388488389670" />
+      </head>
+      <body className="min-h-full flex flex-col dark:bg-[#060607]">
         <Script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID || 'ca-pub-0000000000000000'}`}
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-      </head>
-      <body className="min-h-full flex flex-col dark:bg-[#060607]">
         <MainLayout publishedSlugs={publishedSlugs}>{children}</MainLayout>
       </body>
     </html>

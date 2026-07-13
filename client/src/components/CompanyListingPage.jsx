@@ -5,6 +5,7 @@ import SEO from './SEO';
 import { FaSearch, FaBuilding, FaCode, FaBolt, FaCrown, FaCheckCircle } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
+import SkeletonLoader from './SkeletonLoader';
 
 const CompanyListingPage = () => {
     const [companies, setCompanies] = useState([]);
@@ -81,9 +82,12 @@ const CompanyListingPage = () => {
             </div>
 
             {loading ? (
-                <div className="loader-container">
-                    <div className="spinner"></div>
-                    <p>Loading companies...</p>
+                <div style={{ paddingTop: '20px' }}>
+                    <SkeletonLoader 
+                        variant="card" 
+                        count={12} 
+                        itemStyle={{ height: '200px', borderRadius: '16px', background: '#111', border: '1px solid #1a1a1a' }} 
+                    />
                 </div>
             ) : (
                 <div className="companies-grid">
@@ -359,26 +363,6 @@ const CompanyListingPage = () => {
                 .company-card:hover .card-arrow {
                     color: var(--accent-orange);
                     transform: translateX(5px);
-                }
-
-                .loader-container {
-                    text-align: center;
-                    padding: 5rem 0;
-                    color: #888;
-                }
-
-                .spinner {
-                    width: 40px;
-                    height: 40px;
-                    border: 3px solid rgba(255, 255, 255, 0.1);
-                    border-top-color: var(--accent-orange);
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
-                    margin: 0 auto 1.5rem;
-                }
-
-                @keyframes spin {
-                    to { transform: rotate(360deg); }
                 }
 
                 .no-results {

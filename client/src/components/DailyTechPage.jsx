@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import SEO from './SEO';
 import AdSenseContainer from './AdSenseContainer';
+import SkeletonLoader from './SkeletonLoader';
 
 const DailyTechPage = () => {
     const [articles, setArticles] = useState([]);
@@ -62,8 +63,12 @@ const DailyTechPage = () => {
             </div>
 
             {loading ? (
-                <div style={{ textAlign: 'center', padding: '4rem' }}>
-                    <div className="skeleton" style={{ height: '200px', margin: '0 auto', maxWidth: '800px' }}></div>
+                <div style={{ display: 'grid', gap: '2rem' }}>
+                    <SkeletonLoader 
+                        variant="card" 
+                        count={3} 
+                        itemStyle={{ height: '220px', borderRadius: '16px', background: '#111', border: '1px solid #222' }} 
+                    />
                 </div>
             ) : articles.length > 0 ? (
                 <div style={{ display: 'grid', gap: '2rem' }}>

@@ -4,6 +4,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import SEO from './SEO';
 import { useSolved } from '../context/SolvedContext';
 import { useAuth } from '../context/AuthContext';
+import SkeletonLoader from './SkeletonLoader';
 
 const companies = [
     { id: 'google', name: 'Google' },
@@ -302,7 +303,15 @@ const CompanyPage = () => {
                 </div>
 
                 {/* Content */}
-                {loading && <div style={{ textAlign: 'center', padding: '3rem', color: '#666' }}>Loading questions...</div>}
+                {loading && (
+                    <div style={{ paddingTop: '2rem' }}>
+                        <SkeletonLoader 
+                            variant="row" 
+                            count={8} 
+                            itemStyle={{ height: '60px', marginBottom: '10px', borderRadius: '8px', background: '#1a1a1a' }} 
+                        />
+                    </div>
+                )}
 
                 {error && <div style={{ textAlign: 'center', color: '#ff4444', padding: '2rem' }}>{error}</div>}
 

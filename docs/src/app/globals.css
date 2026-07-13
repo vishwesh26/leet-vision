@@ -180,3 +180,22 @@ body {
 .dark .prose blockquote {
   color: #a1a1aa !important;
 }
+
+/* Skeleton Loading Framework for Next.js */
+.skeleton {
+  background: #222;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,0.05) 20%, rgba(255,255,255,0) 40%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.light .skeleton {
+  background: #e2e8f0;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0) 40%);
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}

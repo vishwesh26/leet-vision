@@ -3,51 +3,23 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { IoIosArrowDown, IoIosArrowUp, IoMdFlash, IoMdTrophy, IoMdList, IoMdCreate, IoMdLink, IoMdPlay, IoMdSettings } from 'react-icons/io';
-import { FaBrain } from 'react-icons/fa';
+import { IoIosArrowDown, IoIosArrowUp, IoMdFlash, IoMdCopy, IoMdCheckmark, IoMdLink, IoMdSettings, IoMdPlay, IoMdTrophy, IoMdList, IoMdCreate } from 'react-icons/io';
+import { FaPlay, FaExclamationTriangle, FaBrain, FaBookOpen } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
 import VintageCoffeeTicket from './VintageCoffeeTicket';
+import SkeletonLoader from './SkeletonLoader';
 
-import { FaCoffee, FaCode, FaBug } from 'react-icons/fa';
-
-const PremiumLoader = () => {
-    const [msgIdx, setMsgIdx] = useState(0);
-    const messages = [
-        "Searching the darkest corners of the codebase...",
-        "Persuading the compiler to be nice...",
-        "Brewing a fresh pot of coffee...",
-        "Untangling the spaghetti code...",
-        "Reversing the binary tree...",
-        "Asking rubber duck for advice..."
-    ];
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setMsgIdx(prev => (prev + 1) % messages.length);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, []);
-
-    // Rotate icons for fun animation
-    const icons = [<FaCode className="brain-icon-premium" style={{animation: 'spin 3s linear infinite'}} key="1" />, <FaCoffee className="brain-icon-premium" style={{animation: 'bounce 2s infinite'}} key="2" />, <FaBug className="brain-icon-premium" style={{animation: 'pulse 1.5s infinite'}} key="3" />];
-
-    return (
-        <div className="premium-loader-container">
-            <div className="brain-pulse-wrapper">
-                <div className="brain-glow" style={{ background: 'rgba(245, 124, 0, 0.3)' }}></div>
-                {icons[msgIdx % 3]}
-            </div>
-            <div className="loading-status-container">
-                <h2 className="loading-title-premium" style={{ animation: 'pulse 2s infinite' }}>Loading Solution...</h2>
-                <p className="loading-msg-premium" key={msgIdx} style={{ animation: 'fadeInUp 0.5s ease-out' }}>{messages[msgIdx]}</p>
-            </div>
-            <div className="loading-progress-bar">
-                <div className="loading-progress-fill"></div>
-            </div>
-        </div>
-    );
-};
+const ArticleSkeleton = () => (
+    <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
+        <SkeletonLoader variant="title" itemStyle={{ height: '40px', width: '60%', marginBottom: '20px' }} />
+        <SkeletonLoader variant="text" count={3} itemStyle={{ height: '20px', marginBottom: '10px' }} />
+        <br />
+        <SkeletonLoader variant="card" itemStyle={{ height: '200px', marginBottom: '30px', borderRadius: '12px' }} />
+        <SkeletonLoader variant="title" itemStyle={{ height: '30px', width: '40%', marginBottom: '20px' }} />
+        <SkeletonLoader variant="text" count={5} itemStyle={{ height: '20px', marginBottom: '10px' }} />
+    </div>
+);
 
 const SolutionPage = () => {
     const { id } = useParams();
@@ -130,7 +102,7 @@ const SolutionPage = () => {
         setActiveLangs(prev => ({ ...prev, [approachIndex]: lang }));
     };
 
-    if (loading) return <PremiumLoader />;
+    if (loading) return <ArticleSkeleton />;
 
     if (error || !data) return (
         <div style={{ padding: '4rem', textAlign: 'center', background: '#080808', minHeight: '100vh', color: '#ff6b6b' }}>
@@ -188,6 +160,37 @@ const SolutionPage = () => {
                             ))}
                         </div>
                     </header>
+
+                    {/* Resources Box */}
+                    <div style={{ margin: '20px 0' }}>
+                        <Link to="/resources" style={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            gap: '12px', 
+                            padding: '16px 20px', 
+                            background: 'linear-gradient(145deg, #1a1a1a, #0f0f0f)', 
+                            border: '1px solid #333', 
+                            borderRadius: '12px', 
+                            textDecoration: 'none', 
+                            color: '#fff',
+                            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                            transition: 'transform 0.2s, border-color 0.2s'
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#4db6ac'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#333'; e.currentTarget.style.transform = 'translateY(0)'; }}
+                        >
+                            <div style={{ background: 'rgba(77, 182, 172, 0.1)', padding: '10px', borderRadius: '8px', color: '#4db6ac' }}>
+                                <FaBookOpen size={24} />
+                            </div>
+                            <div style={{ flex: 1 }}>
+                                <h3 style={{ margin: '0 0 5px 0', fontSize: '1.1rem', color: '#4db6ac' }}>Recommended Resources</h3>
+                                <p style={{ margin: 0, fontSize: '0.9rem', color: '#888' }}>Explore curated books for DSA, System Design, and Interview Prep.</p>
+                            </div>
+                            <div style={{ color: '#666' }}>
+                                <IoMdLink size={20} />
+                            </div>
+                        </Link>
+                    </div>
 
                     {/* Problem Statement Section */}
                     <section ref={sections.problem} id="problem-statement" className="section-container">
@@ -342,14 +345,7 @@ const SolutionPage = () => {
 
                 <aside className="article-sidebar">
 
-                    <div className="sidebar-card">
-                        <IoMdTrophy size={30} color="#f57c00" style={{ marginBottom: '1rem' }} />
-                        <div className="card-title">Master Problem Solving</div>
-                        <p className="card-text">Practice makes perfect. Try to solve this on {data.platform || 'LeetCode'} without hints.</p>
-                        <a href={data.url || `https://leetcode.com/problems/${data.slug || id}/`} target="_blank" rel="noreferrer" className="practice-link" style={{ marginTop: '1.5rem', width: '80%', justifyContent: 'center', background: '#f57c00', color: '#000', border: 'none' }}>
-                            Solve on {data.platform && data.platform !== 'leetcode' ? data.platform.toUpperCase() : 'LeetCode'}
-                        </a>
-                    </div>
+                    
 
                     <VintageCoffeeTicket />
 

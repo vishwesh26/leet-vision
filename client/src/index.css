@@ -2036,3 +2036,49 @@ so they inherit default .video-card styles
     }
 }
 
+/* --- Skeleton Loader --- */
+.skeleton {
+  background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+.skeleton-text.short {
+  width: 60%;
+}
+.skeleton-title {
+  height: 1.5rem;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+.skeleton-card {
+  height: 120px;
+  border-radius: 8px;
+}
+.skeleton-row {
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+

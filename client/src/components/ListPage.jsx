@@ -5,6 +5,7 @@ import VideoCard from './VideoCard';
 import SEO from './SEO';
 import { useAuth } from '../context/AuthContext';
 import { useSolved } from '../context/SolvedContext';
+import SkeletonLoader from './SkeletonLoader';
 import { FaBrain, FaLock, FaPlus, FaEdit } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 
@@ -210,7 +211,15 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                         })}
                     </div>
 
-                    {loading && videos.length === 0 && <div className="state-msg">Loading challenges...</div>}
+                    {loading && videos.length === 0 && (
+                        <div style={{ padding: '0' }}>
+                            <SkeletonLoader 
+                                variant="card" 
+                                count={8} 
+                                itemStyle={{ height: '70px', marginBottom: '10px', borderRadius: '16px', background: '#111', border: '1px solid #1a1a1a' }} 
+                            />
+                        </div>
+                    )}
                     {error && <div className="state-msg" style={{ color: '#ff4444' }}>{error}</div>}
                     {!loading && videos.length === 0 && !error && <div className="state-msg">No questions found.</div>}
 

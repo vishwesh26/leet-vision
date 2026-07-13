@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { basicToAdvanceModules } from '../data/basicToAdvance';
 import { FaExternalLinkAlt, FaBrain, FaChevronDown, FaChevronUp, FaLock, FaCheckCircle, FaCircle, FaPlay } from 'react-icons/fa';
 import { useSolved } from '../context/SolvedContext';
+import SkeletonLoader from './SkeletonLoader';
 
 const BasicToAdvancePage = () => {
     const { user } = useAuth();
@@ -137,7 +138,13 @@ const BasicToAdvancePage = () => {
                                     {isExpanded && (
                                         <div className="roadmap-problems-container">
                                             {loading ? (
-                                                <div className="loader" style={{ margin: '20px auto' }}></div>
+                                                <div style={{ padding: '15px' }}>
+                                                    <SkeletonLoader 
+                                                        variant="row" 
+                                                        count={5} 
+                                                        itemStyle={{ height: '55px', marginBottom: '8px', borderRadius: '12px', background: '#111' }} 
+                                                    />
+                                                </div>
                                             ) : problems.length > 0 ? (
                                                 problems.map((prob) => {
                                                     const solvedState = isProblemSolved(prob);

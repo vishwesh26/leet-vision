@@ -45,14 +45,14 @@ const VintageCoffeeTicket = () => {
             <div className="ticket-body">
                 {/* Vintage details */}
                 <div className="ticket-info">
-                    <div className="ticket-stamp">KEEP THE LIGHTS ON</div>
-                    <div className="ticket-serial">Nº 4920412</div>
+                    <div className="ticket-stamp">Open it</div>
+                    <div className="ticket-serial"></div>
                 </div>
 
                 <div className="ticket-content">
                     <div className="ticket-text">
-                        <span className="ticket-line-1">Buy me</span>
-                        <span className="ticket-line-2">a coffee</span>
+                        <span className="ticket-line-1">If you find it Helpful </span>
+                        <span className="ticket-line-2"></span>
                     </div>
                 </div>
 
