@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
@@ -16,6 +16,46 @@ const SignupPage = () => {
 
     const { signup, sendOtp, loading } = useAuth();
     const navigate = useNavigate();
+    const widgetRef = useRef(null);
+    const widgetIdRef = useRef(null);
+
+    useEffect(() => {
+        let intervalId;
+        const renderWidget = () => {
+            // Only render if step === 1 and widget is not yet rendered
+            if (step === 1 && window.turnstile && widgetRef.current && widgetIdRef.current === null) {
+                widgetIdRef.current = window.turnstile.render(widgetRef.current, {
+                    sitekey: '0x4AAAAAAD7OXc6mSorQJz5c',
+                    action: 'turnstile-spin-v2'
+                });
+            }
+        };
+
+        if (window.turnstile) {
+            renderWidget();
+        } else {
+            intervalId = setInterval(() => {
+                if (window.turnstile) {
+                    renderWidget();
+                    clearInterval(intervalId);
+                }
+            }, 100);
+        }
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
+        };
+    }, [step]); // Re-run if step changes so we can render when step 1 mounts
+
+    // Cleanup widget on unmount
+    useEffect(() => {
+        return () => {
+            if (window.turnstile && widgetIdRef.current !== null) {
+                window.turnstile.remove(widgetIdRef.current);
+                widgetIdRef.current = null;
+            }
+        };
+    }, []);
 
     const handleSendOtp = async (e) => {
         e.preventDefault();
@@ -27,7 +67,10 @@ const SignupPage = () => {
             return;
         }
 
-        const result = await sendOtp(email);
+        const formData = new FormData(e.target);
+        const turnstileToken = formData.get('cf-turnstile-response');
+
+        const result = await sendOtp(email, turnstileToken);
         if (result.success) {
             setLocalSuccess('Verification code sent to your email!');
             setStep(2);
@@ -129,6 +172,8 @@ const SignupPage = () => {
                                 </button>
                             </div>
                         </div>
+
+                        <div ref={widgetRef} style={{ margin: '0.5rem 0' }}></div>
 
                         <button type="submit" className="auth-btn" disabled={loading}>
                             {loading ? (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
@@ -10,12 +10,48 @@ const LoginPage = () => {
     const [localError, setLocalError] = useState('');
     const { login, loading } = useAuth();
     const navigate = useNavigate();
+    const widgetRef = useRef(null);
+    const widgetIdRef = useRef(null);
+
+    useEffect(() => {
+        let intervalId;
+        const renderWidget = () => {
+            if (window.turnstile && widgetRef.current && widgetIdRef.current === null) {
+                // Render the widget explicitly
+                widgetIdRef.current = window.turnstile.render(widgetRef.current, {
+                    sitekey: '0x4AAAAAAD7OXc6mSorQJz5c',
+                    action: 'turnstile-spin-v2'
+                });
+            }
+        };
+
+        if (window.turnstile) {
+            renderWidget();
+        } else {
+            intervalId = setInterval(() => {
+                if (window.turnstile) {
+                    renderWidget();
+                    clearInterval(intervalId);
+                }
+            }, 100);
+        }
+
+        return () => {
+            if (intervalId) clearInterval(intervalId);
+            if (window.turnstile && widgetIdRef.current !== null) {
+                window.turnstile.remove(widgetIdRef.current);
+            }
+        };
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLocalError('');
 
-        const result = await login(email, password);
+        const formData = new FormData(e.target);
+        const turnstileToken = formData.get('cf-turnstile-response');
+
+        const result = await login(email, password, turnstileToken);
         if (result.success) {
             navigate('/'); // Or dashboard
         } else {
@@ -75,6 +111,8 @@ const LoginPage = () => {
                             autoComplete="current-password"
                         />
                     </div>
+
+                    <div ref={widgetRef} style={{ margin: '0.5rem 0' }}></div>
 
                     <button type="submit" className="auth-btn" disabled={loading}>
                         {loading ? (

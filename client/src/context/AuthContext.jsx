@@ -77,12 +77,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Login
-    const login = async (email, password) => {
+    const login = async (email, password, turnstileToken) => {
         setLoading(true);
         setError(null);
         try {
             const response = await axios.post(`${API_BASE}/api/auth/login`,
-                { email, password },
+                { email, password, 'cf-turnstile-response': turnstileToken },
                 { withCredentials: true }
             );
 
@@ -112,11 +112,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Send OTP
-    const sendOtp = async (email) => {
+    const sendOtp = async (email, turnstileToken) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.post(`${API_BASE}/api/auth/send-otp`, { email });
+            const response = await axios.post(`${API_BASE}/api/auth/send-otp`, { email, 'cf-turnstile-response': turnstileToken });
             if (response.data.status === 'success') {
                 return { success: true };
             }

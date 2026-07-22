@@ -58,9 +58,28 @@ router.get('/google/callback', (req, res, next) => {
 router.post('/send-otp', otpLimiter, async (req, res) => {
     try {
         const { email } = req.body;
+        const turnstileToken = req.body['cf-turnstile-response'];
 
         if (!email) {
             return res.status(400).json({ status: 'fail', message: 'Please provide an email' });
+        }
+
+        if (!turnstileToken) {
+            return res.status(400).json({ status: 'fail', message: 'Please complete the CAPTCHA' });
+        }
+
+        const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                secret: process.env.TURNSTILE_SECRET,
+                response: turnstileToken,
+                remoteip: req.ip,
+            }),
+        });
+        const turnstileResult = await turnstileRes.json();
+        if (!turnstileResult.success) {
+            return res.status(403).json({ status: 'fail', message: 'CAPTCHA verification failed' });
         }
 
         // Stateful DB Cooldown Check to prevent spamming the same email
@@ -249,10 +268,29 @@ router.post('/signup', authLimiter, async (req, res) => {
 router.post('/login', authLimiter, async (req, res) => {
     try {
         const { email, password } = req.body;
+        const turnstileToken = req.body['cf-turnstile-response'];
 
         // 1. Validate inputs
         if (!email || !password) {
             return res.status(400).json({ status: 'fail', message: 'Please provide email and password' });
+        }
+
+        if (!turnstileToken) {
+            return res.status(400).json({ status: 'fail', message: 'Please complete the CAPTCHA' });
+        }
+
+        const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                secret: process.env.TURNSTILE_SECRET,
+                response: turnstileToken,
+                remoteip: req.ip,
+            }),
+        });
+        const turnstileResult = await turnstileRes.json();
+        if (!turnstileResult.success) {
+            return res.status(403).json({ status: 'fail', message: 'CAPTCHA verification failed' });
         }
 
         // 2. Find user & include password hash
