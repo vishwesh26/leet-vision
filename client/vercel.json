@@ -14,10 +14,15 @@
         }
     ],
     "redirects": [
-    {
-      "source": "/ads.txt",
-      "destination": "https://srv.adstxtmanager.com/19390/leet-vision.com",
-      "permanent": false
-    }
-  ]
+        {
+            "source": "/ads.txt",
+            "destination": "https://srv.adstxtmanager.com/19390/leet-vision.com",
+            "permanent": true
+        },
+        {
+            "source": "/public/ads.txt",
+            "destination": "https://srv.adstxtmanager.com/19390/leet-vision.com",
+            "permanent": true
+        }
+    ]
 }
