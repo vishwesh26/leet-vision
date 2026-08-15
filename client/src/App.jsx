@@ -45,6 +45,7 @@ import CheckoutPage from './components/CheckoutPage';
 import AdminSolutionEditor from './components/AdminSolutionEditor';
 import AdminEmailCampaign from './components/AdminEmailCampaign';
 import ResourcesPage from './components/ResourcesPage';
+import EzoicRouteHandler from './components/EzoicRouteHandler';
 
 function AppContent({ savedVideos, onToggleSave }) {
   const { user, logout } = useAuth();
@@ -432,6 +433,7 @@ function App() {
       <AuthProvider>
         <SolvedProvider>
           <BrowserRouter>
+            <EzoicRouteHandler />
             <AppContent savedVideos={savedVideos} onToggleSave={handleToggleSave} />
             <Analytics />
           </BrowserRouter>
