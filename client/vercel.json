@@ -1,11 +1,4 @@
 {
-    "redirects": [
-        {
-            "source": "/ads.txt",
-            "destination": "https://srv.adstxtmanager.com/19390/leet-vision.com",
-            "permanent": true
-        }
-    ],
     "headers": [
         {
             "source": "/ads.txt",
@@ -27,7 +20,7 @@
             "destination": "https://leet-vision-docs.vercel.app/docs"
         },
         {
-            "source": "/((?!api|ads\\.txt).*)",
+            "source": "/((?!api).*)",
             "destination": "/index.html"
         }
     ]
