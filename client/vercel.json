@@ -16,7 +16,7 @@
             "destination": "https://leet-vision-docs.vercel.app/docs"
         },
         {
-            "source": "/((?!api).*)",
+            "source": "/((?!api|ads\\.txt).*)",
             "destination": "/index.html"
         }
     ]

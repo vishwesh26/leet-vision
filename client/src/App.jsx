@@ -47,6 +47,13 @@ import AdminEmailCampaign from './components/AdminEmailCampaign';
 import ResourcesPage from './components/ResourcesPage';
 import EzoicRouteHandler from './components/EzoicRouteHandler';
 
+function AdsTxtRedirect() {
+  useEffect(() => {
+    window.location.replace("https://srv.adstxtmanager.com/19390/leet-vision.com");
+  }, []);
+  return null;
+}
+
 function AppContent({ savedVideos, onToggleSave }) {
   const { user, logout } = useAuth();
 
@@ -382,6 +389,7 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/admin/add-solution" element={<AdminSolutionEditor />} />
           <Route path="/admin/campaign" element={<AdminEmailCampaign />} />
           <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/ads.txt" element={<AdsTxtRedirect />} />
         </Routes>
       </div>
 
