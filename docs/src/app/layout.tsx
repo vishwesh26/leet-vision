@@ -45,6 +45,16 @@ export default async function RootLayout({
     >
       <head>
         <meta name="google-adsense-account" content="ca-pub-2403388488389670" />
+        {/* Ezoic Privacy & Header Scripts */}
+        <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" async />
+        <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" async />
+        <script async src="//www.ezojs.com/ezoic/sa.min.js" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ezstandalone = window.ezstandalone || {}; ezstandalone.cmd = ezstandalone.cmd || [];`,
+          }}
+        />
+        <script src="//ezoicanalytics.com/analytics.js" async />
       </head>
       <body className="min-h-full flex flex-col dark:bg-[#060607]">
         <Script

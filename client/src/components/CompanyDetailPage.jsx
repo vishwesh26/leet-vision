@@ -7,6 +7,7 @@ import { useSolved } from '../context/SolvedContext';
 import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
 import SkeletonLoader from './SkeletonLoader';
+import EzoicAd from './EzoicAd';
 
 const CompanyDetailPage = () => {
     const { companyName } = useParams();
@@ -216,6 +217,9 @@ const CompanyDetailPage = () => {
                 </div>
             </div>
 
+            {/* Ad placement */}
+            <EzoicAd />
+
             {/* Premium upsell removed for production */}
 
             {loading ? (
@@ -342,6 +346,9 @@ const CompanyDetailPage = () => {
                     )}
                 </div>
             )}
+
+            {/* Ad placement below table */}
+            <EzoicAd />
 
             {pages > 1 && (
                 <div className="pagination">

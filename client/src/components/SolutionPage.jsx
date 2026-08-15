@@ -9,6 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
 import VintageCoffeeTicket from './VintageCoffeeTicket';
 import SkeletonLoader from './SkeletonLoader';
+import EzoicAd from './EzoicAd';
 
 const ArticleSkeleton = () => (
     <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
@@ -261,7 +262,9 @@ const SolutionPage = () => {
                             const currentLang = activeLangs[idx] || 'python';
                             const isExpanded = expandedApproaches[idx];
                             return (
-                                <article key={idx} className={`approach-card ${isExpanded ? 'expanded' : ''}`}>
+                                <React.Fragment key={idx}>
+                                    {idx > 0 && <EzoicAd />}
+                                    <article className={`approach-card ${isExpanded ? 'expanded' : ''}`}>
                                     <button
                                         onClick={() => toggleApproach(idx)}
                                         className="approach-toggle"
@@ -325,6 +328,7 @@ const SolutionPage = () => {
                                         </div>
                                     )}
                                 </article>
+                                </React.Fragment>
                             )
                         })}
                     </section>
@@ -341,6 +345,9 @@ const SolutionPage = () => {
                             </div>
                         )}
                     </div>
+
+                    {/* Bottom Ad placement */}
+                    <EzoicAd />
                 </main>
 
                 <aside className="article-sidebar">
@@ -502,7 +509,7 @@ const SolutionPage = () => {
                     .problem-title { font-size: 1.8rem; }
                 }
             `}</style>
-        </div >
+        </div>
     );
 };
 

@@ -8,6 +8,7 @@ import { useSolved } from '../context/SolvedContext';
 import SkeletonLoader from './SkeletonLoader';
 import { FaBrain, FaLock, FaPlus, FaEdit } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
+import EzoicAd from './EzoicAd';
 
 
 
@@ -192,24 +193,28 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                             const solved = isProblemSolved(videoData.slug ? videoData : (video.slug ? video : {}));
 
                             return (
-                                <ProblemRow
-                                    key={problemId}
-                                    p={{
-                                        ...videoData,
-                                        platform: 'leetcode',
-                                        questionId: problemId,
-                                        title: videoData.title || video.title,
-                                        slug: videoData.slug || video.slug,
-                                        difficulty: videoData.difficulty || video.difficulty,
-                                        concept_id: videoData.concept_id || video.concept_id
-                                    }}
-                                    solved={solved}
-                                    saved={savedVideos.some(v => v.id === videoData.id)}
-                                    onToggleSave={onToggleSave}
-                                />
+                                <React.Fragment key={problemId}>
+                                    {index > 0 && index % 7 === 0 && <EzoicAd />}
+                                    <ProblemRow
+                                        p={{
+                                            ...videoData,
+                                            platform: 'leetcode',
+                                            questionId: problemId,
+                                            title: videoData.title || video.title,
+                                            slug: videoData.slug || video.slug,
+                                            difficulty: videoData.difficulty || video.difficulty,
+                                            concept_id: videoData.concept_id || video.concept_id
+                                        }}
+                                        solved={solved}
+                                        saved={savedVideos.some(v => v.id === videoData.id)}
+                                        onToggleSave={onToggleSave}
+                                    />
+                                </React.Fragment>
                             );
                         })}
                     </div>
+
+                    <EzoicAd />
 
                     {loading && videos.length === 0 && (
                         <div style={{ padding: '0' }}>

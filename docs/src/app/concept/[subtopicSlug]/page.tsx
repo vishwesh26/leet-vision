@@ -7,12 +7,49 @@ import { prisma } from "@/lib/prisma";
 import { learningRoadmap } from "@/config/roadmap";
 import CodeExplorer from "@/components/CodeExplorer";
 import TableOfContents from "@/components/TableOfContents";
+import EzoicAd from "@/components/EzoicAd";
 import { ChevronLeft, ChevronRight, BookOpen, Clock, AlertTriangle } from "lucide-react";
 
 const cleanAnsi = (str: string) => {
   if (!str) return "";
   const ansiRegex = /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
   return str.replace(ansiRegex, "");
+};
+
+const renderContentWithAds = (content: string) => {
+  const cleaned = cleanAnsi(content);
+  // Split article content by headings (e.g. ## or ###) or paragraph blocks (\n\n)
+  let sections = cleaned.split(/(?=\n##?\s)/);
+  if (sections.length < 3) {
+    sections = cleaned.split(/\n\n+/);
+  }
+
+  if (sections.length <= 1) {
+    return <ReactMarkdown remarkPlugins={[remarkGfm]}>{cleaned}</ReactMarkdown>;
+  }
+
+  // Distribute 3 to 4 ads evenly between sections
+  const maxAds = 4;
+  const step = Math.max(1, Math.floor(sections.length / (maxAds + 1)));
+
+  let adsPlaced = 0;
+
+  return (
+    <>
+      {sections.map((sec, idx) => {
+        const showAd = idx > 0 && idx % step === 0 && adsPlaced < maxAds;
+        if (showAd) {
+          adsPlaced++;
+        }
+        return (
+          <React.Fragment key={idx}>
+            {showAd && <EzoicAd />}
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{sec}</ReactMarkdown>
+          </React.Fragment>
+        );
+      })}
+    </>
+  );
 };
 
 export const revalidate = 60; // ISR validation interval
@@ -185,9 +222,9 @@ export default async function ConceptDetailPage({ params }: PageProps) {
           </div>
         ) : (
           <>
-            {/* Dynamic Markdown Content */}
+            {/* Dynamic Markdown Content with In-article Ads */}
             <div className="prose prose-sm dark:prose-invert max-w-none prose-pre:bg-gray-100 dark:prose-pre:bg-[#07090e] prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand prose-a:no-underline hover:prose-a:underline">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{cleanAnsi(subtopic.content)}</ReactMarkdown>
+              {renderContentWithAds(subtopic.content)}
             </div>
 
             {/* Stacked code sections */}
@@ -197,6 +234,8 @@ export default async function ConceptDetailPage({ params }: PageProps) {
               </h2>
               <CodeExplorer examples={subtopic.codeExamples} />
             </section>
+
+            <EzoicAd />
 
             {/* Practice Problems Index */}
             <section className="space-y-4" id="practice-problems">

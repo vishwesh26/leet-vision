@@ -6,6 +6,7 @@ import { basicToAdvanceModules } from '../data/basicToAdvance';
 import { FaExternalLinkAlt, FaBrain, FaChevronDown, FaChevronUp, FaLock, FaCheckCircle, FaCircle, FaPlay } from 'react-icons/fa';
 import { useSolved } from '../context/SolvedContext';
 import SkeletonLoader from './SkeletonLoader';
+import EzoicAd from './EzoicAd';
 
 const BasicToAdvancePage = () => {
     const { user } = useAuth();
@@ -111,7 +112,9 @@ const BasicToAdvancePage = () => {
                     const isFullyMastered = unitSolved === module.ids.length && module.ids.length > 0;
 
                     return (
-                        <div key={idx} className={`timeline-node-wrapper ${isExpanded ? 'expanded' : ''}`}>
+                        <React.Fragment key={idx}>
+                            {idx > 0 && idx % 3 === 0 && <EzoicAd />}
+                            <div className={`timeline-node-wrapper ${isExpanded ? 'expanded' : ''}`}>
                             <div className="timeline-icon-container">
                                 <div className="timeline-icon-glow">
                                     {module.icon}
@@ -190,8 +193,10 @@ const BasicToAdvancePage = () => {
                                 </div>
                             </div>
                         </div>
+                        </React.Fragment>
                     );
                 })}
+                <EzoicAd />
             </div>
 
             {isGuest && (
