@@ -1,6 +1,6 @@
 import React from 'react';
 import SEO from './SEO';
-import AdSenseContainer from './AdSenseContainer';
+import EzoicAd from './ads/EzoicAd';
 
 const PrivacyPolicy = () => {
     return (
@@ -34,10 +34,19 @@ const PrivacyPolicy = () => {
                 <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>3. Data Sharing & Third Parties</h2>
                 <p>We do not sell your personal data. We use trusted third-party services for specific functions:</p>
                 <ul style={{ paddingLeft: '1.5rem', marginTop: '0.5rem' }}>
+                    <li><strong>Ezoic & Advertising Partners:</strong> We use Ezoic to manage website monetization, analytics, and advertising. For full disclosures on cookies and data used by Ezoic and its partners, see below.</li>
                     <li><strong>Google AdSense:</strong> Serves personalized advertisements based on user interests.</li>
                     <li><strong>YouTube:</strong> We use YouTube API Services to display educational content. Use is subject to the <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-orange)' }}>YouTube Terms of Service</a>.</li>
                     <li><strong>Cloud Infrastructure:</strong> Your data is securely stored on Vercel and MongoDB clusters with industry-standard encryption.</li>
                 </ul>
+            </section>
+
+            {/* Ezoic Privacy Policy Embed */}
+            <section style={{ marginBottom: '2.5rem' }}>
+                <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '1rem' }}>Ezoic Privacy Policy & Cookie Disclosures</h2>
+                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                    <span id="ezoic-privacy-policy-embed"></span>
+                </div>
             </section>
 
             <section style={{ marginBottom: '2.5rem' }}>
@@ -56,7 +65,7 @@ const PrivacyPolicy = () => {
                 </p>
             </div>
 
-            <AdSenseContainer slot="8240394871" />
+            <EzoicAd />
         </div>
     );
 };
