@@ -8,7 +8,7 @@ import { useSolved } from '../context/SolvedContext';
 import SkeletonLoader from './SkeletonLoader';
 import { FaBrain, FaLock, FaPlus, FaEdit } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
-import EzoicAd from './EzoicAd';
+import EzoicAd from './ads/EzoicAd';
 
 
 
@@ -194,7 +194,7 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
 
                             return (
                                 <React.Fragment key={problemId}>
-                                    {index > 0 && index % 7 === 0 && <EzoicAd />}
+                                    {index > 0 && index % 10 === 0 && <EzoicAd />}
                                     <ProblemRow
                                         p={{
                                             ...videoData,

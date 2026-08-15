@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaExternalLinkAlt, FaBook, FaLaptopCode, FaTools } from 'react-icons/fa';
 import SEO from './SEO';
+import EzoicAd from './ads/EzoicAd';
 
 const resourcesData = [
   {
@@ -119,7 +120,9 @@ export default function ResourcesPage() {
         </div>
 
         {resourcesData.map((category, idx) => (
-          <div key={idx} style={{ marginBottom: '60px' }}>
+          <React.Fragment key={idx}>
+            {idx > 0 && <EzoicAd />}
+            <div style={{ marginBottom: '60px' }}>
             <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #333', paddingBottom: '15px' }}>
               <span style={{ color: '#4db6ac' }}>{category.icon}</span> {category.category}
             </h2>
@@ -171,6 +174,7 @@ export default function ResourcesPage() {
               ))}
             </div>
           </div>
+          </React.Fragment>
         ))}
       </div>
     </div>

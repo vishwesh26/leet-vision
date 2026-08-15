@@ -1,6 +1,6 @@
 import React from 'react';
 import SEO from './SEO';
-import AdSenseContainer from './AdSenseContainer';
+import EzoicAd from './ads/EzoicAd';
 
 const About = () => {
     return (
@@ -14,6 +14,8 @@ const About = () => {
                 <h2 style={{ color: '#fff' }}>What is LeetVision?</h2>
                 <p>LeetVision is a specialized tool designed for software engineers preparing for coding interviews. We bridge the gap between hard-to-read text editorials and high-quality video explanations. By indexing thousands of LeetCode problems and their best YouTube video solutions, we provide a streamlined, distraction-free learning experience.</p>
             </section>
+
+            <EzoicAd />
 
             <section style={{ marginBottom: '3rem' }}>
                 <h2 style={{ color: '#fff' }}>Who is it for?</h2>
@@ -34,7 +36,7 @@ const About = () => {
                 <p style={{ margin: 0 }}><strong>Mission:</strong> Our mission is to make the world's best coding interview resources accessible and organized for everyone, everywhere.</p>
             </div>
 
-            <AdSenseContainer slot="8240394871" />
+            <EzoicAd />
         </div>
     );
 };

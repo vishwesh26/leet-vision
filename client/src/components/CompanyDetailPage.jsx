@@ -7,7 +7,7 @@ import { useSolved } from '../context/SolvedContext';
 import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
 import SkeletonLoader from './SkeletonLoader';
-import EzoicAd from './EzoicAd';
+import EzoicAd from './ads/EzoicAd';
 
 const CompanyDetailPage = () => {
     const { companyName } = useParams();

@@ -6,7 +6,7 @@ import { basicToAdvanceModules } from '../data/basicToAdvance';
 import { FaExternalLinkAlt, FaBrain, FaChevronDown, FaChevronUp, FaLock, FaCheckCircle, FaCircle, FaPlay } from 'react-icons/fa';
 import { useSolved } from '../context/SolvedContext';
 import SkeletonLoader from './SkeletonLoader';
-import EzoicAd from './EzoicAd';
+import EzoicAd from './ads/EzoicAd';
 
 const BasicToAdvancePage = () => {
     const { user } = useAuth();
@@ -95,6 +95,9 @@ const BasicToAdvancePage = () => {
                     <div style={{ color: '#ffa116', fontWeight: 800 }}>{totalMastered} / {totalQuestions}</div>
                 </div>
             </div>
+
+            {/* Ad Placement after Hero */}
+            <EzoicAd />
 
             {/* TIMELINE SECTION */}
             <div className="timeline-container">

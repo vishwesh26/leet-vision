@@ -9,7 +9,7 @@ import { useAuth } from '../context/AuthContext';
 import SEO from './SEO';
 import VintageCoffeeTicket from './VintageCoffeeTicket';
 import SkeletonLoader from './SkeletonLoader';
-import EzoicAd from './EzoicAd';
+import EzoicAd from './ads/EzoicAd';
 
 const ArticleSkeleton = () => (
     <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
@@ -212,6 +212,9 @@ const SolutionPage = () => {
                             ))}
                         </div>
                     </section>
+
+                    {/* Ad Placement after Problem Statement */}
+                    <EzoicAd />
                     {/* Analytical Overview Section */}
                     {data.analyticalOverview && (
                         <section id="analytical-overview" className="section-container">

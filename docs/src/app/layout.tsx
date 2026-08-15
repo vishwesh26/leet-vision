@@ -44,10 +44,10 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <meta name="google-adsense-account" content="ca-pub-2403388488389670" />
-        {/* Ezoic Privacy & Header Scripts */}
-        <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" async />
-        <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" async />
+        {/* Ezoic Privacy Scripts */}
+        <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
+        <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" />
+        {/* Ezoic Header Script */}
         <script async src="//www.ezojs.com/ezoic/sa.min.js" />
         <script
           dangerouslySetInnerHTML={{
@@ -55,6 +55,7 @@ export default async function RootLayout({
           }}
         />
         <script src="//ezoicanalytics.com/analytics.js" async />
+        <meta name="google-adsense-account" content="ca-pub-2403388488389670" />
       </head>
       <body className="min-h-full flex flex-col dark:bg-[#060607]">
         <Script

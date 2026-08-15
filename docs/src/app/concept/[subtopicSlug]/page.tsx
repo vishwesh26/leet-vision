@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { learningRoadmap } from "@/config/roadmap";
 import CodeExplorer from "@/components/CodeExplorer";
 import TableOfContents from "@/components/TableOfContents";
-import EzoicAd from "@/components/EzoicAd";
+import EzoicAd from "@/components/ads/EzoicAd";
 import { ChevronLeft, ChevronRight, BookOpen, Clock, AlertTriangle } from "lucide-react";
 
 const cleanAnsi = (str: string) => {
