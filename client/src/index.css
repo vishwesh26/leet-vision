@@ -54,7 +54,6 @@ body {
 }
 
 .app-container {
-    padding-top: 80px !important; /* Push content down */
     min-height: 100vh;
     box-sizing: border-box;
 }

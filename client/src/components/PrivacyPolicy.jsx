@@ -26,7 +26,7 @@ const PrivacyPolicy = () => {
                     <li>To verify your identity via OTP and secure your account.</li>
                     <li>To synchronize your professional coding progress with our dashboard.</li>
                     <li>To provide personalized problem recommendations based on your history.</li>
-                    
+
                 </ul>
             </section>
 
