@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
+import { revalidatePath } from 'next/cache';
 
 // Authentication Middleware
 async function checkAuth() {
@@ -42,15 +43,21 @@ export async function POST(req: Request) {
     }
 
     if (action === 'approve') {
-      await prisma.subTopic.update({
+      const sub = await prisma.subTopic.update({
         where: { id },
         data: { status: 'Published' }
       });
+      revalidatePath(`/concept/${sub.slug}`);
+      
+      // Ping production to revalidate if configured
+      if (process.env.PRODUCTION_URL) {
+        fetch(`${process.env.PRODUCTION_URL}/docs/api/revalidate?path=/concept/${sub.slug}&secret=${process.env.CRON_SECRET}`).catch(console.error);
+      }
       return NextResponse.json({ success: true, status: 'Published' });
     }
 
     if (action === 'update') {
-      await prisma.subTopic.update({
+      const sub = await prisma.subTopic.update({
         where: { id },
         data: { content }
       });
@@ -58,6 +65,11 @@ export async function POST(req: Request) {
         where: { subTopicId: id },
         data: { content }
       });
+      revalidatePath(`/concept/${sub.slug}`);
+      
+      if (process.env.PRODUCTION_URL) {
+        fetch(`${process.env.PRODUCTION_URL}/docs/api/revalidate?path=/concept/${sub.slug}&secret=${process.env.CRON_SECRET}`).catch(console.error);
+      }
       return NextResponse.json({ success: true });
     }
     
@@ -71,7 +83,7 @@ export async function POST(req: Request) {
       // Determine the host (localhost or deployed domain)
       const host = req.headers.get("host");
       const protocol = host?.includes("localhost") ? "http" : "https";
-      const url = `${protocol}://${host}/api/cron/generate?topic=${topicSlug}&subtopic=${subtopicSlug}&secret=${secret}`;
+      const url = `${protocol}://${host}/docs/api/cron/generate?topic=${topicSlug}&subtopic=${subtopicSlug}&secret=${secret}`;
       
       const res = await fetch(url);
       const data = await res.json();

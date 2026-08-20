@@ -34,6 +34,7 @@ import UniversalExplore from './components/UniversalExplore';
 import BasicToAdvancePage from './components/BasicToAdvancePage';
 import WelcomePopup from './components/WelcomePopup';
 import BuyMeACoffeePage from './components/BuyMeACoffeePage';
+import SponsorPage from './components/SponsorPage';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './components/LoginPage';
@@ -121,6 +122,7 @@ function AppContent({ savedVideos, onToggleSave }) {
             <li className="nav-item"><Link to="/companies" style={{ color: 'inherit', textDecoration: 'none' }}>Companies</Link></li>
             <li className="nav-item"><Link to="/progress" style={{ color: 'var(--accent-orange)', textDecoration: 'none' }}>Progress</Link></li>
             <li className="nav-item"><a href="/docs" style={{ color: 'inherit', textDecoration: 'none', fontWeight: 600 }}>Docs</a></li>
+            <li className="nav-item"><Link to="/sponsor" style={{ color: '#f57c00', textDecoration: 'none', fontWeight: 600 }}>Sponsor</Link></li>
 
           </ul>
 
@@ -256,13 +258,14 @@ function AppContent({ savedVideos, onToggleSave }) {
             <Link to="/companies" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Browse All Companies</Link>
 
             <div className="mobile-divider">More</div>
+            <Link to="/sponsor" className="mobile-link" style={{ color: '#f57c00', fontWeight: 600 }} onClick={() => setIsMobileMenuOpen(false)}>⭐ Sponsor LeetVision</Link>
             <Link to="/daily" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Daily Challenge</Link>
             <Link to="/saved" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Saved Videos</Link>
           </div>
         </div>
       </nav>
 
-      <div className="app-container" style={{ display: 'block', padding: 0 }}>
+      <div className="app-container" style={{ display: 'block' }}>
         <style>{`
           .dropdown { position: relative; display: inline-block; }
           .dropdown-content {
@@ -375,6 +378,8 @@ function AppContent({ savedVideos, onToggleSave }) {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/buy-me-a-coffee" element={<BuyMeACoffeePage />} />
+          <Route path="/sponsor" element={<SponsorPage />} />
+          <Route path="/sponsor-us" element={<SponsorPage />} />
 
           {/* Admin Routes */}
           <Route path="/admin/edit-solution/:id" element={<AdminSolutionEditor />} />
@@ -385,25 +390,28 @@ function AppContent({ savedVideos, onToggleSave }) {
         </Routes>
       </div>
 
-      <footer className="app-footer">
-        <p>Created by <span className="creator-name">Vishwesh Shinde</span></p>
-        <div className="footer-links">
-          <Link to="/about" className="footer-link">About</Link>
-          <Link to="/docs" className="footer-link">Docs</Link>
-          <Link to="/how-it-works" className="footer-link">How it Works</Link>
-          <Link to="/contact" className="footer-link">Contact</Link>
-          <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
-          <Link to="/terms" className="footer-link">Terms</Link>
-        </div>
-        <div className="footer-socials" style={{ marginTop: '1rem' }}>
-          <a href="https://www.instagram.com/vishwesh_shinde" target="_blank" rel="noreferrer" className="footer-icon-link" style={{ marginRight: '1rem' }}>
-            <FaInstagram size={20} />
-          </a>
-          <a href="https://www.linkedin.com/in/vishweshshinde" target="_blank" rel="noreferrer" className="footer-icon-link">
-            <FaLinkedin size={20} />
-          </a>
-        </div>
-      </footer>
+      {!isHome && (
+        <footer className="app-footer">
+          <p>Created by <span className="creator-name">Vishwesh Shinde</span></p>
+          <div className="footer-links">
+            <Link to="/about" className="footer-link">About</Link>
+            <Link to="/docs" className="footer-link">Docs</Link>
+            <Link to="/how-it-works" className="footer-link">How it Works</Link>
+            <Link to="/sponsor" className="footer-link" style={{ color: '#f57c00', fontWeight: 600 }}>Sponsor Us</Link>
+            <Link to="/contact" className="footer-link">Contact</Link>
+            <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
+            <Link to="/terms" className="footer-link">Terms</Link>
+          </div>
+          <div className="footer-socials" style={{ marginTop: '1rem' }}>
+            <a href="https://www.instagram.com/vishwesh_shinde" target="_blank" rel="noreferrer" className="footer-icon-link" style={{ marginRight: '1rem' }}>
+              <FaInstagram size={20} />
+            </a>
+            <a href="https://www.linkedin.com/in/vishweshshinde" target="_blank" rel="noreferrer" className="footer-icon-link">
+              <FaLinkedin size={20} />
+            </a>
+          </div>
+        </footer>
+      )}
     </>
   );
 }

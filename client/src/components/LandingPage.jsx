@@ -4,6 +4,7 @@ import { FaArrowRight, FaInstagram, FaLinkedin, FaGithub, FaBuilding, FaPlay, Fa
 import SEO from './SEO';
 import EzoicAd from './ads/EzoicAd';
 import DotField from './DotField';
+import SponsorBanner from './SponsorBanner';
 import '../homepage.css';
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -375,9 +376,9 @@ const faqData = [
    ═══════════════════════════════════════════════════════════════════ */
 const LandingPage = () => {
     return (
-        <div className="hp-page" style={{ position: 'relative', overflow: 'hidden' }}>
-            {/* Interactive DotField Background from React Bits (Homepage Only) */}
-            <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
+        <div className="hp-page" style={{ position: 'relative' }}>
+            {/* Fixed Interactive DotField Background from React Bits (Stays fixed while page scrolls) */}
+            <div style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
                 <DotField
                     dotRadius={1}
                     dotSpacing={30}
@@ -442,7 +443,7 @@ const LandingPage = () => {
                     </div>
 
                     <div className="hp-hero-caption hp-stagger hp-stagger-6">
-                        Free to use · No credit card required
+                        Free to use 
                     </div>
                 </div>
 
@@ -571,7 +572,11 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            <EzoicAd />
+            <section className="hp-section hp-section-bleed" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+                <SectionReveal>
+                    <SponsorBanner variant="hero" slotName="Homepage Featured Hero Banner" />
+                </SectionReveal>
+            </section>
 
             {/* ── 6. FAQ ───────────────────────────────────────────────── */}
             <section className="hp-section hp-section-centered">
@@ -598,7 +603,7 @@ const LandingPage = () => {
                         Start practicing today.
                     </h2>
                     <p className="hp-mono" style={{ fontSize: '0.75rem', color: 'var(--hp-fg-muted)', marginBottom: '2rem', letterSpacing: '0.1em' }}>
-                        FREE TO USE · NO CREDIT CARD
+                        FREE TO USE 
                     </p>
                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <Link to="/companies" className="hp-btn-primary">
@@ -649,6 +654,7 @@ const LandingPage = () => {
                         <div className="hp-footer-col-title">Platform</div>
                         <Link to="/about">About</Link>
                         <a href="/docs">Docs</a>
+                        <Link to="/sponsor" style={{ color: '#f57c00', fontWeight: 600 }}>Sponsor Us</Link>
                         <Link to="/how-it-works">How It Works</Link>
                         <Link to="/privacy-policy">Privacy Policy</Link>
                     </div>

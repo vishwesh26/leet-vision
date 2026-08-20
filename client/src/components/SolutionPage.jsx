@@ -10,6 +10,7 @@ import SEO from './SEO';
 import VintageCoffeeTicket from './VintageCoffeeTicket';
 import SkeletonLoader from './SkeletonLoader';
 import EzoicAd from './ads/EzoicAd';
+import SponsorBanner from './SponsorBanner';
 
 const ArticleSkeleton = () => (
     <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
@@ -32,6 +33,8 @@ const SolutionPage = () => {
     const [activeLangs, setActiveLangs] = useState({});
     const [expandedApproaches, setExpandedApproaches] = useState({});
     const [videoVisible, setVideoVisible] = useState(false);
+    const [visualizerOpen, setVisualizerOpen] = useState(false);
+    const [selectedApproach, setSelectedApproach] = useState(0);
 
     // Refs for smooth scroll
     const sections = {
@@ -152,7 +155,8 @@ const SolutionPage = () => {
                             </div>
                         </div>
 
-                        <div className="tags-container">
+                        <div className="tags-container" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+
                             <a href={data.url || `https://leetcode.com/problems/${data.slug || id}/`} target="_blank" rel="noreferrer" className="practice-link">
                                 <IoMdLink /> Practice {data.platform && data.platform !== 'leetcode' ? `on ${data.platform.toUpperCase()}` : 'Here'}
                             </a>
@@ -215,6 +219,7 @@ const SolutionPage = () => {
 
                     {/* Ad Placement after Problem Statement */}
                     <EzoicAd />
+
                     {/* Analytical Overview Section */}
                     {data.analyticalOverview && (
                         <section id="analytical-overview" className="section-container">
@@ -358,6 +363,16 @@ const SolutionPage = () => {
                     
 
                     <VintageCoffeeTicket />
+
+                    {/* Sponsor Slot below "If you find it helpful" (Same vertical card as Companies page) */}
+                    <SponsorBanner
+                        variant="vertical"
+                        slotName="Solution Sidebar Sponsor Slot"
+                        title="Sponsor Slot Available"
+                        subtitle="Promote your product, dev tool, or hiring role to 10,000+ software engineers."
+                        buttonText="Claim Slot"
+                        style={{ margin: '24px 0' }}
+                    /> 
 
                     {/* Report Issue Button */}
                     <div style={{ marginTop: '30px', textAlign: 'center' }}>

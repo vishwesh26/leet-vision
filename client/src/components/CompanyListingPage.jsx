@@ -6,6 +6,7 @@ import { FaSearch, FaBuilding, FaCode, FaBolt, FaCrown, FaCheckCircle } from 're
 import { useAuth } from '../context/AuthContext';
 import { companyDomains } from '../data/companyDomains';
 import SkeletonLoader from './SkeletonLoader';
+import SponsorBanner from './SponsorBanner';
 
 const CompanyListingPage = () => {
     const [companies, setCompanies] = useState([]);
@@ -63,20 +64,31 @@ const CompanyListingPage = () => {
                 path="/companies"
             />
 
-            <div className="listing-header">
-                <div className="premium-badge"><FaCrown /> Official Interview Partner</div>
-                <h1>Company <span>Interview</span> Questions</h1>
-                <p>Curated list of questions reported by the community for 470+ companies.</p>
+            <div className="listing-header-wrapper">
+                <div className="listing-header-left">
+                   
+                    <h1>Company <span>Interview</span> Questions</h1>
+                    <p>Curated list of questions reported by the community for 340+ companies.</p>
 
-                {/* Purchase/Bundle UI removed for production */}
+                    <div className="search-box-container">
+                        <FaSearch className="search-icon" />
+                        <input
+                            type="text"
+                            placeholder="Search company (e.g. Google, Atlassian...)"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                </div>
 
-                <div className="search-box-container">
-                    <FaSearch className="search-icon" />
-                    <input
-                        type="text"
-                        placeholder="Search company (e.g. Google, Atlassian...)"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                <div className="listing-header-sponsor">
+                    <SponsorBanner
+                        variant="vertical"
+                        slotName="Companies Page Header Partner Slot"
+                        title="Sponsor Slot Available"
+                        subtitle="Promote your product, dev tool, or hiring role to 10,000+ software engineers."
+                        buttonText="Claim Slot"
+                        style={{ width: '100%', height: '100%', minHeight: '230px' }}
                     />
                 </div>
             </div>
@@ -144,28 +156,55 @@ const CompanyListingPage = () => {
                     min-height: 100vh;
                 }
 
-                .listing-header {
-                    text-align: center;
+                .listing-header-wrapper {
+                    display: grid;
+                    grid-template-columns: 1fr 380px;
+                    gap: 3rem;
+                    align-items: stretch;
                     margin-bottom: 4rem;
                 }
 
-                .listing-header h1 {
-                    font-size: clamp(2.5rem, 5vw, 4rem);
-                    margin-bottom: 1rem;
+                @media (max-width: 960px) {
+                    .listing-header-wrapper {
+                        grid-template-columns: 1fr;
+                        gap: 2rem;
+                    }
+                }
+
+                .listing-header-left {
+                    text-align: left;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+
+                .listing-header-left h1 {
+                    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+                    margin-bottom: 0.8rem;
                     font-weight: 800;
                     letter-spacing: -1px;
                 }
 
-                .listing-header h1 span {
+                .listing-header-left h1 span {
                     color: var(--accent-orange);
                     position: relative;
                 }
 
-                .listing-header p {
+                .listing-header-left p {
                     color: #888;
-                    font-size: 1.2rem;
-                    max-width: 600px;
-                    margin: 0 auto 1.5rem;
+                    font-size: 1.1rem;
+                    max-width: 580px;
+                    margin: 0 0 1.5rem 0;
+                }
+
+                .listing-header-left .search-box-container {
+                    max-width: 100%;
+                    margin: 0;
+                }
+
+                .listing-header-sponsor {
+                    display: flex;
+                    margin-bottom : 10%;
                 }
 
                 .premium-badge {
@@ -178,8 +217,9 @@ const CompanyListingPage = () => {
                     border-radius: 50px;
                     font-size: 0.85rem;
                     font-weight: 700;
-                    margin-bottom: 2rem;
+                    margin-bottom: 1.5rem;
                     border: 1px solid rgba(245, 124, 0, 0.2);
+                    align-self: flex-start;
                 }
 
                 .bundle-promo {

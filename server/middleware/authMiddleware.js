@@ -35,6 +35,30 @@ exports.protect = async (req, res, next) => {
     }
 };
 
+exports.optionalAuth = async (req, res, next) => {
+    try {
+        let token;
+        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+            token = req.headers.authorization.split(' ')[1];
+        } else if (req.cookies && req.cookies.jwt) {
+            token = req.cookies.jwt;
+        }
+
+        if (!token) return next();
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const currentUser = await User.findById(decoded.id);
+        
+        if (currentUser) {
+            req.user = currentUser;
+        }
+        next();
+    } catch (err) {
+        // Just proceed without setting req.user
+        next();
+    }
+};
+
 exports.admin = (req, res, next) => {
     if (req.user && req.user.isAdmin) {
         next();

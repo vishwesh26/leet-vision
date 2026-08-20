@@ -29,6 +29,15 @@ export default function TableOfContents({ contentSelector }: { contentSelector: 
           .replace(/[^a-z0-9]+/g, "-")
           .replace(/(^-|-$)/g, "");
       }
+      
+      let uniqueId = el.id;
+      let counter = 1;
+      while (items.find(item => item.id === uniqueId)) {
+        uniqueId = `${el.id}-${counter}`;
+        counter++;
+      }
+      el.id = uniqueId;
+
       items.push({
         id: el.id,
         text,

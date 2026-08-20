@@ -48,9 +48,26 @@ const aiGenerationLimiter = rateLimit({
     legacyHeaders: false,
 });
 
+// 5. Visualizer Limiter: 60/hr for authenticated, 10/hr for demo
+const visualizerLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: (req, res) => req.user ? 600 : 100,
+    message: {
+        status: 'fail',
+        message: 'Too many visualizer launches from this IP. Please try again after an hour. Login to increase your limits.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+    keyGenerator: (req) => {
+        // Use user ID if available, otherwise IP
+        return req.user ? req.user._id.toString() : req.ip;
+    }
+});
+
 module.exports = {
     authLimiter,
     otpLimiter,
     reportLimiter,
-    aiGenerationLimiter
+    aiGenerationLimiter,
+    visualizerLimiter
 };

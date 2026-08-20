@@ -1,14 +1,16 @@
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const dotenv = require('dotenv');
 const NodeCache = require('node-cache');
 const axios = require('axios');
 
 dotenv.config();
+dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const fs = require('fs');
-const path = require('path');
 const CompanyQuestion = require('./models/CompanyQuestion');
 const mongoose = require('mongoose');
 const slugify = require('slugify');
@@ -29,6 +31,7 @@ const Concept = require('./models/Concept');
 const UniversalProblem = require('./models/UniversalProblem');
 const Explanation = require('./models/Explanation');
 const Report = require('./models/Report');
+const SponsorInquiry = require('./models/SponsorInquiry');
 const { initCampaignScheduler, sendCampaignToAll, generateUnsubToken } = require('./utils/campaignScheduler');
 const { campaigns, getCampaignById, getRandomCampaign } = require('./utils/emailCampaigns');
 const sendEmail = require('./utils/email');
@@ -264,6 +267,160 @@ app.get('/api/reports', protect, admin, async (req, res) => {
     } catch (err) {
         console.error('Error fetching reports:', err);
         res.status(500).json({ error: 'Failed to fetch reports' });
+    }
+});
+
+// Sponsor Inquiry Endpoints
+app.post('/api/sponsor/inquiry', reportLimiter, async (req, res) => {
+    try {
+        const { name, email, companyName, websiteUrl, placement, budget, message } = req.body;
+
+        if (!name || !email || !companyName || !message) {
+            return res.status(400).json({ error: 'Name, email, company name, and message are required.' });
+        }
+
+        const newInquiry = await SponsorInquiry.create({
+            name,
+            email,
+            companyName,
+            websiteUrl: websiteUrl || '',
+            placement: placement || 'Homepage Hero Banner',
+            budget: budget || '$500 - $1,000 / month',
+            message
+        });
+
+        console.log(`[Sponsor] New inquiry from ${companyName} (${name} - ${email})`);
+
+        // Send Email Notification to Admin
+        const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+        if (adminEmail) {
+            try {
+                await sendEmail({
+                    email: adminEmail,
+                    subject: `⚡ New Sponsorship Inquiry: ${companyName} (${name})`,
+                    html: `
+                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; background-color: #0d0e12; color: #e5e5e5; border-radius: 12px; overflow: hidden; border: 1px solid #262626;">
+                            <div style="background: linear-gradient(135deg, #1c1307 0%, #0d0e12 100%); padding: 32px 28px; border-bottom: 1px solid #2a2012;">
+                                <span style="background: rgba(245, 124, 0, 0.15); color: #f57c00; font-family: monospace; font-size: 11px; font-weight: bold; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 4px; text-transform: uppercase;">
+                                    🚀 New Sponsorship Lead
+                                </span>
+                                <h1 style="color: #ffffff; font-size: 24px; margin: 12px 0 4px 0; font-weight: 700;">${companyName}</h1>
+                                <p style="color: #888888; font-size: 14px; margin: 0;">Submitted via LeetVision Sponsor Portal</p>
+                            </div>
+
+                            <div style="padding: 28px;">
+                                <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                                    <tr style="border-bottom: 1px solid #1f1f1f;">
+                                        <td style="padding: 12px 0; color: #888888; font-size: 13px; width: 140px;">Contact Name</td>
+                                        <td style="padding: 12px 0; color: #ffffff; font-size: 14px; font-weight: 600;">${name}</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #1f1f1f;">
+                                        <td style="padding: 12px 0; color: #888888; font-size: 13px;">Contact Email</td>
+                                        <td style="padding: 12px 0; color: #f57c00; font-size: 14px; font-weight: 600;">
+                                            <a href="mailto:${email}" style="color: #f57c00; text-decoration: none;">${email}</a>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #1f1f1f;">
+                                        <td style="padding: 12px 0; color: #888888; font-size: 13px;">Company Website</td>
+                                        <td style="padding: 12px 0; color: #ffffff; font-size: 14px;">
+                                            ${websiteUrl ? `<a href="${websiteUrl.startsWith('http') ? websiteUrl : 'https://' + websiteUrl}" target="_blank" style="color: #60a5fa; text-decoration: none;">${websiteUrl}</a>` : '<span style="color: #666;">Not provided</span>'}
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #1f1f1f;">
+                                        <td style="padding: 12px 0; color: #888888; font-size: 13px;">Requested Slot</td>
+                                        <td style="padding: 12px 0; color: #ffffff; font-size: 14px; font-weight: 600;">${placement || 'Homepage Hero Banner'}</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #1f1f1f;">
+                                        <td style="padding: 12px 0; color: #888888; font-size: 13px;">Estimated Budget</td>
+                                        <td style="padding: 12px 0; color: #10b981; font-size: 14px; font-weight: 700;">${budget || '$500 - $1,000 / month'}</td>
+                                    </tr>
+                                </table>
+
+                                <div style="background-color: #141417; border: 1px solid #222226; border-radius: 8px; padding: 18px; margin-bottom: 24px;">
+                                    <div style="color: #888888; font-size: 12px; text-transform: uppercase; font-family: monospace; letter-spacing: 0.05em; margin-bottom: 8px;">
+                                        Project / Message Details:
+                                    </div>
+                                    <div style="color: #e5e5e5; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">
+                                        ${message}
+                                    </div>
+                                </div>
+
+                                <div style="text-align: center; margin-top: 28px;">
+                                    <a href="mailto:${email}?subject=LeetVision%20Sponsorship%20Inquiry%20-%20${encodeURIComponent(companyName)}" style="display: inline-block; background-color: #f57c00; color: #000000; font-weight: 700; font-size: 14px; padding: 12px 28px; border-radius: 6px; text-decoration: none;">
+                                        Reply to ${name} (${email}) →
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div style="background-color: #08090b; padding: 16px 28px; text-align: center; border-top: 1px solid #1c1c1c; color: #555555; font-size: 12px;">
+                                LeetVision Sponsorship System • ${new Date().toUTCString()}
+                            </div>
+                        </div>
+                    `
+                });
+                console.log(`[Sponsor] Admin notification email dispatched to ${adminEmail}`);
+            } catch (mailErr) {
+                console.error('[Sponsor] Failed to send admin email notification:', mailErr.message);
+            }
+        }
+
+        // Send Confirmation Email to Inquirer
+        if (email) {
+            try {
+                await sendEmail({
+                    email,
+                    subject: `We received your sponsorship inquiry for ${companyName} — LeetVision`,
+                    html: `
+                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0d0e12; color: #e5e5e5; border-radius: 12px; overflow: hidden; border: 1px solid #262626;">
+                            <div style="background: linear-gradient(135deg, #1c1307 0%, #0d0e12 100%); padding: 32px 28px; border-bottom: 1px solid #2a2012;">
+                                <h1 style="color: #ffffff; font-size: 22px; margin: 0 0 6px 0; font-weight: 700;">Thanks for reaching out, ${name}!</h1>
+                                <p style="color: #f57c00; font-size: 14px; margin: 0;">LeetVision Official Partnerships</p>
+                            </div>
+
+                            <div style="padding: 28px; font-size: 14px; line-height: 1.6; color: #cccccc;">
+                                <p>We've received your partnership inquiry for <b>${companyName}</b> regarding the <b>${placement || 'Sponsorship Slot'}</b> on LeetVision.</p>
+                                <p>Our team is reviewing your requirements and will get back to you within <b>24 hours</b> with traffic insights, slot availability, and next steps.</p>
+                                
+                                <div style="background-color: #141417; border: 1px solid #222226; border-radius: 8px; padding: 16px; margin: 20px 0;">
+                                    <div style="color: #888888; font-size: 12px; text-transform: uppercase; font-family: monospace; margin-bottom: 6px;">Summary of your submission:</div>
+                                    <div style="color: #ffffff;"><b>Company:</b> ${companyName}</div>
+                                    <div style="color: #ffffff;"><b>Placement:</b> ${placement || 'Hero Banner'}</div>
+                                    <div style="color: #ffffff;"><b>Estimated Budget:</b> ${budget || 'Flexible'}</div>
+                                </div>
+
+                                <p style="color: #888888; font-size: 13px;">If you have any immediate questions or assets to share, simply reply directly to this email.</p>
+                            </div>
+
+                            <div style="background-color: #08090b; padding: 16px 28px; text-align: center; border-top: 1px solid #1c1c1c; color: #555555; font-size: 12px;">
+                                LeetVision • Visual Coding Preparation & Software Engineer Community
+                            </div>
+                        </div>
+                    `
+                });
+                console.log(`[Sponsor] Confirmation email dispatched to inquirer: ${email}`);
+            } catch (mailErr) {
+                console.error('[Sponsor] Failed to send confirmation email to inquirer:', mailErr.message);
+            }
+        }
+
+        res.status(201).json({
+            status: 'success',
+            message: 'Your sponsor inquiry has been submitted successfully. We will get back to you within 24 hours!',
+            data: newInquiry
+        });
+    } catch (err) {
+        console.error('Sponsor Inquiry Error:', err);
+        res.status(500).json({ error: 'Failed to submit sponsor inquiry. Please try again.' });
+    }
+});
+
+app.get('/api/sponsor/inquiries', protect, admin, async (req, res) => {
+    try {
+        const inquiries = await SponsorInquiry.find().sort({ createdAt: -1 });
+        res.json(inquiries);
+    } catch (err) {
+        console.error('Error fetching sponsor inquiries:', err);
+        res.status(500).json({ error: 'Failed to fetch sponsor inquiries' });
     }
 });
 
@@ -2256,5 +2413,11 @@ app.get('/api/external/questions', async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`🚀 LeetVision Server running on http://localhost:${PORT}`);
+    });
+}
 
 module.exports = app;

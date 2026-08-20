@@ -8,6 +8,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { IoIosArrowDown, IoIosArrowUp, IoMdCreate } from 'react-icons/io';
 import SEO from './SEO';
 import VintageCoffeeTicket from './VintageCoffeeTicket';
+import SponsorBanner from './SponsorBanner';
 import { FaCoffee, FaBug } from 'react-icons/fa';
 
 
@@ -329,6 +330,16 @@ const ConceptPage = () => {
                     </section>
 
                     <VintageCoffeeTicket />
+
+                    {/* Sponsor Slot below "If you find it helpful" */}
+                    <SponsorBanner
+                        variant="vertical"
+                        slotName="Concept Sidebar Sponsor Slot"
+                        title="Sponsor Slot Available"
+                        subtitle="Promote your product, dev tool, or hiring role to 10,000+ software engineers."
+                        buttonText="Claim Slot"
+                        style={{ margin: '24px 0' }}
+                    />
 
                     {explanation.video_links && explanation.video_links.length > 0 && (
                         <section className="sidebar-group shadow-premium">

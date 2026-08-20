@@ -49,6 +49,24 @@ export default function AdminDashboard({ initialSubtopics, topics = [] }: { init
     }
   };
 
+  const handleSeedMissing = async () => {
+    setLoadingId('seed-missing');
+    try {
+      const res = await fetch("/docs/api/admin/seed-missing", { method: "POST" });
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message);
+        window.location.reload();
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (err) {
+      alert("Network error");
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
   const handleAction = async (id: string, action: string, extraData: any = {}) => {
     setLoadingId(`${id}-${action}`);
     try {
@@ -101,6 +119,14 @@ export default function AdminDashboard({ initialSubtopics, topics = [] }: { init
             >
               <PlusCircle size={16} /> Write New Article
             </button>
+            <button 
+              onClick={handleSeedMissing}
+              disabled={loadingId === 'seed-missing'}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full font-bold text-sm transition-colors flex items-center gap-2 disabled:opacity-50"
+            >
+              <RefreshCw size={16} className={loadingId === 'seed-missing' ? 'animate-spin' : ''} /> 
+              Seed Missing Roadmap Articles
+            </button>
             <div className="bg-blue-600/10 text-blue-600 px-4 py-2 rounded-full font-bold text-sm">
               {subtopics.filter(s => s.status === 'Draft').length} Pending Drafts
             </div>
@@ -140,7 +166,7 @@ export default function AdminDashboard({ initialSubtopics, topics = [] }: { init
                   </td>
                   <td className="p-4 flex items-center gap-2">
                     <a 
-                      href={`/concept/${realSlug}`} 
+                      href={`/docs/concept/${realSlug}`} 
                       target="_blank" 
                       className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors"
                       title="Preview"

@@ -7,6 +7,7 @@ import { FaExternalLinkAlt, FaBrain, FaChevronDown, FaChevronUp, FaLock, FaCheck
 import { useSolved } from '../context/SolvedContext';
 import SkeletonLoader from './SkeletonLoader';
 import EzoicAd from './ads/EzoicAd';
+import SponsorBanner from './SponsorBanner';
 
 const BasicToAdvancePage = () => {
     const { user } = useAuth();
@@ -98,6 +99,15 @@ const BasicToAdvancePage = () => {
 
             {/* Ad Placement after Hero */}
             <EzoicAd />
+
+            {/* Sponsor Slot Banner */}
+            <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 20px' }}>
+                <SponsorBanner
+                    variant="strip"
+                    title="Sponsor Slot Available"
+                    slotName="DSA Roadmap Section Partner"
+                />
+            </div>
 
             {/* TIMELINE SECTION */}
             <div className="timeline-container">

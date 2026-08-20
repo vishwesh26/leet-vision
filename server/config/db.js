@@ -47,6 +47,11 @@ const connectDB = async () => {
         const conn = await cachedConnection;
         console.log(`MongoDB Connected: ${conn.connection.host}`);
         
+        try {
+            await conn.connection.db.collection('tracecaches').deleteMany({});
+            console.log('TraceCache cleared successfully.');
+        } catch(e) {}
+        
         // Handle connection events
         mongoose.connection.on('error', err => {
             console.error('MongoDB runtime error:', err);

@@ -41,3 +41,21 @@ node_modules_old/
 # External Data & Caches
 server/data/solutions/
 server/data/videoCache.json
+
+# Scratch & PSD assets
+*.psd
+testTrace.js
+replace.js
+server/trace.json
+
+# Algorithm Visualizer (WIP - Excluded from production)
+client/src/visualizer/
+client/src/components/visualizer/
+client/src/components/SolutionVisualizer.jsx
+client/src/hooks/
+server/routes/visualize.js
+server/models/TraceCache.js
+server/utils/sceneClassifier.js
+server/utils/traceGenerator.js
+.agents/
+leetvision-homepage-redesign-prompt.md

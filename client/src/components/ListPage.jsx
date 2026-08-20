@@ -9,6 +9,7 @@ import SkeletonLoader from './SkeletonLoader';
 import { FaBrain, FaLock, FaPlus, FaEdit } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import EzoicAd from './ads/EzoicAd';
+import SponsorBanner from './SponsorBanner';
 
 
 
@@ -176,6 +177,13 @@ const ListPage = ({ type: propType, title: propTitle, param: propParam, savedVid
                     <h1 className="page-title">{pageTitle.split(' ').slice(0, -1).join(' ')} <span className="highlight-text">{pageTitle.split(' ').pop()}</span></h1>
                     <p className="page-subtitle">{description}</p>
                 </header>
+
+                {/* Sponsor Slot Strip */}
+                <SponsorBanner
+                    variant="strip"
+                    slotName={`Problem List Banner (${pageTitle})`}
+                    style={{ margin: '0 0 24px 0' }}
+                />
 
                 <div className="problems-container">
                     <div className="grid-header-custom">

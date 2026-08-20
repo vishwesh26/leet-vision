@@ -425,6 +425,254 @@
       "videoUrl": "https://www.youtube.com/watch?v=BKy7H8rEmco"
     }
   ],
+  "4": [
+    {
+      "id": "oVi-fSX8cpg",
+      "questionId": "4",
+      "title": "Ranked #1 on LeetCode  #leetcode #codeprep #competitiveprogramming #codeforces",
+      "channelTitle": "Leetcode Profiles",
+      "thumbnail": "https://i.ytimg.com/vi/oVi-fSX8cpg/hqdefault.jpg",
+      "viewCount": 3967730,
+      "likeCount": 72238,
+      "publishedAt": "2025-07-29T13:49:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=oVi-fSX8cpg"
+    },
+    {
+      "id": "q6IEA26hvXc",
+      "questionId": "4",
+      "title": "Median of Two Sorted Arrays - Binary Search - Leetcode 4",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/q6IEA26hvXc/hqdefault.jpg",
+      "viewCount": 722272,
+      "likeCount": 10135,
+      "publishedAt": "2021-01-19T15:00:31Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=q6IEA26hvXc"
+    },
+    {
+      "id": "F9c7LpRZWVQ",
+      "questionId": "4",
+      "title": "BS-21. Median of two Sorted Arrays of Different Sizes | Binary Search Approach With Intuition",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/F9c7LpRZWVQ/hqdefault.jpg",
+      "viewCount": 513604,
+      "likeCount": 16988,
+      "publishedAt": "2023-08-13T08:30:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=F9c7LpRZWVQ"
+    },
+    {
+      "id": "7nABqJCEMuY",
+      "questionId": "4",
+      "title": "Median of Two Sorted Arrays | PART-2 | Best Approach | Binary Search | Google | Apple | Leetcode - 4",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/7nABqJCEMuY/hqdefault.jpg",
+      "viewCount": 41830,
+      "likeCount": 1321,
+      "publishedAt": "2023-09-21T14:12:02Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=7nABqJCEMuY"
+    },
+    {
+      "id": "T8rD7XbUCLI",
+      "questionId": "4",
+      "title": "Median of Two Sorted Arrays (LeetCode 4) | Classic problem | Interview Essential | Visual solution",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/T8rD7XbUCLI/hqdefault.jpg",
+      "viewCount": 12027,
+      "likeCount": 393,
+      "publishedAt": "2026-02-03T00:30:26Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=T8rD7XbUCLI"
+    }
+  ],
+  "5": [
+    {
+      "id": "XYQecbcd6_c",
+      "questionId": "5",
+      "title": "Longest Palindromic Substring - Python - Leetcode 5",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/XYQecbcd6_c/hqdefault.jpg",
+      "viewCount": 807759,
+      "likeCount": 11908,
+      "publishedAt": "2020-08-10T20:25:27Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=XYQecbcd6_c"
+    },
+    {
+      "id": "uX0-xyPkR2w",
+      "questionId": "5",
+      "title": "Longest Palindromic Sub-string (LeetCode 5) | Full solution with examples | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/uX0-xyPkR2w/hqdefault.jpg",
+      "viewCount": 188932,
+      "likeCount": 2404,
+      "publishedAt": "2020-06-13T14:38:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=uX0-xyPkR2w"
+    },
+    {
+      "id": "n_kL8BkURVA",
+      "questionId": "5",
+      "title": "Longest Palindromic Substring | Recursion | Memoization | Microsoft | Leetcode 5 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/n_kL8BkURVA/hqdefault.jpg",
+      "viewCount": 62943,
+      "likeCount": 1757,
+      "publishedAt": "2023-10-27T04:09:42Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=n_kL8BkURVA"
+    },
+    {
+      "id": "QfZvw8_jz1w",
+      "questionId": "5",
+      "title": "Longest Palindromic Substring | Live Coding with Explanation | Leetcode - 5",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/QfZvw8_jz1w/hqdefault.jpg",
+      "viewCount": 37236,
+      "likeCount": 530,
+      "publishedAt": "2021-01-19T16:40:43Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=QfZvw8_jz1w"
+    },
+    {
+      "id": "ij3X5SAhf_0",
+      "questionId": "5",
+      "title": "Longest Palindromic Substring | Recursion Memo | Bottom Up | DP On Strings | Leetcode 5",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/ij3X5SAhf_0/hqdefault.jpg",
+      "viewCount": 20701,
+      "likeCount": 564,
+      "publishedAt": "2024-06-29T17:48:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ij3X5SAhf_0"
+    }
+  ],
+  "6": [
+    {
+      "id": "Q2Tw6gcVEwc",
+      "questionId": "6",
+      "title": "ZigZag Conversion - Leetcode 6 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/Q2Tw6gcVEwc/hqdefault.jpg",
+      "viewCount": 165697,
+      "likeCount": 3040,
+      "publishedAt": "2021-08-23T16:00:25Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=Q2Tw6gcVEwc"
+    },
+    {
+      "id": "MQOZgBQCTIg",
+      "questionId": "6",
+      "title": "ZigZag Conversion - Leetcode 6",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/MQOZgBQCTIg/hqdefault.jpg",
+      "viewCount": 44774,
+      "likeCount": 2028,
+      "publishedAt": "2024-07-30T14:43:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=MQOZgBQCTIg"
+    },
+    {
+      "id": "OO_wrniY8Ts",
+      "questionId": "6",
+      "title": "6. Zigzag Conversion | Leetcode | Medium | Java | String | Google",
+      "channelTitle": "AlgorithmHQ",
+      "thumbnail": "https://i.ytimg.com/vi/OO_wrniY8Ts/hqdefault.jpg",
+      "viewCount": 33090,
+      "likeCount": 637,
+      "publishedAt": "2024-03-04T14:49:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=OO_wrniY8Ts"
+    },
+    {
+      "id": "pEku6cp_J80",
+      "questionId": "6",
+      "title": "[Java] Leetcode 6. ZigZag Conversion [Array #7]",
+      "channelTitle": "Eric Programming",
+      "thumbnail": "https://i.ytimg.com/vi/pEku6cp_J80/hqdefault.jpg",
+      "viewCount": 18805,
+      "likeCount": 258,
+      "publishedAt": "2021-05-20T14:00:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=pEku6cp_J80"
+    },
+    {
+      "id": "k8F7nzySY60",
+      "questionId": "6",
+      "title": "DSA Phir se with Sumeet | Leetcode 6 | Zigzag Conversion",
+      "channelTitle": "Pepcoding",
+      "thumbnail": "https://i.ytimg.com/vi/k8F7nzySY60/hqdefault.jpg",
+      "viewCount": 12580,
+      "likeCount": 340,
+      "publishedAt": "2023-11-26T07:21:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=k8F7nzySY60"
+    }
+  ],
+  "8": [
+    {
+      "id": "qZoFJKyHQ98",
+      "questionId": "8",
+      "title": "String to Integer atoi 🔥| Leetcode 8 | String",
+      "channelTitle": "Ayushi Sharma",
+      "thumbnail": "https://i.ytimg.com/vi/qZoFJKyHQ98/hqdefault.jpg",
+      "viewCount": 83654,
+      "likeCount": 2057,
+      "publishedAt": "2022-01-14T12:26:16Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=qZoFJKyHQ98"
+    },
+    {
+      "id": "An1BTSYpOIY",
+      "questionId": "8",
+      "title": "String to Integer (atoi) | Leetcode 8",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/An1BTSYpOIY/hqdefault.jpg",
+      "viewCount": 23005,
+      "likeCount": 399,
+      "publishedAt": "2025-04-08T17:53:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=An1BTSYpOIY"
+    },
+    {
+      "id": "YA0LYrKI1CQ",
+      "questionId": "8",
+      "title": "STRING TO INTEGER (ATOI) | PYTHON | LEETCODE # 8",
+      "channelTitle": "Cracking FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/YA0LYrKI1CQ/hqdefault.jpg",
+      "viewCount": 22365,
+      "likeCount": 343,
+      "publishedAt": "2022-03-02T08:53:41Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=YA0LYrKI1CQ"
+    },
+    {
+      "id": "c67bciCuQGQ",
+      "questionId": "8",
+      "title": "String-6 | 8. String to Integer (atoi) | 🔥 Beginner, Medium & Advanced Level! #easy",
+      "channelTitle": "CTO Bhaiya",
+      "thumbnail": "https://i.ytimg.com/vi/c67bciCuQGQ/hqdefault.jpg",
+      "viewCount": 9161,
+      "likeCount": 237,
+      "publishedAt": "2025-03-11T03:30:19Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=c67bciCuQGQ"
+    },
+    {
+      "id": "CiFe16A288g",
+      "questionId": "8",
+      "title": "String to Integer (atoi) Python Solution - LeetCode #8",
+      "channelTitle": "Professor Oakes",
+      "thumbnail": "https://i.ytimg.com/vi/CiFe16A288g/hqdefault.jpg",
+      "viewCount": 7270,
+      "likeCount": 128,
+      "publishedAt": "2023-09-08T14:00:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=CiFe16A288g"
+    }
+  ],
   "9": [
     {
       "id": "yubRKwixN-U",
@@ -611,6 +859,626 @@
       "videoUrl": "https://www.youtube.com/watch?v=rnkjquApJdw"
     }
   ],
+  "12": [
+    {
+      "id": "ohBNdSJyLh8",
+      "questionId": "12",
+      "title": "Integer to Roman - Leetcode 12 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/ohBNdSJyLh8/hqdefault.jpg",
+      "viewCount": 116851,
+      "likeCount": 2298,
+      "publishedAt": "2021-09-21T16:00:33Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=ohBNdSJyLh8"
+    },
+    {
+      "id": "Rsq1ObYg6ak",
+      "questionId": "12",
+      "title": "Integer to Roman | Leetcode #12",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/Rsq1ObYg6ak/hqdefault.jpg",
+      "viewCount": 56791,
+      "likeCount": 957,
+      "publishedAt": "2022-09-21T14:30:13Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Rsq1ObYg6ak"
+    },
+    {
+      "id": "f_F9ItFyiEg",
+      "questionId": "12",
+      "title": "Integer to Roman | Live Coding with Explanation | Leetcode - 12",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/f_F9ItFyiEg/hqdefault.jpg",
+      "viewCount": 29330,
+      "likeCount": 414,
+      "publishedAt": "2021-03-10T17:58:44Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=f_F9ItFyiEg"
+    },
+    {
+      "id": "gB8JePMXUS8",
+      "questionId": "12",
+      "title": "Integer to Roman 🔥 | Leetcode 12 (Medium) | Java",
+      "channelTitle": "Code for Placement",
+      "thumbnail": "https://i.ytimg.com/vi/gB8JePMXUS8/hqdefault.jpg",
+      "viewCount": 10734,
+      "likeCount": 173,
+      "publishedAt": "2023-02-12T14:15:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=gB8JePMXUS8"
+    },
+    {
+      "id": "Ss27oAfuPf4",
+      "questionId": "12",
+      "title": "DSA Phir se with Sumeet | Leetcode 12 | Integer to Roman",
+      "channelTitle": "Pepcoding",
+      "thumbnail": "https://i.ytimg.com/vi/Ss27oAfuPf4/hqdefault.jpg",
+      "viewCount": 6391,
+      "likeCount": 142,
+      "publishedAt": "2023-11-26T14:02:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Ss27oAfuPf4"
+    }
+  ],
+  "13": [
+    {
+      "id": "3jdxYj3DD98",
+      "questionId": "13",
+      "title": "Roman to Integer - Leetcode 13 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/3jdxYj3DD98/hqdefault.jpg",
+      "viewCount": 236657,
+      "likeCount": 4127,
+      "publishedAt": "2021-08-30T16:00:02Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=3jdxYj3DD98"
+    },
+    {
+      "id": "pUV_4YeJzjM",
+      "questionId": "13",
+      "title": "13. Roman to Integer || Java || Leetcode || Hindi",
+      "channelTitle": "Coding Sphere",
+      "thumbnail": "https://i.ytimg.com/vi/pUV_4YeJzjM/hqdefault.jpg",
+      "viewCount": 39622,
+      "likeCount": 675,
+      "publishedAt": "2023-03-18T04:50:33Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=pUV_4YeJzjM"
+    },
+    {
+      "id": "ULNj8zXNeC0",
+      "questionId": "13",
+      "title": "Roman to Integer | Leetcode 13 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/ULNj8zXNeC0/hqdefault.jpg",
+      "viewCount": 38860,
+      "likeCount": 611,
+      "publishedAt": "2024-10-13T09:26:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ULNj8zXNeC0"
+    },
+    {
+      "id": "3oSaP9hrwik",
+      "questionId": "13",
+      "title": "13. Roman to Integer | Day 005 | Short & Simple Solution",
+      "channelTitle": "Aryan Mittal",
+      "thumbnail": "https://i.ytimg.com/vi/3oSaP9hrwik/hqdefault.jpg",
+      "viewCount": 16717,
+      "likeCount": 356,
+      "publishedAt": "2024-01-07T12:30:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3oSaP9hrwik"
+    },
+    {
+      "id": "Mel8UUFmVfc",
+      "questionId": "13",
+      "title": "Roman To Integer - Interview Coding Question -  Leetcode 13 - Tamil",
+      "channelTitle": "Algo Tamizha",
+      "thumbnail": "https://i.ytimg.com/vi/Mel8UUFmVfc/hqdefault.jpg",
+      "viewCount": 13922,
+      "likeCount": 357,
+      "publishedAt": "2023-10-15T14:12:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Mel8UUFmVfc"
+    }
+  ],
+  "14": [
+    {
+      "id": "0sWShKIJoo4",
+      "questionId": "14",
+      "title": "Longest Common Prefix - Leetcode 14 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/0sWShKIJoo4/hqdefault.jpg",
+      "viewCount": 310788,
+      "likeCount": 4217,
+      "publishedAt": "2021-09-02T16:00:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=0sWShKIJoo4"
+    },
+    {
+      "id": "wtOQaovlvhY",
+      "questionId": "14",
+      "title": "Longest Common Prefix (LeetCode 14) | Full solution with animations and examples | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/wtOQaovlvhY/hqdefault.jpg",
+      "viewCount": 201495,
+      "likeCount": 4929,
+      "publishedAt": "2022-02-21T05:02:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=wtOQaovlvhY"
+    },
+    {
+      "id": "5YSqKljnHdQ",
+      "questionId": "14",
+      "title": "Most Asked FAANG Coding Question! | Longest Common Prefix - Leetcode 14",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/5YSqKljnHdQ/hqdefault.jpg",
+      "viewCount": 174644,
+      "likeCount": 7355,
+      "publishedAt": "2024-02-01T05:25:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=5YSqKljnHdQ"
+    },
+    {
+      "id": "XX4ikVj6Bug",
+      "questionId": "14",
+      "title": "Longest Common Prefix | LeetCode problem 14 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/XX4ikVj6Bug/hqdefault.jpg",
+      "viewCount": 88043,
+      "likeCount": 1392,
+      "publishedAt": "2023-01-24T08:54:50Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=XX4ikVj6Bug"
+    },
+    {
+      "id": "Bc-_UGPxWTg",
+      "questionId": "14",
+      "title": "DSA DAY-06 | Longest Common Prefix - Leetcode 14 | JAVA SOLUTION",
+      "channelTitle": "Meghna Srivastava",
+      "thumbnail": "https://i.ytimg.com/vi/Bc-_UGPxWTg/hqdefault.jpg",
+      "viewCount": 1197,
+      "likeCount": 28,
+      "publishedAt": "2025-08-02T13:42:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Bc-_UGPxWTg"
+    }
+  ],
+  "15": [
+    {
+      "id": "jzZsG8n2R9A",
+      "questionId": "15",
+      "title": "3Sum - Leetcode 15 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/jzZsG8n2R9A/hqdefault.jpg",
+      "viewCount": 1271339,
+      "likeCount": 16128,
+      "publishedAt": "2020-06-24T18:23:32Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=jzZsG8n2R9A"
+    },
+    {
+      "id": "cRBSOz49fQk",
+      "questionId": "15",
+      "title": "3 Sum (LeetCode 15) | Full solution with examples and visuals | Interview Essential",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/cRBSOz49fQk/hqdefault.jpg",
+      "viewCount": 188341,
+      "likeCount": 3836,
+      "publishedAt": "2023-03-27T06:08:30Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=cRBSOz49fQk"
+    },
+    {
+      "id": "TBePcj8DgxM",
+      "questionId": "15",
+      "title": "3Sum (Updated Solution) - Leetcode 15 - Two Pointers (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/TBePcj8DgxM/hqdefault.jpg",
+      "viewCount": 58806,
+      "likeCount": 1274,
+      "publishedAt": "2024-07-29T15:14:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=TBePcj8DgxM"
+    },
+    {
+      "id": "xnGLVMOq_cI",
+      "questionId": "15",
+      "title": "3Sum Problem Explained | Brute Force → Optimized Solution | LeetCode 15 (Java)",
+      "channelTitle": "Smart Programming",
+      "thumbnail": "https://i.ytimg.com/vi/xnGLVMOq_cI/hqdefault.jpg",
+      "viewCount": 3613,
+      "likeCount": 96,
+      "publishedAt": "2026-01-19T08:25:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xnGLVMOq_cI"
+    },
+    {
+      "id": "wYjV5GuB6to",
+      "questionId": "15",
+      "title": "LeetCode 15 — 3 Sum | Java Solution Explained Step-by-Step",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/wYjV5GuB6to/hqdefault.jpg",
+      "viewCount": 1227,
+      "likeCount": 36,
+      "publishedAt": "2026-05-31T17:21:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=wYjV5GuB6to"
+    }
+  ],
+  "16": [
+    {
+      "id": "uSpJQa6MRZ8",
+      "questionId": "16",
+      "title": "Three Sum Closest (LeetCode 16) | Full Solution with visual explanation | Interview Essential",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/uSpJQa6MRZ8/hqdefault.jpg",
+      "viewCount": 45490,
+      "likeCount": 947,
+      "publishedAt": "2023-04-03T04:35:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=uSpJQa6MRZ8"
+    },
+    {
+      "id": "hGLjwiPRh0U",
+      "questionId": "16",
+      "title": "3Sum Closest - (Meta, Amazon, Microsoft, Oracle)➕Live Coding 🧑🏻‍💻",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/hGLjwiPRh0U/hqdefault.jpg",
+      "viewCount": 31203,
+      "likeCount": 845,
+      "publishedAt": "2022-07-11T23:30:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=hGLjwiPRh0U"
+    },
+    {
+      "id": "PXWT4wzkA6M",
+      "questionId": "16",
+      "title": "3Sum Closest - Leetcode 16 - Two Pointers (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/PXWT4wzkA6M/hqdefault.jpg",
+      "viewCount": 16337,
+      "likeCount": 306,
+      "publishedAt": "2024-07-29T20:51:41Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=PXWT4wzkA6M"
+    },
+    {
+      "id": "oTxo_XgIGuU",
+      "questionId": "16",
+      "title": "DSA Phir se with Sumeet | Leetcode 16 | 3Sum Closest",
+      "channelTitle": "Pepcoding",
+      "thumbnail": "https://i.ytimg.com/vi/oTxo_XgIGuU/hqdefault.jpg",
+      "viewCount": 4088,
+      "likeCount": 103,
+      "publishedAt": "2023-12-03T16:04:02Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=oTxo_XgIGuU"
+    },
+    {
+      "id": "WiHt-Vvr0pI",
+      "questionId": "16",
+      "title": "LeetCode 16. 3Sum Closest | C++ | Hindi | Easy Explanation",
+      "channelTitle": "CodeSpace",
+      "thumbnail": "https://i.ytimg.com/vi/WiHt-Vvr0pI/hqdefault.jpg",
+      "viewCount": 34,
+      "likeCount": 0,
+      "publishedAt": "2025-03-16T12:30:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=WiHt-Vvr0pI"
+    }
+  ],
+  "17": [
+    {
+      "id": "0snEunUacZY",
+      "questionId": "17",
+      "title": "Letter Combinations of a Phone Number - Backtracking - Leetcode 17",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/0snEunUacZY/hqdefault.jpg",
+      "viewCount": 236993,
+      "likeCount": 4079,
+      "publishedAt": "2021-02-09T16:00:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=0snEunUacZY"
+    },
+    {
+      "id": "vgnhZzw-kfU",
+      "questionId": "17",
+      "title": "Letter Combinations of a Phone Number | INTUITIVE | Backtracking Template | Leetcode-17",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/vgnhZzw-kfU/hqdefault.jpg",
+      "viewCount": 34643,
+      "likeCount": 1279,
+      "publishedAt": "2023-08-03T03:58:56Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=vgnhZzw-kfU"
+    },
+    {
+      "id": "xrRGmnybBlc",
+      "questionId": "17",
+      "title": "Letter combinations of a phone number | Leetcode | Medium | Java | Striver's A to Z DSA Sheet",
+      "channelTitle": "AlgorithmHQ",
+      "thumbnail": "https://i.ytimg.com/vi/xrRGmnybBlc/hqdefault.jpg",
+      "viewCount": 7233,
+      "likeCount": 127,
+      "publishedAt": "2023-09-09T17:57:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xrRGmnybBlc"
+    },
+    {
+      "id": "yuwIMGGAXpg",
+      "questionId": "17",
+      "title": "LeetCode Problem 17: Letter Combinations of a Phone Number || Java || FAANG Interview || Blind 75",
+      "channelTitle": "KeyStrokes",
+      "thumbnail": "https://i.ytimg.com/vi/yuwIMGGAXpg/hqdefault.jpg",
+      "viewCount": 605,
+      "likeCount": 10,
+      "publishedAt": "2023-05-14T21:40:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=yuwIMGGAXpg"
+    },
+    {
+      "id": "EQgFsp2vcvU",
+      "questionId": "17",
+      "title": "LeetCode 17: Letter Combinations of a Phone Number | C++ Solution + Step-by-Step Explanation",
+      "channelTitle": "CodeWithBK",
+      "thumbnail": "https://i.ytimg.com/vi/EQgFsp2vcvU/hqdefault.jpg",
+      "viewCount": 386,
+      "likeCount": 9,
+      "publishedAt": "2025-10-27T14:53:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=EQgFsp2vcvU"
+    }
+  ],
+  "20": [
+    {
+      "id": "WTzjTskDFMg",
+      "questionId": "20",
+      "title": "Valid Parentheses - Stack - Leetcode 20 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/WTzjTskDFMg/hqdefault.jpg",
+      "viewCount": 612287,
+      "likeCount": 8688,
+      "publishedAt": "2021-04-19T16:00:11Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=WTzjTskDFMg"
+    },
+    {
+      "id": "9kmUaXrjizQ",
+      "questionId": "20",
+      "title": "LeetCode 20. Valid Parentheses Solution Explained - Java",
+      "channelTitle": "Nick White",
+      "thumbnail": "https://i.ytimg.com/vi/9kmUaXrjizQ/hqdefault.jpg",
+      "viewCount": 88177,
+      "likeCount": 1752,
+      "publishedAt": "2019-09-15T07:35:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=9kmUaXrjizQ"
+    },
+    {
+      "id": "TaWs8tIrnoA",
+      "questionId": "20",
+      "title": "Valid Parentheses (LeetCode 20) | Full solution with visuals and animations | Stack Data Structure",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/TaWs8tIrnoA/hqdefault.jpg",
+      "viewCount": 54025,
+      "likeCount": 1362,
+      "publishedAt": "2023-10-30T13:30:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=TaWs8tIrnoA"
+    },
+    {
+      "id": "3ssh_mk4LqY",
+      "questionId": "20",
+      "title": "Valid Parentheses | Leetcode - 20 | Google, Meta | Explanation ➕ Live Coding Trash",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/3ssh_mk4LqY/hqdefault.jpg",
+      "viewCount": 16536,
+      "likeCount": 0,
+      "publishedAt": "2023-04-10T04:39:54Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3ssh_mk4LqY"
+    },
+    {
+      "id": "qGHwgzKN1Nk",
+      "questionId": "20",
+      "title": "Valid Parentheses | Leetcode 20 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/qGHwgzKN1Nk/hqdefault.jpg",
+      "viewCount": 16071,
+      "likeCount": 276,
+      "publishedAt": "2024-10-15T15:48:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qGHwgzKN1Nk"
+    }
+  ],
+  "22": [
+    {
+      "id": "s9fokUqJ76A",
+      "questionId": "22",
+      "title": "Generate Parentheses - Stack - Leetcode 22",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/s9fokUqJ76A/hqdefault.jpg",
+      "viewCount": 554852,
+      "likeCount": 8223,
+      "publishedAt": "2021-02-06T16:00:15Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=s9fokUqJ76A"
+    },
+    {
+      "id": "qBbZ3tS0McI",
+      "questionId": "22",
+      "title": "LeetCode 22. Generate Parentheses",
+      "channelTitle": "Nick White",
+      "thumbnail": "https://i.ytimg.com/vi/qBbZ3tS0McI/hqdefault.jpg",
+      "viewCount": 89076,
+      "likeCount": 2066,
+      "publishedAt": "2020-01-03T05:04:33Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qBbZ3tS0McI"
+    },
+    {
+      "id": "ZswAiOqfkCc",
+      "questionId": "22",
+      "title": "Generate Parentheses - Leetcode 22",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/ZswAiOqfkCc/hqdefault.jpg",
+      "viewCount": 65491,
+      "likeCount": 3020,
+      "publishedAt": "2024-12-17T16:00:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZswAiOqfkCc"
+    },
+    {
+      "id": "7xkPbffc6w8",
+      "questionId": "22",
+      "title": "Generate Parentheses | 2 Approaches | Magic Of Recursion | Recursion Concepts And Questions",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/7xkPbffc6w8/hqdefault.jpg",
+      "viewCount": 41445,
+      "likeCount": 1421,
+      "publishedAt": "2024-02-25T15:48:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=7xkPbffc6w8"
+    },
+    {
+      "id": "oC4saZRNwfI",
+      "questionId": "22",
+      "title": "Generate Parentheses - Leetcode 22 - Recursive Backtracking (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/oC4saZRNwfI/hqdefault.jpg",
+      "viewCount": 21952,
+      "likeCount": 428,
+      "publishedAt": "2024-04-30T19:23:53Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=oC4saZRNwfI"
+    }
+  ],
+  "23": [
+    {
+      "id": "q5a5OiGbT6Q",
+      "questionId": "23",
+      "title": "Merge K Sorted Lists - Leetcode 23 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/q5a5OiGbT6Q/hqdefault.jpg",
+      "viewCount": 305517,
+      "likeCount": 4066,
+      "publishedAt": "2020-08-22T01:42:12Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=q5a5OiGbT6Q"
+    },
+    {
+      "id": "1zktEppsdig",
+      "questionId": "23",
+      "title": "L25. Merge K Sorted Lists | Multiple Approaches",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/1zktEppsdig/hqdefault.jpg",
+      "viewCount": 145780,
+      "likeCount": 4155,
+      "publishedAt": "2024-01-01T06:03:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=1zktEppsdig"
+    },
+    {
+      "id": "Q64u-W3l3mA",
+      "questionId": "23",
+      "title": "Merge k Sorted Lists - (Leetcode - 23) - (Google, Amazon, Microsoft..) : Explanation ➕ Live Coding",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/Q64u-W3l3mA/hqdefault.jpg",
+      "viewCount": 30921,
+      "likeCount": 1070,
+      "publishedAt": "2023-03-12T06:14:31Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Q64u-W3l3mA"
+    },
+    {
+      "id": "RyrVWP76lVo",
+      "questionId": "23",
+      "title": "Merge K Sorted Linked Lists - Leetcode 23 - Heaps (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/RyrVWP76lVo/hqdefault.jpg",
+      "viewCount": 20670,
+      "likeCount": 479,
+      "publishedAt": "2024-06-22T20:25:35Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=RyrVWP76lVo"
+    },
+    {
+      "id": "3yvecsuv3iQ",
+      "questionId": "23",
+      "title": "Merge k Sorted Lists | Live Coding with Explanation | Leetcode - 23",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/3yvecsuv3iQ/hqdefault.jpg",
+      "viewCount": 19505,
+      "likeCount": 240,
+      "publishedAt": "2021-01-24T11:43:42Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3yvecsuv3iQ"
+    }
+  ],
+  "25": [
+    {
+      "id": "oVi-fSX8cpg",
+      "questionId": "25",
+      "title": "Ranked #1 on LeetCode  #leetcode #codeprep #competitiveprogramming #codeforces",
+      "channelTitle": "Leetcode Profiles",
+      "thumbnail": "https://i.ytimg.com/vi/oVi-fSX8cpg/hqdefault.jpg",
+      "viewCount": 3968375,
+      "likeCount": 72243,
+      "publishedAt": "2025-07-29T13:49:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=oVi-fSX8cpg"
+    },
+    {
+      "id": "lIar1skcQYI",
+      "questionId": "25",
+      "title": "L21. Reverse Nodes in K Group Size of LinkedList",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/lIar1skcQYI/hqdefault.jpg",
+      "viewCount": 284054,
+      "likeCount": 7981,
+      "publishedAt": "2023-11-30T07:38:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=lIar1skcQYI"
+    },
+    {
+      "id": "1UOPsfP85V4",
+      "questionId": "25",
+      "title": "Reverse Nodes in K-Group - Linked List - Leetcode 25",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/1UOPsfP85V4/hqdefault.jpg",
+      "viewCount": 177445,
+      "likeCount": 2688,
+      "publishedAt": "2021-01-07T15:00:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=1UOPsfP85V4"
+    },
+    {
+      "id": "-swgIiMIlJo",
+      "questionId": "25",
+      "title": "Reverse Nodes in K-Group | Linked List",
+      "channelTitle": "Shradha Khapra",
+      "thumbnail": "https://i.ytimg.com/vi/-swgIiMIlJo/hqdefault.jpg",
+      "viewCount": 74685,
+      "likeCount": 1806,
+      "publishedAt": "2025-01-21T14:30:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=-swgIiMIlJo"
+    },
+    {
+      "id": "FYsYAELWyRs",
+      "questionId": "25",
+      "title": "Reverse Nodes in k-Group O(1) | Live Coding with Explanation | Leetcode - 25",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/FYsYAELWyRs/hqdefault.jpg",
+      "viewCount": 14057,
+      "likeCount": 185,
+      "publishedAt": "2021-07-18T15:48:40Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=FYsYAELWyRs"
+    }
+  ],
   "26": [
     {
       "id": "DEJAZBq0FDA",
@@ -671,6 +1539,688 @@
       "publishedAt": "2024-04-20T17:06:41Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=Jg6NDNVrVTY"
+    }
+  ],
+  "27": [
+    {
+      "id": "Pcd1ii9P9ZI",
+      "questionId": "27",
+      "title": "Remove Element - Leetcode 27 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/Pcd1ii9P9ZI/hqdefault.jpg",
+      "viewCount": 173197,
+      "likeCount": 2638,
+      "publishedAt": "2021-09-13T16:00:12Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=Pcd1ii9P9ZI"
+    },
+    {
+      "id": "QrCds_6NiSk",
+      "questionId": "27",
+      "title": "Remove Element | Leetcode problem 27",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/QrCds_6NiSk/hqdefault.jpg",
+      "viewCount": 75371,
+      "likeCount": 1182,
+      "publishedAt": "2022-09-25T17:25:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=QrCds_6NiSk"
+    },
+    {
+      "id": "5kuhq82Xdqk",
+      "questionId": "27",
+      "title": "LeetCode 27 | Remove Element | Interview Question",
+      "channelTitle": "Jenny's Lectures CS IT",
+      "thumbnail": "https://i.ytimg.com/vi/5kuhq82Xdqk/hqdefault.jpg",
+      "viewCount": 15852,
+      "likeCount": 286,
+      "publishedAt": "2025-03-29T12:10:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=5kuhq82Xdqk"
+    },
+    {
+      "id": "HxWagDSB_a8",
+      "questionId": "27",
+      "title": "Leetcode | 27. Remove Element | Easy | Java Solution",
+      "channelTitle": "Developer Docs",
+      "thumbnail": "https://i.ytimg.com/vi/HxWagDSB_a8/hqdefault.jpg",
+      "viewCount": 9747,
+      "likeCount": 102,
+      "publishedAt": "2023-12-13T18:48:22Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=HxWagDSB_a8"
+    },
+    {
+      "id": "5v-Rx7TM95c",
+      "questionId": "27",
+      "title": "LeetCode 27: Remove Element | C# Solution | Two Pointer Technique |",
+      "channelTitle": "Code Scribbler",
+      "thumbnail": "https://i.ytimg.com/vi/5v-Rx7TM95c/hqdefault.jpg",
+      "viewCount": 155,
+      "likeCount": 4,
+      "publishedAt": "2025-03-15T07:00:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=5v-Rx7TM95c"
+    }
+  ],
+  "30": [
+    {
+      "id": "G9o6ZI_C5cc",
+      "questionId": "30",
+      "title": "How many LeetCode problems should you solve? #leetcode #techinterview  #developer #softwareengineer",
+      "channelTitle": "CrioDo",
+      "thumbnail": "https://i.ytimg.com/vi/G9o6ZI_C5cc/hqdefault.jpg",
+      "viewCount": 936920,
+      "likeCount": 33530,
+      "publishedAt": "2024-01-23T12:38:53Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=G9o6ZI_C5cc"
+    },
+    {
+      "id": "taYRJf-M25I",
+      "questionId": "30",
+      "title": "Substring with Concatenation of All Words | Leetcode #30",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/taYRJf-M25I/hqdefault.jpg",
+      "viewCount": 45602,
+      "likeCount": 567,
+      "publishedAt": "2024-03-04T15:49:22Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=taYRJf-M25I"
+    },
+    {
+      "id": "EVHQ48RM5tw",
+      "questionId": "30",
+      "title": "Leetcode 30 Substring with Concatenation of All Words | Checkout SDE preparation Sheet link below",
+      "channelTitle": "Coding Decoded",
+      "thumbnail": "https://i.ytimg.com/vi/EVHQ48RM5tw/hqdefault.jpg",
+      "viewCount": 28300,
+      "likeCount": 418,
+      "publishedAt": "2022-08-13T12:04:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=EVHQ48RM5tw"
+    },
+    {
+      "id": "R1W8mbHh2Lo",
+      "questionId": "30",
+      "title": "30. Substring with Concatenation of All Words - Leetcode | Java & C++ | Hard | Algorithm | DSA",
+      "channelTitle": "Prasun Personal",
+      "thumbnail": "https://i.ytimg.com/vi/R1W8mbHh2Lo/hqdefault.jpg",
+      "viewCount": 1403,
+      "likeCount": 11,
+      "publishedAt": "2022-12-26T04:40:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=R1W8mbHh2Lo"
+    },
+    {
+      "id": "jdmzLbfnEAg",
+      "questionId": "30",
+      "title": "Substring with Concatenation of All Words - Leetcode 30 - Solution (JavaScript)",
+      "channelTitle": "Arindam Keswani",
+      "thumbnail": "https://i.ytimg.com/vi/jdmzLbfnEAg/hqdefault.jpg",
+      "viewCount": 242,
+      "likeCount": 9,
+      "publishedAt": "2025-03-27T13:15:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jdmzLbfnEAg"
+    }
+  ],
+  "31": [
+    {
+      "id": "JDOXKqF60RQ",
+      "questionId": "31",
+      "title": "Next Permutation - Intuition in Detail 🔥 | Brute to Optimal",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/JDOXKqF60RQ/hqdefault.jpg",
+      "viewCount": 1068448,
+      "likeCount": 34931,
+      "publishedAt": "2023-03-23T08:23:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=JDOXKqF60RQ"
+    },
+    {
+      "id": "-1cLK6PaLsQ",
+      "questionId": "31",
+      "title": "Merge Sorted Arrays Problem and Next Permutation Problem | DSA Series",
+      "channelTitle": "Apna College",
+      "thumbnail": "https://i.ytimg.com/vi/-1cLK6PaLsQ/hqdefault.jpg",
+      "viewCount": 343781,
+      "likeCount": 5510,
+      "publishedAt": "2024-10-14T16:26:55Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=-1cLK6PaLsQ"
+    },
+    {
+      "id": "CboKBIpo640",
+      "questionId": "31",
+      "title": "Next Permutation | Google | Microsoft | Amazon | Leetcode 31",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/CboKBIpo640/hqdefault.jpg",
+      "viewCount": 56992,
+      "likeCount": 1752,
+      "publishedAt": "2022-07-20T00:30:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=CboKBIpo640"
+    },
+    {
+      "id": "IhsUbEMfIbY",
+      "questionId": "31",
+      "title": "Next Permutation | Live Coding with Explanation | Leetcode - 31",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/IhsUbEMfIbY/hqdefault.jpg",
+      "viewCount": 56130,
+      "likeCount": 933,
+      "publishedAt": "2021-01-31T13:44:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=IhsUbEMfIbY"
+    },
+    {
+      "id": "ho4gTCr0QSk",
+      "questionId": "31",
+      "title": "Next Permutation || LeetCode #31 || Medium || Code + Explanation || C++",
+      "channelTitle": "Code with Alisha",
+      "thumbnail": "https://i.ytimg.com/vi/ho4gTCr0QSk/hqdefault.jpg",
+      "viewCount": 25826,
+      "likeCount": 477,
+      "publishedAt": "2021-02-02T20:57:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ho4gTCr0QSk"
+    }
+  ],
+  "32": [
+    {
+      "id": "VdQuwtEd10M",
+      "questionId": "32",
+      "title": "Longest Valid Parentheses | Live Coding with Explanation | Leetcode - 32",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/VdQuwtEd10M/hqdefault.jpg",
+      "viewCount": 64932,
+      "likeCount": 1041,
+      "publishedAt": "2021-04-03T18:18:30Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=VdQuwtEd10M"
+    },
+    {
+      "id": "vURq_xYGr-k",
+      "questionId": "32",
+      "title": "Leetcode 32 Longest Valid Parentheses",
+      "channelTitle": "Pratiksha Bakrola",
+      "thumbnail": "https://i.ytimg.com/vi/vURq_xYGr-k/hqdefault.jpg",
+      "viewCount": 34442,
+      "likeCount": 1069,
+      "publishedAt": "2022-06-10T04:26:35Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=vURq_xYGr-k"
+    },
+    {
+      "id": "D5b_JWlkXxw",
+      "questionId": "32",
+      "title": "LONGEST VALID PARENTHESIS | LEETCODE # 32 | PYTHON OPTIMAL SOLUTION",
+      "channelTitle": "Cracking FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/D5b_JWlkXxw/hqdefault.jpg",
+      "viewCount": 15979,
+      "likeCount": 247,
+      "publishedAt": "2022-03-25T03:00:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=D5b_JWlkXxw"
+    },
+    {
+      "id": "gqQsbdTcey0",
+      "questionId": "32",
+      "title": "Longest Valid Parentheses Leetcode Hard 32 Best Explanation | Java DSA Placement | FAANG",
+      "channelTitle": "ShashCode",
+      "thumbnail": "https://i.ytimg.com/vi/gqQsbdTcey0/hqdefault.jpg",
+      "viewCount": 11264,
+      "likeCount": 285,
+      "publishedAt": "2023-06-07T12:00:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=gqQsbdTcey0"
+    },
+    {
+      "id": "GrSL3c8G6k8",
+      "questionId": "32",
+      "title": "Longest Valid Parentheses | LeetCode 32 (Hard)",
+      "channelTitle": "Destination FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/GrSL3c8G6k8/hqdefault.jpg",
+      "viewCount": 2067,
+      "likeCount": 38,
+      "publishedAt": "2024-02-26T10:00:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GrSL3c8G6k8"
+    }
+  ],
+  "33": [
+    {
+      "id": "5qGrJbHhqFs",
+      "questionId": "33",
+      "title": "BS-4. Search Element in Rotated Sorted Array - I",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/5qGrJbHhqFs/hqdefault.jpg",
+      "viewCount": 635003,
+      "likeCount": 18870,
+      "publishedAt": "2023-06-01T19:31:51Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=5qGrJbHhqFs"
+    },
+    {
+      "id": "U8XENwh8Oy8",
+      "questionId": "33",
+      "title": "Search in rotated sorted array - Leetcode 33 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/U8XENwh8Oy8/hqdefault.jpg",
+      "viewCount": 542176,
+      "likeCount": 6954,
+      "publishedAt": "2020-06-18T06:19:31Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=U8XENwh8Oy8"
+    },
+    {
+      "id": "6WNZQBHWQJs",
+      "questionId": "33",
+      "title": "Search in Rotated Sorted Array | Binary Search | Leetcode 33",
+      "channelTitle": "Apna College",
+      "thumbnail": "https://i.ytimg.com/vi/6WNZQBHWQJs/hqdefault.jpg",
+      "viewCount": 292240,
+      "likeCount": 6166,
+      "publishedAt": "2024-09-30T16:21:47Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=6WNZQBHWQJs"
+    },
+    {
+      "id": "iXLMMbdjeNM",
+      "questionId": "33",
+      "title": "Search in a Rotated Sorted Array (LeetCode 33) | Full solution with examples | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/iXLMMbdjeNM/hqdefault.jpg",
+      "viewCount": 39970,
+      "likeCount": 903,
+      "publishedAt": "2021-03-05T09:40:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=iXLMMbdjeNM"
+    },
+    {
+      "id": "4Ik1nCLjwcI",
+      "questionId": "33",
+      "title": "Search in Rotated Sorted Array - Leetcode 33 - Binary Search (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/4Ik1nCLjwcI/hqdefault.jpg",
+      "viewCount": 25650,
+      "likeCount": 464,
+      "publishedAt": "2024-03-05T01:44:43Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=4Ik1nCLjwcI"
+    }
+  ],
+  "35": [
+    {
+      "id": "K-RYzDZkzCI",
+      "questionId": "35",
+      "title": "Search Insert Position - Binary Search - Leetcode 35 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/K-RYzDZkzCI/hqdefault.jpg",
+      "viewCount": 93495,
+      "likeCount": 2228,
+      "publishedAt": "2020-12-11T21:51:48Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=K-RYzDZkzCI"
+    },
+    {
+      "id": "p07ahfFzMi0",
+      "questionId": "35",
+      "title": "Search Insert Position (LeetCode 35) | Full solution with examples animations  | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/p07ahfFzMi0/hqdefault.jpg",
+      "viewCount": 24162,
+      "likeCount": 555,
+      "publishedAt": "2022-01-19T09:15:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=p07ahfFzMi0"
+    },
+    {
+      "id": "SW4jN-Fvw1g",
+      "questionId": "35",
+      "title": "Search Insert Position | Leetcode 35 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/SW4jN-Fvw1g/hqdefault.jpg",
+      "viewCount": 22082,
+      "likeCount": 421,
+      "publishedAt": "2023-03-09T13:24:41Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=SW4jN-Fvw1g"
+    },
+    {
+      "id": "q1mgS0ZtLBE",
+      "questionId": "35",
+      "title": "Search Insert Position | leetcode 35 | Hindi",
+      "channelTitle": "Codebix",
+      "thumbnail": "https://i.ytimg.com/vi/q1mgS0ZtLBE/hqdefault.jpg",
+      "viewCount": 13304,
+      "likeCount": 220,
+      "publishedAt": "2020-06-10T07:56:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=q1mgS0ZtLBE"
+    },
+    {
+      "id": "HOvFyOJGKig",
+      "questionId": "35",
+      "title": "Search Insert Position - Brute Force & Optimal Solutions Explained | LeetCode 35",
+      "channelTitle": "Jenny's Lectures CS IT",
+      "thumbnail": "https://i.ytimg.com/vi/HOvFyOJGKig/hqdefault.jpg",
+      "viewCount": 11910,
+      "likeCount": 227,
+      "publishedAt": "2025-03-12T13:53:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=HOvFyOJGKig"
+    }
+  ],
+  "36": [
+    {
+      "id": "TjFXEUCMqI8",
+      "questionId": "36",
+      "title": "Valid Sudoku - Amazon Interview Question - Leetcode 36 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/TjFXEUCMqI8/hqdefault.jpg",
+      "viewCount": 535021,
+      "likeCount": 7434,
+      "publishedAt": "2021-07-05T16:00:10Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=TjFXEUCMqI8"
+    },
+    {
+      "id": "dGZjzA9zLW8",
+      "questionId": "36",
+      "title": "Valid Sudoku | 2 Approaches | Leetcode 36 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/dGZjzA9zLW8/hqdefault.jpg",
+      "viewCount": 33738,
+      "likeCount": 1183,
+      "publishedAt": "2022-11-23T13:04:14Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=dGZjzA9zLW8"
+    },
+    {
+      "id": "Ohpr2TM1IRQ",
+      "questionId": "36",
+      "title": "Valid Sudoku - Leetcode 36",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/Ohpr2TM1IRQ/hqdefault.jpg",
+      "viewCount": 31528,
+      "likeCount": 1543,
+      "publishedAt": "2024-07-06T14:00:19Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Ohpr2TM1IRQ"
+    },
+    {
+      "id": "iI2SNs-Eqeg",
+      "questionId": "36",
+      "title": "36. Valid Sudoku || Leetcode || C++ || Hindi",
+      "channelTitle": "Code with Sky",
+      "thumbnail": "https://i.ytimg.com/vi/iI2SNs-Eqeg/hqdefault.jpg",
+      "viewCount": 13784,
+      "likeCount": 176,
+      "publishedAt": "2022-11-23T05:46:42Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=iI2SNs-Eqeg"
+    },
+    {
+      "id": "byehAzPcfho",
+      "questionId": "36",
+      "title": "Valid Sudoku | LeetCode 36 | Easiest Solution with Hash Maps Explained",
+      "channelTitle": "Sanyam IIT Guwahati",
+      "thumbnail": "https://i.ytimg.com/vi/byehAzPcfho/hqdefault.jpg",
+      "viewCount": 271,
+      "likeCount": 8,
+      "publishedAt": "2025-08-30T00:31:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=byehAzPcfho"
+    }
+  ],
+  "39": [
+    {
+      "id": "OyZFFqQtu98",
+      "questionId": "39",
+      "title": "L8. Combination Sum | Recursion | Leetcode | C++ | Java",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/OyZFFqQtu98/hqdefault.jpg",
+      "viewCount": 1001813,
+      "likeCount": 19445,
+      "publishedAt": "2021-02-08T15:35:32Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=OyZFFqQtu98"
+    },
+    {
+      "id": "GBKI9VSKdGg",
+      "questionId": "39",
+      "title": "Combination Sum - Backtracking - Leetcode 39 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/GBKI9VSKdGg/hqdefault.jpg",
+      "viewCount": 486854,
+      "likeCount": 6394,
+      "publishedAt": "2021-06-01T16:00:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GBKI9VSKdGg"
+    },
+    {
+      "id": "jkgZw2WEaqA",
+      "questionId": "39",
+      "title": "Combination Sum Problem | Recursion & Backtracking",
+      "channelTitle": "Apna College",
+      "thumbnail": "https://i.ytimg.com/vi/jkgZw2WEaqA/hqdefault.jpg",
+      "viewCount": 125058,
+      "likeCount": 2699,
+      "publishedAt": "2024-12-12T15:24:26Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jkgZw2WEaqA"
+    },
+    {
+      "id": "utBw5FbYswk",
+      "questionId": "39",
+      "title": "Combination Sum - Leetcode 39 - Recursive Backtracking (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/utBw5FbYswk/hqdefault.jpg",
+      "viewCount": 27266,
+      "likeCount": 492,
+      "publishedAt": "2024-04-29T18:53:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=utBw5FbYswk"
+    },
+    {
+      "id": "bhJZ4nTkoxo",
+      "questionId": "39",
+      "title": "Combination Sum | Leetcode 39 | Array | Java Leetcode | Fully Explained | Time complexity |  Manish",
+      "channelTitle": "Manish Harit",
+      "thumbnail": "https://i.ytimg.com/vi/bhJZ4nTkoxo/hqdefault.jpg",
+      "viewCount": 1149,
+      "likeCount": 22,
+      "publishedAt": "2023-09-22T06:30:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=bhJZ4nTkoxo"
+    }
+  ],
+  "42": [
+    {
+      "id": "ZI2z5pq0TqA",
+      "questionId": "42",
+      "title": "Trapping Rain Water - Google Interview Question - Leetcode 42",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/ZI2z5pq0TqA/hqdefault.jpg",
+      "viewCount": 767381,
+      "likeCount": 12289,
+      "publishedAt": "2021-04-05T15:00:12Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=ZI2z5pq0TqA"
+    },
+    {
+      "id": "8gXYxQW1CZ8",
+      "questionId": "42",
+      "title": "Trapping Rain Water - Leetcode 42",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/8gXYxQW1CZ8/hqdefault.jpg",
+      "viewCount": 105202,
+      "likeCount": 4904,
+      "publishedAt": "2024-10-22T15:40:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=8gXYxQW1CZ8"
+    },
+    {
+      "id": "f2QgmVxPiS4",
+      "questionId": "42",
+      "title": "Trapping Rain Water | without stack | Made Super Easy | Leetcode 42 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/f2QgmVxPiS4/hqdefault.jpg",
+      "viewCount": 66673,
+      "likeCount": 1909,
+      "publishedAt": "2022-07-10T17:50:35Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=f2QgmVxPiS4"
+    },
+    {
+      "id": "KFdHpOlz8hs",
+      "questionId": "42",
+      "title": "Trapping Rain Water - Leetcode 42 - 2 Pointers (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/KFdHpOlz8hs/hqdefault.jpg",
+      "viewCount": 47978,
+      "likeCount": 1034,
+      "publishedAt": "2024-02-22T16:37:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=KFdHpOlz8hs"
+    },
+    {
+      "id": "09KF1hjWoSU",
+      "questionId": "42",
+      "title": "Trapping Rain Water (LeetCode 42) | Interview Essential | Full visual solution",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/09KF1hjWoSU/hqdefault.jpg",
+      "viewCount": 12954,
+      "likeCount": 392,
+      "publishedAt": "2026-01-26T12:30:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=09KF1hjWoSU"
+    }
+  ],
+  "44": [
+    {
+      "id": "ZmlQ3vgAOMo",
+      "questionId": "44",
+      "title": "DP 34. Wildcard Matching | Recursive to 1D Array Optimisation 🔥",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/ZmlQ3vgAOMo/hqdefault.jpg",
+      "viewCount": 296911,
+      "likeCount": 10083,
+      "publishedAt": "2022-03-14T19:48:41Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=ZmlQ3vgAOMo"
+    },
+    {
+      "id": "x4TG1x0STNE",
+      "questionId": "44",
+      "title": "Leetcode 44 | Wildcard matching | Hindi | Recursion + Memoization | Explanation + Code",
+      "channelTitle": "Anurag Codes",
+      "thumbnail": "https://i.ytimg.com/vi/x4TG1x0STNE/hqdefault.jpg",
+      "viewCount": 5381,
+      "likeCount": 107,
+      "publishedAt": "2020-10-18T04:30:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=x4TG1x0STNE"
+    },
+    {
+      "id": "FJJavs1tyoQ",
+      "questionId": "44",
+      "title": "Wildcard Matching Python Solution - LeetCode #44",
+      "channelTitle": "Professor Oakes",
+      "thumbnail": "https://i.ytimg.com/vi/FJJavs1tyoQ/hqdefault.jpg",
+      "viewCount": 3447,
+      "likeCount": 45,
+      "publishedAt": "2024-01-15T15:00:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=FJJavs1tyoQ"
+    },
+    {
+      "id": "Wo0AqP1zM6U",
+      "questionId": "44",
+      "title": "44. Wildcard Matching (Leetcode Hard)",
+      "channelTitle": "Programming Live with Larry",
+      "thumbnail": "https://i.ytimg.com/vi/Wo0AqP1zM6U/hqdefault.jpg",
+      "viewCount": 1638,
+      "likeCount": 21,
+      "publishedAt": "2024-09-05T03:21:57Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Wo0AqP1zM6U"
+    },
+    {
+      "id": "lefttVEpj9g",
+      "questionId": "44",
+      "title": "LEETCODE :44, Wildcard Matching : BEST EXPLANATION AND COMPLETE SOLUTION",
+      "channelTitle": "ALGO EASY",
+      "thumbnail": "https://i.ytimg.com/vi/lefttVEpj9g/hqdefault.jpg",
+      "viewCount": 1461,
+      "likeCount": 30,
+      "publishedAt": "2020-07-31T14:48:40Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=lefttVEpj9g"
+    }
+  ],
+  "45": [
+    {
+      "id": "dJ7sWiOoK7g",
+      "questionId": "45",
+      "title": "Jump Game II - Greedy - Leetcode 45 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/dJ7sWiOoK7g/hqdefault.jpg",
+      "viewCount": 300842,
+      "likeCount": 6022,
+      "publishedAt": "2021-04-15T16:00:16Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=dJ7sWiOoK7g"
+    },
+    {
+      "id": "7SBVnw7GSTk",
+      "questionId": "45",
+      "title": "L5. Jump Game - II | Greedy Algorithm Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/7SBVnw7GSTk/hqdefault.jpg",
+      "viewCount": 272607,
+      "likeCount": 7657,
+      "publishedAt": "2024-05-22T02:50:38Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=7SBVnw7GSTk"
+    },
+    {
+      "id": "9kyHYVxL4fw",
+      "questionId": "45",
+      "title": "Jump Game 2 (LeetCode 45) | Minimum jumps to reach end of array | Explanation with Animations",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/9kyHYVxL4fw/hqdefault.jpg",
+      "viewCount": 67660,
+      "likeCount": 1777,
+      "publishedAt": "2023-09-25T16:22:54Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=9kyHYVxL4fw"
+    },
+    {
+      "id": "CsDI-yQuGeM",
+      "questionId": "45",
+      "title": "Jump Game II - Leetcode 45 - Recursive Backtracking (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/CsDI-yQuGeM/hqdefault.jpg",
+      "viewCount": 14474,
+      "likeCount": 252,
+      "publishedAt": "2024-08-08T20:01:51Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=CsDI-yQuGeM"
+    },
+    {
+      "id": "XnSmRXlf0hk",
+      "questionId": "45",
+      "title": "LeetCode 45: Jump Game II — Java Solution Explained (Medium) | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/XnSmRXlf0hk/hqdefault.jpg",
+      "viewCount": 114,
+      "likeCount": 7,
+      "publishedAt": "2026-07-07T18:21:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=XnSmRXlf0hk"
     }
   ],
   "48": [
@@ -735,6 +2285,316 @@
       "videoUrl": "https://www.youtube.com/watch?v=I48Z8QlQH8c"
     }
   ],
+  "53": [
+    {
+      "id": "AHZpyENo7k4",
+      "questionId": "53",
+      "title": "Kadane's Algorithm | Maximum Subarray Sum | Finding and Printing",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/AHZpyENo7k4/hqdefault.jpg",
+      "viewCount": 1283190,
+      "likeCount": 30147,
+      "publishedAt": "2023-03-17T20:46:23Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=AHZpyENo7k4"
+    },
+    {
+      "id": "5WZl3MMT0Eg",
+      "questionId": "53",
+      "title": "Maximum Subarray - Amazon Coding Interview Question - Leetcode 53 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/5WZl3MMT0Eg/hqdefault.jpg",
+      "viewCount": 753252,
+      "likeCount": 10196,
+      "publishedAt": "2020-06-13T05:42:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=5WZl3MMT0Eg"
+    },
+    {
+      "id": "GrNSGC8Z2T0",
+      "questionId": "53",
+      "title": "Maximum Sub-Array Sum (LeetCode 53) | Kadane's Algorithm | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/GrNSGC8Z2T0/hqdefault.jpg",
+      "viewCount": 75690,
+      "likeCount": 1402,
+      "publishedAt": "2020-06-25T13:00:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GrNSGC8Z2T0"
+    },
+    {
+      "id": "usxn9PV6Fdo",
+      "questionId": "53",
+      "title": "Maximum Subarray | Kadane's Algorithm | Leetcode 53",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/usxn9PV6Fdo/hqdefault.jpg",
+      "viewCount": 29879,
+      "likeCount": 517,
+      "publishedAt": "2023-03-30T16:06:42Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=usxn9PV6Fdo"
+    },
+    {
+      "id": "O3xEi9jdaHU",
+      "questionId": "53",
+      "title": "Kadane’s Algorithm Explained 🔥 | Maximum Subarray Sum (LeetCode 53) | DSA Java for Placements",
+      "channelTitle": "Smart Programming",
+      "thumbnail": "https://i.ytimg.com/vi/O3xEi9jdaHU/hqdefault.jpg",
+      "viewCount": 6003,
+      "likeCount": 162,
+      "publishedAt": "2025-10-30T09:28:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=O3xEi9jdaHU"
+    }
+  ],
+  "55": [
+    {
+      "id": "Yan0cv2cLy8",
+      "questionId": "55",
+      "title": "Jump Game - Greedy - Leetcode 55",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/Yan0cv2cLy8/hqdefault.jpg",
+      "viewCount": 359968,
+      "likeCount": 7094,
+      "publishedAt": "2021-04-06T16:30:06Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=Yan0cv2cLy8"
+    },
+    {
+      "id": "kmnoRRvZAhc",
+      "questionId": "55",
+      "title": "Jump Game - Leetcode 55",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/kmnoRRvZAhc/hqdefault.jpg",
+      "viewCount": 79348,
+      "likeCount": 4114,
+      "publishedAt": "2024-10-01T15:27:38Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=kmnoRRvZAhc"
+    },
+    {
+      "id": "Gtugy3mRV-A",
+      "questionId": "55",
+      "title": "Jump Game (LeetCode 55) | Full solution with animations and visuals | Greedy Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/Gtugy3mRV-A/hqdefault.jpg",
+      "viewCount": 60238,
+      "likeCount": 1580,
+      "publishedAt": "2023-08-14T15:29:55Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Gtugy3mRV-A"
+    },
+    {
+      "id": "pvg0yrD-E5w",
+      "questionId": "55",
+      "title": "Jump Game - (Google, Microsoft, Amazon, Ebay, Meta) : Explanation ➕ Live Coding",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/pvg0yrD-E5w/hqdefault.jpg",
+      "viewCount": 27458,
+      "likeCount": 787,
+      "publishedAt": "2022-12-26T07:20:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=pvg0yrD-E5w"
+    },
+    {
+      "id": "F2ib7SuUGCo",
+      "questionId": "55",
+      "title": "Jump Game  | Full Solution with animations | Leetcode 55 | Jump Game Leetcode | Java | Manish |",
+      "channelTitle": "Manish Harit",
+      "thumbnail": "https://i.ytimg.com/vi/F2ib7SuUGCo/hqdefault.jpg",
+      "viewCount": 498,
+      "likeCount": 13,
+      "publishedAt": "2023-09-21T06:00:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=F2ib7SuUGCo"
+    }
+  ],
+  "62": [
+    {
+      "id": "IlEsdxuD4lY",
+      "questionId": "62",
+      "title": "Unique Paths - Dynamic Programming - Leetcode 62",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/IlEsdxuD4lY/hqdefault.jpg",
+      "viewCount": 203295,
+      "likeCount": 3158,
+      "publishedAt": "2021-01-23T15:30:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=IlEsdxuD4lY"
+    },
+    {
+      "id": "xs_v17Oxo2s",
+      "questionId": "62",
+      "title": "I Really Enjoyed This Google Interview Question! Unique Paths - Leetcode 62",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/xs_v17Oxo2s/hqdefault.jpg",
+      "viewCount": 77365,
+      "likeCount": 1961,
+      "publishedAt": "2025-07-02T15:04:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xs_v17Oxo2s"
+    },
+    {
+      "id": "Ee-rJmkwaTM",
+      "questionId": "62",
+      "title": "Unique Paths (LeetCode 62) | Full Dynamic Programming method with Memoization",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/Ee-rJmkwaTM/hqdefault.jpg",
+      "viewCount": 16312,
+      "likeCount": 570,
+      "publishedAt": "2024-12-09T00:30:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Ee-rJmkwaTM"
+    },
+    {
+      "id": "iOeoZbHxQqI",
+      "questionId": "62",
+      "title": "Leetcode 62. Unique Paths || Code + Explanation",
+      "channelTitle": "Code with Alisha",
+      "thumbnail": "https://i.ytimg.com/vi/iOeoZbHxQqI/hqdefault.jpg",
+      "viewCount": 12765,
+      "likeCount": 348,
+      "publishedAt": "2021-03-08T11:32:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=iOeoZbHxQqI"
+    },
+    {
+      "id": "DaakAKiCkyc",
+      "questionId": "62",
+      "title": "Unique Paths | Recursion | Memoization | AMAZON | CISCO | PAYTM | OLA | LINKEDIN | Leetcode - 62",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/DaakAKiCkyc/hqdefault.jpg",
+      "viewCount": 11323,
+      "likeCount": 386,
+      "publishedAt": "2023-09-03T05:09:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=DaakAKiCkyc"
+    }
+  ],
+  "72": [
+    {
+      "id": "fJaKO8FbDdo",
+      "questionId": "72",
+      "title": "DP 33. Edit Distance | Recursive to 1D Array Optimised Solution 🔥",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/fJaKO8FbDdo/hqdefault.jpg",
+      "viewCount": 347212,
+      "likeCount": 11649,
+      "publishedAt": "2022-03-11T18:56:39Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=fJaKO8FbDdo"
+    },
+    {
+      "id": "XYi2-LPrwm4",
+      "questionId": "72",
+      "title": "Edit Distance - Dynamic Programming - Leetcode 72 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/XYi2-LPrwm4/hqdefault.jpg",
+      "viewCount": 224218,
+      "likeCount": 4559,
+      "publishedAt": "2021-05-08T16:00:13Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=XYi2-LPrwm4"
+    },
+    {
+      "id": "HwDXH35lr0o",
+      "questionId": "72",
+      "title": "Edit Distance (LeetCode 72) | Full step by step solution with thought process | Dynamic Programming",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/HwDXH35lr0o/hqdefault.jpg",
+      "viewCount": 28581,
+      "likeCount": 683,
+      "publishedAt": "2023-07-03T10:47:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=HwDXH35lr0o"
+    },
+    {
+      "id": "oqfqPEqrKo8",
+      "questionId": "72",
+      "title": "Edit Distance | Recursion | Memo | Bottom Up | DP On Strings | Leetcode 72 | DP Concepts & Qns-22",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/oqfqPEqrKo8/hqdefault.jpg",
+      "viewCount": 22045,
+      "likeCount": 779,
+      "publishedAt": "2024-04-15T02:20:54Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=oqfqPEqrKo8"
+    },
+    {
+      "id": "ws1P8ozKKc4",
+      "questionId": "72",
+      "title": "72. Edit Distance// LeetCode Solution// Java // In Hindi",
+      "channelTitle": "Mission Coding Sikho",
+      "thumbnail": "https://i.ytimg.com/vi/ws1P8ozKKc4/hqdefault.jpg",
+      "viewCount": 239,
+      "likeCount": 25,
+      "publishedAt": "2023-02-27T19:23:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ws1P8ozKKc4"
+    }
+  ],
+  "76": [
+    {
+      "id": "jSto0O4AJbM",
+      "questionId": "76",
+      "title": "Minimum Window Substring - Airbnb Interview Question - Leetcode 76",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/jSto0O4AJbM/hqdefault.jpg",
+      "viewCount": 524080,
+      "likeCount": 7518,
+      "publishedAt": "2021-01-21T15:30:11Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=jSto0O4AJbM"
+    },
+    {
+      "id": "WJaij9ffOIY",
+      "questionId": "76",
+      "title": "L12. Minimum Window Substring | 2 Pointers and Sliding Window Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/WJaij9ffOIY/hqdefault.jpg",
+      "viewCount": 325179,
+      "likeCount": 8004,
+      "publishedAt": "2024-03-27T04:25:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=WJaij9ffOIY"
+    },
+    {
+      "id": "e1HlptlipB0",
+      "questionId": "76",
+      "title": "Minimum Window Substring (Leetcode Hard) | Hashmap Interview Questions",
+      "channelTitle": "Pepcoding",
+      "thumbnail": "https://i.ytimg.com/vi/e1HlptlipB0/hqdefault.jpg",
+      "viewCount": 86660,
+      "likeCount": 2027,
+      "publishedAt": "2020-10-09T11:56:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=e1HlptlipB0"
+    },
+    {
+      "id": "3Bp3OVD1EGc",
+      "questionId": "76",
+      "title": "Minimum Window Substring | Google | Leetcode 76",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/3Bp3OVD1EGc/hqdefault.jpg",
+      "viewCount": 58166,
+      "likeCount": 2076,
+      "publishedAt": "2022-10-22T04:20:10Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3Bp3OVD1EGc"
+    },
+    {
+      "id": "SdeaOYoPhIs",
+      "questionId": "76",
+      "title": "Minimum Window Substring (LeetCode 76) | Interview Essential | Sliding Window + Two Pointers",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/SdeaOYoPhIs/hqdefault.jpg",
+      "viewCount": 10681,
+      "likeCount": 309,
+      "publishedAt": "2026-02-14T10:30:30Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=SdeaOYoPhIs"
+    }
+  ],
   "79": [
     {
       "id": "pfiQ_PS1g8E",
@@ -797,6 +2657,254 @@
       "videoUrl": "https://www.youtube.com/watch?v=f1q6BriScew"
     }
   ],
+  "84": [
+    {
+      "id": "zx5Sw9130L0",
+      "questionId": "84",
+      "title": "LARGEST RECTANGLE IN HISTOGRAM - Leetcode 84 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/zx5Sw9130L0/hqdefault.jpg",
+      "viewCount": 413422,
+      "likeCount": 5998,
+      "publishedAt": "2020-06-04T23:45:43Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=zx5Sw9130L0"
+    },
+    {
+      "id": "Bzat9vgD0fs",
+      "questionId": "84",
+      "title": "L12. Largest Rectangle in Histogram | Stack and Queue Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/Bzat9vgD0fs/hqdefault.jpg",
+      "viewCount": 300477,
+      "likeCount": 7851,
+      "publishedAt": "2024-07-16T17:15:27Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Bzat9vgD0fs"
+    },
+    {
+      "id": "X0X6G-eWgQ8",
+      "questionId": "84",
+      "title": "Largest Rectangle in Histogram | Part - 1 | Leetcode 84",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/X0X6G-eWgQ8/hqdefault.jpg",
+      "viewCount": 256473,
+      "likeCount": 5453,
+      "publishedAt": "2021-07-06T12:30:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=X0X6G-eWgQ8"
+    },
+    {
+      "id": "ysy1o-QEj3k",
+      "questionId": "84",
+      "title": "Largest Rectangle in Histogram | Best Solution & Code",
+      "channelTitle": "Shradha Khapra",
+      "thumbnail": "https://i.ytimg.com/vi/ysy1o-QEj3k/hqdefault.jpg",
+      "viewCount": 84646,
+      "likeCount": 2031,
+      "publishedAt": "2025-02-12T17:04:55Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ysy1o-QEj3k"
+    },
+    {
+      "id": "ZGMw8Bvpwd4",
+      "questionId": "84",
+      "title": "Largest Rectangle in Histogram - Leetcode 84 - Stacks (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/ZGMw8Bvpwd4/hqdefault.jpg",
+      "viewCount": 20820,
+      "likeCount": 494,
+      "publishedAt": "2024-07-31T21:14:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZGMw8Bvpwd4"
+    }
+  ],
+  "87": [
+    {
+      "id": "MDmZm_aVDF8",
+      "questionId": "87",
+      "title": "Scramble string | Dynamic Programming | MCM | Leetcode #87",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/MDmZm_aVDF8/hqdefault.jpg",
+      "viewCount": 29734,
+      "likeCount": 719,
+      "publishedAt": "2021-01-04T06:00:13Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=MDmZm_aVDF8"
+    },
+    {
+      "id": "Fx96uB9EIDQ",
+      "questionId": "87",
+      "title": "Scramble String - (GOOGLE) | Leetcode-87 | Explanation ➕ Live Coding",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/Fx96uB9EIDQ/hqdefault.jpg",
+      "viewCount": 15863,
+      "likeCount": 586,
+      "publishedAt": "2023-03-30T15:46:19Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Fx96uB9EIDQ"
+    },
+    {
+      "id": "2SS3YCzNR64",
+      "questionId": "87",
+      "title": "87. Scramble String | LeetCode Daily Challenge | LeetCode POTD",
+      "channelTitle": "Deep Tech",
+      "thumbnail": "https://i.ytimg.com/vi/2SS3YCzNR64/hqdefault.jpg",
+      "viewCount": 1814,
+      "likeCount": 28,
+      "publishedAt": "2023-03-30T03:55:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=2SS3YCzNR64"
+    },
+    {
+      "id": "qhl-mWol_SI",
+      "questionId": "87",
+      "title": "87. Scramble String LeetCode Solution Java | Detailed Explanation",
+      "channelTitle": "The Stylish Coder",
+      "thumbnail": "https://i.ytimg.com/vi/qhl-mWol_SI/hqdefault.jpg",
+      "viewCount": 248,
+      "likeCount": 8,
+      "publishedAt": "2023-03-30T08:28:30Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qhl-mWol_SI"
+    },
+    {
+      "id": "7QAHMYAVj_8",
+      "questionId": "87",
+      "title": "LeetCode 87: Scramble String Made Easy For Complete Beginners – Python Tutorial",
+      "channelTitle": "JameSparKing",
+      "thumbnail": "https://i.ytimg.com/vi/7QAHMYAVj_8/hqdefault.jpg",
+      "viewCount": 192,
+      "likeCount": 4,
+      "publishedAt": "2025-09-19T16:09:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=7QAHMYAVj_8"
+    }
+  ],
+  "94": [
+    {
+      "id": "g_S5WuasWUE",
+      "questionId": "94",
+      "title": "Iterative & Recursive - Binary Tree Inorder Traversal - Leetcode 94 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/g_S5WuasWUE/hqdefault.jpg",
+      "viewCount": 158085,
+      "likeCount": 3098,
+      "publishedAt": "2022-03-12T17:00:25Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=g_S5WuasWUE"
+    },
+    {
+      "id": "Wq3ibaP4dJY",
+      "questionId": "94",
+      "title": "Binary Tree Inorder Traversal | Morris Traversal | Leetcode-94",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/Wq3ibaP4dJY/hqdefault.jpg",
+      "viewCount": 22191,
+      "likeCount": 865,
+      "publishedAt": "2023-12-09T14:36:19Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Wq3ibaP4dJY"
+    },
+    {
+      "id": "O0GEkNPdKxA",
+      "questionId": "94",
+      "title": "Iterative Inorder Traversal Of Binary Tree In Hindi ( Leetcode 94 )",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/O0GEkNPdKxA/hqdefault.jpg",
+      "viewCount": 3931,
+      "likeCount": 75,
+      "publishedAt": "2022-08-21T06:04:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=O0GEkNPdKxA"
+    },
+    {
+      "id": "IAMR8sEBOYA",
+      "questionId": "94",
+      "title": "Binary Tree Inorder Traversal | Binary Tree | Python | Iterative Approach | LeetCode 94",
+      "channelTitle": "Ace Leetcode",
+      "thumbnail": "https://i.ytimg.com/vi/IAMR8sEBOYA/hqdefault.jpg",
+      "viewCount": 673,
+      "likeCount": 20,
+      "publishedAt": "2023-11-16T05:59:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=IAMR8sEBOYA"
+    },
+    {
+      "id": "U-Lf0jYh70M",
+      "questionId": "94",
+      "title": "Leetcode 94 - Binary Tree Inorder Traversal (Java, Solution Explained)",
+      "channelTitle": "LC Bear",
+      "thumbnail": "https://i.ytimg.com/vi/U-Lf0jYh70M/hqdefault.jpg",
+      "viewCount": 270,
+      "likeCount": 7,
+      "publishedAt": "2021-01-07T01:42:44Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=U-Lf0jYh70M"
+    }
+  ],
+  "95": [
+    {
+      "id": "G9o6ZI_C5cc",
+      "questionId": "95",
+      "title": "How many LeetCode problems should you solve? #leetcode #techinterview  #developer #softwareengineer",
+      "channelTitle": "CrioDo",
+      "thumbnail": "https://i.ytimg.com/vi/G9o6ZI_C5cc/hqdefault.jpg",
+      "viewCount": 935462,
+      "likeCount": 33486,
+      "publishedAt": "2024-01-23T12:38:53Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=G9o6ZI_C5cc"
+    },
+    {
+      "id": "m907FlQa2Yc",
+      "questionId": "95",
+      "title": "Unique Binary Search Trees II - Leetcode 95 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/m907FlQa2Yc/hqdefault.jpg",
+      "viewCount": 33554,
+      "likeCount": 750,
+      "publishedAt": "2023-08-05T01:35:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=m907FlQa2Yc"
+    },
+    {
+      "id": "SXU--MPoUe8",
+      "questionId": "95",
+      "title": "Unique Binary Search Trees II | Similar Problem | Recursion | Memoization | Amazon | Leetcode-95",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/SXU--MPoUe8/hqdefault.jpg",
+      "viewCount": 22678,
+      "likeCount": 632,
+      "publishedAt": "2023-08-05T08:59:19Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=SXU--MPoUe8"
+    },
+    {
+      "id": "mhCJgZWJlSI",
+      "questionId": "95",
+      "title": "Unique Binary Search Trees II | Leetcode 95 | Live coding session 🔥🔥🔥",
+      "channelTitle": "Coding Decoded",
+      "thumbnail": "https://i.ytimg.com/vi/mhCJgZWJlSI/hqdefault.jpg",
+      "viewCount": 15477,
+      "likeCount": 388,
+      "publishedAt": "2021-09-02T10:43:44Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=mhCJgZWJlSI"
+    },
+    {
+      "id": "F8ap-7dsCiM",
+      "questionId": "95",
+      "title": "Leetcode - Unique Binary Search Trees II (Python)",
+      "channelTitle": "Timothy H Chang",
+      "thumbnail": "https://i.ytimg.com/vi/F8ap-7dsCiM/hqdefault.jpg",
+      "viewCount": 2634,
+      "likeCount": 57,
+      "publishedAt": "2021-09-03T00:48:33Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=F8ap-7dsCiM"
+    }
+  ],
   "96": [
     {
       "id": "Ox0TenN3Zpg",
@@ -857,6 +2965,192 @@
       "publishedAt": "2022-11-21T15:00:07Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=BIF4wlYwclU"
+    }
+  ],
+  "98": [
+    {
+      "id": "s6ATEkipzow",
+      "questionId": "98",
+      "title": "Validate Binary Search Tree - Depth First Search - Leetcode 98",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/s6ATEkipzow/hqdefault.jpg",
+      "viewCount": 326652,
+      "likeCount": 5384,
+      "publishedAt": "2021-01-08T15:00:16Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=s6ATEkipzow"
+    },
+    {
+      "id": "dSBcCynP1nA",
+      "questionId": "98",
+      "title": "Validate Binary Search Tree | DSA Series : L.98",
+      "channelTitle": "Shradha Khapra",
+      "thumbnail": "https://i.ytimg.com/vi/dSBcCynP1nA/hqdefault.jpg",
+      "viewCount": 36192,
+      "likeCount": 913,
+      "publishedAt": "2025-06-03T16:57:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=dSBcCynP1nA"
+    },
+    {
+      "id": "sLoZJ2E4ZDs",
+      "questionId": "98",
+      "title": "Validate Binary Search Tree (LeetCode 98) | Full solution with animations and visuals",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/sLoZJ2E4ZDs/hqdefault.jpg",
+      "viewCount": 15742,
+      "likeCount": 432,
+      "publishedAt": "2023-02-27T02:34:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=sLoZJ2E4ZDs"
+    },
+    {
+      "id": "Itx-6DHTues",
+      "questionId": "98",
+      "title": "LeetCode 98. Validate Binary Search Tree [Algorithm + Code Explained ] Best Solution",
+      "channelTitle": "jayati tiwari",
+      "thumbnail": "https://i.ytimg.com/vi/Itx-6DHTues/hqdefault.jpg",
+      "viewCount": 4724,
+      "likeCount": 80,
+      "publishedAt": "2020-03-31T23:32:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Itx-6DHTues"
+    },
+    {
+      "id": "QaCMLopSwWI",
+      "questionId": "98",
+      "title": "Validate BST | LeetCode 98 (Medium)",
+      "channelTitle": "Destination FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/QaCMLopSwWI/hqdefault.jpg",
+      "viewCount": 1107,
+      "likeCount": 19,
+      "publishedAt": "2022-08-01T02:48:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=QaCMLopSwWI"
+    }
+  ],
+  "99": [
+    {
+      "id": "ZWGW7FminDM",
+      "questionId": "99",
+      "title": "L52. Recover BST | Correct BST with two nodes swapped",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/ZWGW7FminDM/hqdefault.jpg",
+      "viewCount": 239388,
+      "likeCount": 7746,
+      "publishedAt": "2021-11-06T13:30:12Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=ZWGW7FminDM"
+    },
+    {
+      "id": "2uPKWpMHmZA",
+      "questionId": "99",
+      "title": "Recover Binary Search Tree (with Follow Up) | Live Coding with Explanation | Leetcode #99",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/2uPKWpMHmZA/hqdefault.jpg",
+      "viewCount": 16142,
+      "likeCount": 235,
+      "publishedAt": "2020-10-31T16:12:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=2uPKWpMHmZA"
+    },
+    {
+      "id": "XLFGcZxn0PM",
+      "questionId": "99",
+      "title": "Recover Binary Search Tree | Using Morris Traversal With O(1) Space | Leetcode 99 Solution",
+      "channelTitle": "Pepcoding",
+      "thumbnail": "https://i.ytimg.com/vi/XLFGcZxn0PM/hqdefault.jpg",
+      "viewCount": 10756,
+      "likeCount": 282,
+      "publishedAt": "2021-08-07T07:30:14Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=XLFGcZxn0PM"
+    },
+    {
+      "id": "bJBwOMPhe6Y",
+      "questionId": "99",
+      "title": "Leetcode - Recover Binary Search Tree (Python)",
+      "channelTitle": "Timothy H Chang",
+      "thumbnail": "https://i.ytimg.com/vi/bJBwOMPhe6Y/hqdefault.jpg",
+      "viewCount": 9905,
+      "likeCount": 167,
+      "publishedAt": "2020-10-31T21:35:10Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=bJBwOMPhe6Y"
+    },
+    {
+      "id": "bNBBztsfNDs",
+      "questionId": "99",
+      "title": "Recover Binary Search Tree | Leetcode 99 | BST | Day-19",
+      "channelTitle": "Ayushi Sharma",
+      "thumbnail": "https://i.ytimg.com/vi/bNBBztsfNDs/hqdefault.jpg",
+      "viewCount": 7291,
+      "likeCount": 193,
+      "publishedAt": "2022-04-19T18:36:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=bNBBztsfNDs"
+    }
+  ],
+  "100": [
+    {
+      "id": "oVi-fSX8cpg",
+      "questionId": "100",
+      "title": "Ranked #1 on LeetCode  #leetcode #codeprep #competitiveprogramming #codeforces",
+      "channelTitle": "Leetcode Profiles",
+      "thumbnail": "https://i.ytimg.com/vi/oVi-fSX8cpg/hqdefault.jpg",
+      "viewCount": 3966845,
+      "likeCount": 72224,
+      "publishedAt": "2025-07-29T13:49:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=oVi-fSX8cpg"
+    },
+    {
+      "id": "m-akKNXwvQQ",
+      "questionId": "100",
+      "title": "I Solved 100 LeetCode Problems",
+      "channelTitle": "Green Code",
+      "thumbnail": "https://i.ytimg.com/vi/m-akKNXwvQQ/hqdefault.jpg",
+      "viewCount": 749990,
+      "likeCount": 25936,
+      "publishedAt": "2024-09-27T17:34:38Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=m-akKNXwvQQ"
+    },
+    {
+      "id": "HUUXsRNqIJI",
+      "questionId": "100",
+      "title": "🛑Stop using Leetcode before watching🚀 #LeetCode #CodingChallenge  #TechInterview #CodingProblems",
+      "channelTitle": "Kavitha - Career advisor ",
+      "thumbnail": "https://i.ytimg.com/vi/HUUXsRNqIJI/hqdefault.jpg",
+      "viewCount": 311277,
+      "likeCount": 1592,
+      "publishedAt": "2024-05-26T09:24:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=HUUXsRNqIJI"
+    },
+    {
+      "id": "vRbbcKXCxOw",
+      "questionId": "100",
+      "title": "Same Tree - Leetcode 100 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/vRbbcKXCxOw/hqdefault.jpg",
+      "viewCount": 188546,
+      "likeCount": 3587,
+      "publishedAt": "2021-04-30T16:30:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=vRbbcKXCxOw"
+    },
+    {
+      "id": "YPIaDOU4ZWc",
+      "questionId": "100",
+      "title": "Same Tree (LeetCode 100) | Full solution with visuals and animations | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/YPIaDOU4ZWc/hqdefault.jpg",
+      "viewCount": 14209,
+      "likeCount": 373,
+      "publishedAt": "2022-12-11T12:30:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=YPIaDOU4ZWc"
     }
   ],
   "101": [
@@ -983,6 +3277,440 @@
       "videoUrl": "https://www.youtube.com/watch?v=8P5qG4OzopQ"
     }
   ],
+  "103": [
+    {
+      "id": "3OXWEdlIGl4",
+      "questionId": "103",
+      "title": "L19. Zig-Zag or Spiral Traversal in Binary Tree | C++ | Java",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/3OXWEdlIGl4/hqdefault.jpg",
+      "viewCount": 425901,
+      "likeCount": 12111,
+      "publishedAt": "2021-08-23T14:30:13Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=3OXWEdlIGl4"
+    },
+    {
+      "id": "igbboQbiwqw",
+      "questionId": "103",
+      "title": "Binary Tree Zigzag Level Order Traversal - Leetcode 103 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/igbboQbiwqw/hqdefault.jpg",
+      "viewCount": 30698,
+      "likeCount": 639,
+      "publishedAt": "2023-02-19T00:49:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=igbboQbiwqw"
+    },
+    {
+      "id": "y3lJY5ofLro",
+      "questionId": "103",
+      "title": "Zig Zag Traversal (LeetCode 103) | Full Solution with visuals and a little trick | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/y3lJY5ofLro/hqdefault.jpg",
+      "viewCount": 20540,
+      "likeCount": 418,
+      "publishedAt": "2023-03-06T02:30:21Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=y3lJY5ofLro"
+    },
+    {
+      "id": "qU_zaA87w5A",
+      "questionId": "103",
+      "title": "103. Binary Tree Zigzag Level Order Traversal || Leetcode || C++ || Hindi",
+      "channelTitle": "Code with Sky",
+      "thumbnail": "https://i.ytimg.com/vi/qU_zaA87w5A/hqdefault.jpg",
+      "viewCount": 1079,
+      "likeCount": 19,
+      "publishedAt": "2023-02-19T05:49:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qU_zaA87w5A"
+    },
+    {
+      "id": "a_vHtYL4Zr4",
+      "questionId": "103",
+      "title": "103. Binary Tree Zigzag Level Order Traversal - JAVA (BFS)",
+      "channelTitle": "Sourin Majumdar",
+      "thumbnail": "https://i.ytimg.com/vi/a_vHtYL4Zr4/hqdefault.jpg",
+      "viewCount": 731,
+      "likeCount": 16,
+      "publishedAt": "2023-02-19T14:15:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=a_vHtYL4Zr4"
+    }
+  ],
+  "104": [
+    {
+      "id": "hTM3phVI6YQ",
+      "questionId": "104",
+      "title": "Maximum Depth of Binary Tree - 3 Solutions - Leetcode 104 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/hTM3phVI6YQ/hqdefault.jpg",
+      "viewCount": 377533,
+      "likeCount": 6002,
+      "publishedAt": "2021-06-11T16:00:34Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=hTM3phVI6YQ"
+    },
+    {
+      "id": "o2LEC2NEVuk",
+      "questionId": "104",
+      "title": "Maximum Depth of Binary Tree (LeetCode 104) | Full Solution with animations | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/o2LEC2NEVuk/hqdefault.jpg",
+      "viewCount": 24274,
+      "likeCount": 502,
+      "publishedAt": "2022-10-10T04:04:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=o2LEC2NEVuk"
+    },
+    {
+      "id": "ScvTcU2Aifs",
+      "questionId": "104",
+      "title": "Maximum Depth of Binary Tree - Leetcode 104 - Trees (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/ScvTcU2Aifs/hqdefault.jpg",
+      "viewCount": 21295,
+      "likeCount": 487,
+      "publishedAt": "2024-04-08T20:15:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ScvTcU2Aifs"
+    },
+    {
+      "id": "Qm-aU3MTSWg",
+      "questionId": "104",
+      "title": "Maximum Depth of Binary Tree - LeetCode 104 - Java",
+      "channelTitle": "LeetCode University",
+      "thumbnail": "https://i.ytimg.com/vi/Qm-aU3MTSWg/hqdefault.jpg",
+      "viewCount": 1460,
+      "likeCount": 43,
+      "publishedAt": "2022-03-07T03:32:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Qm-aU3MTSWg"
+    },
+    {
+      "id": "35g0lY6jKw0",
+      "questionId": "104",
+      "title": "Maximum Depth of Binary Tree | Leetcode 104 | Height of Binary Tree #dsa",
+      "channelTitle": "Learn With Chirag",
+      "thumbnail": "https://i.ytimg.com/vi/35g0lY6jKw0/hqdefault.jpg",
+      "viewCount": 1428,
+      "likeCount": 34,
+      "publishedAt": "2023-03-07T11:52:43Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=35g0lY6jKw0"
+    }
+  ],
+  "105": [
+    {
+      "id": "aZNaLrVebKQ",
+      "questionId": "105",
+      "title": "L34. Construct a Binary Tree from Preorder and Inorder Traversal | C++ | Java",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/aZNaLrVebKQ/hqdefault.jpg",
+      "viewCount": 453559,
+      "likeCount": 11634,
+      "publishedAt": "2021-08-31T08:21:47Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=aZNaLrVebKQ"
+    },
+    {
+      "id": "ihj4IQGZ2zc",
+      "questionId": "105",
+      "title": "Construct Binary Tree from Inorder and Preorder Traversal - Leetcode 105 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/ihj4IQGZ2zc/hqdefault.jpg",
+      "viewCount": 414493,
+      "likeCount": 6382,
+      "publishedAt": "2021-04-17T16:00:31Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ihj4IQGZ2zc"
+    },
+    {
+      "id": "33b1M980cCA",
+      "questionId": "105",
+      "title": "Build Tree from Preorder & Inorder | DSA Series : L.90",
+      "channelTitle": "Shradha Khapra",
+      "thumbnail": "https://i.ytimg.com/vi/33b1M980cCA/hqdefault.jpg",
+      "viewCount": 62310,
+      "likeCount": 1289,
+      "publishedAt": "2025-04-28T15:52:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=33b1M980cCA"
+    },
+    {
+      "id": "G5c1wM3Kpuw",
+      "questionId": "105",
+      "title": "Construct Binary Tree From Preorder And Inorder Traversal | Leetcode 105 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/G5c1wM3Kpuw/hqdefault.jpg",
+      "viewCount": 38141,
+      "likeCount": 1128,
+      "publishedAt": "2022-07-16T00:00:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=G5c1wM3Kpuw"
+    },
+    {
+      "id": "PbPS460rbMo",
+      "questionId": "105",
+      "title": "Create Binary Tree from pre-order and in-order traversal (LeetCode 105) | Easiest explanation",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/PbPS460rbMo/hqdefault.jpg",
+      "viewCount": 33178,
+      "likeCount": 777,
+      "publishedAt": "2023-05-15T18:00:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=PbPS460rbMo"
+    }
+  ],
+  "106": [
+    {
+      "id": "LgLRTaEMRVc",
+      "questionId": "106",
+      "title": "L35. Construct the Binary Tree from Postorder and Inorder Traversal | C++ | Java",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/LgLRTaEMRVc/hqdefault.jpg",
+      "viewCount": 211062,
+      "likeCount": 6080,
+      "publishedAt": "2021-08-31T08:22:40Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=LgLRTaEMRVc"
+    },
+    {
+      "id": "vm63HuIU7kw",
+      "questionId": "106",
+      "title": "Construct Binary Tree from Inorder and Postorder Traversal - Leetcode 106 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/vm63HuIU7kw/hqdefault.jpg",
+      "viewCount": 42066,
+      "likeCount": 836,
+      "publishedAt": "2023-03-16T01:34:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=vm63HuIU7kw"
+    },
+    {
+      "id": "y6zSY_z7Kh4",
+      "questionId": "106",
+      "title": "Construct Binary Tree from Inorder and Postorder Traversal | Leetcode 106 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/y6zSY_z7Kh4/hqdefault.jpg",
+      "viewCount": 14982,
+      "likeCount": 471,
+      "publishedAt": "2023-03-16T07:15:27Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=y6zSY_z7Kh4"
+    },
+    {
+      "id": "qZVHC1_tRmY",
+      "questionId": "106",
+      "title": "Construct Binary Tree from Inorder and Postorder Traversal | Leetcode - 106",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/qZVHC1_tRmY/hqdefault.jpg",
+      "viewCount": 1161,
+      "likeCount": 16,
+      "publishedAt": "2020-07-27T13:58:23Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qZVHC1_tRmY"
+    },
+    {
+      "id": "xNT8sEcL08o",
+      "questionId": "106",
+      "title": "Construct Binary Tree from Inorder and Postorder Traversal | Leetcode 106",
+      "channelTitle": "Binod Suman Academy",
+      "thumbnail": "https://i.ytimg.com/vi/xNT8sEcL08o/hqdefault.jpg",
+      "viewCount": 300,
+      "likeCount": 4,
+      "publishedAt": "2022-12-24T13:09:24Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xNT8sEcL08o"
+    }
+  ],
+  "107": [
+    {
+      "id": "FSWqYp3k1O4",
+      "questionId": "107",
+      "title": "Binary Tree Level Order Traversal ii | LeetCode 107 | C++, Java, Python",
+      "channelTitle": "Knowledge Center",
+      "thumbnail": "https://i.ytimg.com/vi/FSWqYp3k1O4/hqdefault.jpg",
+      "viewCount": 10922,
+      "likeCount": 161,
+      "publishedAt": "2020-07-02T09:11:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=FSWqYp3k1O4"
+    },
+    {
+      "id": "rCPpficf9vw",
+      "questionId": "107",
+      "title": "Binary Tree Level Order Traversal II | Leet code 107 | Theory explained + Python code",
+      "channelTitle": "Sai Anish Malla",
+      "thumbnail": "https://i.ytimg.com/vi/rCPpficf9vw/hqdefault.jpg",
+      "viewCount": 2312,
+      "likeCount": 63,
+      "publishedAt": "2020-07-02T14:49:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=rCPpficf9vw"
+    },
+    {
+      "id": "6e4pmYyr_1o",
+      "questionId": "107",
+      "title": "Binary Tree Level Order Traversal II - Leetcode 107 - Java",
+      "channelTitle": "Mastering Programming",
+      "thumbnail": "https://i.ytimg.com/vi/6e4pmYyr_1o/hqdefault.jpg",
+      "viewCount": 901,
+      "likeCount": 12,
+      "publishedAt": "2021-01-20T12:42:54Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=6e4pmYyr_1o"
+    },
+    {
+      "id": "84ym_t2H9Lo",
+      "questionId": "107",
+      "title": "107. Binary Tree Level Order Traversal II | Leetcode Medium",
+      "channelTitle": "JOY of LIFE",
+      "thumbnail": "https://i.ytimg.com/vi/84ym_t2H9Lo/hqdefault.jpg",
+      "viewCount": 333,
+      "likeCount": 12,
+      "publishedAt": "2021-04-08T17:01:26Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=84ym_t2H9Lo"
+    },
+    {
+      "id": "1Mf8fqI_uqo",
+      "questionId": "107",
+      "title": "Binary Tree Level Order Traversal -2 | Leetcode 107 (Medium) | Java Solution",
+      "channelTitle": "Guneet Malhotra",
+      "thumbnail": "https://i.ytimg.com/vi/1Mf8fqI_uqo/hqdefault.jpg",
+      "viewCount": 54,
+      "likeCount": 3,
+      "publishedAt": "2021-09-02T14:47:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=1Mf8fqI_uqo"
+    }
+  ],
+  "108": [
+    {
+      "id": "0K0uCMYq5ng",
+      "questionId": "108",
+      "title": "Convert Sorted Array to Binary Search Tree - Leetcode 108 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/0K0uCMYq5ng/hqdefault.jpg",
+      "viewCount": 114772,
+      "likeCount": 2295,
+      "publishedAt": "2021-01-26T15:30:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=0K0uCMYq5ng"
+    },
+    {
+      "id": "guyEygPRaiE",
+      "questionId": "108",
+      "title": "[Java] Leetcode 108. Convert Sorted Array to Binary Search Tree [Binary Search Tree #1]",
+      "channelTitle": "Eric Programming",
+      "thumbnail": "https://i.ytimg.com/vi/guyEygPRaiE/hqdefault.jpg",
+      "viewCount": 6906,
+      "likeCount": 200,
+      "publishedAt": "2021-06-08T14:00:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=guyEygPRaiE"
+    },
+    {
+      "id": "Pl2vza7-txU",
+      "questionId": "108",
+      "title": "LEETCODE 108 (JAVASCRIPT) | CONVERT SORTED ARRAY TO BINARY SEARCH TREE",
+      "channelTitle": "Andy Gala",
+      "thumbnail": "https://i.ytimg.com/vi/Pl2vza7-txU/hqdefault.jpg",
+      "viewCount": 5211,
+      "likeCount": 87,
+      "publishedAt": "2021-06-01T05:31:32Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Pl2vza7-txU"
+    },
+    {
+      "id": "c_o05s9WbLg",
+      "questionId": "108",
+      "title": "LeetCode 108 | Converted Sorted Array to Binary Search Tree | Day 90 | 100 Days LeetCode Challenge",
+      "channelTitle": "edSlash",
+      "thumbnail": "https://i.ytimg.com/vi/c_o05s9WbLg/hqdefault.jpg",
+      "viewCount": 1476,
+      "likeCount": 60,
+      "publishedAt": "2024-01-15T04:30:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=c_o05s9WbLg"
+    },
+    {
+      "id": "tj2fa9NNwe0",
+      "questionId": "108",
+      "title": "Leetcode problem 108 Convert sorted array to BST java easy solution.",
+      "channelTitle": "Code with Me",
+      "thumbnail": "https://i.ytimg.com/vi/tj2fa9NNwe0/hqdefault.jpg",
+      "viewCount": 100,
+      "likeCount": 1,
+      "publishedAt": "2022-08-08T18:00:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=tj2fa9NNwe0"
+    }
+  ],
+  "109": [
+    {
+      "id": "4zvmruet_H0",
+      "questionId": "109",
+      "title": "Convert Sorted List to Binary Search Tree | Google | Flipkart | Amazon | Leetcode 109",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/4zvmruet_H0/hqdefault.jpg",
+      "viewCount": 18317,
+      "likeCount": 699,
+      "publishedAt": "2023-03-11T05:18:34Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=4zvmruet_H0"
+    },
+    {
+      "id": "0E8Xxu6LV9o",
+      "questionId": "109",
+      "title": "Convert Sorted List to BST | LeetCode 109 | Google Coding Interview Question",
+      "channelTitle": "EazyAlgo",
+      "thumbnail": "https://i.ytimg.com/vi/0E8Xxu6LV9o/hqdefault.jpg",
+      "viewCount": 11338,
+      "likeCount": 146,
+      "publishedAt": "2020-11-30T18:25:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=0E8Xxu6LV9o"
+    },
+    {
+      "id": "XsWPrkDqmtM",
+      "questionId": "109",
+      "title": "Convert Sorted List to Binary Search Tree (BST) | LeetCode 109 | C++, Java, Python",
+      "channelTitle": "Knowledge Center",
+      "thumbnail": "https://i.ytimg.com/vi/XsWPrkDqmtM/hqdefault.jpg",
+      "viewCount": 10343,
+      "likeCount": 167,
+      "publishedAt": "2021-05-07T20:00:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=XsWPrkDqmtM"
+    },
+    {
+      "id": "LBP8m9qGLo4",
+      "questionId": "109",
+      "title": "109. Convert Sorted List to Binary Search Tree - JAVA (Divide & Conquer - Recursion)",
+      "channelTitle": "Sourin Majumdar",
+      "thumbnail": "https://i.ytimg.com/vi/LBP8m9qGLo4/hqdefault.jpg",
+      "viewCount": 458,
+      "likeCount": 16,
+      "publishedAt": "2023-03-11T11:37:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=LBP8m9qGLo4"
+    },
+    {
+      "id": "MZi46g8oJSs",
+      "questionId": "109",
+      "title": "Convert Sorted List to BST |  Leetcode 109 (Medium) | Java Solution",
+      "channelTitle": "Guneet Malhotra",
+      "thumbnail": "https://i.ytimg.com/vi/MZi46g8oJSs/hqdefault.jpg",
+      "viewCount": 60,
+      "likeCount": 4,
+      "publishedAt": "2021-08-17T12:08:56Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=MZi46g8oJSs"
+    }
+  ],
   "121": [
     {
       "id": "1pkOgXD63yU",
@@ -1043,6 +3771,68 @@
       "publishedAt": "2025-02-07T17:21:06Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=jQDIeuMIPGI"
+    }
+  ],
+  "133": [
+    {
+      "id": "mQeF6bN8hMk",
+      "questionId": "133",
+      "title": "Clone Graph - Depth First Search - Leetcode 133",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/mQeF6bN8hMk/hqdefault.jpg",
+      "viewCount": 353876,
+      "likeCount": 5050,
+      "publishedAt": "2021-02-01T15:30:09Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=mQeF6bN8hMk"
+    },
+    {
+      "id": "z7mPg_xT5xk",
+      "questionId": "133",
+      "title": "Clone Graph | Leetcode - 133 | Google, Facebook, Amazon | DFS+BFS | Explanation ➕ Live Coding🧑🏻‍💻",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/z7mPg_xT5xk/hqdefault.jpg",
+      "viewCount": 27215,
+      "likeCount": 0,
+      "publishedAt": "2023-04-08T08:37:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=z7mPg_xT5xk"
+    },
+    {
+      "id": "Nki9V1tD5_I",
+      "questionId": "133",
+      "title": "9. Clone Graph | Tricky Question | LeetCode 133 | Explained with Intuition - Simple C++, JAVA code",
+      "channelTitle": "Keerti Purswani",
+      "thumbnail": "https://i.ytimg.com/vi/Nki9V1tD5_I/hqdefault.jpg",
+      "viewCount": 19793,
+      "likeCount": 614,
+      "publishedAt": "2024-02-06T11:00:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Nki9V1tD5_I"
+    },
+    {
+      "id": "wWE7YzuBBkE",
+      "questionId": "133",
+      "title": "Clone Graph - Leetcode 133 - Graphs (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/wWE7YzuBBkE/hqdefault.jpg",
+      "viewCount": 17821,
+      "likeCount": 383,
+      "publishedAt": "2024-05-08T20:18:02Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=wWE7YzuBBkE"
+    },
+    {
+      "id": "0m_eIw_XW9c",
+      "questionId": "133",
+      "title": "Clone Graph | Live Coding with Explanation | Leetcode - 133",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/0m_eIw_XW9c/hqdefault.jpg",
+      "viewCount": 3931,
+      "likeCount": 58,
+      "publishedAt": "2020-10-20T14:56:29Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=0m_eIw_XW9c"
     }
   ],
   "136": [
@@ -1107,6 +3897,440 @@
       "videoUrl": "https://www.youtube.com/watch?v=dUmaWUPRcLQ"
     }
   ],
+  "146": [
+    {
+      "id": "7ABFKPK2hD4",
+      "questionId": "146",
+      "title": "LRU Cache - Twitch Interview Question - Leetcode 146",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/7ABFKPK2hD4/hqdefault.jpg",
+      "viewCount": 517708,
+      "likeCount": 9385,
+      "publishedAt": "2020-12-21T15:00:02Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=7ABFKPK2hD4"
+    },
+    {
+      "id": "z9bJUPxzFOw",
+      "questionId": "146",
+      "title": "L18. Implement LRU Cache",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/z9bJUPxzFOw/hqdefault.jpg",
+      "viewCount": 324809,
+      "likeCount": 7091,
+      "publishedAt": "2024-07-16T17:27:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=z9bJUPxzFOw"
+    },
+    {
+      "id": "GsY6y0iPaHw",
+      "questionId": "146",
+      "title": "L76. Implement LRU Cache | Linked List",
+      "channelTitle": "Shradha Khapra",
+      "thumbnail": "https://i.ytimg.com/vi/GsY6y0iPaHw/hqdefault.jpg",
+      "viewCount": 81168,
+      "likeCount": 1800,
+      "publishedAt": "2025-02-25T15:21:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GsY6y0iPaHw"
+    },
+    {
+      "id": "81h8O-0U5oo",
+      "questionId": "146",
+      "title": "LRU Cache | Brute Force | Optimal | Detailed | Leetcode 146",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/81h8O-0U5oo/hqdefault.jpg",
+      "viewCount": 52428,
+      "likeCount": 1697,
+      "publishedAt": "2023-01-29T10:36:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=81h8O-0U5oo"
+    },
+    {
+      "id": "IIykGt3TJ_0",
+      "questionId": "146",
+      "title": "LRU Cache | Leetcode 146",
+      "channelTitle": "Nideesh Terapalli",
+      "thumbnail": "https://i.ytimg.com/vi/IIykGt3TJ_0/hqdefault.jpg",
+      "viewCount": 2424,
+      "likeCount": 55,
+      "publishedAt": "2020-11-18T08:00:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=IIykGt3TJ_0"
+    }
+  ],
+  "167": [
+    {
+      "id": "cQ1Oz4ckceM",
+      "questionId": "167",
+      "title": "TWO SUM II - Amazon Coding Interview Question - Leetcode 167 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/cQ1Oz4ckceM/hqdefault.jpg",
+      "viewCount": 549740,
+      "likeCount": 9035,
+      "publishedAt": "2020-06-11T06:03:50Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=cQ1Oz4ckceM"
+    },
+    {
+      "id": "chKk9gszrlU",
+      "questionId": "167",
+      "title": "Two Sum II - Two Pointers Algorithm - Leetcode 167",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/chKk9gszrlU/hqdefault.jpg",
+      "viewCount": 136057,
+      "likeCount": 6669,
+      "publishedAt": "2024-04-26T18:38:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=chKk9gszrlU"
+    },
+    {
+      "id": "AZH2iev6POI",
+      "questionId": "167",
+      "title": "Efficiently Solving Leetcode Problem 167: Two Sum II - Input array is sorted",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/AZH2iev6POI/hqdefault.jpg",
+      "viewCount": 10814,
+      "likeCount": 205,
+      "publishedAt": "2023-01-01T14:39:13Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=AZH2iev6POI"
+    },
+    {
+      "id": "Bk6Im9h6ouA",
+      "questionId": "167",
+      "title": "Two Sum 2 (LeetCode 167) — 3 Approaches from Brute Force to Optimal | Asked by 17+ Companies",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/Bk6Im9h6ouA/hqdefault.jpg",
+      "viewCount": 3196,
+      "likeCount": 124,
+      "publishedAt": "2026-03-23T16:00:14Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Bk6Im9h6ouA"
+    },
+    {
+      "id": "Hxj4Quu5-30",
+      "questionId": "167",
+      "title": "LeetCode 167. Two Sum II - Input Array Is Sorted | Medium | Algorithm Explained | C++",
+      "channelTitle": "Cherry Coding [IIT-G]",
+      "thumbnail": "https://i.ytimg.com/vi/Hxj4Quu5-30/hqdefault.jpg",
+      "viewCount": 828,
+      "likeCount": 18,
+      "publishedAt": "2022-03-12T13:12:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Hxj4Quu5-30"
+    }
+  ],
+  "187": [
+    {
+      "id": "FzTYfsmtOso",
+      "questionId": "187",
+      "title": "Repeated DNA Sequences - Leetcode 187 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/FzTYfsmtOso/hqdefault.jpg",
+      "viewCount": 45052,
+      "likeCount": 901,
+      "publishedAt": "2022-03-15T16:00:04Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=FzTYfsmtOso"
+    },
+    {
+      "id": "EuHUlhUz6oI",
+      "questionId": "187",
+      "title": "Repeated DNA Sequences | LeetCode 187 | Two Pointers | Sliding Window | HashMaps",
+      "channelTitle": "codeTips",
+      "thumbnail": "https://i.ytimg.com/vi/EuHUlhUz6oI/hqdefault.jpg",
+      "viewCount": 1253,
+      "likeCount": 28,
+      "publishedAt": "2024-06-06T05:21:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=EuHUlhUz6oI"
+    },
+    {
+      "id": "x6LN9HPg4BY",
+      "questionId": "187",
+      "title": "Repeated DNA Sequences Explained | HashMap and Set Approaches | LeetCode 187 | Geekific",
+      "channelTitle": "Geekific",
+      "thumbnail": "https://i.ytimg.com/vi/x6LN9HPg4BY/hqdefault.jpg",
+      "viewCount": 530,
+      "likeCount": 12,
+      "publishedAt": "2025-07-26T13:01:47Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=x6LN9HPg4BY"
+    },
+    {
+      "id": "HTaBSJPSOWg",
+      "questionId": "187",
+      "title": "Repeated DNA Sequences | LeetCode 187 | October LeetCode Challenge | Day 17",
+      "channelTitle": "Learn Code Repeat",
+      "thumbnail": "https://i.ytimg.com/vi/HTaBSJPSOWg/hqdefault.jpg",
+      "viewCount": 470,
+      "likeCount": 6,
+      "publishedAt": "2020-10-18T00:57:40Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=HTaBSJPSOWg"
+    },
+    {
+      "id": "p8Ac3_CBre4",
+      "questionId": "187",
+      "title": "Repeated DNA Sequences | LeetCode 187 | Python Solution",
+      "channelTitle": "ExDevPro",
+      "thumbnail": "https://i.ytimg.com/vi/p8Ac3_CBre4/hqdefault.jpg",
+      "viewCount": 451,
+      "likeCount": 5,
+      "publishedAt": "2024-08-09T14:33:56Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=p8Ac3_CBre4"
+    }
+  ],
+  "200": [
+    {
+      "id": "pV2kpPD66nE",
+      "questionId": "200",
+      "title": "NUMBER OF ISLANDS - Leetcode 200 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/pV2kpPD66nE/hqdefault.jpg",
+      "viewCount": 510823,
+      "likeCount": 7421,
+      "publishedAt": "2020-06-15T05:40:52Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=pV2kpPD66nE"
+    },
+    {
+      "id": "9mj8MTp3c8A",
+      "questionId": "200",
+      "title": "Number of Islands - Leetcode 200",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/9mj8MTp3c8A/hqdefault.jpg",
+      "viewCount": 342218,
+      "likeCount": 12410,
+      "publishedAt": "2024-08-01T17:36:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=9mj8MTp3c8A"
+    },
+    {
+      "id": "gCswsDauXPc",
+      "questionId": "200",
+      "title": "Number of Islands - Leetcode 200 - Graphs (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/gCswsDauXPc/hqdefault.jpg",
+      "viewCount": 45119,
+      "likeCount": 1237,
+      "publishedAt": "2024-05-02T20:05:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=gCswsDauXPc"
+    },
+    {
+      "id": "AME6baBpswY",
+      "questionId": "200",
+      "title": "Number of Islands | Connected Components in Matrix | Leetcode 200",
+      "channelTitle": "Shradha Khapra",
+      "thumbnail": "https://i.ytimg.com/vi/AME6baBpswY/hqdefault.jpg",
+      "viewCount": 36494,
+      "likeCount": 893,
+      "publishedAt": "2025-09-11T14:30:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=AME6baBpswY"
+    },
+    {
+      "id": "ZgCZfXPo3hI",
+      "questionId": "200",
+      "title": "Number of Islands (LeetCode 200) | Full solution with a DFS and a BFS approach",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/ZgCZfXPo3hI/hqdefault.jpg",
+      "viewCount": 25262,
+      "likeCount": 787,
+      "publishedAt": "2025-02-18T03:00:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZgCZfXPo3hI"
+    }
+  ],
+  "207": [
+    {
+      "id": "EgI5nU9etnU",
+      "questionId": "207",
+      "title": "Course Schedule - Graph Adjacency List - Leetcode 207",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/EgI5nU9etnU/hqdefault.jpg",
+      "viewCount": 558526,
+      "likeCount": 6940,
+      "publishedAt": "2021-01-05T15:00:12Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=EgI5nU9etnU"
+    },
+    {
+      "id": "kXy0ABd1vwo",
+      "questionId": "207",
+      "title": "Course Schedule | Deadlock detection | Graph coloring | Leetcode #207",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/kXy0ABd1vwo/hqdefault.jpg",
+      "viewCount": 71280,
+      "likeCount": 1166,
+      "publishedAt": "2020-05-29T14:49:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=kXy0ABd1vwo"
+    },
+    {
+      "id": "lqjlGGMjSMU",
+      "questionId": "207",
+      "title": "Course Schedule | Apple | Microsoft | Amazon | BFS | Graph Concepts & Qns - 12 | Leetcode 207",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/lqjlGGMjSMU/hqdefault.jpg",
+      "viewCount": 36339,
+      "likeCount": 1050,
+      "publishedAt": "2023-01-08T14:11:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=lqjlGGMjSMU"
+    },
+    {
+      "id": "nz5V5pOiT8w",
+      "questionId": "207",
+      "title": "Course Schedule (Detecting Cycles in a Graph) - Leetcode 207 - Graphs (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/nz5V5pOiT8w/hqdefault.jpg",
+      "viewCount": 32423,
+      "likeCount": 618,
+      "publishedAt": "2024-05-18T17:29:22Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=nz5V5pOiT8w"
+    },
+    {
+      "id": "Oa4Srx9mDqs",
+      "questionId": "207",
+      "title": "Course Schedule (LeetCode 207) | Interview Essential | BFS, Queue, Cycle in a directed graph",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/Oa4Srx9mDqs/hqdefault.jpg",
+      "viewCount": 9143,
+      "likeCount": 252,
+      "publishedAt": "2025-09-02T14:00:40Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Oa4Srx9mDqs"
+    }
+  ],
+  "209": [
+    {
+      "id": "aYqYMIqZx5s",
+      "questionId": "209",
+      "title": "Minimum Size Subarray Sum - Leetcode 209 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/aYqYMIqZx5s/hqdefault.jpg",
+      "viewCount": 144150,
+      "likeCount": 2868,
+      "publishedAt": "2022-01-26T17:00:01Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=aYqYMIqZx5s"
+    },
+    {
+      "id": "D2MbogiFXWU",
+      "questionId": "209",
+      "title": "Minimum Size Subarray Sum | Google | Amazon | Easy Explanation | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/D2MbogiFXWU/hqdefault.jpg",
+      "viewCount": 31717,
+      "likeCount": 986,
+      "publishedAt": "2022-09-10T13:50:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=D2MbogiFXWU"
+    },
+    {
+      "id": "9UOmXgG4h2U",
+      "questionId": "209",
+      "title": "Minimum Size Subarray Sum (LeetCode 209) | Full solution with animations | Variable Sliding Window",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/9UOmXgG4h2U/hqdefault.jpg",
+      "viewCount": 30213,
+      "likeCount": 830,
+      "publishedAt": "2024-05-27T04:00:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=9UOmXgG4h2U"
+    },
+    {
+      "id": "RG17VCQOFpg",
+      "questionId": "209",
+      "title": "Minimum Size Subarray Sum - Leetcode 209 - Sliding Window (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/RG17VCQOFpg/hqdefault.jpg",
+      "viewCount": 16606,
+      "likeCount": 384,
+      "publishedAt": "2024-06-21T13:56:52Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=RG17VCQOFpg"
+    },
+    {
+      "id": "xBZfV0OBmLY",
+      "questionId": "209",
+      "title": "LeetCode 209 -  Minimum Size Subarray Sum",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/xBZfV0OBmLY/hqdefault.jpg",
+      "viewCount": 11882,
+      "likeCount": 213,
+      "publishedAt": "2023-03-15T16:32:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=xBZfV0OBmLY"
+    }
+  ],
+  "210": [
+    {
+      "id": "Akt3glAwyfY",
+      "questionId": "210",
+      "title": "Course Schedule II - Topological Sort - Leetcode 210",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/Akt3glAwyfY/hqdefault.jpg",
+      "viewCount": 245211,
+      "likeCount": 3423,
+      "publishedAt": "2021-01-18T15:00:08Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=Akt3glAwyfY"
+    },
+    {
+      "id": "W1WhSN9wAw0",
+      "questionId": "210",
+      "title": "Course Schedule-II | Apple | Microsoft | Amazon | BFS | Graph Concepts & Qns - 13 | Leetcode 210",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/W1WhSN9wAw0/hqdefault.jpg",
+      "viewCount": 20600,
+      "likeCount": 710,
+      "publishedAt": "2023-01-09T12:28:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=W1WhSN9wAw0"
+    },
+    {
+      "id": "33vK4AqXjag",
+      "questionId": "210",
+      "title": "Google Coding Interview Question explained | Course Schedule 2 [LeetCode 210]",
+      "channelTitle": "Shiran Afergan",
+      "thumbnail": "https://i.ytimg.com/vi/33vK4AqXjag/hqdefault.jpg",
+      "viewCount": 3883,
+      "likeCount": 131,
+      "publishedAt": "2021-01-06T16:51:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=33vK4AqXjag"
+    },
+    {
+      "id": "31lxawZ3D6U",
+      "questionId": "210",
+      "title": "Course Schedule II | Leetcode 210 | Live coding session 🔥🔥🔥 | Topological Sort nailed !!!!",
+      "channelTitle": "Coding Decoded",
+      "thumbnail": "https://i.ytimg.com/vi/31lxawZ3D6U/hqdefault.jpg",
+      "viewCount": 1922,
+      "likeCount": 42,
+      "publishedAt": "2021-12-23T10:21:45Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=31lxawZ3D6U"
+    },
+    {
+      "id": "qhof9QNXwUI",
+      "questionId": "210",
+      "title": "Course Schedule II | Leetcode 210 | Topological Sorting | DAG  | Cycle Detection | Course Schedule 2",
+      "channelTitle": "Hellgeek Arena",
+      "thumbnail": "https://i.ytimg.com/vi/qhof9QNXwUI/hqdefault.jpg",
+      "viewCount": 309,
+      "likeCount": 31,
+      "publishedAt": "2021-12-31T03:30:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qhof9QNXwUI"
+    }
+  ],
   "217": [
     {
       "id": "3OamzN90kPg",
@@ -1167,6 +4391,316 @@
       "publishedAt": "2022-08-29T09:43:46Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=xTzBc4sLcfg"
+    }
+  ],
+  "219": [
+    {
+      "id": "ypn0aZ0nrL4",
+      "questionId": "219",
+      "title": "Contains Duplicate II - Leetcode 219 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/ypn0aZ0nrL4/hqdefault.jpg",
+      "viewCount": 86737,
+      "likeCount": 1413,
+      "publishedAt": "2023-02-13T12:50:12Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=ypn0aZ0nrL4"
+    },
+    {
+      "id": "tp4JivY1-Mk",
+      "questionId": "219",
+      "title": "Contains Duplicate 2  | LeetCode problem 219 | Top 150 interview question series",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/tp4JivY1-Mk/hqdefault.jpg",
+      "viewCount": 26343,
+      "likeCount": 0,
+      "publishedAt": "2023-02-18T08:17:50Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=tp4JivY1-Mk"
+    },
+    {
+      "id": "1Vl4UCI7FXs",
+      "questionId": "219",
+      "title": "219. Contains Duplicate ii || Java || Leetcode || Hindi",
+      "channelTitle": "Coding Sphere",
+      "thumbnail": "https://i.ytimg.com/vi/1Vl4UCI7FXs/hqdefault.jpg",
+      "viewCount": 6352,
+      "likeCount": 93,
+      "publishedAt": "2023-12-24T14:41:07Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=1Vl4UCI7FXs"
+    },
+    {
+      "id": "RBxjA_cGr7g",
+      "questionId": "219",
+      "title": "LeetCode 219 | Contains Duplicate II",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/RBxjA_cGr7g/hqdefault.jpg",
+      "viewCount": 5563,
+      "likeCount": 114,
+      "publishedAt": "2024-03-03T05:42:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=RBxjA_cGr7g"
+    },
+    {
+      "id": "8PAcZOQAIUo",
+      "questionId": "219",
+      "title": "Contains Duplicate II (Leetcode 219) – Efficient Solution Explained",
+      "channelTitle": "Mohit Chhabra",
+      "thumbnail": "https://i.ytimg.com/vi/8PAcZOQAIUo/hqdefault.jpg",
+      "viewCount": 195,
+      "likeCount": 5,
+      "publishedAt": "2025-03-21T18:06:20Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=8PAcZOQAIUo"
+    }
+  ],
+  "261": [
+    {
+      "id": "G9o6ZI_C5cc",
+      "questionId": "261",
+      "title": "How many LeetCode problems should you solve? #leetcode #techinterview  #developer #softwareengineer",
+      "channelTitle": "CrioDo",
+      "thumbnail": "https://i.ytimg.com/vi/G9o6ZI_C5cc/hqdefault.jpg",
+      "viewCount": 939009,
+      "likeCount": 33575,
+      "publishedAt": "2024-01-23T12:38:53Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=G9o6ZI_C5cc"
+    },
+    {
+      "id": "bXsUuownnoQ",
+      "questionId": "261",
+      "title": "Graph Valid Tree - Leetcode 261 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/bXsUuownnoQ/hqdefault.jpg",
+      "viewCount": 168205,
+      "likeCount": 2265,
+      "publishedAt": "2021-05-28T16:00:33Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=bXsUuownnoQ"
+    },
+    {
+      "id": "WU3-vo0MJW0",
+      "questionId": "261",
+      "title": "Valid Graph Tree | LeetCode 261 (Medium)",
+      "channelTitle": "Destination FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/WU3-vo0MJW0/hqdefault.jpg",
+      "viewCount": 1083,
+      "likeCount": 18,
+      "publishedAt": "2022-04-08T21:07:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=WU3-vo0MJW0"
+    },
+    {
+      "id": "3Bc8IEtO8Dk",
+      "questionId": "261",
+      "title": "Leetcode Premium | 261. Graph Valid Tree |Best Solution| DFS | Cycle Detection | Graph | C++ | Hindi",
+      "channelTitle": "The Code Theory",
+      "thumbnail": "https://i.ytimg.com/vi/3Bc8IEtO8Dk/hqdefault.jpg",
+      "viewCount": 439,
+      "likeCount": 4,
+      "publishedAt": "2025-02-07T03:47:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3Bc8IEtO8Dk"
+    },
+    {
+      "id": "HOiaCwNGXzs",
+      "questionId": "261",
+      "title": "Leetcode #261. Graph Valid Tree Solution - Blind 75 Leetcode Questions",
+      "channelTitle": "Álvaroszi",
+      "thumbnail": "https://i.ytimg.com/vi/HOiaCwNGXzs/hqdefault.jpg",
+      "viewCount": 43,
+      "likeCount": 1,
+      "publishedAt": "2022-06-26T22:30:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=HOiaCwNGXzs"
+    }
+  ],
+  "268": [
+    {
+      "id": "WnPLSRLSANE",
+      "questionId": "268",
+      "title": "Missing Number - Blind 75 - Leetcode 268 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/WnPLSRLSANE/hqdefault.jpg",
+      "viewCount": 179706,
+      "likeCount": 2723,
+      "publishedAt": "2021-07-26T16:00:13Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=WnPLSRLSANE"
+    },
+    {
+      "id": "iCrQG_kbuP0",
+      "questionId": "268",
+      "title": "Missing Number (LeetCode 268) | Full solution with visuals and diagrams | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/iCrQG_kbuP0/hqdefault.jpg",
+      "viewCount": 37005,
+      "likeCount": 980,
+      "publishedAt": "2023-01-02T01:00:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=iCrQG_kbuP0"
+    },
+    {
+      "id": "cuNX7rijdt8",
+      "questionId": "268",
+      "title": "Missing Number | LeetCode problem 268",
+      "channelTitle": "Technosage",
+      "thumbnail": "https://i.ytimg.com/vi/cuNX7rijdt8/hqdefault.jpg",
+      "viewCount": 32507,
+      "likeCount": 486,
+      "publishedAt": "2023-02-15T04:04:01Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=cuNX7rijdt8"
+    },
+    {
+      "id": "lpyQGkbDvqI",
+      "questionId": "268",
+      "title": "Missing Number | Multiple Approaches | Leetcode 268",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/lpyQGkbDvqI/hqdefault.jpg",
+      "viewCount": 9799,
+      "likeCount": 327,
+      "publishedAt": "2024-02-20T02:23:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=lpyQGkbDvqI"
+    },
+    {
+      "id": "3y25EaWckO4",
+      "questionId": "268",
+      "title": "Missing Number (#Leetcode 268) - Easy (Hindi)",
+      "channelTitle": "Engineering Digest",
+      "thumbnail": "https://i.ytimg.com/vi/3y25EaWckO4/hqdefault.jpg",
+      "viewCount": 4852,
+      "likeCount": 110,
+      "publishedAt": "2022-07-26T02:30:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=3y25EaWckO4"
+    }
+  ],
+  "269": [
+    {
+      "id": "U3N_je7tWAs",
+      "questionId": "269",
+      "title": "G-26. Alien Dictionary - Topological Sort",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/U3N_je7tWAs/hqdefault.jpg",
+      "viewCount": 355835,
+      "likeCount": 10863,
+      "publishedAt": "2022-09-10T19:18:09Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=U3N_je7tWAs"
+    },
+    {
+      "id": "6kTZYvNNyps",
+      "questionId": "269",
+      "title": "Alien Dictionary - Topological Sort - Leetcode 269 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/6kTZYvNNyps/hqdefault.jpg",
+      "viewCount": 238332,
+      "likeCount": 3251,
+      "publishedAt": "2021-06-10T16:00:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=6kTZYvNNyps"
+    },
+    {
+      "id": "ZU7fiX0WCCY",
+      "questionId": "269",
+      "title": "【小小福讲Leetcode】LeetCode 269. Alien Dictionary Final 中文详解",
+      "channelTitle": "小小福LeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/ZU7fiX0WCCY/hqdefault.jpg",
+      "viewCount": 4530,
+      "likeCount": 123,
+      "publishedAt": "2020-01-14T06:48:59Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZU7fiX0WCCY"
+    },
+    {
+      "id": "SyqEYeEVG_c",
+      "questionId": "269",
+      "title": "Alien Dictionary | LeetCode 269 | Blind 75 #leetcode #codinginterview #faang",
+      "channelTitle": "AlgoMonster",
+      "thumbnail": "https://i.ytimg.com/vi/SyqEYeEVG_c/hqdefault.jpg",
+      "viewCount": 1296,
+      "likeCount": 85,
+      "publishedAt": "2026-02-17T16:00:44Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=SyqEYeEVG_c"
+    },
+    {
+      "id": "L5n9AA7cHDY",
+      "questionId": "269",
+      "title": "Alien Dictionary | Leetcode 269. Alien Dictionary | Topological sorting | #FAANG",
+      "channelTitle": "code Tree",
+      "thumbnail": "https://i.ytimg.com/vi/L5n9AA7cHDY/hqdefault.jpg",
+      "viewCount": 935,
+      "likeCount": 12,
+      "publishedAt": "2021-07-28T13:06:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=L5n9AA7cHDY"
+    }
+  ],
+  "277": [
+    {
+      "id": "oVi-fSX8cpg",
+      "questionId": "277",
+      "title": "Ranked #1 on LeetCode  #leetcode #codeprep #competitiveprogramming #codeforces",
+      "channelTitle": "Leetcode Profiles",
+      "thumbnail": "https://i.ytimg.com/vi/oVi-fSX8cpg/hqdefault.jpg",
+      "viewCount": 3968442,
+      "likeCount": 72243,
+      "publishedAt": "2025-07-29T13:49:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=oVi-fSX8cpg"
+    },
+    {
+      "id": "cEadsbTeze4",
+      "questionId": "277",
+      "title": "L17. The Celebrity Problem | Stack and Queue Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/cEadsbTeze4/hqdefault.jpg",
+      "viewCount": 147464,
+      "likeCount": 4891,
+      "publishedAt": "2024-07-16T17:26:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=cEadsbTeze4"
+    },
+    {
+      "id": "ZuJEDPU1iug",
+      "questionId": "277",
+      "title": "FIND THE CELEBRITY | LEETCODE # 277 | PYTHON SOLUTION",
+      "channelTitle": "Cracking FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/ZuJEDPU1iug/hqdefault.jpg",
+      "viewCount": 6062,
+      "likeCount": 86,
+      "publishedAt": "2022-10-13T01:00:19Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZuJEDPU1iug"
+    },
+    {
+      "id": "Woma70JhE0Y",
+      "questionId": "277",
+      "title": "LeetCode 277 | Find the Celebrity |  Solution Explained (Java + Whiteboard)",
+      "channelTitle": "Xavier Elon",
+      "thumbnail": "https://i.ytimg.com/vi/Woma70JhE0Y/hqdefault.jpg",
+      "viewCount": 2188,
+      "likeCount": 29,
+      "publishedAt": "2020-08-03T22:01:25Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Woma70JhE0Y"
+    },
+    {
+      "id": "lqdgGNGPS68",
+      "questionId": "277",
+      "title": "Find The Celebrity | LeetCode 277 (Two Pointers)",
+      "channelTitle": "Destination FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/lqdgGNGPS68/hqdefault.jpg",
+      "viewCount": 643,
+      "likeCount": 16,
+      "publishedAt": "2022-12-02T23:59:55Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=lqdgGNGPS68"
     }
   ],
   "283": [
@@ -1533,6 +5067,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=AQ8mHCeEK_s"
     }
   ],
+  "310": [
+    {
+      "id": "wQGQnyv_9hI",
+      "questionId": "310",
+      "title": "Minimum Height Trees - Leetcode 310 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/wQGQnyv_9hI/hqdefault.jpg",
+      "viewCount": 43569,
+      "likeCount": 919,
+      "publishedAt": "2024-04-23T02:55:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=wQGQnyv_9hI"
+    },
+    {
+      "id": "ivl6BHJVcB0",
+      "questionId": "310",
+      "title": "Minimum Height Trees | Live Coding with Explanation | Leetcode #310",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/ivl6BHJVcB0/hqdefault.jpg",
+      "viewCount": 33789,
+      "likeCount": 587,
+      "publishedAt": "2020-11-04T12:13:42Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ivl6BHJVcB0"
+    },
+    {
+      "id": "ZXANlaEuYvQ",
+      "questionId": "310",
+      "title": "Minimum Height Trees | Know Every Detail | Why BFS | GOOGLE | Leetcode 310 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/ZXANlaEuYvQ/hqdefault.jpg",
+      "viewCount": 16968,
+      "likeCount": 764,
+      "publishedAt": "2024-04-23T04:37:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ZXANlaEuYvQ"
+    },
+    {
+      "id": "tJAwo2hgMU8",
+      "questionId": "310",
+      "title": "310. Minimum Height Trees | BFS | Topological Sort | Graphs",
+      "channelTitle": "Aryan Mittal",
+      "thumbnail": "https://i.ytimg.com/vi/tJAwo2hgMU8/hqdefault.jpg",
+      "viewCount": 10329,
+      "likeCount": 594,
+      "publishedAt": "2024-04-23T04:06:27Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=tJAwo2hgMU8"
+    },
+    {
+      "id": "bxBKtrEj6YI",
+      "questionId": "310",
+      "title": "LeetCode 310 | Minimum Height Trees | Graphs | BFS | Explained in Detail | Google | Java Code",
+      "channelTitle": "Developer Coder",
+      "thumbnail": "https://i.ytimg.com/vi/bxBKtrEj6YI/hqdefault.jpg",
+      "viewCount": 27,
+      "likeCount": 2,
+      "publishedAt": "2024-04-23T08:34:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=bxBKtrEj6YI"
+    }
+  ],
   "319": [
     {
       "id": "uQM9sldV7ms",
@@ -1593,6 +5189,192 @@
       "publishedAt": "2023-04-27T12:11:47Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=q-7aoEILGb0"
+    }
+  ],
+  "323": [
+    {
+      "id": "8f1XPm4WOUc",
+      "questionId": "323",
+      "title": "Number of Connected Components in an Undirected Graph - Union Find - Leetcode 323 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/8f1XPm4WOUc/hqdefault.jpg",
+      "viewCount": 274179,
+      "likeCount": 3544,
+      "publishedAt": "2021-06-09T16:00:05Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=8f1XPm4WOUc"
+    },
+    {
+      "id": "Y29g_m96iaI",
+      "questionId": "323",
+      "title": "NUMBER OF CONNECTED COMPONENTS IN AN UNDIRECTED GRAPH | LEETCODE # 323 | PYTHON GRAPH SOLUTION",
+      "channelTitle": "Cracking FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/Y29g_m96iaI/hqdefault.jpg",
+      "viewCount": 5141,
+      "likeCount": 96,
+      "publishedAt": "2022-04-27T01:15:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Y29g_m96iaI"
+    },
+    {
+      "id": "qdB_KTYMwKk",
+      "questionId": "323",
+      "title": "Leetcode 323 | Number of Connected Components in an Undirected Graph( DFS and Union Find approach)",
+      "channelTitle": "Tech Traversal",
+      "thumbnail": "https://i.ytimg.com/vi/qdB_KTYMwKk/hqdefault.jpg",
+      "viewCount": 2030,
+      "likeCount": 19,
+      "publishedAt": "2021-03-07T10:47:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=qdB_KTYMwKk"
+    },
+    {
+      "id": "gKKATlgNNqM",
+      "questionId": "323",
+      "title": "LeetCode 323. Number of Connected Components in an Undirected Graph",
+      "channelTitle": "Happy Coding",
+      "thumbnail": "https://i.ytimg.com/vi/gKKATlgNNqM/hqdefault.jpg",
+      "viewCount": 1886,
+      "likeCount": 13,
+      "publishedAt": "2020-06-23T05:19:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=gKKATlgNNqM"
+    },
+    {
+      "id": "ergjX3K3-xk",
+      "questionId": "323",
+      "title": "Leetcode 323. Number of Connected Components in an Undirected Graph - Union-Find method",
+      "channelTitle": "Code-Yao",
+      "thumbnail": "https://i.ytimg.com/vi/ergjX3K3-xk/hqdefault.jpg",
+      "viewCount": 276,
+      "likeCount": 1,
+      "publishedAt": "2022-06-19T05:00:10Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ergjX3K3-xk"
+    }
+  ],
+  "329": [
+    {
+      "id": "wCc_nd-GiEc",
+      "questionId": "329",
+      "title": "Longest Increasing Path in a Matrix - Leetcode 329",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/wCc_nd-GiEc/hqdefault.jpg",
+      "viewCount": 93526,
+      "likeCount": 1765,
+      "publishedAt": "2021-12-20T17:00:43Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=wCc_nd-GiEc"
+    },
+    {
+      "id": "WiEqhI7v2FY",
+      "questionId": "329",
+      "title": "Longest Increasing Path in a Matrix | Live Coding with Explanation | Leetcode - 329",
+      "channelTitle": "Algorithms Made Easy",
+      "thumbnail": "https://i.ytimg.com/vi/WiEqhI7v2FY/hqdefault.jpg",
+      "viewCount": 13623,
+      "likeCount": 303,
+      "publishedAt": "2021-04-10T14:25:47Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=WiEqhI7v2FY"
+    },
+    {
+      "id": "frN7Fl38Mio",
+      "questionId": "329",
+      "title": "Longest Increasing Path | Leetcode 329 | DFS Graph | Easy Peasy | Live coding session 💯💯",
+      "channelTitle": "Coding Decoded",
+      "thumbnail": "https://i.ytimg.com/vi/frN7Fl38Mio/hqdefault.jpg",
+      "viewCount": 1710,
+      "likeCount": 33,
+      "publishedAt": "2022-05-19T06:20:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=frN7Fl38Mio"
+    },
+    {
+      "id": "gvwTGXP-reQ",
+      "questionId": "329",
+      "title": "Longest Increasing Path | LeetCode 329 (Hard)",
+      "channelTitle": "Destination FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/gvwTGXP-reQ/hqdefault.jpg",
+      "viewCount": 893,
+      "likeCount": 20,
+      "publishedAt": "2023-10-20T15:00:41Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=gvwTGXP-reQ"
+    },
+    {
+      "id": "aor360qbZng",
+      "questionId": "329",
+      "title": "Leetcode 329. Longest Increasing Path in Matrix | Hindi",
+      "channelTitle": "ThinkCode",
+      "thumbnail": "https://i.ytimg.com/vi/aor360qbZng/hqdefault.jpg",
+      "viewCount": 861,
+      "likeCount": 19,
+      "publishedAt": "2022-05-19T09:27:14Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=aor360qbZng"
+    }
+  ],
+  "347": [
+    {
+      "id": "YPTqKIgVk-k",
+      "questionId": "347",
+      "title": "Top K Frequent Elements - Bucket Sort - Leetcode 347 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/YPTqKIgVk-k/hqdefault.jpg",
+      "viewCount": 935737,
+      "likeCount": 11417,
+      "publishedAt": "2021-05-14T16:00:17Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=YPTqKIgVk-k"
+    },
+    {
+      "id": "eNR2PmOm_6w",
+      "questionId": "347",
+      "title": "Meta Coding Interview Question - Top K Frequent Elements - Leetcode 347",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/eNR2PmOm_6w/hqdefault.jpg",
+      "viewCount": 112824,
+      "likeCount": 4198,
+      "publishedAt": "2024-04-02T20:15:12Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=eNR2PmOm_6w"
+    },
+    {
+      "id": "EBNPu0GgM64",
+      "questionId": "347",
+      "title": "Top K Frequent Elements (LeetCode 347) | Full solution with examples | Interview | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/EBNPu0GgM64/hqdefault.jpg",
+      "viewCount": 80413,
+      "likeCount": 1672,
+      "publishedAt": "2022-06-20T12:00:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=EBNPu0GgM64"
+    },
+    {
+      "id": "GLw4WbJdYLw",
+      "questionId": "347",
+      "title": "Top K Frequent Elements | Heap | Bucket Sort | AMAZON | Leetcode 347 | Explanation | Live Coding",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/GLw4WbJdYLw/hqdefault.jpg",
+      "viewCount": 32165,
+      "likeCount": 1090,
+      "publishedAt": "2023-05-22T07:09:32Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GLw4WbJdYLw"
+    },
+    {
+      "id": "jW6XKvZWv_8",
+      "questionId": "347",
+      "title": "Top K Frequent Elements solution in PYTHON | Leetcode-347 | Leetcode solutions by S.Javahar Reddy",
+      "channelTitle": "Javahar reddy Sunkireddy",
+      "thumbnail": "https://i.ytimg.com/vi/jW6XKvZWv_8/hqdefault.jpg",
+      "viewCount": 731,
+      "likeCount": 12,
+      "publishedAt": "2024-01-03T14:30:15Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jW6XKvZWv_8"
     }
   ],
   "380": [
@@ -1719,6 +5501,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=wdcyuxmYAWI"
     }
   ],
+  "424": [
+    {
+      "id": "gqXU1UyA8pk",
+      "questionId": "424",
+      "title": "Longest Repeating Character Replacement - Leetcode 424 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/gqXU1UyA8pk/hqdefault.jpg",
+      "viewCount": 818170,
+      "likeCount": 10320,
+      "publishedAt": "2021-05-27T16:00:19Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=gqXU1UyA8pk"
+    },
+    {
+      "id": "_eNhaDCr6P0",
+      "questionId": "424",
+      "title": "L8. Longest Repeating Character Replacement | 2 Pointers and Sliding Window Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/_eNhaDCr6P0/hqdefault.jpg",
+      "viewCount": 391017,
+      "likeCount": 10081,
+      "publishedAt": "2024-03-27T04:05:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=_eNhaDCr6P0"
+    },
+    {
+      "id": "ExY8svHF_Eo",
+      "questionId": "424",
+      "title": "Longest Repeating Character Replacement (LeetCode 424) | Single iteration | Sliding Window",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/ExY8svHF_Eo/hqdefault.jpg",
+      "viewCount": 40587,
+      "likeCount": 1072,
+      "publishedAt": "2024-11-10T12:30:11Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=ExY8svHF_Eo"
+    },
+    {
+      "id": "tkNWKvxI3mU",
+      "questionId": "424",
+      "title": "Longest Repeating Character Replacement - Leetcode 424 - Sliding Window (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/tkNWKvxI3mU/hqdefault.jpg",
+      "viewCount": 38926,
+      "likeCount": 754,
+      "publishedAt": "2024-03-09T19:33:22Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=tkNWKvxI3mU"
+    },
+    {
+      "id": "8wzdPJZP7cE",
+      "questionId": "424",
+      "title": "Crack LeetCode 424: Longest Repeating Character Replacement | Sliding Window Trick",
+      "channelTitle": "Life In Frame",
+      "thumbnail": "https://i.ytimg.com/vi/8wzdPJZP7cE/hqdefault.jpg",
+      "viewCount": 39,
+      "likeCount": 5,
+      "publishedAt": "2025-12-05T05:38:06Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=8wzdPJZP7cE"
+    }
+  ],
   "466": [
     {
       "id": "H9gyzCkxYwQ",
@@ -1779,6 +5623,130 @@
       "publishedAt": "2025-09-07T09:42:32Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=pGBLi27ugk4"
+    }
+  ],
+  "543": [
+    {
+      "id": "K81C31ytOZE",
+      "questionId": "543",
+      "title": "Diameter of Binary Tree - Leetcode 543 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/K81C31ytOZE/hqdefault.jpg",
+      "viewCount": 150185,
+      "likeCount": 1587,
+      "publishedAt": "2024-07-29T20:53:48Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=K81C31ytOZE"
+    },
+    {
+      "id": "zM9N_x_v_24",
+      "questionId": "543",
+      "title": "Diameter of Binary Tree (LeetCode 543) | Full Solution with Examples | Study Algorithms",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/zM9N_x_v_24/hqdefault.jpg",
+      "viewCount": 41375,
+      "likeCount": 582,
+      "publishedAt": "2020-06-30T07:35:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=zM9N_x_v_24"
+    },
+    {
+      "id": "6lJZ_xj1mEo",
+      "questionId": "543",
+      "title": "Diameter of Binary Tree - Leetcode 543 - Trees (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/6lJZ_xj1mEo/hqdefault.jpg",
+      "viewCount": 23766,
+      "likeCount": 631,
+      "publishedAt": "2024-04-08T20:14:44Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=6lJZ_xj1mEo"
+    },
+    {
+      "id": "15KwRECEXLU",
+      "questionId": "543",
+      "title": "Diameter of Binary Tree | Simple Story | Amazon | Leetcode 543",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/15KwRECEXLU/hqdefault.jpg",
+      "viewCount": 19773,
+      "likeCount": 858,
+      "publishedAt": "2024-02-27T03:11:56Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=15KwRECEXLU"
+    },
+    {
+      "id": "9mh8VlGW2sE",
+      "questionId": "543",
+      "title": "🌳 LeetCode 543 | Diameter of Binary Tree | Beginner Solves LIVE (Learning Trees & Recursion)",
+      "channelTitle": "Code with Goku",
+      "thumbnail": "https://i.ytimg.com/vi/9mh8VlGW2sE/hqdefault.jpg",
+      "viewCount": 3,
+      "likeCount": 1,
+      "publishedAt": "2026-07-16T18:04:32Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=9mh8VlGW2sE"
+    }
+  ],
+  "562": [
+    {
+      "id": "eWweg7QwB6A",
+      "questionId": "562",
+      "title": "LeetCode 562. Longest Line of Consecutive One in Matrix",
+      "channelTitle": "Happy Coding",
+      "thumbnail": "https://i.ytimg.com/vi/eWweg7QwB6A/hqdefault.jpg",
+      "viewCount": 2576,
+      "likeCount": 26,
+      "publishedAt": "2020-07-23T19:26:23Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=eWweg7QwB6A"
+    },
+    {
+      "id": "1OrzRFwc9mw",
+      "questionId": "562",
+      "title": "LeetCode 562. Longest Line of Consecutive One in Matrix Explanation and Solution",
+      "channelTitle": "happygirlzt",
+      "thumbnail": "https://i.ytimg.com/vi/1OrzRFwc9mw/hqdefault.jpg",
+      "viewCount": 2536,
+      "likeCount": 47,
+      "publishedAt": "2019-03-31T15:31:04Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=1OrzRFwc9mw"
+    },
+    {
+      "id": "X7bCSh1IwHc",
+      "questionId": "562",
+      "title": "LONGEST LINE OF CONSECUTIVE ONES | LEETCODE 562 | PYTHON DFS SOLUTION",
+      "channelTitle": "Cracking FAANG",
+      "thumbnail": "https://i.ytimg.com/vi/X7bCSh1IwHc/hqdefault.jpg",
+      "viewCount": 1892,
+      "likeCount": 53,
+      "publishedAt": "2022-12-11T02:00:08Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=X7bCSh1IwHc"
+    },
+    {
+      "id": "6FPsqiCS2g8",
+      "questionId": "562",
+      "title": "Google Coding Interview Question | Leetcode 562 | Longest Line of Consecutive One in Matrix",
+      "channelTitle": "WorkWithGoogler",
+      "thumbnail": "https://i.ytimg.com/vi/6FPsqiCS2g8/hqdefault.jpg",
+      "viewCount": 1760,
+      "likeCount": 18,
+      "publishedAt": "2021-07-18T16:00:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=6FPsqiCS2g8"
+    },
+    {
+      "id": "YuBVa78cnAs",
+      "questionId": "562",
+      "title": "Leetcode 562",
+      "channelTitle": "DailyLeetcode",
+      "thumbnail": "https://i.ytimg.com/vi/YuBVa78cnAs/hqdefault.jpg",
+      "viewCount": 115,
+      "likeCount": 0,
+      "publishedAt": "2023-08-28T01:08:55Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=YuBVa78cnAs"
     }
   ],
   "594": [
@@ -1843,6 +5811,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=YhdG0lRZfIA"
     }
   ],
+  "658": [
+    {
+      "id": "o-YDQzHoaKM",
+      "questionId": "658",
+      "title": "Find K Closest Elements - Leetcode 658 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/o-YDQzHoaKM/hqdefault.jpg",
+      "viewCount": 116270,
+      "likeCount": 1741,
+      "publishedAt": "2022-01-31T17:00:36Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=o-YDQzHoaKM"
+    },
+    {
+      "id": "Of4bdCDwcdY",
+      "questionId": "658",
+      "title": "Find K Closest Elements 🔥| Leetcode #658 Code Explained Hindi @HelloWorldbyprince Heap DSA playlist Prince",
+      "channelTitle": "Hello World",
+      "thumbnail": "https://i.ytimg.com/vi/Of4bdCDwcdY/hqdefault.jpg",
+      "viewCount": 16514,
+      "likeCount": 312,
+      "publishedAt": "2022-05-17T11:30:05Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Of4bdCDwcdY"
+    },
+    {
+      "id": "IRtv7pdp8hQ",
+      "questionId": "658",
+      "title": "Find K Closest Elements | LeetCode 658 | Coders Camp",
+      "channelTitle": "Coders Camp",
+      "thumbnail": "https://i.ytimg.com/vi/IRtv7pdp8hQ/hqdefault.jpg",
+      "viewCount": 12923,
+      "likeCount": 170,
+      "publishedAt": "2021-07-03T00:14:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=IRtv7pdp8hQ"
+    },
+    {
+      "id": "6AackEaa0Qs",
+      "questionId": "658",
+      "title": "Find K Closest Elements - Optimised Approach | Leetcode 658 Solution | Searching and Sorting",
+      "channelTitle": "Pepcoding",
+      "thumbnail": "https://i.ytimg.com/vi/6AackEaa0Qs/hqdefault.jpg",
+      "viewCount": 12785,
+      "likeCount": 422,
+      "publishedAt": "2021-05-05T11:42:49Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=6AackEaa0Qs"
+    },
+    {
+      "id": "IJ4d3FJC-n8",
+      "questionId": "658",
+      "title": "Binary Search-13 | 658. Find K Closest Elements | 🔥 Beginner, Medium & Advanced Level #dsa",
+      "channelTitle": "CTO Bhaiya",
+      "thumbnail": "https://i.ytimg.com/vi/IJ4d3FJC-n8/hqdefault.jpg",
+      "viewCount": 1791,
+      "likeCount": 55,
+      "publishedAt": "2025-03-30T12:06:46Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=IJ4d3FJC-n8"
+    }
+  ],
   "692": [
     {
       "id": "zW-8-6A2gxM",
@@ -1903,6 +5933,68 @@
       "publishedAt": "2025-10-30T02:13:47Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=Bxh5_qAFAxg"
+    }
+  ],
+  "704": [
+    {
+      "id": "s4DPM8ct1pI",
+      "questionId": "704",
+      "title": "Binary Search - Leetcode 704 - Python",
+      "channelTitle": "NeetCode",
+      "thumbnail": "https://i.ytimg.com/vi/s4DPM8ct1pI/hqdefault.jpg",
+      "viewCount": 271639,
+      "likeCount": 4641,
+      "publishedAt": "2022-03-26T02:45:02Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=s4DPM8ct1pI"
+    },
+    {
+      "id": "Dt4FKOF25ZY",
+      "questionId": "704",
+      "title": "Binary Search - Leetcode 704 - Binary Search (Python)",
+      "channelTitle": "Greg Hogg",
+      "thumbnail": "https://i.ytimg.com/vi/Dt4FKOF25ZY/hqdefault.jpg",
+      "viewCount": 15772,
+      "likeCount": 283,
+      "publishedAt": "2023-12-12T19:15:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Dt4FKOF25ZY"
+    },
+    {
+      "id": "Rxf93Ey1fpA",
+      "questionId": "704",
+      "title": "Binary Search - (Recursive + Iterative) | Leetcode-704 | Explanation ➕ Live Coding",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/Rxf93Ey1fpA/hqdefault.jpg",
+      "viewCount": 7886,
+      "likeCount": 0,
+      "publishedAt": "2023-04-01T09:31:09Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Rxf93Ey1fpA"
+    },
+    {
+      "id": "dDc3PK8l0O0",
+      "questionId": "704",
+      "title": "Binary Search | (Leetcode 704) | Google interview question",
+      "channelTitle": "The Hustling Engineer",
+      "thumbnail": "https://i.ytimg.com/vi/dDc3PK8l0O0/hqdefault.jpg",
+      "viewCount": 881,
+      "likeCount": 22,
+      "publishedAt": "2022-11-19T04:51:21Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=dDc3PK8l0O0"
+    },
+    {
+      "id": "PG5cI5W_rkg",
+      "questionId": "704",
+      "title": "Binary Search | Leetcode 704 | Code + Explanation | Iterative Approach #dsa",
+      "channelTitle": "Learn With Chirag",
+      "thumbnail": "https://i.ytimg.com/vi/PG5cI5W_rkg/hqdefault.jpg",
+      "viewCount": 714,
+      "likeCount": 16,
+      "publishedAt": "2023-03-19T07:59:49Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=PG5cI5W_rkg"
     }
   ],
   "739": [
@@ -1967,6 +6059,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=nFIUPfClaG4"
     }
   ],
+  "904": [
+    {
+      "id": "e3bs0uA1NhQ",
+      "questionId": "904",
+      "title": "L5. Fruit Into Baskets | 2 Pointers and Sliding Window Playlist",
+      "channelTitle": "take U forward",
+      "thumbnail": "https://i.ytimg.com/vi/e3bs0uA1NhQ/hqdefault.jpg",
+      "viewCount": 290336,
+      "likeCount": 8429,
+      "publishedAt": "2024-03-27T03:50:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=e3bs0uA1NhQ"
+    },
+    {
+      "id": "yYtaV0G3mWQ",
+      "questionId": "904",
+      "title": "Fruits into Basket - Leetcode 904 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/yYtaV0G3mWQ/hqdefault.jpg",
+      "viewCount": 35228,
+      "likeCount": 713,
+      "publishedAt": "2023-02-07T01:43:00Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=yYtaV0G3mWQ"
+    },
+    {
+      "id": "Oi09pnLLy78",
+      "questionId": "904",
+      "title": "Fruits in Basket (LeetCode 904) | Solution with diagrams and animations | Simplified explanation",
+      "channelTitle": "Nikhil Lohia",
+      "thumbnail": "https://i.ytimg.com/vi/Oi09pnLLy78/hqdefault.jpg",
+      "viewCount": 16092,
+      "likeCount": 623,
+      "publishedAt": "2023-09-05T13:41:42Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Oi09pnLLy78"
+    },
+    {
+      "id": "QBi5_btsse4",
+      "questionId": "904",
+      "title": "Fruit Into Baskets | Simple Observation | Leetcode 904 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/QBi5_btsse4/hqdefault.jpg",
+      "viewCount": 12548,
+      "likeCount": 521,
+      "publishedAt": "2025-08-04T10:51:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=QBi5_btsse4"
+    },
+    {
+      "id": "Ifx_JGwKbCw",
+      "questionId": "904",
+      "title": "LeetCode 904: Fruit Into Baskets | Java Solution | Sliding Window Technique",
+      "channelTitle": "Code Scribbler",
+      "thumbnail": "https://i.ytimg.com/vi/Ifx_JGwKbCw/hqdefault.jpg",
+      "viewCount": 315,
+      "likeCount": 4,
+      "publishedAt": "2025-08-17T07:00:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=Ifx_JGwKbCw"
+    }
+  ],
   "1105": [
     {
       "id": "lFYPPPTp8qE",
@@ -2029,6 +6183,68 @@
       "videoUrl": "https://www.youtube.com/watch?v=f5eOmnZ3dok"
     }
   ],
+  "1234": [
+    {
+      "id": "nU6HOD6MFKY",
+      "questionId": "1234",
+      "title": "Replace the Substring for Balanced String | LeetCode 1234 | Coders Camp",
+      "channelTitle": "Coders Camp",
+      "thumbnail": "https://i.ytimg.com/vi/nU6HOD6MFKY/hqdefault.jpg",
+      "viewCount": 6873,
+      "likeCount": 101,
+      "publishedAt": "2021-02-09T02:41:00Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=nU6HOD6MFKY"
+    },
+    {
+      "id": "d5ZnzCXut1w",
+      "questionId": "1234",
+      "title": "LeetCode - 1234. Replace the Substring for Balanced String | Two Pointers Technique | Java",
+      "channelTitle": "Orkhan Gasanov",
+      "thumbnail": "https://i.ytimg.com/vi/d5ZnzCXut1w/hqdefault.jpg",
+      "viewCount": 2053,
+      "likeCount": 17,
+      "publishedAt": "2023-11-25T07:51:48Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=d5ZnzCXut1w"
+    },
+    {
+      "id": "uAb7GrybJyE",
+      "questionId": "1234",
+      "title": "Leetcode 1234 Replace the Substring for Balanced String - two-pointer sliding window method",
+      "channelTitle": "Code-Yao",
+      "thumbnail": "https://i.ytimg.com/vi/uAb7GrybJyE/hqdefault.jpg",
+      "viewCount": 780,
+      "likeCount": 3,
+      "publishedAt": "2022-06-10T22:26:16Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=uAb7GrybJyE"
+    },
+    {
+      "id": "UqgTeg3MziA",
+      "questionId": "1234",
+      "title": "LeetCode 1234: Replace the Substring for Balanced String",
+      "channelTitle": "Kitajima",
+      "thumbnail": "https://i.ytimg.com/vi/UqgTeg3MziA/hqdefault.jpg",
+      "viewCount": 400,
+      "likeCount": 8,
+      "publishedAt": "2025-03-03T09:00:36Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=UqgTeg3MziA"
+    },
+    {
+      "id": "OTqDJT1gUtU",
+      "questionId": "1234",
+      "title": "No Sound Leetcode 1234: Replace the Substring for Balanced String",
+      "channelTitle": "ExtremeProgrammer",
+      "thumbnail": "https://i.ytimg.com/vi/OTqDJT1gUtU/hqdefault.jpg",
+      "viewCount": 12,
+      "likeCount": 1,
+      "publishedAt": "2025-12-31T21:00:21Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=OTqDJT1gUtU"
+    }
+  ],
   "1480": [
     {
       "id": "fFJaIDUKDoA",
@@ -2089,6 +6305,130 @@
       "publishedAt": "2021-08-30T13:37:27Z",
       "isMostAccurate": false,
       "videoUrl": "https://www.youtube.com/watch?v=MATtaDI7p2s"
+    }
+  ],
+  "1625": [
+    {
+      "id": "SUkbctHiREI",
+      "questionId": "1625",
+      "title": "Leetcode 1625 | Lexicographically Smallest String After Applying Operations | Common Pattern | MIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/SUkbctHiREI/hqdefault.jpg",
+      "viewCount": 10139,
+      "likeCount": 509,
+      "publishedAt": "2025-10-19T06:12:13Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=SUkbctHiREI"
+    },
+    {
+      "id": "nWwd3ca4jsU",
+      "questionId": "1625",
+      "title": "Leetcode 1625. Lexicographically Smallest String After Applying Operations",
+      "channelTitle": "Fraz",
+      "thumbnail": "https://i.ytimg.com/vi/nWwd3ca4jsU/hqdefault.jpg",
+      "viewCount": 9265,
+      "likeCount": 111,
+      "publishedAt": "2020-10-20T06:59:34Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=nWwd3ca4jsU"
+    },
+    {
+      "id": "GBBPDszeczw",
+      "questionId": "1625",
+      "title": "Lexicographically Smallest String After Applying Operations | LeetCode 1625",
+      "channelTitle": "Sanyam IIT Guwahati",
+      "thumbnail": "https://i.ytimg.com/vi/GBBPDszeczw/hqdefault.jpg",
+      "viewCount": 1572,
+      "likeCount": 88,
+      "publishedAt": "2025-10-19T01:43:18Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=GBBPDszeczw"
+    },
+    {
+      "id": "fLIQhXLr804",
+      "questionId": "1625",
+      "title": "Lexicographically Smallest String After Applying Operations | Leetcode 1625 | DSA",
+      "channelTitle": "Code with Deepak",
+      "thumbnail": "https://i.ytimg.com/vi/fLIQhXLr804/hqdefault.jpg",
+      "viewCount": 718,
+      "likeCount": 24,
+      "publishedAt": "2025-10-19T04:45:03Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=fLIQhXLr804"
+    },
+    {
+      "id": "iUjrdfwE9bw",
+      "questionId": "1625",
+      "title": "【每日一题】1625. Lexicographically Smallest String After Applying Operations, 10/20/2020",
+      "channelTitle": "Huifeng Guan",
+      "thumbnail": "https://i.ytimg.com/vi/iUjrdfwE9bw/hqdefault.jpg",
+      "viewCount": 526,
+      "likeCount": 18,
+      "publishedAt": "2020-10-20T21:04:17Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=iUjrdfwE9bw"
+    }
+  ],
+  "1652": [
+    {
+      "id": "c4oOIi5YTE4",
+      "questionId": "1652",
+      "title": "Defuse the Bomb - Leetcode 1652 - Python",
+      "channelTitle": "NeetCodeIO",
+      "thumbnail": "https://i.ytimg.com/vi/c4oOIi5YTE4/hqdefault.jpg",
+      "viewCount": 15862,
+      "likeCount": 427,
+      "publishedAt": "2024-11-18T01:00:31Z",
+      "isMostAccurate": true,
+      "videoUrl": "https://www.youtube.com/watch?v=c4oOIi5YTE4"
+    },
+    {
+      "id": "QjO6T1cThRU",
+      "questionId": "1652",
+      "title": "Defuse the Bomb | Detailed for Beginners | Leetcode 1652 | codestorywithMIK",
+      "channelTitle": "codestorywithMIK",
+      "thumbnail": "https://i.ytimg.com/vi/QjO6T1cThRU/hqdefault.jpg",
+      "viewCount": 8831,
+      "likeCount": 407,
+      "publishedAt": "2024-11-18T08:07:37Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=QjO6T1cThRU"
+    },
+    {
+      "id": "e3JxsH_Ltsk",
+      "questionId": "1652",
+      "title": "Defuse the Bomb | Leetcode 1652",
+      "channelTitle": "Techdose",
+      "thumbnail": "https://i.ytimg.com/vi/e3JxsH_Ltsk/hqdefault.jpg",
+      "viewCount": 4483,
+      "likeCount": 83,
+      "publishedAt": "2024-11-18T02:30:24Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=e3JxsH_Ltsk"
+    },
+    {
+      "id": "p8XfyIwC0BI",
+      "questionId": "1652",
+      "title": "1652. Defuse the Bomb | Sliding Window | 2 Approaches",
+      "channelTitle": "Aryan Mittal",
+      "thumbnail": "https://i.ytimg.com/vi/p8XfyIwC0BI/hqdefault.jpg",
+      "viewCount": 3985,
+      "likeCount": 88,
+      "publishedAt": "2024-11-18T01:13:39Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=p8XfyIwC0BI"
+    },
+    {
+      "id": "jgABtiwPyjg",
+      "questionId": "1652",
+      "title": "Solving LeetCode 1652  Defuse the Bomb | Sliding Window | Amazon | Detailed Explanation",
+      "channelTitle": "Code Harmony",
+      "thumbnail": "https://i.ytimg.com/vi/jgABtiwPyjg/hqdefault.jpg",
+      "viewCount": 1289,
+      "likeCount": 25,
+      "publishedAt": "2024-11-18T02:13:28Z",
+      "isMostAccurate": false,
+      "videoUrl": "https://www.youtube.com/watch?v=jgABtiwPyjg"
     }
   ],
   "1696": [
